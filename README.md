@@ -38,7 +38,7 @@ idbank_list_selected =
   filter(dim10 == "ECAI_TPE") 
 ```
   
-# get idbanks' title
+# get idbank title
 ```{r get_title}
 idbank_list_selected = 
   idbank_list_selected %>% 
