@@ -4,7 +4,7 @@
 #' Any query to INSEE database can handle around 400 idbanks at maximum, if necessary the idbank list will then be splitted in several lists of 400 idbanks each.
 #' Consequently, it is not advised to use it on the whole idbank dataset, the user should filter the idbank dataset first.
 #' @param ... list of series key (idbank)
-#' @param lang language of the title, by default it is Engligh, if lang is from "en" then French will be the title's language
+#' @param lang language of the title, by default it is Engligh, if lang is different from "en" then French will be the title's language
 #' @examples
 #' library(tidyverse)
 #'

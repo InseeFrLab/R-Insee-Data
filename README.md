@@ -1,14 +1,3 @@
----
-output: github_document
----
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "README-"
-)
-```
 
 ## Overview
 
@@ -27,17 +16,17 @@ library(tidyverse)
 library(insee)
 ```
 
-# INSEE dataset list
+# get INSEE datasets list
 ```{r dataset list}
 dataset = get_dataset_list()
 ```
 
-# INSEE series key (idbank) list
+# get INSEE series key (idbank) list
 ```{r idbank list}
 idbank_list = get_idbank_list()
 ```
 
-# select idbank 
+# select idbanks 
 ```{r select idbank}
 idbank_list_selected = 
   idbank_list %>% 
@@ -48,14 +37,14 @@ idbank_list_selected =
   filter(dim10 == "ECAI_TPE") 
 ```
   
-# get idbank title
+# get idbanks' title
 ```{r get_title}
 idbank_list_selected = 
   idbank_list_selected %>% 
   mutate(title = get_insee_title(idbank, lang = "fr")) 
 ```
 
-# extract selected idbank list
+# extract selected idbanks list
 ```{r selected idbank}
 list_idbank = idbank_list_selected %>% pull(idbank)
 ```
