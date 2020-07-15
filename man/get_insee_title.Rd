@@ -9,7 +9,7 @@ get_insee_title(..., lang = "en")
 \arguments{
 \item{...}{list of series key (idbank)}
 
-\item{lang}{language of the title, by default it is Engligh, if lang is from "en" then French will be the title's language}
+\item{lang}{language of the title, by default it is Engligh, if lang is different from "en" then French will be the title's language}
 }
 \description{
 Get title from INSEE series idbank

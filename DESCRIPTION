@@ -4,7 +4,8 @@ Title: Tools to download easily data from INSEE BDM database
 Version: 0.1.0
 Author: Hadrien Leclerc
 Maintainer: Hadrien Leclerc <leclerc.hadrien@gmail.com>
-Description: Tools to download easily data from INSEE BDM database.
+Description: Using embedded SDMX queries get the data of more than 140 000 INSEE series from BDM database (Banque de données macroéconomiques).
+URL: https://www.insee.fr/en/information/2868055
 Encoding: UTF-8
 LazyData: true
 License: GPL-2
