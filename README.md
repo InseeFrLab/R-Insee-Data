@@ -54,4 +54,9 @@ list_idbank = idbank_list_selected %>% pull(idbank)
 data = get_insee_idbank(list_idbank)
 ```
 
+# avoid proxy issues 
+```{r proxy}
+Sys.setenv(http_proxy = "my_proxy_server")
+Sys.setenv(https_proxy = "my_proxy_server")
+```
 
