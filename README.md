@@ -1,16 +1,3 @@
----
-output: github_document
----
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "README-"
-)
-```
-
 
 ## Overview
 
@@ -21,7 +8,7 @@ The insee package contains tools to download easily data and metadata from INSEE
 ```{r eval = FALSE}
 # Get the development version from GitHub
 # install.packages("devtools")
-devtools::install_github("hadrilec/insee")
+devtools::install_github("hadrilec2/insee")
 ```
 
 ## Usage
