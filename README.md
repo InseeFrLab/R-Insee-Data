@@ -1,41 +1,68 @@
+---
+output: github_document
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
 
 ## Overview
 
 The insee package contains tools to download easily data and metadata from INSEE BDM database.
 
 ## Installation
-
 ```{r eval = FALSE}
 # Get the development version from GitHub
 # install.packages("devtools")
 devtools::install_github("hadrilec2/insee")
 ```
 
-## Usage
-
-```{r example}
+# Library
+```{r example, echo = FALSE}
 library(tidyverse)
+library(insee)
 ```
 
-You can see conflicts created later with `tidyverse_conflicts()`:
-
-```{r conflicts}
-library(MASS)
-tidyverse_conflicts()
+# INSEE dataset list
+```{r dataset list}
+dataset = get_dataset_list()
 ```
 
-And you can check that all tidyverse packages are up-to-date with `tidyverse_update()`:
+# INSEE series key (idbank) list
+```{r idbank list}
+idbank_list = get_idbank_list()
+```
 
-```{r update, eval = FALSE}
-tidyverse_update()
-#> The following packages are out of date:
-#>  * broom (0.4.0 -> 0.4.1)
-#>  * DBI   (0.4.1 -> 0.5)
-#>  * Rcpp  (0.12.6 -> 0.12.7)
-#> Update now?
-#> 
-#> 1: Yes
-#> 2: No
+# select idbank 
+```{r select idbank}
+idbank_list_selected = 
+  idbank_list %>% 
+  filter(nomflow == "ENQ-CONJ-ACT-IND") %>% 
+  filter(dim12 == "A88-29") %>% 
+  filter(dim8  == "CVS") %>% 
+  filter(dim13 == "SOLDE_PROPORTION") %>% 
+  filter(dim10 == "ECAI_TPE") 
+```
+  
+# get idbank title
+```{r get_title}
+idbank_list_selected = 
+  idbank_list_selected %>% 
+  mutate(title = get_insee_title(idbank, lang = "fr")) 
+```
+
+# extract selected idbank list
+```{r selected idbank}
+list_idbank = idbank_list_selected %>% pull(idbank)
+```
+
+# get selected idbanks data
+```{r data}
+data = get_insee_idbank(list_idbank)
 ```
 
 
