@@ -2,6 +2,7 @@
 ## Overview
 
 The insee package contains tools to download easily data and metadata from INSEE BDM database.
+Using embedded SDMX queries, get the data of more than 140 000 INSEE series from BDM database (Banque de données macroéconomiques).
 
 ## Installation
 ```{r eval = FALSE}
