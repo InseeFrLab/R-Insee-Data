@@ -9,8 +9,7 @@ get_insee_idbank(
   startPeriod = NULL,
   endPeriod = NULL,
   firstNObservations = NULL,
-  lastNObservations = NULL,
-  insee_bdm_series_link = "http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"
+  lastNObservations = NULL
 )
 }
 \arguments{
@@ -23,8 +22,6 @@ get_insee_idbank(
 \item{firstNObservations}{get the first N observations for each key series (idbank)}
 
 \item{lastNObservations}{get the last N observations for each key series (idbank)}
-
-\item{insee_bdm_series_link}{SDMX link used to build the query on series keys}
 }
 \description{
 Get data from INSEE series idbank

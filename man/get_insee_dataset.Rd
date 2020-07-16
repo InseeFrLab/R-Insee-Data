@@ -10,8 +10,7 @@ get_insee_dataset(
   endPeriod = NULL,
   firstNObservations = NULL,
   lastNObservations = NULL,
-  filter = NULL,
-  insee_bdm_dataset_link = "https://www.bdm.insee.fr/series/sdmx/data"
+  filter = NULL
 )
 }
 \arguments{
@@ -25,9 +24,7 @@ get_insee_dataset(
 
 \item{lastNObservations}{get the last N observations for each key series (idbank)}
 
-\item{filter}{Use the filter to choose only some dimensions. It is recommended to use it for big datasets.}
-
-\item{insee_bdm_dataset_link}{SDMX link to download datasets
+\item{filter}{Use the filter to choose only some dimensions. It is recommended to use it for big datasets.
 A dimension left empty means all values are selected. To select multiple values in one dimension put a "+" between those values (see example)}
 }
 \description{

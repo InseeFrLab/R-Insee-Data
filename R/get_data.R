@@ -74,7 +74,6 @@ get_insee_title = function(..., lang = "en"){
 #' @param endPeriod end date of data
 #' @param firstNObservations get the first N observations for each key series (idbank)
 #' @param lastNObservations get the last N observations for each key series (idbank)
-#' @param insee_bdm_series_link SDMX link used to build the query on series keys
 #' @examples data = get_insee_idbank("001558315", "010540726")
 #'
 #' @export
@@ -82,8 +81,9 @@ get_insee_idbank <- function(...,
                              startPeriod = NULL,
                              endPeriod = NULL,
                              firstNObservations = NULL,
-                             lastNObservations = NULL,
-                             insee_bdm_series_link = "http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"){
+                             lastNObservations = NULL){
+
+  insee_bdm_series_link = file.path(Sys.getenv("INSEE_sdmx_link"), "SERIES_BDM")
 
   if(length(list(...)) == 1){
     list_idbank = paste0(list(...)[[1]], collapse = "+")
@@ -115,7 +115,6 @@ get_insee_idbank <- function(...,
 #' @param firstNObservations get the first N observations for each key series (idbank)
 #' @param lastNObservations get the last N observations for each key series (idbank)
 #' @param filter Use the filter to choose only some dimensions. It is recommended to use it for big datasets.
-#' @param insee_bdm_dataset_link SDMX link to download datasets
 #' A dimension left empty means all values are selected. To select multiple values in one dimension put a "+" between those values (see example)
 #' @examples
 #' data = get_insee_dataset("CLIMAT-AFFAIRES")
@@ -127,8 +126,9 @@ get_insee_dataset <- function(dataset,
                               endPeriod = NULL,
                               firstNObservations = NULL,
                               lastNObservations = NULL,
-                              filter = NULL,
-                              insee_bdm_dataset_link = "https://www.bdm.insee.fr/series/sdmx/data"){
+                              filter = NULL){
+
+  insee_bdm_dataset_link = Sys.getenv("INSEE_sdmx_link")
 
   if(!"character" %in% class(dataset)){
     stop("idbank must be a character")
