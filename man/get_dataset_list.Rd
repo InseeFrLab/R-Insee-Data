@@ -4,10 +4,7 @@
 \alias{get_dataset_list}
 \title{Download an INSEE dataset list}
 \usage{
-get_dataset_list(link_dataflow = "https://bdm.insee.fr/series/sdmx/dataflow")
-}
-\arguments{
-\item{link_dataflow}{SDMX query link}
+get_dataset_list()
 }
 \description{
 Download an INSEE dataset list

@@ -6,27 +6,26 @@
 #'
 #' @param dataset if a dataset name is provided, only a subset of the data is delivered, otherwise
 #' all the data is returned
-#' @param insee_path main INSEE link
-#' @param mapping_file_path INSEE zip file containting idbank dataset ()
-#' @param mapping_file_pattern dataset file name pattern
-#' @param mapping_file_sep dataset file separator
-#' @param idbank_nchar number of character in an series key (idbank)
 #' @export
 get_idbank_list = function(
-  dataset = NULL,
-  insee_path = "https://www.insee.fr/en/statistiques",
-  mapping_file_path = "/fichier/2868055/correspondance_idbank_dimension.zip",
-  mapping_file_pattern = "correspondance_idbank_dimension",
-  mapping_file_sep = ";",
-  idbank_nchar = 9
+  dataset = NULL
 ){
+
+  insee_path = Sys.getenv("INSEE_website")
+  mapping_file_path = file.path(Sys.getenv("INSEE_idbank_path"), paste0(Sys.getenv("INSEE_idbank_file"), ".zip"))
+  mapping_file_pattern = Sys.getenv("INSEE_idbank_file")
+  mapping_file_sep = Sys.getenv("INSEE_idbank_sep")
+  idbank_nchar = as.numeric(Sys.getenv("INSEE_idbank_nchar"))
+  if(is.na(idbank_nchar)){idbank_nchar = 9}
+
   # temporary files
   temp_file = tempfile()
   temp_dir = tempdir()
 
   options(warn = -1)
   # download and unzip
-  utils::download.file(file.path(insee_path, mapping_file_path), temp_file, mode = "wb", quiet = TRUE)
+  file_to_dwn = file.path(insee_path, mapping_file_path)
+  utils::download.file(file_to_dwn, temp_file, mode = "wb", quiet = TRUE)
   utils::unzip(temp_file, exdir = temp_dir)
 
   # load data
@@ -58,11 +57,12 @@ get_idbank_list = function(
 #' Download an INSEE dataset list
 #'
 #' @details the datasets returned are the ones available through a SDMX query
-#' @param link_dataflow SDMX query link
 #' @examples dataset = get_dataset_list()
 #'
 #' @export
-get_dataset_list = function(link_dataflow = "https://bdm.insee.fr/series/sdmx/dataflow"){
+get_dataset_list = function(){
+
+  link_dataflow = file.path(Sys.getenv("INSEE_sdmx_link"), "dataflow")
   tfile = tempfile()
   on.exit(unlink(tfile))
   dwn = try(utils::download.file(link_dataflow, tfile, mode = "wb", quiet = TRUE), silent = TRUE)
