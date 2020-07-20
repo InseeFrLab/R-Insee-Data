@@ -84,3 +84,5 @@ ggplot(data, aes(x = TIME, y = OBS_VALUE)) +
   geom_line() +
   ggtitle("French GDP growth rate")
 ```
+
+![](pict/plot.png)
