@@ -1,10 +1,11 @@
 Package: insee
 Type: Package
-Title: Tools to download easily data from INSEE BDM database
-Version: 0.1.0
+Title: Tools to Easily Download Data from INSEE BDM Database
+Version: 0.2.0
+Authors@R : c(person("Hadrien", "Leclerc", email = "leclerc.hadrien@gmail.com", role = "auth"))
 Author: Hadrien Leclerc
 Maintainer: Hadrien Leclerc <leclerc.hadrien@gmail.com>
-Description: Using embedded SDMX queries, get the data of more than 140 000 INSEE series from BDM database (Banque de donnees macroeconomiques).
+Description: Using embedded SDMX queries, get the data of more than 140 000 INSEE series from BDM database (Banque de donnees macroeconomiques). Have a look at the detailed SDMX web service page with the following link : <https://www.insee.fr/en/information/2868055>
 URL: <https://www.insee.fr/en/information/2868055>
 Encoding: UTF-8
 LazyData: true
