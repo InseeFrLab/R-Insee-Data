@@ -22,7 +22,6 @@ get_idbank_list = function(
   temp_file = tempfile()
   temp_dir = tempdir()
 
-  options(warn = -1)
   # download and unzip
   file_to_dwn = file.path(insee_path, mapping_file_path)
   utils::download.file(file_to_dwn, temp_file, mode = "wb", quiet = TRUE)
