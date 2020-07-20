@@ -1,7 +1,7 @@
 
 ## Overview
 
-The insee package contains tools to download easily data and metadata from INSEE BDM database.
+The insee package contains tools to easily download data and metadata from INSEE BDM database.
 Using embedded SDMX queries, get the data of more than 140 000 INSEE series from BDM database (Banque de données macroéconomiques).
 
 ## Installation
@@ -61,7 +61,7 @@ Sys.setenv(http_proxy = "my_proxy_server")
 Sys.setenv(https_proxy = "my_proxy_server")
 ```
 
-# Full example 
+# Full example : French GDP plot
 ```{r GDP}
 
 idbank_list = get_idbank_list()

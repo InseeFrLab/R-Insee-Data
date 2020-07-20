@@ -207,7 +207,7 @@ get_insee = function(link){
       data_final = dplyr::bind_rows(list_df)
 
       if("TIME_PERIOD" %in% names(data_final)){
-        col_date = dplyr::pull(.data = data_final, TIME_PERIOD)
+        col_date = dplyr::pull(.data = data_final, "TIME_PERIOD")
         data_final[,"TIME"] = suppressWarnings(get_date(col_date))
       }else{
         data_final[,"TIME"] = NA
