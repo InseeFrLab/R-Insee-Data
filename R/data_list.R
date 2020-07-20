@@ -11,9 +11,9 @@ get_idbank_list = function(
   dataset = NULL
 ){
 
-  insee_path = Sys.getenv("INSEE_website")
-  mapping_file_path = file.path(Sys.getenv("INSEE_idbank_path"), paste0(Sys.getenv("INSEE_idbank_file"), ".zip"))
-  mapping_file_pattern = Sys.getenv("INSEE_idbank_file")
+  file_to_dwn = Sys.getenv("INSEE_idbank_dataset_path")
+  mapping_file_pattern = Sys.getenv("INSEE_idbank_dataset_file")
+
   mapping_file_sep = Sys.getenv("INSEE_idbank_sep")
   idbank_nchar = as.numeric(Sys.getenv("INSEE_idbank_nchar"))
   if(is.na(idbank_nchar)){idbank_nchar = 9}
@@ -23,7 +23,6 @@ get_idbank_list = function(
   temp_dir = tempdir()
 
   # download and unzip
-  file_to_dwn = file.path(insee_path, mapping_file_path)
   utils::download.file(file_to_dwn, temp_file, mode = "wb", quiet = TRUE)
   utils::unzip(temp_file, exdir = temp_dir)
 
@@ -62,7 +61,7 @@ get_idbank_list = function(
 #' @export
 get_dataset_list = function(){
 
-  link_dataflow = file.path(Sys.getenv("INSEE_sdmx_link"), "dataflow")
+  link_dataflow = Sys.getenv("INSEE_sdmx_link_dataflow")
   tfile = tempfile()
   on.exit(unlink(tfile))
   dwn = try(utils::download.file(link_dataflow, tfile, mode = "wb", quiet = TRUE), silent = TRUE)

@@ -83,7 +83,7 @@ get_insee_idbank <- function(...,
                              firstNObservations = NULL,
                              lastNObservations = NULL){
 
-  insee_bdm_series_link = file.path(Sys.getenv("INSEE_sdmx_link"), "SERIES_BDM")
+  insee_bdm_series_link = Sys.getenv("INSEE_sdmx_link_idbank")
 
   if(length(list(...)) == 1){
     list_idbank = paste0(list(...)[[1]], collapse = "+")
