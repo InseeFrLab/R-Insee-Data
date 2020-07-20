@@ -8,7 +8,7 @@
 #' @examples
 #' library(tidyverse)
 #'
-#' idbank_dataset = get_idbank_list()
+#' idbank_list = get_idbank_list()
 #'
 #' idbank_list_selected =
 #'   idbank_list %>%
