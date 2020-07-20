@@ -167,7 +167,7 @@ get_insee_dataset <- function(dataset,
 #'
 #' @export
 get_insee = function(link){
-  # print(link)
+
   response = httr::GET(link)
   response_content = try(httr::content(response, encoding = "UTF-8"), silent = TRUE)
 
