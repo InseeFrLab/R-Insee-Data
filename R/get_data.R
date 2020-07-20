@@ -10,10 +10,15 @@
 #'
 #' idbank_dataset = get_idbank_list()
 #'
-#' idbank_dataset_with_title =
-#'   idbank_dataset %>%
-#'   filter(str_detect(nomflow, "CLIMAT-AFFAIRES")) %>%
+#' idbank_list_selected =
+#'   idbank_list %>%
+#'   filter(nomflow == "IPI-2015") %>% #industrial production index dataset
+#'   filter(dim1 == "M") %>% #monthly
+#'   filter(dim5 == "INDICE") %>% #index
+#'   filter(dim8  == "CVS-CJO") %>% #Working day and seasonally adjusted SA-WDA
+#'   filter(str_detect(dim4,"^29$|A10-BE")) %>% #automotive industry and overall industrial production
 #'   mutate(title = get_insee_title(idbank))
+#'
 #' @export
 get_insee_title = function(..., lang = "en"){
 
@@ -74,7 +79,22 @@ get_insee_title = function(..., lang = "en"){
 #' @param endPeriod end date of data
 #' @param firstNObservations get the first N observations for each key series (idbank)
 #' @param lastNObservations get the last N observations for each key series (idbank)
-#' @examples data = get_insee_idbank("001558315", "010540726")
+#' @examples
+#' #EXAMPLE1
+#'
+#' library(tidyverse)
+#'
+#' idbank_list = get_idbank_list()
+#'
+#' list_idbank =
+#'   idbank_list %>%
+#'   filter(nomflow == "CHOMAGE-TRIM-NATIONAL") %>%  #unemployment dataset
+#'   pull(idbank)
+#'
+#' unem = get_insee_idbank(list_idbank)
+#'
+#' #EXAMPLE2
+#' data = get_insee_idbank("001558315", "010540726")
 #'
 #' @export
 get_insee_idbank <- function(...,

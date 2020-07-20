@@ -30,6 +30,20 @@ Get data from INSEE series idbank
 Get data from INSEE series idbank
 }
 \examples{
+#EXAMPLE1
+
+library(tidyverse)
+
+idbank_list = get_idbank_list()
+
+list_idbank =
+  idbank_list \%>\%
+  filter(nomflow == "CHOMAGE-TRIM-NATIONAL") \%>\%  #unemployment dataset
+  pull(idbank)
+
+unem = get_insee_idbank(list_idbank)
+
+#EXAMPLE2
 data = get_insee_idbank("001558315", "010540726")
 
 }
