@@ -61,3 +61,26 @@ Sys.setenv(http_proxy = "my_proxy_server")
 Sys.setenv(https_proxy = "my_proxy_server")
 ```
 
+# Full example 
+```{r GDP}
+
+idbank_list = get_idbank_list()
+
+idbank_list_selected =
+  idbank_list %>%
+  filter(nomflow == "CNT-2014-PIB-EQB-RF") %>%  # Gross domestic product balance
+  filter(dim1 == "T") %>% #quarter
+  filter(dim4 == "PIB") %>% #GDP
+  filter(dim6 == "TAUX") #rate
+
+idbank = idbank_list_selected %>% pull(idbank)
+
+idbank_title = get_insee_title(idbank)
+
+data = get_insee_idbank(idbank) %>% 
+  mutate(OBS_VALUE = as.numeric(as.character(OBS_VALUE)))
+
+ggplot(data, aes(x = TIME, y = OBS_VALUE)) +
+  geom_line() +
+  ggtitle("French GDP growth rate")
+```
