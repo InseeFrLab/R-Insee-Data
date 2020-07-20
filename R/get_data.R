@@ -128,7 +128,7 @@ get_insee_dataset <- function(dataset,
                               lastNObservations = NULL,
                               filter = NULL){
 
-  insee_bdm_dataset_link = Sys.getenv("INSEE_sdmx_link")
+  insee_bdm_dataset_link = Sys.getenv("INSEE_sdmx_link_dataset")
 
   if(!"character" %in% class(dataset)){
     stop("idbank must be a character")
