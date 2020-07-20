@@ -82,8 +82,8 @@ data = get_insee_idbank(idbank) %>%
 
 ggplot(data, aes(x = TIME, y = OBS_VALUE)) +
   geom_line() +
-   geom_point() +
+  geom_point() +
   ggtitle("French GDP growth rate")
 ```
 
-![](pict/plot.png)
+![](inst/plot.png)
