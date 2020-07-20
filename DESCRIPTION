@@ -15,7 +15,9 @@ Imports:
   httr,
   xml2,
   tibble,
-  dplyr
+  dplyr,
+  tidyr,
+  stringr
 Suggests:
   tidyverse
 RoxygenNote: 7.1.1
