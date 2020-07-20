@@ -233,7 +233,7 @@ get_insee = function(link){
         data_final[,"TIME"] = NA
       }
       col_names_ordered = c("TIME", names(data_final)[which(names(data_final) != "TIME")])
-      data_final = dplyr::select(data_final, dplyr::all_of(col_names_ordered))
+      data_final = dplyr::select(data_final, tidyselect::all_of(col_names_ordered))
 
     }else{
       warning("The query might be either too big or wrongly done, try to modify it, use filter argument if necessary")

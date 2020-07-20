@@ -18,7 +18,8 @@ Imports:
   dplyr,
   tidyr,
   stringr,
-  lubridate
+  lubridate,
+  tidyselect
 Suggests:
   tidyverse
 RoxygenNote: 7.1.1

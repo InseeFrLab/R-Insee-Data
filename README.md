@@ -63,6 +63,8 @@ Sys.setenv(https_proxy = "my_proxy_server")
 
 # Full example : French GDP plot
 ```{r GDP}
+library(tidyverse)
+library(insee)
 
 idbank_list = get_idbank_list()
 
