@@ -205,6 +205,16 @@ get_insee = function(link){
       }
 
       data_final = dplyr::bind_rows(list_df)
+
+      if("TIME_PERIOD" %in% names(data_final)){
+        col_date = dplyr::pull(.data = data_final, TIME_PERIOD)
+        data_final[,"TIME"] = suppressWarnings(get_date(col_date))
+      }else{
+        data_final[,"TIME"] = NA
+      }
+      col_names_ordered = c("TIME", names(data_final)[which(names(data_final) != "TIME")])
+      data_final = dplyr::select(data_final, dplyr::all_of(col_names_ordered))
+
     }else{
       warning("The query might be either too big or wrongly done, try to modify it, use filter argument if necessary")
       warning(data[[1]][[1]][["Text"]][[1]])
@@ -217,4 +227,32 @@ get_insee = function(link){
   }
   return(data_final)
 }
+
+get_date = function(date){
+
+  # semester
+  date = stringr::str_replace_all(date, "-S1", "-Q1")
+  date = stringr::str_replace_all(date, "-S2", "-Q3")
+
+  # bimonthly
+  date = stringr::str_replace_all(date, "-B1", "-01")
+  date = stringr::str_replace_all(date, "-B2", "-03")
+  date = stringr::str_replace_all(date, "-B3", "-05")
+  date = stringr::str_replace_all(date, "-B4", "-07")
+  date = stringr::str_replace_all(date, "-B5", "-09")
+  date = stringr::str_replace_all(date, "-B6", "-11")
+
+  # monthly
+  date = stringr::str_replace_all(date, "^[0-9]{4}-[0-1][0-9]$", as.character(paste0(date, "-01")))
+
+  # quarterly
+  date = stringr::str_replace_all(date, "^[0-9]{4}-Q[1-4]$", as.character(lubridate::yq(date)))
+
+  # annualy
+  date = stringr::str_replace_all(date, "^[0-9]{4}$", as.character(paste0(date, "-01-01")))
+
+  date = lubridate::ymd(date)
+  return(date)
+}
+
 
