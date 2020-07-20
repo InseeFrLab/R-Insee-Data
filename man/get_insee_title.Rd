@@ -24,8 +24,13 @@ library(tidyverse)
 
 idbank_dataset = get_idbank_list()
 
-idbank_dataset_with_title =
-  idbank_dataset \%>\%
-  filter(str_detect(nomflow, "CLIMAT-AFFAIRES")) \%>\%
+idbank_list_selected =
+  idbank_list \%>\%
+  filter(nomflow == "IPI-2015") \%>\% #industrial production index dataset
+  filter(dim1 == "M") \%>\% #monthly
+  filter(dim5 == "INDICE") \%>\% #index
+  filter(dim8  == "CVS-CJO") \%>\% #Working day and seasonally adjusted SA-WDA
+  filter(str_detect(dim4,"^29$|A10-BE")) \%>\% #automotive industry and overall industrial production
   mutate(title = get_insee_title(idbank))
+
 }
