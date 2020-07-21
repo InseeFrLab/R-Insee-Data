@@ -219,6 +219,14 @@ get_insee = function(link){
           for(metadata_item in names(metadata)){
             data_series[, metadata_item] = metadata[[metadata_item]]
           }
+          
+          if(all(c("TIME_PERIOD", "FREQ") %in% names(data_series))){
+            col_date = dplyr::pull(.data = data_series, "TIME_PERIOD")
+            freq_data = as.character(unique(data_series$FREQ)[1])
+            data_series[,"DATE"] = suppressWarnings(get_date(col_date, freq = freq_data))
+          }else{
+            data_series[,"DATE"] = NA
+          }
 
           list_df[[length(list_df)+1]] = data_series
         }
@@ -226,14 +234,11 @@ get_insee = function(link){
 
       data_final = dplyr::bind_rows(list_df)
 
-      if("TIME_PERIOD" %in% names(data_final)){
-        col_date = dplyr::pull(.data = data_final, "TIME_PERIOD")
-        data_final[,"TIME"] = suppressWarnings(get_date(col_date))
-      }else{
-        data_final[,"TIME"] = NA
+      if("DATE" %in% names(data_final)){
+        col_names_ordered = c("DATE", names(data_final)[which(names(data_final) != "DATE")])
+        data_final = dplyr::select(data_final, tidyselect::all_of(col_names_ordered))
       }
-      col_names_ordered = c("TIME", names(data_final)[which(names(data_final) != "TIME")])
-      data_final = dplyr::select(data_final, tidyselect::all_of(col_names_ordered))
+     
 
     }else{
       warning("The query might be either too big or wrongly done, try to modify it, use filter argument if necessary")
@@ -248,30 +253,38 @@ get_insee = function(link){
   return(data_final)
 }
 
-get_date = function(date){
+get_date = function(date, freq){
 
   # semester
-  date = stringr::str_replace_all(date, "-S1", "-Q1")
-  date = stringr::str_replace_all(date, "-S2", "-Q3")
+  if(freq == "S"){
+    date = stringr::str_replace_all(date, c("-S1" = "-Q1", 
+                                            "-S2" = "-Q3"))
+  }
+  if(freq == "B"){
+    # bimonthly
+    date = stringr::str_replace_all(date, "-B1", "-01")
+    date = stringr::str_replace_all(date, "-B2", "-03")
+    date = stringr::str_replace_all(date, "-B3", "-05")
+    date = stringr::str_replace_all(date, "-B4", "-07")
+    date = stringr::str_replace_all(date, "-B5", "-09")
+    date = stringr::str_replace_all(date, "-B6", "-11")
+  }
 
-  # bimonthly
-  date = stringr::str_replace_all(date, "-B1", "-01")
-  date = stringr::str_replace_all(date, "-B2", "-03")
-  date = stringr::str_replace_all(date, "-B3", "-05")
-  date = stringr::str_replace_all(date, "-B4", "-07")
-  date = stringr::str_replace_all(date, "-B5", "-09")
-  date = stringr::str_replace_all(date, "-B6", "-11")
-
-  # monthly
-  date = stringr::str_replace_all(date, "^[0-9]{4}-[0-1][0-9]$", as.character(paste0(date, "-01")))
-
-  # quarterly
-  date = stringr::str_replace_all(date, "^[0-9]{4}-Q[1-4]$", as.character(lubridate::yq(date)))
-
-  # annualy
-  date = stringr::str_replace_all(date, "^[0-9]{4}$", as.character(paste0(date, "-01-01")))
-
-  date = lubridate::ymd(date)
+  if(freq %in% c("M", "B")){
+    # monthly
+    date = stringr::str_replace_all(date, "^[0-9]{4}-[0-1][0-9]$", as.character(paste0(date, "-01")))
+  }
+  if(freq %in% c("S", "T")){
+    # quarterly
+    date = stringr::str_replace_all(date, "^[0-9]{4}-Q[1-4]$", as.character(lubridate::yq(date)))
+  }
+  if(freq == "A"){
+    # annualy
+    date = stringr::str_replace_all(date, "^[0-9]{4}$", as.character(paste0(date, "-01-01")))
+  }
+  if(freq %in% c("M", "B", "T", "A", "S")){
+    date = lubridate::ymd(date)
+  }
   return(date)
 }
 
