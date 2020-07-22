@@ -113,7 +113,7 @@ get_insee_idbank <- function(...,
 #' @param filter Use the filter to choose only some dimensions. It is recommended to use it for big datasets.
 #' A dimension left empty means all values are selected. To select multiple values in one dimension put a "+" between those values (see example)
 #' @examples
-#' data = get_insee_dataset("IPC-2015", filter = "M+A.........CVS.", startPeriod = "2015-03", lastNObservations = 1)
+#' data = get_insee_dataset("IPC-2015", filter = "M+A.........CVS.", lastNObservations = 1)
 #'
 #' @export
 get_insee_dataset <- function(dataset,
