@@ -1,7 +1,7 @@
 Package: insee
 Type: Package
 Title: Tools to Easily Download Data from INSEE BDM Database
-Version: 0.5.0
+Version: 0.6.0
 Authors@R: person("Hadrien", "Leclerc", email = "leclerc.hadrien@gmail.com", role = c("aut", "cre"))
 Author: Hadrien Leclerc [aut, cre]
 Maintainer: Hadrien Leclerc <leclerc.hadrien@gmail.com>
