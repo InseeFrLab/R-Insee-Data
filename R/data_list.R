@@ -54,6 +54,7 @@ get_idbank_list = function(
 #' Download an INSEE dataset list
 #'
 #' @details the datasets returned are the ones available through a SDMX query
+#'
 #' @export
 get_dataset_list = function(){
 
