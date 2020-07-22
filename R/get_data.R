@@ -1,3 +1,4 @@
+
 #' Get title from INSEE series idbank
 #'
 #' @details Query INSEE website to get series title from series key (idbank).
@@ -262,5 +263,3 @@ get_date = function(date, freq){
   }
   return(date)
 }
-
-
