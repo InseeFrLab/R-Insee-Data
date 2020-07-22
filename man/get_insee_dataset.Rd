@@ -34,7 +34,6 @@ Get dataset from INSEE BDM database
 Get dataset from INSEE BDM database
 }
 \examples{
-data = get_insee_dataset("CLIMAT-AFFAIRES")
-data = get_insee_dataset("IPC-2015", filter = "M+A.........CVS.", startPeriod = "2015-03")
+data = get_insee_dataset("IPC-2015", filter = "M+A.........CVS.", startPeriod = "2015-03", lastNObservations = 1)
 
 }
