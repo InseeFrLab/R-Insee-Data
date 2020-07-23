@@ -17,6 +17,8 @@ Get data from INSEE BDM database with a SDMX query link
 Mainly for package internal use from the functions get_insee_dataset and get_insee_idbank
 }
 \examples{
-data = get_insee("http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM/010539365")
+insee_link = "http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"
+insee_query = file.path(insee_link, paste0("010539365","?", "firstNObservations=1"))
+data = get_insee(insee_query)
 
 }

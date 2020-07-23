@@ -158,7 +158,10 @@ get_insee_dataset <- function(dataset,
 #' Mainly for package internal use from the functions get_insee_dataset and get_insee_idbank
 #'
 #' @param link SDMX query link
-#' @examples data = get_insee("http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM/010539365")
+#' @examples
+#' insee_link = "http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"
+#' insee_query = file.path(insee_link, paste0("010539365","?", "firstNObservations=1"))
+#' data = get_insee(insee_query)
 #'
 #' @export
 get_insee = function(link){
