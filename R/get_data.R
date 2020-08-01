@@ -69,12 +69,10 @@ get_insee_title = function(..., lang = "en"){
 
     df_title = dplyr::arrange(.data = df_title, IDBANK)
 
-    df_title = as.data.frame(df_title)
-
     if(lang == "en"){
-      titles = as.character(df_title[,"TITLE_EN"])
+      titles = dplyr::pull(.data = df_title, TITLE_EN)
     }else{
-      titles = as.character(df_title[,"TITLE_FR"])
+      titles = dplyr::pull(.data = df_title, TITLE_FR)
     }
     titles_final = c(titles_final, titles)
   }
