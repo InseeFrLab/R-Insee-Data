@@ -26,6 +26,7 @@
 #'  mutate(title = get_insee_title(idbank))
 #' }
 #'
+#' @importFrom rlang .data
 #' @export
 get_insee_title = function(..., lang = "en"){
 
@@ -65,14 +66,14 @@ get_insee_title = function(..., lang = "en"){
     df_title = get_insee_idbank(list_idbank_selected, lastNObservations = 1)
 
     df_title = dplyr::mutate(.data = df_title,
-                             IDBANK = factor(IDBANK, levels = list_idbank_selected))
+                             IDBANK = factor(.data$IDBANK, levels = list_idbank_selected))
 
-    df_title = dplyr::arrange(.data = df_title, IDBANK)
+    df_title = dplyr::arrange(.data = df_title, .data$IDBANK)
 
     if(lang == "en"){
-      titles = dplyr::pull(.data = df_title, TITLE_EN)
+      titles = dplyr::pull(.data = df_title, name = .data$TITLE_EN)
     }else{
-      titles = dplyr::pull(.data = df_title, TITLE_FR)
+      titles = dplyr::pull(.data = df_title, name = .data$TITLE_FR)
     }
     titles_final = c(titles_final, titles)
   }
@@ -102,11 +103,13 @@ get_insee_title = function(..., lang = "en"){
 #'
 #' idbank_list = get_idbank_list()
 #'
-#' idbank_list_selected =
+#' df_idbank_list_selected =
 #'   idbank_list %>%
 #'   filter(nomflow == "CHOMAGE-TRIM-NATIONAL") %>%  #unemployment dataset
 #'   filter(dim5 == 0) %>% #men and women
-#'   pull(idbank)
+#'   mutate(title = get_insee_title(idbank))
+#'
+#' idbank_list_selected = df_idbank_list_selected %>% pull(idbank)
 #'
 #' unem = get_insee_idbank(idbank_list_selected)
 #' }
@@ -153,6 +156,8 @@ get_insee_idbank <- function(...,
 #' A dimension left empty means all values are selected. To select multiple values in one dimension put a "+" between those values (see example)
 #' @examples
 #' \donttest{
+#' insee_dataset = get_dataset_list()
+#'
 #' data = get_insee_dataset("IPC-2015", filter = "M+A.........CVS.", startPeriod = "2015-03")
 #' }
 #'
@@ -261,7 +266,7 @@ get_insee = function(link){
 
       if(insee_value_as_numeric & "OBS_VALUE" %in% names(data_final)){
         data_final = dplyr::mutate(.data = data_final,
-                                   OBS_VALUE = as.numeric(as.character(OBS_VALUE)))
+                                   OBS_VALUE = as.numeric(as.character(.data$OBS_VALUE)))
       }
 
       if("DATE" %in% names(data_final)){

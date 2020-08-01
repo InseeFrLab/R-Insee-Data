@@ -12,3 +12,7 @@ Download an INSEE dataset list
 \details{
 the datasets returned are the ones available through a SDMX query
 }
+\examples{
+\donttest{insee_dataset = get_dataset_list()}
+
+}

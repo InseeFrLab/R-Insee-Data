@@ -16,3 +16,6 @@ Download a mapping dataset betwen INSEE series keys (idbank) and SDMX series nam
 \details{
 Download a mapping dataset betwen INSEE series keys (idbank) and SDMX series names
 }
+\examples{
+\donttest{idbank_list = get_idbank_list()}
+}
