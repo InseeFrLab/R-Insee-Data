@@ -4,6 +4,8 @@
 #' @details Download a mapping dataset betwen INSEE series keys (idbank) and SDMX series names
 #' @param dataset if a dataset name is provided, only a subset of the data is delivered, otherwise
 #' all the data is returned
+#' @examples
+#' \donttest{idbank_list = get_idbank_list()}
 #' @export
 get_idbank_list = function(
   dataset = NULL
@@ -54,6 +56,8 @@ get_idbank_list = function(
 #' Download an INSEE dataset list
 #'
 #' @details the datasets returned are the ones available through a SDMX query
+#' @examples
+#' \donttest{insee_dataset = get_dataset_list()}
 #'
 #' @export
 get_dataset_list = function(){
