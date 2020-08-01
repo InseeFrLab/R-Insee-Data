@@ -30,6 +30,26 @@ Get data from INSEE series idbank
 Get data from INSEE series idbank
 }
 \examples{
-data = get_insee_idbank("001558315", firstNObservations = 1)
+\donttest{
+
+#example 1 : import price index of industrial products and turnover index : manufacture of wood
+data = get_insee_idbank("001558315", "010540726")
+
+#example 2 : unemployment data
+
+library(tidyverse)
+
+idbank_list = get_idbank_list()
+
+df_idbank_list_selected =
+  idbank_list \%>\%
+  filter(nomflow == "CHOMAGE-TRIM-NATIONAL") \%>\%  #unemployment dataset
+  filter(dim5 == 0) \%>\% #men and women
+  mutate(title = get_insee_title(idbank))
+
+idbank_list_selected = df_idbank_list_selected \%>\% pull(idbank)
+
+unem = get_insee_idbank(idbank_list_selected)
+}
 
 }
