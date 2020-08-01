@@ -8,4 +8,5 @@
   Sys.setenv(INSEE_idbank_dataset_file = "correspondance_idbank_dimension")
   Sys.setenv(INSEE_idbank_nchar = 9)
   Sys.setenv(INSEE_idbank_sep = ";")
+  Sys.setenv(INSEE_value_as_numeric = "TRUE")
 }
