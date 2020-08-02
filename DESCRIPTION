@@ -22,5 +22,8 @@ Imports:
   tidyselect,
   rlang
 Suggests:
-  tidyverse
+  tidyverse,
+  prettydoc,
+  htmltools,
+  kableExtra
 RoxygenNote: 7.1.1
