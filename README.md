@@ -79,13 +79,13 @@ idbank = idbank_list_selected %>% pull(idbank)
 
 idbank_title = get_insee_title(idbank)
 
-data = get_insee_idbank(idbank) %>% 
-  mutate(OBS_VALUE = as.numeric(as.character(OBS_VALUE)))
+data = get_insee_idbank(idbank)
 
+# plot
 ggplot(data, aes(x = DATE, y = OBS_VALUE)) +
-  geom_line() +
-  geom_point() +
-  ggtitle("French GDP growth rate")
+  geom_col() +
+  ggtitle("French GDP growth rate, quarter-on-quarter, sa-wda") +
+  labs(subtitle = sprintf("Last updated : %s", data$TIME_PERIOD[1]))
 ```
 
 ![](inst/plot.png)
