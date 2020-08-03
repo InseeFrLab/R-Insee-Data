@@ -10,6 +10,7 @@ URL: <https://www.insee.fr/en/information/2868055>
 Encoding: UTF-8
 LazyData: true
 License: GPL-2
+VignetteBuilder: knitr
 Imports: 
   httr,
   xml2,
@@ -24,5 +25,8 @@ Suggests:
   tidyverse,
   prettydoc,
   htmltools,
-  kableExtra
+  kableExtra,
+  knitr,
+  rmarkdown,
+  magrittr
 RoxygenNote: 7.1.1
