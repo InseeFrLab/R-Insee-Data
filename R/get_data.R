@@ -280,11 +280,11 @@ get_insee = function(link){
             dataset_n_series = if_null_na(data[[1]][[2]]$Dataflows[[j]]$Annotation[[2]]$AnnotationText[[1]])
 
             if(!is.null(dataset_n_series)){
-              dataset_n_series = gsub("Nombre de séries : ", "", dataset_n_series)
+               dataset_n_series = stringr::str_replace_all(dataset_n_series, "[:alpha:]|\\s|:", "")
             }
 
-            dt_name_fr = NA
-            dt_name_en = NA
+            dataset_name_fr = NA
+            dataset_name_en = NA
 
             lang1 = attr(data[[1]][[2]]$Dataflows[[j]][[2]], "lang")
             name1 = data[[1]][[2]]$Dataflows[[j]][[2]][[1]]
