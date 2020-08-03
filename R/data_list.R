@@ -63,16 +63,9 @@ get_idbank_list = function(
 get_dataset_list = function(){
 
   link_dataflow = Sys.getenv("INSEE_sdmx_link_dataflow")
-  tfile = tempfile()
-  on.exit(unlink(tfile))
-  dwn = try(utils::download.file(link_dataflow, tfile, mode = "wb", quiet = TRUE), silent = TRUE)
 
-  if(class(dwn) != "try-error"){
-    sdmx = rsdmx::readSDMX(tfile, isURL = FALSE)
-    df = as.data.frame(sdmx)
-  }else{
-    df = NULL
-  }
+  df = get_insee(link_dataflow)
+
   return(df)
 }
 
