@@ -65,7 +65,7 @@ df_idbank_list_selected =
   filter(dim6 == "TAUX") \%>\% #rate
   filter(dim10 == "CVS-CJO") #SA-WDA, seasonally adjusted, working day adjusted
 
-idbank = idbank_list_selected \%>\% pull(idbank)
+idbank = df_idbank_list_selected \%>\% pull(idbank)
 
 data = get_insee_idbank(idbank)
 
