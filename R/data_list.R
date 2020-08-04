@@ -30,6 +30,7 @@ get_idbank_list = function(
     utils::unzip(temp_file, exdir = temp_dir)
   }
 
+  mapping_file = file.path(temp_dir, list.files(temp_dir, pattern = mapping_file_pattern)[1])
   # load data
   mapping = utils::read.delim(mapping_file, sep = mapping_file_sep, stringsAsFactors = F)
 
