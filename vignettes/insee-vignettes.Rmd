@@ -46,7 +46,7 @@ The first version of the package was published on CRAN 2020-07-29.
 
 In order for someone working behind a proxy server to be able to use [insee](https://CRAN.R-project.org/package=insee), it is necessary to modify system variables as follow.
 
-```{r, message=FALSE,warning=FALSE,eval=FALSE}
+```{r, message = FALSE, warning = FALSE, eval = FALSE}
 Sys.setenv(http_proxy = "my_proxy_server")
 Sys.setenv(https_proxy = "my_proxy_server")
 ```
@@ -55,7 +55,7 @@ Sys.setenv(https_proxy = "my_proxy_server")
 
 You can easily install [insee](https://CRAN.R-project.org/package=insee) with the following code :
 
-```{r, message=FALSE,warning=FALSE,eval=FALSE}
+```{r, message = FALSE, warning = FALSE, eval = FALSE}
 install.packages("insee")
 ```
 
@@ -63,13 +63,13 @@ install.packages("insee")
 
 You can easily load [insee](https://CRAN.R-project.org/package=insee) with the following code :
 
-```{r, message=FALSE,warning=FALSE,eval=FALSE}
+```{r, message = FALSE, warning = FALSE, eval = FALSE}
 library(insee)
 ```
 
 This vignette uses the [tidyverse](https://CRAN.R-project.org/package=tidyverse) package to exemplify the [insee](https://CRAN.R-project.org/package=insee) package functionalities with hands-on examples.
 
-```{r, message=FALSE,warning=FALSE,eval=FALSE}
+```{r, message = FALSE, warning = FALSE, eval = FALSE}
 library(tidyverse)
 ```
 
@@ -83,12 +83,13 @@ Series have two identifiers the SDMX identifier and the so called idbank. Both c
 
 [INSEE BDM database](https://www.insee.fr/en/information/2512785) offers more than 200 Datasets. The <code>get_dataset_list()</code> function returns the datasets catalogue :
 
-```{r, message=FALSE,warning=FALSE,eval=NOT_CRAN}
+```{r, message = FALSE, warning = FALSE, eval = NOT_CRAN}
 insee_dataset <- get_dataset_list() 
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE,eval=NOT_CRAN}
+```{r echo = FALSE, message = FALSE, warning = FALSE, eval = NOT_CRAN}
 rownames(insee_dataset) <- NULL
+
 insee_dataset %>% 
   select(id, Name.en, Name.fr, url, n_series) %>% 
   slice(1:10) %>% 
@@ -96,7 +97,7 @@ insee_dataset %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
 ```
 
-## Series Keys List
+## Series Key List
 
 [INSEE BDM database](https://www.insee.fr/en/information/2512785) currently offers more than 140 000 Series. The <code>get_idbank_list</code> function returns the series catalogue.
 
@@ -123,7 +124,7 @@ idbank_list %>%
 The best way to download data is to find the right series key (idbank), but how ? Indeed, in some cases it is not easy to understand what are the differences among series, especially for non-French speakers.
 To make the search easier, the [insee](https://CRAN.R-project.org/package=insee) package provides the function <code>get_insee_title</code> to get the title related to an idbank, either in English or in French. It is not advised to use the <code>get_insee_title</code> function on the whole idbank dataset, as each SDMX query has 400-idbank limit. Then, <code>get_insee_title</code> function splits the input into several lists of 400 idbanks each and is consequently quite slow. Thus, the user should filter the idbank dataset before using the <code>get_insee_title</code> function to avoid as much as possible this bottleneck as the following example shows. 
 
-```{r message=FALSE, warning=FALSE,eval=NOT_CRAN}
+```{r message=FALSE, warning=FALSE,eval=FALSE}
 idbank_list = get_idbank_list()
 
 idbank_list_selected =
@@ -131,8 +132,9 @@ idbank_list_selected =
   filter(nomflow == "IPI-2015") %>% #industrial production index dataset
   filter(dim1 == "M") %>% #monthly
   filter(dim5 == "INDICE") %>% #index
-  filter(dim8  == "CVS-CJO") %>% #Working day and seasonally adjusted SA-WDA
-  filter(str_detect(dim4,"^29$|A10-BE")) %>% #automotive industry and overall industrial production
+  filter(dim8 == "CVS-CJO") %>% #Working day and seasonally adjusted SA-WDA
+  #automotive industry and overall industrial production
+  filter(str_detect(dim4,"^29$|A10-BE")) %>% 
   mutate(title = get_insee_title(idbank))
 
 idbank_list_selected
@@ -143,19 +145,61 @@ idbank_list_selected
 
 ### Download using idbank
 
-```{r message=FALSE, warning=FALSE,eval=NOT_CRAN}
+The <code>get_insee_idbank</code> function should handle up to 400 idbanks but not more.
+It is then advised to narrow down the idbanks list used as argument of the function.
+
+```{r message=FALSE, warning=FALSE,eval=FALSE}
 library(tidyverse)
 
+# the user can make a manual list of idbanks to get the data 
+# example 1
+
 data = get_insee_idbank("001558315", "010540726")
+
+# using a list of idbanks extracted from the insee idbank dataset
+# example 2 : household's confidence survey
+
+idbank_dataset = get_idbank_list()
+
+df_idbank = idbank_dataset %>%
+  filter(nomflow == "ENQ-CONJ-MENAGES") %>%  #monthly households' confidence survey
+  mutate(title = get_insee_title(idbank)) %>%
+  separate(title, sep = " - ", into = paste0("title", 1:4),
+           fill = "right", remove = FALSE) %>%
+  filter(dim7 == "CVS") #seasonally adjusted
+
+# dim2: IND_SYNT_CONF - Summary indicator of households' confidence
+
+list_idbank = df_idbank %>% pull(idbank)
+
+data = get_insee_idbank(list_idbank)
 
 ```
 
 ### Download using dataset name
 
-```{r message=FALSE, warning=FALSE,eval=NOT_CRAN}
-library(tidyverse)
+For some datasets as IPC-2015 (inflation), the filter is necessary.
 
-data = get_insee_idbank("001558315", "010540726")
+```{r message=FALSE, warning=FALSE,eval=FALSE}
+
+insee_dataset <- get_dataset_list() 
+
+# example 1 : full dataset
+data = get_insee_dataset("CLIMAT-AFFAIRES")
+
+# example 2 : filtered dataset 
+# the user can filter the data
+data = get_insee_dataset("IPC-2015", filter = "M+A.........CVS.", startPeriod = "2015-03")
+
+# in the filter, the + is used to select several values in one dimension, like an "and" statement
+# the void means "all" values available
+
+# example 3 : only one series
+# by filtering with the full SDMX series key, the user will get only one series
+data = 
+  get_insee_dataset("CNA-2014-CPEB",
+                    filter = "A.CNA_CPEB.A38-CB.VAL.D39.VALEUR_ABSOLUE.FE.EUROS_COURANTS.BRUT",
+                    lastNObservations = 10)
 
 ```
 
@@ -163,7 +207,7 @@ data = get_insee_idbank("001558315", "010540726")
 
 ## GDP growth rate 
 
-```{r message=FALSE, warning=FALSE,eval=NOT_CRAN}
+```{r message=FALSE, warning=FALSE, eval=FALSE}
 library(tidyverse)
 
 idbank_list = get_idbank_list()
@@ -188,9 +232,11 @@ ggplot(data, aes(x = DATE, y = OBS_VALUE)) +
 
 ```
 
+![](gdp.png)
+
 ## Inflation
 
-```{r message=FALSE, warning=FALSE,eval=NOT_CRAN}
+```{r message = FALSE, warning=FALSE, eval = FALSE}
 library(tidyverse)
 library(lubridate)
 
@@ -213,7 +259,8 @@ data = get_insee_idbank(list_idbank, startPeriod = "2010-01")
 n_sep = str_count(data$TITLE_FR[1], " - ") + 1
 
 data_plot = data %>%
-  separate(TITLE_EN, into = paste0("title", 1:n_sep), sep = " - ", remove = FALSE, fill = "right") %>%
+  separate(TITLE_EN, into = paste0("title", 1:n_sep),
+           sep = " - ", remove = FALSE, fill = "right") %>%
   mutate(title6 = case_when(is.na(title6) ~ title5,
                             TRUE ~ as.character(title6))) %>%
   mutate(title6 = substr(title6, 1 , 22)) %>%
@@ -230,9 +277,11 @@ ggplot(data_plot, aes(x = DATE, y = growth)) +
 
 ```
 
+![](inflation.png)
+
 ## Unemployment rate
 
-```{r message=FALSE, warning=FALSE,eval=NOT_CRAN}
+```{r message=FALSE, warning = FALSE, eval = FALSE}
 library(tidyverse)
 
 dataset_list = get_dataset_list()
@@ -254,7 +303,8 @@ data = get_insee_idbank(list_idbank, startPeriod = "2000-01")
 n_sep = str_count(data$TITLE_FR[1], " - ") + 1
 
 data_plot = data %>%
-  separate(TITLE_EN, into = paste0("title", 1:n_sep), sep = " - ", remove = FALSE, fill = "right")
+  separate(TITLE_EN, into = paste0("title", 1:n_sep),
+           sep = " - ", remove = FALSE, fill = "right")
 
 ggplot(data_plot, aes(x = DATE, y = OBS_VALUE, colour = title2)) +
   geom_line() +
@@ -264,9 +314,13 @@ ggplot(data_plot, aes(x = DATE, y = OBS_VALUE, colour = title2)) +
 
 ```
 
+![](unem.png)
+
 ## Population
 
-```{r message=FALSE, warning=FALSE,eval=NOT_CRAN}
+### Population by age
+
+```{r message=FALSE, warning=FALSE,eval=FALSE}
 library(tidyverse)
 
 dataset_list = get_dataset_list()
@@ -289,7 +343,8 @@ data = get_insee_idbank(list_idbank)
 n_sep = str_count(data$TITLE_FR[1], " - ") + 1
 
 data_plot = data %>%
-  separate(TITLE_EN, into = paste0("title", 1:n_sep), sep = " - ", remove = FALSE, fill = "right") %>%
+  separate(TITLE_EN, into = paste0("title", 1:n_sep),
+           sep = " - ", remove = FALSE, fill = "right") %>%
   mutate(OBS_VALUE = OBS_VALUE / 10^6)
 
 ggplot(data_plot, aes(x = DATE, y = OBS_VALUE, fill = title3)) +
@@ -298,6 +353,82 @@ ggplot(data_plot, aes(x = DATE, y = OBS_VALUE, fill = title3)) +
   labs(subtitle = sprintf("Last updated : %s", data_plot$TIME_PERIOD[1]))
 
 ```
+
+![](pop.png)
+
+### Population by departement
+
+```{r message=FALSE, warning=FALSE,eval=FALSE}
+
+library(insee)
+library(tidyverse)
+
+library(raster)
+library(rgdal)
+library(broom)
+library(viridis)
+
+idbank_list = get_idbank_list()
+
+dataset_list = get_dataset_list()
+
+list_idbank = idbank_list %>%
+  filter(nomflow == "TCRED-ESTIMATIONS-POPULATION") %>%
+  filter(dim6 == "00-") %>% #all population
+  filter(dim5 == 0) %>% #men and women
+  filter(str_detect(dim4, "^D")) %>% #departement
+  mutate(title = get_insee_title(idbank))
+
+list_idbank_selected = list_idbank %>% pull(idbank)
+
+# get population data by departement
+pop = get_insee_idbank(list_idbank_selected)
+
+#get departement limits
+FranceMap <- raster::getData(name = "GADM", country = "FRA", level = 2)
+
+# extract the population by departement in 2020
+pop_plot = pop %>%
+  group_by(TITLE_EN) %>%
+  filter(DATE == "2020-01-01") %>%
+  mutate(dptm = gsub("D", "", REF_AREA)) %>%
+  filter(dptm %in% FranceMap@data$CC_2) %>%
+  mutate(dptm = factor(dptm, levels = FranceMap@data$CC_2)) %>%
+  arrange(dptm) %>%
+  mutate(id = dptm)
+
+vec_pop = pop_plot %>% pull(OBS_VALUE)
+
+# add population data to the departement object map
+FranceMap@data$pop = vec_pop
+
+# extract the departement limits from the spatial object
+FranceMap_tidy <- broom::tidy(FranceMap)
+
+# mapping table
+dptm_df = data.frame(dptm = FranceMap@data$CC_2,
+                     dptm_name = FranceMap@data$NAME_2,
+                     pop = FranceMap@data$pop,
+                     id = rownames(FranceMap@data))
+
+# add population data to departement dataframe
+FranceMap_tidy_final =
+  FranceMap_tidy %>%
+  left_join(dptm_df, by = "id") %>%
+  select(long, lat, pop, group, id)
+
+ggplot() +
+  geom_polygon(data = FranceMap_tidy_final,
+               aes(fill = pop, x = long, y = lat, group = group) ,
+               size = 0, alpha = 0.9) +
+  coord_map() +
+  theme_void() +
+  scale_fill_viridis() +
+  ggtitle("Distribution of the population on French territory in 2020")
+
+```
+
+![](pop_map.png)
 
 # Support
 Feel free to contact me with any question about this package using this [e-mail address](mailto:leclerc.hadrien@gmail.com?subject=[r-package][insee]).
