@@ -22,12 +22,15 @@ get_idbank_list = function(
   temp_file = tempfile()
   temp_dir = tempdir()
 
+  mapping_file = file.path(temp_dir, list.files(temp_dir, pattern = mapping_file_pattern)[1])
+
   # download and unzip
-  utils::download.file(file_to_dwn, temp_file, mode = "wb", quiet = TRUE)
-  utils::unzip(temp_file, exdir = temp_dir)
+  if(!file.exists(mapping_file)){
+    utils::download.file(file_to_dwn, temp_file, mode = "wb", quiet = TRUE)
+    utils::unzip(temp_file, exdir = temp_dir)
+  }
 
   # load data
-  mapping_file = file.path(temp_dir, list.files(temp_dir, pattern = mapping_file_pattern)[1])
   mapping = utils::read.delim(mapping_file, sep = mapping_file_sep, stringsAsFactors = F)
 
   # filter data
