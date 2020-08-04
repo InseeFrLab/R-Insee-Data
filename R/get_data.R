@@ -224,8 +224,10 @@ get_insee_dataset <- function(dataset,
 
 #' Get data from INSEE BDM database with a SDMX query link
 #'
-#' @details Get data from INSEE BDM database with a SDMX query link
-#' Mainly for package internal use from the functions get_insee_dataset and get_insee_idbank
+#' @details Get data from INSEE BDM database with a SDMX query link.
+#' This function is mainly for package internal use.
+#' It is used by the functions get_insee_dataset, get_insee_idbank and get_dataset_list.
+#' The data is cached, hence all queries are only done once per R session.
 #'
 #' @param link SDMX query link
 #' @examples
