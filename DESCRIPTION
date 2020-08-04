@@ -20,7 +20,8 @@ Imports:
   stringr,
   lubridate,
   tidyselect,
-  rlang
+  rlang,
+  openssl
 Suggests:
   tidyverse,
   prettydoc,
