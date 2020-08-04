@@ -22,13 +22,13 @@ get_idbank_list = function(
   temp_file = tempfile()
   temp_dir = tempdir()
 
-  mapping_file = file.path(temp_dir, list.files(temp_dir, pattern = mapping_file_pattern)[1])
+  mapping_file_cache = file.path(temp_dir, paste0(mapping_file_pattern, ".rds"))
 
   # download and unzip
-  if(!file.exists(mapping_file)){
-    utils::download.file(file_to_dwn, temp_file, mode = "wb", quiet = TRUE)
-    utils::unzip(temp_file, exdir = temp_dir)
-  }
+  if(!file.exists(mapping_file_cache)){
+
+  utils::download.file(file_to_dwn, temp_file, mode = "wb", quiet = TRUE)
+  utils::unzip(temp_file, exdir = temp_dir)
 
   mapping_file = file.path(temp_dir, list.files(temp_dir, pattern = mapping_file_pattern)[1])
   # load data
@@ -53,6 +53,12 @@ get_idbank_list = function(
     paste0(c(rep("0", idbank_nchar_arg-nchar(x)), x), collapse = "")}
 
   mapping_final[,"idbank"] = sapply(mapping_final[,"idbank"], add_zero)
+
+  saveRDS(mapping_final, file = mapping_file_cache)
+
+  }else{
+    mapping_final = readRDS(mapping_file_cache)
+  }
 
   return(mapping_final)
 }
