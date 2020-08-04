@@ -13,8 +13,10 @@ get_insee(link)
 Get data from INSEE BDM database with a SDMX query link
 }
 \details{
-Get data from INSEE BDM database with a SDMX query link
-Mainly for package internal use from the functions get_insee_dataset and get_insee_idbank
+Get data from INSEE BDM database with a SDMX query link.
+This function is mainly for package internal use.
+It is used by the functions get_insee_dataset, get_insee_idbank and get_dataset_list.
+The data is cached, hence all queries are only done once per R session.
 }
 \examples{
 insee_link = "http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"
