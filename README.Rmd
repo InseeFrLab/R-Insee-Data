@@ -13,15 +13,13 @@ knitr::opts_chunk$set(
 )
 ```
 
-<br>
-<!-- badges: start -->
+<!-- <br> -->
 
-[![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee)
-[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee)
-[![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee)
+<!-- [![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee) -->
+<!-- [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee) -->
+<!-- [![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee) -->
 
-<!-- badges: end -->
-<br>
+<!-- <br> -->
 
 ## Overview
 
@@ -39,7 +37,8 @@ install.packages("insee")
 ```
 
 # Library
-```{r example, echo = FALSE}
+```{r example, message=FALSE}
+# examples below use tidyverse packages 
 library(tidyverse)
 library(insee)
 ```
@@ -69,7 +68,7 @@ idbank_list_selected =
 ```{r get_title}
 idbank_list_selected = 
   idbank_list_selected %>% 
-  mutate(title = get_insee_title(idbank, lang = "fr")) 
+  mutate(title = get_insee_title(idbank, lang = "en")) 
 ```
 
 # extract selected idbanks list
@@ -121,7 +120,7 @@ ggplot(data, aes(x = DATE, y = OBS_VALUE)) +
 
 ## Inflation
 
-```{r message = FALSE, warning=FALSE, eval = FALSE}
+```{r message=FALSE, warning=FALSE, eval=FALSE}
 library(tidyverse)
 library(lubridate)
 
@@ -243,7 +242,7 @@ ggplot(data_plot, aes(x = DATE, y = OBS_VALUE, fill = title3)) +
 
 ### Population by departement
 
-```{r population_departement, eval = FALSE}
+```{r population_departement, eval=FALSE}
 
 library(insee)
 library(tidyverse)

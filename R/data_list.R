@@ -97,7 +97,7 @@ search_insee = function(pattern){
 
   dataset_list = get_dataset_list()
 
-  # create new french name columns withtout accent
+  # create new french name column withtout accent
   dataset_list = dplyr::mutate(.data = dataset_list,
                                Name.fr_accent = iconv(.data$Name.fr,
                                                       from = "UTF-8", to = 'ASCII//TRANSLIT')

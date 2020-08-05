@@ -1,10 +1,19 @@
-<!-- badges: start -->
+---
+title: insee R package
+output: 
+  html_document: 
+    keep_md: yes
+---
 
-[![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee)
-[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee)
-[![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee)
 
-<!-- badges: end -->
+
+<!-- <br> -->
+
+<!-- [![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee) -->
+<!-- [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee) -->
+<!-- [![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee) -->
+
+<!-- <br> -->
 
 ## Overview
 
@@ -12,58 +21,71 @@ The insee package contains tools to easily download data and metadata from INSEE
 Using embedded SDMX queries, get the data of more than 140 000 INSEE series from BDM database (Banque de données macroéconomiques).
 
 ## Installation
-```{r eval = FALSE}
+
+```r
 # Get the development version from GitHub
 # install.packages("devtools")
-devtools::install_github("hadrilec2/insee")
+# devtools::install_github("hadrilec2/insee")
+
+# Get the CRAN version
+install.packages("insee")
 ```
 
 # Library
-```{r example, echo = FALSE}
+
+```r
+# examples below use tidyverse packages 
 library(tidyverse)
 library(insee)
 ```
 
 # get INSEE datasets list
-```{r dataset list}
+
+```r
 dataset = get_dataset_list()
 ```
 
 # get INSEE series key (idbank) list
-```{r idbank list}
+
+```r
 idbank_list = get_idbank_list()
 ```
 
 # select idbanks 
-```{r select idbank}
+
+```r
 idbank_list_selected = 
   idbank_list %>% 
-  filter(nomflow == "ENQ-CONJ-ACT-IND") %>% 
-  filter(dim12 == "A88-29") %>% 
-  filter(dim8  == "CVS") %>% 
-  filter(dim13 == "SOLDE_PROPORTION") %>% 
-  filter(dim10 == "ECAI_TPE") 
+  filter(nomflow == "ENQ-CONJ-ACT-IND") %>% #industry activity survey 
+  filter(dim4 == "A88-29") %>% # 29 : automotive industry, A88 : aggregation level - 88 sectors
+  filter(dim8  == "CVS") %>% #seasonally adjusted
+  filter(dim5 == "SOLDE_PROPORTION") %>% #balance of opinion
+  filter(dim2 == "ECAI_TPE")  #expected trend in employment
 ```
   
 # get idbank title
-```{r get_title}
+
+```r
 idbank_list_selected = 
   idbank_list_selected %>% 
-  mutate(title = get_insee_title(idbank, lang = "fr")) 
+  mutate(title = get_insee_title(idbank, lang = "en")) 
 ```
 
 # extract selected idbanks list
-```{r selected idbank}
+
+```r
 list_idbank = idbank_list_selected %>% pull(idbank)
 ```
 
 # get selected idbanks data
-```{r data}
+
+```r
 data = get_insee_idbank(list_idbank)
 ```
 
 # avoid proxy issues 
-```{r proxy}
+
+```r
 Sys.setenv(http_proxy = "my_proxy_server")
 Sys.setenv(https_proxy = "my_proxy_server")
 ```
@@ -72,7 +94,8 @@ Sys.setenv(https_proxy = "my_proxy_server")
 
 ## GDP growth rate 
 
-```{r message=FALSE, warning=FALSE, eval=FALSE}
+
+```r
 library(tidyverse)
 
 idbank_list = get_idbank_list()
@@ -101,7 +124,8 @@ ggplot(data, aes(x = DATE, y = OBS_VALUE)) +
 
 ## Inflation
 
-```{r message = FALSE, warning=FALSE, eval = FALSE}
+
+```r
 library(tidyverse)
 library(lubridate)
 
@@ -146,7 +170,8 @@ ggplot(data_plot, aes(x = DATE, y = growth)) +
 
 ## Unemployment rate
 
-```{r unem}
+
+```r
 library(tidyverse)
 
 dataset_list = get_dataset_list()
@@ -185,7 +210,8 @@ ggplot(data_plot, aes(x = DATE, y = OBS_VALUE, colour = title2)) +
 
 ### Population by age
 
-```{r population_age}
+
+```r
 library(tidyverse)
 
 dataset_list = get_dataset_list()
@@ -223,7 +249,8 @@ ggplot(data_plot, aes(x = DATE, y = OBS_VALUE, fill = title3)) +
 
 ### Population by departement
 
-```{r population_departement}
+
+```r
 
 library(insee)
 library(tidyverse)
@@ -280,7 +307,7 @@ dptm_df = data.frame(dptm = FranceMap@data$CC_2,
 FranceMap_tidy_final =
   FranceMap_tidy %>%
   left_join(dptm_df, by = "id") %>%
-  select(long, lat, pop, group, id)
+  dplyr::select(long, lat, pop, group, id)
 
 ggplot() +
   geom_polygon(data = FranceMap_tidy_final,
@@ -297,3 +324,6 @@ ggplot() +
 
 # Support
 Feel free to contact me with any question about this package using this [e-mail address](mailto:leclerc.hadrien@gmail.com?subject=[r-package][insee]).
+
+# Disclaimer
+This package is in no way officially related to or endorsed by INSEE.
