@@ -6,4 +6,5 @@ doc
 Meta
 docs
 README.html
+README.Rmd
 _pkgdown.yml
