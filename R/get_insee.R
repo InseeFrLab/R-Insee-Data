@@ -3,7 +3,7 @@
 #' @details Get data from INSEE BDM database with a SDMX query link.
 #' This function is mainly for package internal use.
 #' It is used by the functions get_insee_dataset, get_insee_idbank and get_dataset_list.
-#' The data is cached, hence all queries are only done once per R session.
+#' The data is cached, hence all queries are only run once per R session.
 #'
 #' @param link SDMX query link
 #' @examples
