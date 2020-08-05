@@ -5,5 +5,5 @@ insee.Rproj
 doc
 Meta
 docs
-^README.html$
+README.html
 _pkgdown.yml
