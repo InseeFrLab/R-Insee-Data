@@ -415,7 +415,7 @@ dptm_df = data.frame(dptm = FranceMap@data$CC_2,
 FranceMap_tidy_final =
   FranceMap_tidy %>%
   left_join(dptm_df, by = "id") %>%
-  select(long, lat, pop, group, id)
+  dplyr::select(long, lat, pop, group, id)
 
 ggplot() +
   geom_polygon(data = FranceMap_tidy_final,
@@ -432,3 +432,8 @@ ggplot() +
 
 # Support
 Feel free to contact me with any question about this package using this [e-mail address](mailto:leclerc.hadrien@gmail.com?subject=[r-package][insee]).
+
+# Disclaimer
+
+This package is in no way officially related to or endorsed by INSEE.
+
