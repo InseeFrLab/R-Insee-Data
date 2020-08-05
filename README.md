@@ -3,9 +3,11 @@ insee R package
 
 <br>
 
-[![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee)
-[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee)
-[![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee)
+[![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee) 
+
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee) 
+
+[![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee) 
 
 <br>
 
@@ -253,9 +255,9 @@ dataset_list = get_dataset_list()
 
 list_idbank = idbank_list %>%
   filter(nomflow == "TCRED-ESTIMATIONS-POPULATION") %>%
-  filter(dim6 == "00-") %>% #all population
+  filter(dim6 == "00-") %>% #all ages
   filter(dim5 == 0) %>% #men and women
-  filter(str_detect(dim4, "^D")) %>% #departement
+  filter(str_detect(dim4, "^D")) %>% #select only departements
   mutate(title = get_insee_title(idbank))
 
 list_idbank_selected = list_idbank %>% pull(idbank)
@@ -263,7 +265,7 @@ list_idbank_selected = list_idbank %>% pull(idbank)
 # get population data by departement
 pop = get_insee_idbank(list_idbank_selected)
 
-#get departement limits
+#get departements' geographical limits
 FranceMap <- raster::getData(name = "GADM", country = "FRA", level = 2)
 
 # extract the population by departement in 2020
@@ -281,7 +283,7 @@ vec_pop = pop_plot %>% pull(OBS_VALUE)
 # add population data to the departement object map
 FranceMap@data$pop = vec_pop
 
-# extract the departement limits from the spatial object
+# extract the departements' limits from the spatial object
 FranceMap_tidy <- broom::tidy(FranceMap)
 
 # mapping table
@@ -303,7 +305,7 @@ ggplot() +
   coord_map() +
   theme_void() +
   scale_fill_viridis() +
-  ggtitle("Distribution of the population on French territory in 2020")
+  ggtitle("Distribution of the population within French territory in 2020")
 ```
 
 ![](vignettes/pop_map.png)

@@ -2,7 +2,6 @@
 .Rbuildignore
 .Rproj.user
 insee.Rproj
-doc
 Meta
 docs
 README.html

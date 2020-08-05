@@ -1,4 +1,4 @@
-#' Download an INSEE dataset list
+#' Download a full INSEE's dataset list
 #'
 #' @details the datasets returned are the ones available through a SDMX query
 #' @examples

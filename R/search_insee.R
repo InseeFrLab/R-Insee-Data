@@ -1,5 +1,5 @@
 
-#' Search among insee dataset names a pattern
+#' Search a pattern among insee dataset names
 #'
 #' @details the function ignores accents and cases
 #' @param pattern string used to filtern the dataset list
