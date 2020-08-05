@@ -1,0 +1,81 @@
+#' Get title from INSEE series idbank
+#'
+#' @details Query INSEE website to get series title from series key (idbank).
+#' Any query to INSEE database can handle around 400 idbanks at maximum, if necessary the idbank list will then be splitted in several lists of 400 idbanks each.
+#' Consequently, it is not advised to use it on the whole idbank dataset, the user should filter the idbank dataset first.
+#' @param ... list of series key (idbank)
+#' @param lang language of the title, by default it is Engligh, if lang is different from "en" then French will be the title's language
+#' @examples
+#' #example 1 : industrial production index on manufacturing and industrial activities
+#' title = get_insee_title("010537900")
+#'
+#' \donttest{
+#' #example 2 : automotive industry and overall industrial production
+#' library(tidyverse)
+#'
+#'idbank_list = get_idbank_list()
+#'
+#'idbank_list_selected =
+#'  idbank_list %>%
+#'  filter(nomflow == "IPI-2015") %>% #industrial production index dataset
+#'  filter(dim1 == "M") %>% #monthly
+#'  filter(dim5 == "INDICE") %>% #index
+#'  filter(dim8  == "CVS-CJO") %>% #Working day and seasonally adjusted SA-WDA
+#'  filter(str_detect(dim4,"^29$|A10-BE")) %>% #automotive industry and overall industrial production
+#'  mutate(title = get_insee_title(idbank))
+#' }
+#'
+#' @importFrom rlang .data
+#' @export
+get_insee_title = function(..., lang = "en"){
+
+  if(length(list(...)) == 1){
+    list_idbank = list(...)[[1]]
+  }else{
+    list_idbank = unlist(list(...))
+  }
+
+  # if there are more than 400 idbanks
+  # the query is divided in several
+
+  n_idbank = length(list_idbank)
+  if(n_idbank > 200000){stop("Too many idbanks!")}
+  n_idbank_query = 400
+
+  list_seq = lapply(1:500, function(x){
+    if(x == 1){
+      return(1:n_idbank_query)
+    }else{
+      return(((x-1) * n_idbank_query + 1):(x * n_idbank_query))
+    }
+  })
+
+  i = 1
+  while(!(n_idbank %in% list_seq[[i]])){
+    i = i + 1
+  }
+
+  titles_final = c()
+
+  for(j in 1:i){
+
+    selected_idbank = min(list_seq[[j]]):(min(max(list_seq[[j]]), n_idbank))
+    list_idbank_selected = list_idbank[selected_idbank]
+
+    df_title = get_insee_idbank(list_idbank_selected, lastNObservations = 1)
+
+    df_title = dplyr::mutate(.data = df_title,
+                             IDBANK = factor(.data$IDBANK, levels = list_idbank_selected))
+
+    df_title = dplyr::arrange(.data = df_title, .data$IDBANK)
+
+    if(lang == "en"){
+      titles = dplyr::pull(.data = df_title, .data$TITLE_EN)
+    }else{
+      titles = dplyr::pull(.data = df_title, .data$TITLE_FR)
+    }
+    titles_final = c(titles_final, titles)
+  }
+
+  return(titles_final)
+}
