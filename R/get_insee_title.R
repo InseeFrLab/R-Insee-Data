@@ -35,47 +35,18 @@ get_insee_title = function(..., lang = "en"){
     list_idbank = unlist(list(...))
   }
 
-  # if there are more than 400 idbanks
-  # the query is divided in several
+  df_title = get_insee_idbank(list_idbank, lastNObservations = 1, limit = FALSE)
 
-  n_idbank = length(list_idbank)
-  if(n_idbank > 200000){stop("Too many idbanks!")}
-  n_idbank_query = 400
+  df_title = dplyr::mutate(.data = df_title,
+                           IDBANK = factor(.data$IDBANK, levels = list_idbank))
 
-  list_seq = lapply(1:500, function(x){
-    if(x == 1){
-      return(1:n_idbank_query)
-    }else{
-      return(((x-1) * n_idbank_query + 1):(x * n_idbank_query))
-    }
-  })
+  df_title = dplyr::arrange(.data = df_title, .data$IDBANK)
 
-  i = 1
-  while(!(n_idbank %in% list_seq[[i]])){
-    i = i + 1
+  if(lang == "en"){
+    titles = dplyr::pull(.data = df_title, .data$TITLE_EN)
+  }else{
+    titles = dplyr::pull(.data = df_title, .data$TITLE_FR)
   }
 
-  titles_final = c()
-
-  for(j in 1:i){
-
-    selected_idbank = min(list_seq[[j]]):(min(max(list_seq[[j]]), n_idbank))
-    list_idbank_selected = list_idbank[selected_idbank]
-
-    df_title = get_insee_idbank(list_idbank_selected, lastNObservations = 1)
-
-    df_title = dplyr::mutate(.data = df_title,
-                             IDBANK = factor(.data$IDBANK, levels = list_idbank_selected))
-
-    df_title = dplyr::arrange(.data = df_title, .data$IDBANK)
-
-    if(lang == "en"){
-      titles = dplyr::pull(.data = df_title, .data$TITLE_EN)
-    }else{
-      titles = dplyr::pull(.data = df_title, .data$TITLE_FR)
-    }
-    titles_final = c(titles_final, titles)
-  }
-
-  return(titles_final)
+  return(titles)
 }
