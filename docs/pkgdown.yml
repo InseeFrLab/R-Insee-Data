@@ -1,0 +1,7 @@
+pandoc: 2.7.2
+pkgdown: 1.5.1
+pkgdown_sha: ~
+articles:
+  insee-vignettes: insee-vignettes.html
+last_built: 2020-08-05T17:02Z
+
