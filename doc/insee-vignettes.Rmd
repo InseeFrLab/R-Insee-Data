@@ -374,9 +374,9 @@ dataset_list = get_dataset_list()
 
 list_idbank = idbank_list %>%
   filter(nomflow == "TCRED-ESTIMATIONS-POPULATION") %>%
-  filter(dim6 == "00-") %>% #all ages
+  filter(dim6 == "00-") %>% #all population
   filter(dim5 == 0) %>% #men and women
-  filter(str_detect(dim4, "^D")) %>% #select only departements
+  filter(str_detect(dim4, "^D")) %>% #departement
   mutate(title = get_insee_title(idbank))
 
 list_idbank_selected = list_idbank %>% pull(idbank)
@@ -384,7 +384,7 @@ list_idbank_selected = list_idbank %>% pull(idbank)
 # get population data by departement
 pop = get_insee_idbank(list_idbank_selected)
 
-#get departements' geographical limits
+#get departement limits
 FranceMap <- raster::getData(name = "GADM", country = "FRA", level = 2)
 
 # extract the population by departement in 2020
@@ -402,7 +402,7 @@ vec_pop = pop_plot %>% pull(OBS_VALUE)
 # add population data to the departement object map
 FranceMap@data$pop = vec_pop
 
-# extract the departements' limits from the spatial object
+# extract the departement limits from the spatial object
 FranceMap_tidy <- broom::tidy(FranceMap)
 
 # mapping table
@@ -415,7 +415,7 @@ dptm_df = data.frame(dptm = FranceMap@data$CC_2,
 FranceMap_tidy_final =
   FranceMap_tidy %>%
   left_join(dptm_df, by = "id") %>%
-  dplyr::select(long, lat, pop, group, id)
+  select(long, lat, pop, group, id)
 
 ggplot() +
   geom_polygon(data = FranceMap_tidy_final,
@@ -424,7 +424,7 @@ ggplot() +
   coord_map() +
   theme_void() +
   scale_fill_viridis() +
-  ggtitle("Distribution of the population within French territory in 2020")
+  ggtitle("Distribution of the population on French territory in 2020")
 
 ```
 
@@ -432,8 +432,3 @@ ggplot() +
 
 # Support
 Feel free to contact me with any question about this package using this [e-mail address](mailto:leclerc.hadrien@gmail.com?subject=[r-package][insee]).
-
-# Disclaimer
-
-This package is in no way officially related to or endorsed by INSEE.
-

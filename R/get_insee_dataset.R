@@ -6,7 +6,7 @@
 #' @param endPeriod end date of data
 #' @param firstNObservations get the first N observations for each key series (idbank)
 #' @param lastNObservations get the last N observations for each key series (idbank)
-#' @param filter Use the filter to choose only some dimensions. It is recommended to use it for big datasets.
+#' @param filter Use the filter to choose only some values in a dimension. It is recommended to use it for big datasets.
 #' A dimension left empty means all values are selected. To select multiple values in one dimension put a "+" between those values (see example)
 #' @examples
 #' \donttest{

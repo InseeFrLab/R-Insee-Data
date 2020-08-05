@@ -1,4 +1,4 @@
-#' Download a mapping dataset betwen INSEE series keys (idbank) and SDMX series names
+#' Download a full INSEE's series key list
 #'
 #' @details Download a mapping dataset betwen INSEE series keys (idbank) and SDMX series names
 #' @param dataset if a dataset name is provided, only a subset of the data is delivered, otherwise
