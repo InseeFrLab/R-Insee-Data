@@ -29,7 +29,7 @@ Using embedded SDMX queries, get the data of more than 140 000 INSEE series from
 ```{r eval = FALSE}
 # Get the development version from GitHub
 # install.packages("devtools")
-# devtools::install_github("hadrilec2/insee")
+# devtools::install_github("hadrilec/insee")
 
 # Get the CRAN version
 install.packages("insee")
