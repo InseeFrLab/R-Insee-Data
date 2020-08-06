@@ -1,9 +1,8 @@
 .Rhistory
 .Rbuildignore
 .Rproj.user
-insee.Rproj
 Meta
 doc
 README.html
 README.Rmd
-_pkgdown.yml
+
