@@ -2,7 +2,7 @@
 % Please edit documentation in R/search_insee.R
 \name{search_insee}
 \alias{search_insee}
-\title{Search among insee dataset names a pattern}
+\title{Search a pattern among insee dataset names}
 \usage{
 search_insee(pattern)
 }
@@ -10,7 +10,7 @@ search_insee(pattern)
 \item{pattern}{string used to filtern the dataset list}
 }
 \description{
-Search among insee dataset names a pattern
+Search a pattern among insee dataset names
 }
 \details{
 the function ignores accents and cases

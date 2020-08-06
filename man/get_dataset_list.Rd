@@ -2,12 +2,12 @@
 % Please edit documentation in R/get_dataset_list.R
 \name{get_dataset_list}
 \alias{get_dataset_list}
-\title{Download an INSEE dataset list}
+\title{Download a full INSEE's dataset list}
 \usage{
 get_dataset_list()
 }
 \description{
-Download an INSEE dataset list
+Download a full INSEE's dataset list
 }
 \details{
 the datasets returned are the ones available through a SDMX query
