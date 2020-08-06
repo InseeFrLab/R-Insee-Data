@@ -137,7 +137,7 @@ df_idbank_list_selected =
 
 list_idbank = df_idbank_list_selected %>% pull(idbank)
 
-data = get_insee_idbank(list_idbank, startPeriod = "2010-01")
+data = get_insee_idbank(list_idbank, startPeriod = "2015-01")
 
 n_sep = str_count(data$TITLE_FR[1], " - ") + 1
 

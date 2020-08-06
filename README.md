@@ -2,11 +2,9 @@ insee R package
 ================
 
 <br>
-
-[![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee) 
-[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee) 
-[![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee) 
-
+[![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee)
+[![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee)
 <br>
 
 ## Overview
@@ -136,7 +134,7 @@ df_idbank_list_selected =
 
 list_idbank = df_idbank_list_selected %>% pull(idbank)
 
-data = get_insee_idbank(list_idbank, startPeriod = "2010-01")
+data = get_insee_idbank(list_idbank, startPeriod = "2015-01")
 
 n_sep = str_count(data$TITLE_FR[1], " - ") + 1
 
