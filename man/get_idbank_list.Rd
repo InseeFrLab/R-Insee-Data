@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_idbank_list.R
 \name{get_idbank_list}
 \alias{get_idbank_list}
-\title{Download a mapping dataset betwen INSEE series keys (idbank) and SDMX series names}
+\title{Download a full INSEE's series key list}
 \usage{
 get_idbank_list(dataset = NULL)
 }
@@ -11,7 +11,7 @@ get_idbank_list(dataset = NULL)
 all the data is returned}
 }
 \description{
-Download a mapping dataset betwen INSEE series keys (idbank) and SDMX series names
+Download a full INSEE's series key list
 }
 \details{
 Download a mapping dataset betwen INSEE series keys (idbank) and SDMX series names
