@@ -6,7 +6,7 @@ Authors@R: person("Hadrien", "Leclerc", email = "leclerc.hadrien@gmail.com", rol
 Author: Hadrien Leclerc [aut, cre]
 Maintainer: Hadrien Leclerc <leclerc.hadrien@gmail.com>
 Description: Using embedded sdmx queries, get the data of more than 140 000 insee series from bdm database. Have a look at the detailed sdmx web service page with the following link : <https://www.insee.fr/en/information/2868055>.
-URL: <https://hadrilec2.github.io/insee/>
+URL: <https://hadrilec.github.io/insee/>
 Encoding: UTF-8
 LazyData: true
 License: GPL-2
