@@ -10,5 +10,6 @@
   Sys.setenv(INSEE_get_idbank_limit = 1200)
   Sys.setenv(INSEE_sdmx_idbank_limit = 400)
   Sys.setenv(INSEE_idbank_sep = ";")
+  Sys.setenv(INSEE_title_sep = " - ")
   Sys.setenv(INSEE_value_as_numeric = "TRUE")
 }
