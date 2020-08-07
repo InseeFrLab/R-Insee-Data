@@ -4,6 +4,9 @@
     <loc>https://hadrilec.github.io/insee//index.html</loc>
   </url>
   <url>
+    <loc>https://hadrilec.github.io/insee//reference/add_insee_title.html</loc>
+  </url>
+  <url>
     <loc>https://hadrilec.github.io/insee//reference/clean_table.html</loc>
   </url>
   <url>
@@ -26,6 +29,9 @@
   </url>
   <url>
     <loc>https://hadrilec.github.io/insee//reference/search_insee.html</loc>
+  </url>
+  <url>
+    <loc>https://hadrilec.github.io/insee//reference/split_title.html</loc>
   </url>
   <url>
     <loc>https://hadrilec.github.io/insee//articles/insee-vignettes.html</loc>

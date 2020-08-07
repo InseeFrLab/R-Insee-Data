@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Remove columns filled only with NA (missing value) — clean_table • insee</title>
+<title>Add a title column to the idbank list dataset — add_insee_title • insee</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Remove columns filled only with NA (missing value) — clean_table" />
-<meta property="og:description" content="Remove columns filled only with NA (missing value)" />
+<meta property="og:title" content="Add a title column to the idbank list dataset — add_insee_title" />
+<meta property="og:description" content="Add a title column to the idbank list dataset" />
 
 
 
@@ -115,39 +115,63 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Remove columns filled only with NA (missing value)</h1>
+    <h1>Add a title column to the idbank list dataset</h1>
     
-    <div class="hidden name"><code>clean_table.Rd</code></div>
+    <div class="hidden name"><code>add_insee_title.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Remove columns filled only with NA (missing value)</p>
+    <p>Add a title column to the idbank list dataset</p>
     </div>
 
-    <pre class="usage"><span class='fu'>clean_table</span>(<span class='no'>df</span>)</pre>
+    <pre class="usage"><span class='fu'>add_insee_title</span>(<span class='no'>df</span>, <span class='no'>n_split</span>, <span class='kw'>lang</span> <span class='kw'>=</span> <span class='st'>"en"</span>, <span class='kw'>split</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>, <span class='kw'>clean</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>df</th>
-      <td><p>the dataframe to be cleaned</p></td>
+      <td><p>a dataframe containing an idbank column called "idbank" or "IDBANK"</p></td>
+    </tr>
+    <tr>
+      <th>n_split</th>
+      <td><p>number of new columns, by default the maximum is chosen</p></td>
+    </tr>
+    <tr>
+      <th>lang</th>
+      <td><p>returns an English title, by default is "en", any other value returns a French title</p></td>
+    </tr>
+    <tr>
+      <th>split</th>
+      <td><p>split the title column in several columns, by default is TRUE</p></td>
+    </tr>
+    <tr>
+      <th>clean</th>
+      <td><p>remove the columns filled with NA (missing value), by default is TRUE</p></td>
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>this function uses extensively the get_insee_title function.
+Then, it should be used on an already filtered dataset, not on the full idbank dataset (cf. get_insee_title).
+The number of separators in the official INSEE title can vary and is not normalized. Beware all title columns created may not be a cleaned dimension label.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>)
-
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>)</div><div class='output co'>#&gt; <span class='message'>-- <span style='font-weight: bold;'>Attaching packages</span><span> ------------------------------------------------------------- tidyverse 1.3.0 --</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>ggplot2</span><span> 3.3.2     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>purrr  </span><span> 0.3.4</span>
+#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>tibble </span><span> 3.0.1     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>dplyr  </span><span> 1.0.0</span>
+#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>tidyr  </span><span> 1.1.0     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>stringr</span><span> 1.4.0</span>
+#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>readr  </span><span> 1.3.1     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>forcats</span><span> 0.5.0</span></div><div class='output co'>#&gt; <span class='message'>-- </span><span style='font-weight: bold;'>Conflicts</span><span> ---------------------------------------------------------------- tidyverse_conflicts() --</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>filter()</span><span> masks </span><span style='color: #0000BB;'>stats</span><span>::filter()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>lag()</span><span>    masks </span><span style='color: #0000BB;'>stats</span><span>::lag()</span></div><div class='input'>
 <span class='no'>idbank_list</span> <span class='kw'>=</span> <span class='fu'><a href='get_idbank_list.html'>get_idbank_list</a></span>() <span class='co'>#idbank list</span>
 
 <span class='no'>idbank_empl</span> <span class='kw'>=</span> <span class='no'>idbank_list</span> <span class='kw'>%&gt;%</span>
+ <span class='fu'>slice</span>(<span class='fl'>1</span>:<span class='fl'>15</span>) <span class='kw'>%&gt;%</span>
  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='no'>nomflow</span> <span class='kw'>==</span> <span class='st'>"EMPLOI-SALARIE-TRIM-NATIONAL"</span>) <span class='kw'>%&gt;%</span> <span class='co'>#employment</span>
- <span class='fu'>mutate</span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='fu'><a href='get_insee_title.html'>get_insee_title</a></span>(<span class='no'>idbank</span>)) <span class='kw'>%&gt;%</span>
- <span class='fu'>separate</span>(<span class='no'>title</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>" - "</span>, <span class='kw'>into</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"title"</span>, <span class='fl'>1</span>:<span class='fl'>5</span>), <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"right"</span>) <span class='kw'>%&gt;%</span>
- <span class='fu'>clean_table</span>()
-<span class='co'># }</span></div></pre>
+ <span class='fu'>add_insee_title</span>()
+<span class='co'># }</span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
