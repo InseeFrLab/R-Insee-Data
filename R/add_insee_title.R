@@ -24,7 +24,7 @@ add_insee_title = function(df, n_split, lang = "en", split = TRUE, clean = TRUE)
 
   col_idbank = which(names(df) %in% c("idbank", "IDBANK"))
 
-  if(length(col_idbank) > 0){
+  if(length(col_idbank) > 0 & nrow(df) > 0){
 
     col_idbank = min(col_idbank)
 

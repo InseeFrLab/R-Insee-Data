@@ -28,7 +28,7 @@ split_title = function(df, title_col_name, n_split = "max", lang = "en"){
 
   col_title = which(names(df) == title_col_name)
 
-  if(length(col_title) > 0){
+  if(length(col_title) > 0 & nrow(df) > 0){
 
     if(n_split == "max"){
       n_split = max(stringr::str_count(df[[title_col_name]], pattern = insee_title_sep)) + 1
