@@ -21,7 +21,7 @@ macroéconomiques).
 ``` r
 # Get the development version from GitHub
 # install.packages("devtools")
-# devtools::install_github("hadrilec2/insee")
+# devtools::install_github("hadrilec/insee")
 
 # Get the CRAN version
 install.packages("insee")
