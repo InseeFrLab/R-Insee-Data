@@ -7,13 +7,14 @@
 #' @param lang by default it returns an English title (its default value is "en"), any other value returns a French title
 #' @examples
 #' \donttest{
-# data_raw = get_insee_idbank("001577236") # quarterly payroll enrollment in the construction sector
-#
-# data = data_raw %>%
-#   split_title(lang = "fr")
+#' # quarterly payroll enrollment in the construction sector
+#' data_raw = get_insee_idbank("001577236")
+#'
+#' data = data_raw %>%
+#'   split_title(lang = "fr")
 #' }
 #' @export
-split_title = function(df, title_col_name, n_split, lang = "en", extra = "merge"){
+split_title = function(df, title_col_name, n_split, lang = "en"){
 
   insee_title_sep = Sys.getenv("INSEE_title_sep")
 
@@ -36,7 +37,7 @@ split_title = function(df, title_col_name, n_split, lang = "en", extra = "merge"
     df = tidyr::separate(data = df, col = title_col_name,
                          into = paste0(title_col_name, 1:n_split),
                          sep = insee_title_sep, fill = "right",
-                         extra = extra, remove = FALSE)
+                         extra = "merge", remove = FALSE)
   }
   return(df)
 }
