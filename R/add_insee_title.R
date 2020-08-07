@@ -39,7 +39,7 @@ add_insee_title = function(df, n_split, lang = "en", split = TRUE, clean = TRUE)
 
     if(split){
       if("title" %in% names(df)){
-        df = split_title(df = df, title_col_name = "title", lang = lang)
+        df = split_title(df = df, n_split = n_split, title_col_name = "title", lang = lang)
       }
     }
     if(clean){
