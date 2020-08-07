@@ -4,7 +4,7 @@
 \alias{split_title}
 \title{Split the title column in several columns}
 \usage{
-split_title(df, title_col_name, n_split, lang = "en")
+split_title(df, title_col_name, n_split = "max", lang = "en")
 }
 \arguments{
 \item{df}{a dataframe containing a title column}
