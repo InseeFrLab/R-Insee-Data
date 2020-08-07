@@ -14,7 +14,7 @@
 #'   split_title(lang = "fr")
 #' }
 #' @export
-split_title = function(df, title_col_name, n_split, lang = "en"){
+split_title = function(df, title_col_name, n_split = "max", lang = "en"){
 
   insee_title_sep = Sys.getenv("INSEE_title_sep")
 
@@ -30,7 +30,7 @@ split_title = function(df, title_col_name, n_split, lang = "en"){
 
   if(length(col_title) > 0){
 
-    if(missing(n_split)){
+    if(n_split == "max"){
       n_split = max(stringr::str_count(df[[title_col_name]], pattern = insee_title_sep)) + 1
     }
 
