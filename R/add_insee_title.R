@@ -33,10 +33,13 @@ add_insee_title = function(df, n_split, lang = "en", split = TRUE, clean = TRUE)
     df = dplyr::mutate(.data = df,
                        title = insee::get_insee_title(.data[[!!col_idbank_name]], lang = lang))
 
+    if(missing(n_split)){
+      n_split = "max"
+    }
+
     if(split){
       if("title" %in% names(df)){
-        df = split_title(df = df, n_split = n_split,
-                         title_col_name = "title", lang = lang)
+        df = split_title(df = df, title_col_name = "title", lang = lang)
       }
     }
     if(clean){
