@@ -31,9 +31,9 @@ library(tidyverse)
 
 idbank_list = get_idbank_list() #idbank list
 
-idbank_empl = idbank_list \%>\%
- slice(1:15) \%>\%
+idbank_empl = idbank_list \%>\%#'
  filter(nomflow == "EMPLOI-SALARIE-TRIM-NATIONAL") \%>\% #employment
+ slice(1:15) \%>\%
  add_insee_title()
 }
 }
