@@ -16,28 +16,32 @@
 #' @export
 split_title = function(df, title_col_name, n_split = "max", lang = "en"){
 
-  insee_title_sep = Sys.getenv("INSEE_title_sep")
+  if(!is.null(df)){
 
-  if(missing(title_col_name)){
-    if(lang == "en"){
-      title_col_name = "TITLE_EN"
-    }else{
-      title_col_name = "TITLE_FR"
+    insee_title_sep = Sys.getenv("INSEE_title_sep")
+
+    if(missing(title_col_name)){
+      if(lang == "en"){
+        title_col_name = "TITLE_EN"
+      }else{
+        title_col_name = "TITLE_FR"
+      }
+    }
+
+    col_title = which(names(df) == title_col_name)
+
+    if(length(col_title) > 0 & nrow(df) > 0){
+
+      if(n_split == "max"){
+        n_split = max(stringr::str_count(df[[title_col_name]], pattern = insee_title_sep)) + 1
+      }
+
+      df = tidyr::separate(data = df, col = title_col_name,
+                           into = paste0(title_col_name, 1:n_split),
+                           sep = insee_title_sep, fill = "right",
+                           extra = "merge", remove = FALSE)
     }
   }
 
-  col_title = which(names(df) == title_col_name)
-
-  if(length(col_title) > 0 & nrow(df) > 0){
-
-    if(n_split == "max"){
-      n_split = max(stringr::str_count(df[[title_col_name]], pattern = insee_title_sep)) + 1
-    }
-
-    df = tidyr::separate(data = df, col = title_col_name,
-                         into = paste0(title_col_name, 1:n_split),
-                         sep = insee_title_sep, fill = "right",
-                         extra = "merge", remove = FALSE)
-  }
   return(df)
 }

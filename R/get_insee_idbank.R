@@ -118,9 +118,13 @@ get_insee_idbank <- function(...,
 
     df = insee::get_insee(link)
 
-    list_df[[length(list_df)+1]] = df
+    if(!is.null(df)){
+      list_df[[length(list_df)+1]] = df
+    }
+
   }
 
   data = dplyr::bind_rows(list_df)
+
   return(data)
 }

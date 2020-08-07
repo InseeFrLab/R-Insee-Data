@@ -22,28 +22,31 @@
 #' @export
 add_insee_title = function(df, n_split, lang = "en", split = TRUE, clean = TRUE){
 
-  col_idbank = which(names(df) %in% c("idbank", "IDBANK"))
+  if(!is.null(df)){
 
-  if(length(col_idbank) > 0 & nrow(df) > 0){
+    col_idbank = which(names(df) %in% c("idbank", "IDBANK"))
 
-    col_idbank = min(col_idbank)
+    if(length(col_idbank) > 0 & nrow(df) > 0){
 
-    col_idbank_name = names(df)[col_idbank]
+      col_idbank = min(col_idbank)
 
-    df = dplyr::mutate(.data = df,
-                       title = insee::get_insee_title(.data[[!!col_idbank_name]], lang = lang))
+      col_idbank_name = names(df)[col_idbank]
 
-    if(missing(n_split)){
-      n_split = "max"
-    }
+      df = dplyr::mutate(.data = df,
+                         title = insee::get_insee_title(.data[[!!col_idbank_name]], lang = lang))
 
-    if(split){
-      if("title" %in% names(df)){
-        df = split_title(df = df, n_split = n_split, title_col_name = "title", lang = lang)
+      if(missing(n_split)){
+        n_split = "max"
       }
-    }
-    if(clean){
-      df = clean_table(df)
+
+      if(split){
+        if("title" %in% names(df)){
+          df = split_title(df = df, n_split = n_split, title_col_name = "title", lang = lang)
+        }
+      }
+      if(clean){
+        df = clean_table(df)
+      }
     }
   }
 
