@@ -54,7 +54,7 @@
   </a>
   <ul class="dropdown-menu" role="menu">
 <li>
-      <a href="articles/insee-vignettes.html">package R : insee</a>
+      <a href="articles/insee-vignettes.html">Tutorial</a>
     </li>
   </ul>
 </li>
@@ -194,7 +194,7 @@
 
 <span class="no">list_idbank</span> <span class="kw">=</span> <span class="no">df_idbank_list_selected</span> <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">idbank</span>)
 
-<span class="no">data</span> <span class="kw">=</span> <span class="fu"><a href="reference/get_insee_idbank.html">get_insee_idbank</a></span>(<span class="no">list_idbank</span>, <span class="kw">startPeriod</span> <span class="kw">=</span> <span class="st">"2010-01"</span>)
+<span class="no">data</span> <span class="kw">=</span> <span class="fu"><a href="reference/get_insee_idbank.html">get_insee_idbank</a></span>(<span class="no">list_idbank</span>, <span class="kw">startPeriod</span> <span class="kw">=</span> <span class="st">"2015-01"</span>)
 
 <span class="no">n_sep</span> <span class="kw">=</span> <span class="fu">str_count</span>(<span class="no">data</span>$<span class="no">TITLE_FR</span>[<span class="fl">1</span>], <span class="st">" - "</span>) + <span class="fl">1</span>
 
