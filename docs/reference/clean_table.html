@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get data from INSEE BDM database with a SDMX query link — get_insee • insee</title>
+<title>Remove columns filled only with NA (missing value) — clean_table • insee</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Get data from INSEE BDM database with a SDMX query link — get_insee" />
-<meta property="og:description" content="Get data from INSEE BDM database with a SDMX query link" />
+<meta property="og:title" content="Remove columns filled only with NA (missing value) — clean_table" />
+<meta property="og:description" content="Remove columns filled only with NA (missing value)" />
 
 
 
@@ -115,37 +115,43 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get data from INSEE BDM database with a SDMX query link</h1>
+    <h1>Remove columns filled only with NA (missing value)</h1>
     
-    <div class="hidden name"><code>get_insee.Rd</code></div>
+    <div class="hidden name"><code>clean_table.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Get data from INSEE BDM database with a SDMX query link</p>
+    <p>Remove columns filled only with NA (missing value)</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_insee</span>(<span class='no'>link</span>)</pre>
+    <pre class="usage"><span class='fu'>clean_table</span>(<span class='no'>df</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>link</th>
-      <td><p>SDMX query link</p></td>
+      <th>df</th>
+      <td><p>the dataframe to be cleaned</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Get data from INSEE BDM database with a SDMX query link.
-This function is mainly for package internal use.
-It is used by the functions get_insee_dataset, get_insee_idbank and get_dataset_list.
-The data is cached, hence all queries are only run once per R session.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='no'>insee_link</span> <span class='kw'>=</span> <span class='st'>"http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"</span>
-<span class='no'>insee_query</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>insee_link</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"010539365"</span>,<span class='st'>"?"</span>, <span class='st'>"firstNObservations=1"</span>))
-<span class='no'>data</span> <span class='kw'>=</span> <span class='fu'>get_insee</span>(<span class='no'>insee_query</span>)</div></pre>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='fu'><a href='https://rdrr.io/r/base/library.html'>library</a></span>(<span class='no'>tidyverse</span>)</div><div class='output co'>#&gt; <span class='message'>-- <span style='font-weight: bold;'>Attaching packages</span><span> --------------------------------------------------- tidyverse 1.3.0 --</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>ggplot2</span><span> 3.3.2     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>purrr  </span><span> 0.3.4</span>
+#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>tibble </span><span> 3.0.1     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>dplyr  </span><span> 1.0.0</span>
+#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>tidyr  </span><span> 1.1.0     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>stringr</span><span> 1.4.0</span>
+#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>readr  </span><span> 1.3.1     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>forcats</span><span> 0.5.0</span></div><div class='output co'>#&gt; <span class='message'>-- </span><span style='font-weight: bold;'>Conflicts</span><span> ------------------------------------------------------ tidyverse_conflicts() --</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>filter()</span><span> masks </span><span style='color: #0000BB;'>stats</span><span>::filter()</span>
+#&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>lag()</span><span>    masks </span><span style='color: #0000BB;'>stats</span><span>::lag()</span></div><div class='input'>
+<span class='no'>idbank_list</span> <span class='kw'>=</span> <span class='fu'><a href='get_idbank_list.html'>get_idbank_list</a></span>() <span class='co'>#idbank list</span>
+
+<span class='no'>idbank_empl</span> <span class='kw'>=</span> <span class='no'>idbank_list</span> <span class='kw'>%&gt;%</span>
+ <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='no'>nomflow</span> <span class='kw'>==</span> <span class='st'>"EMPLOI-SALARIE-TRIM-NATIONAL"</span>) <span class='kw'>%&gt;%</span> <span class='co'>#employment</span>
+ <span class='fu'>mutate</span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='fu'><a href='get_insee_title.html'>get_insee_title</a></span>(<span class='no'>idbank</span>)) <span class='kw'>%&gt;%</span>
+ <span class='fu'>separate</span>(<span class='no'>title</span>, <span class='kw'>sep</span> <span class='kw'>=</span> <span class='st'>" - "</span>, <span class='kw'>into</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"title"</span>, <span class='fl'>1</span>:<span class='fl'>5</span>), <span class='kw'>fill</span> <span class='kw'>=</span> <span class='st'>"right"</span>) <span class='kw'>%&gt;%</span>
+ <span class='fu'>clean_table</span>()
+<span class='co'># }</span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
