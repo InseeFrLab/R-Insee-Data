@@ -92,7 +92,12 @@ get_insee_idbank <- function(...,
     param2add = paste0(unlist(lapply(arg, get_param)), collapse = "&")
   }
 
-  max_seq = insee_get_idbank_limit / insee_sdmx_idbank_limit
+  if(limit){
+    max_seq = insee_get_idbank_limit / insee_sdmx_idbank_limit
+  }else{
+    max_seq = ceiling(n_idbank / insee_sdmx_idbank_limit)
+  }
+
 
   list_seq = lapply(1:max_seq, function(x){
       return(((x-1) * insee_sdmx_idbank_limit + 1):(x * insee_sdmx_idbank_limit))
