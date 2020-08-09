@@ -4,10 +4,12 @@
 \alias{get_insee}
 \title{Get data from INSEE BDM database with a SDMX query link}
 \usage{
-get_insee(link)
+get_insee(link, step = "1/1")
 }
 \arguments{
 \item{link}{SDMX query link}
+
+\item{step}{argument used only for internal package purposes to tweak download display}
 }
 \description{
 Get data from INSEE BDM database with a SDMX query link
@@ -17,6 +19,8 @@ Get data from INSEE BDM database with a SDMX query link.
 This function is mainly for package internal use.
 It is used by the functions get_insee_dataset, get_insee_idbank and get_dataset_list.
 The data is cached, hence all queries are only run once per R session.
+The user can disable the download display in the console with the following command :
+Sys.setenv(INSEE_download_verbose = "FALSE")
 }
 \examples{
 insee_link = "http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"
