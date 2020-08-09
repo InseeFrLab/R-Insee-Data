@@ -101,7 +101,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/hadrilec/insee/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -116,7 +121,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Get data from INSEE BDM database with a SDMX query link</h1>
-    
+    <small class="dont-index">Source: <a href='https://github.com/hadrilec/insee/blob/master/R/get_insee.R'><code>R/get_insee.R</code></a></small>
     <div class="hidden name"><code>get_insee.Rd</code></div>
     </div>
 
@@ -124,7 +129,7 @@
     <p>Get data from INSEE BDM database with a SDMX query link</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_insee</span>(<span class='no'>link</span>)</pre>
+    <pre class="usage"><span class='fu'>get_insee</span>(<span class='no'>link</span>, <span class='kw'>step</span> <span class='kw'>=</span> <span class='st'>"1/1"</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -133,6 +138,10 @@
       <th>link</th>
       <td><p>SDMX query link</p></td>
     </tr>
+    <tr>
+      <th>step</th>
+      <td><p>argument used only for internal package purposes to tweak download display</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
@@ -140,15 +149,20 @@
     <p>Get data from INSEE BDM database with a SDMX query link.
 This function is mainly for package internal use.
 It is used by the functions get_insee_dataset, get_insee_idbank and get_dataset_list.
-The data is cached, hence all queries are only run once per R session.</p>
+The data is cached, hence all queries are only run once per R session.
+The user can disable the download display in the console with the following command :
+Sys.setenv(INSEE_download_verbose = "FALSE")</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>insee_link</span> <span class='kw'>=</span> <span class='st'>"http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"</span>
 <span class='no'>insee_query</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>insee_link</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"010539365"</span>,<span class='st'>"?"</span>, <span class='st'>"firstNObservations=1"</span>))
 <span class='no'>data</span> <span class='kw'>=</span> <span class='fu'>get_insee</span>(<span class='no'>insee_query</span>)</div><div class='output co'>#&gt; 1/1 - Data download : 
-#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%</div><div class='output co'>#&gt; <span class='error'>Error in sprintf("%s - Dataframe build : 100% \n", step): unrecognised format specification '% </span>
-#&gt; <span class='error'>'</span></div><div class='input'>
-</div></pre>
+#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%
+#&gt; 1/1 - Dataframe build : 100% 
+#&gt; <span style='color: #00BB00;'>
+#&gt; Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpX7qR6I/022dd22e63655d0225105ee0f610e936.rds
+#&gt; </span><span></div><div class='input'>
+</div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
