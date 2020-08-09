@@ -32,7 +32,7 @@ get_insee = function(link){
 
   if(!file.exists(file_cache)){
 
-    response = httr::GET(link)
+    response = httr::GET(link, httr::progress())
     response_content = try(httr::content(response, encoding = "UTF-8"), silent = TRUE)
 
     if(!"try-error" %in% class(response_content)){
@@ -156,8 +156,10 @@ get_insee = function(link){
     }
     if(!is.null(data_final)){
       saveRDS(data_final, file = file_cache)
+      warning(sprintf("Data cached at %s", file_cache))
     }
   }else{
+    warning("Cached data has been used")
     data_final = readRDS(file_cache)
   }
 
