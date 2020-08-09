@@ -76,7 +76,7 @@ get_insee_idbank <- function(...,
   n_idbank = length(list_idbank)
 
   if(n_idbank > insee_get_idbank_limit & limit){
-    msg = sprintf("By default, this function has a %s-idbank limit.\n  Please set limit argument to FALSE to ignore the limit.\n  Otherwise, modify the limit with the following command : Sys.setenv(INSEE_idbank_limit = 1200).\n  Beware that it could be slow. Nevertheless, the data is cached, so all queries are only run once per R session.\n  A query run twice is then almost immediate.", insee_get_idbank_limit)
+    msg = sprintf("By default, this function has a %s-idbank limit.\n  Please set limit argument to FALSE to ignore the limit.\n  Otherwise, modify the limit with the following command : Sys.setenv(INSEE_idbank_limit = 1200).\n  Beware that it could be slow.\n  Nevertheless, the data is cached, so all queries are only run once per R session.\n  A query run twice is then almost immediate.", insee_get_idbank_limit)
     cat(testthat:::colourise(msg, "error"))
     return(NULL)
   }
@@ -96,8 +96,8 @@ get_insee_idbank <- function(...,
 
   max_seq = ceiling(n_idbank / insee_sdmx_idbank_limit)
 
-  if(n_idbank > insee_sdmx_idbank_limit & limit){
-    msg = sprintf("\nData download and Dataframe build steps will be repeted %s times.\n", max_seq)
+  if(n_idbank > insee_sdmx_idbank_limit){
+    msg = sprintf("\nData download and Dataframe build steps will be repeted %s times, unless cached data exists.\n", max_seq)
     cat(msg)
   }
 
