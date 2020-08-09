@@ -111,7 +111,7 @@ get_insee = function(link){
           cat("Dataframe build : \n")
 
           if(n_series > 1){
-            pb = txtProgressBar(min = 1, max = n_series, initial = 1)
+            pb = txtProgressBar(min = 1, max = n_series, initial = 1, style = 3)
           }
 
           for (i in 1:n_series) {
