@@ -15,6 +15,8 @@
 #' @export
 get_insee = function(link, step = "1/1"){
 
+  insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
+
   if(Sys.getenv("INSEE_value_as_numeric") == "TRUE"){
     insee_value_as_numeric = TRUE
   }else{
@@ -33,8 +35,13 @@ get_insee = function(link, step = "1/1"){
 
   if(!file.exists(file_cache)){
 
-    cat(sprintf("%s - Data download : \n", step))
-    response = httr::GET(link, httr::progress())
+    if(insee_download_verbose){
+      cat(sprintf("%s - Data download : \n", step))
+      response = httr::GET(link, httr::progress())
+    }else{
+      response = httr::GET(link)
+    }
+
     response_content = try(httr::content(response, encoding = "UTF-8"), silent = TRUE)
 
     if(!"try-error" %in% class(response_content)){
@@ -109,11 +116,13 @@ get_insee = function(link, step = "1/1"){
 
         if(!dataflow_dwn){
 
-          if(n_series > 1){
-            cat(sprintf("%s - Dataframe build : \n", step))
-            pb = txtProgressBar(min = 1, max = n_series, initial = 1, style = 3)
-          }else{
-            cat(sprintf("%s - Dataframe build : completed \n", step))
+          if(insee_download_verbose){
+            if(n_series > 1){
+              cat(sprintf("%s - Dataframe build : \n", step))
+              pb = txtProgressBar(min = 1, max = n_series, initial = 1, style = 3)
+            }else{
+              cat(sprintf("%s - Dataframe build : 100% \n", step))
+            }
           }
 
           for (i in 1:n_series) {
@@ -139,11 +148,11 @@ get_insee = function(link, step = "1/1"){
 
               list_df[[length(list_df) + 1]] = data_series
             }
-
-            if(n_series > 1){
-              setTxtProgressBar(pb,i)
+            if(insee_download_verbose){
+              if(n_series > 1){
+                setTxtProgressBar(pb,i)
+              }
             }
-
           }
 
           data_final = dplyr::bind_rows(list_df)
@@ -171,10 +180,14 @@ get_insee = function(link, step = "1/1"){
     }
     if(!is.null(data_final)){
       saveRDS(data_final, file = file_cache)
-      cat(testthat:::colourise(sprintf("\nData cached : %s\n", file_cache), "success"))
+      if(insee_download_verbose){
+        cat(testthat:::colourise(sprintf("\nData cached : %s\n", file_cache), "success"))
+      }
     }
   }else{
-    cat(testthat:::colourise("Cached data has been used\n", "success"))
+    if(insee_download_verbose){
+      cat(testthat:::colourise("Cached data has been used\n", "success"))
+    }
     data_final = readRDS(file_cache)
   }
 

@@ -66,6 +66,7 @@ get_insee_idbank <- function(...,
   insee_bdm_series_link = Sys.getenv("INSEE_sdmx_link_idbank")
   insee_get_idbank_limit = as.numeric(Sys.getenv("INSEE_get_idbank_limit"))
   insee_sdmx_idbank_limit = as.numeric(Sys.getenv("INSEE_sdmx_idbank_limit"))
+  insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
 
   if(length(list(...)) == 1){
     list_idbank = list(...)[[1]]
@@ -96,7 +97,7 @@ get_insee_idbank <- function(...,
 
   max_seq = ceiling(n_idbank / insee_sdmx_idbank_limit)
 
-  if(n_idbank > insee_sdmx_idbank_limit){
+  if(n_idbank > insee_sdmx_idbank_limit & insee_download_verbose){
     msg = sprintf("\nData download and Dataframe build steps will be repeted %s times, unless cached data exist.\n", max_seq)
     cat(msg)
   }
