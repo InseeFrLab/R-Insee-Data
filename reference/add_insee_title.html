@@ -170,9 +170,11 @@ The number of separators in the official INSEE title can vary and is not normali
 <span class='no'>idbank_empl</span> <span class='kw'>=</span> <span class='no'>idbank_list</span> <span class='kw'>%&gt;%</span><span class='co'>#'</span>
  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='no'>nomflow</span> <span class='kw'>==</span> <span class='st'>"EMPLOI-SALARIE-TRIM-NATIONAL"</span>) <span class='kw'>%&gt;%</span> <span class='co'>#employment</span>
  <span class='fu'>slice</span>(<span class='fl'>1</span>:<span class='fl'>15</span>) <span class='kw'>%&gt;%</span>
- <span class='fu'>add_insee_title</span>()</div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |=================================================                     |  69%  |                                                                              |======================================================================| 100%</div><div class='output co'>#&gt; <span class='warning'>Warning: Problem with `mutate()` input `title`.</span>
-#&gt; <span class='warning'></span><span style='color: #BB0000;'>✖</span><span> Data cached at /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpOsB886/cdf81e8e50dd4b1bb583422aafd6fc7b.rds</span>
-#&gt; <span class='warning'></span><span style='color: #0000BB;'>ℹ</span><span> Input `title` is `insee::get_insee_title(.data[["idbank"]], lang = lang)`.</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Data cached at /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpOsB886/cdf81e8e50dd4b1bb583422aafd6fc7b.rds</span></div><div class='input'># }
+ <span class='fu'>add_insee_title</span>()</div><div class='output co'>#&gt; Data download : 
+#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |=================================================                     |  69%  |                                                                              |======================================================================| 100%
+#&gt; Dataframe build : 
+#&gt; ================================================================================</span><span style='color: #00BB00;'>
+#&gt; Data cached at /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpTDMhAo/cdf81e8e50dd4b1bb583422aafd6fc7b.rds</span><span></div><div class='input'># }
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
