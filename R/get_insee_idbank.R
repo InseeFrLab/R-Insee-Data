@@ -1,6 +1,8 @@
 #' Get data from INSEE series idbank
 #'
-#' @details Get data from INSEE series idbank
+#' @details Get data from INSEE series idbanks
+#' The user can disable the download display in the console with the following command :
+#' Sys.setenv(INSEE_download_verbose = "FALSE")
 #'
 #' @param ... one or several series key (idbank)
 #' @param startPeriod start date of data
