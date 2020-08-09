@@ -7,6 +7,8 @@
 #' @param lang by default it returns an English title (its default value is "en"), any other value returns a French title
 #' @examples
 #' \donttest{
+#' library(tidyverse)
+#'
 #' # quarterly payroll enrollment in the construction sector
 #' data_raw = get_insee_idbank("001577236")
 #'
