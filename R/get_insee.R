@@ -32,6 +32,7 @@ get_insee = function(link){
 
   if(!file.exists(file_cache)){
 
+    cat("Data download : \n")
     response = httr::GET(link, httr::progress())
     response_content = try(httr::content(response, encoding = "UTF-8"), silent = TRUE)
 
@@ -106,6 +107,13 @@ get_insee = function(link){
         }
 
         if(!dataflow_dwn){
+
+          cat("Dataframe build : \n")
+
+          if(n_series > 1){
+            pb = txtProgressBar(min = 1, max = n_series, initial = 1)
+          }
+
           for (i in 1:n_series) {
 
             data_series = lapply(data[[1]][[2]][[i]], attributes)
@@ -129,6 +137,11 @@ get_insee = function(link){
 
               list_df[[length(list_df) + 1]] = data_series
             }
+
+            if(n_series > 1){
+              setTxtProgressBar(pb,i)
+            }
+
           }
 
           data_final = dplyr::bind_rows(list_df)
@@ -156,10 +169,10 @@ get_insee = function(link){
     }
     if(!is.null(data_final)){
       saveRDS(data_final, file = file_cache)
-      warning(sprintf("Data cached at %s", file_cache))
+      cat(testthat:::colourise(sprintf("\nData cached at %s", file_cache), "success"))
     }
   }else{
-    warning("Cached data has been used")
+    cat(testthat:::colourise("Cached data has been used", "success"))
     data_final = readRDS(file_cache)
   }
 

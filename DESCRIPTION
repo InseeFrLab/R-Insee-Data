@@ -22,6 +22,7 @@ Imports:
   lubridate,
   tidyselect,
   rlang,
+  testthat,
   openssl
 Suggests:
   tidyverse,
