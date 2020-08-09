@@ -59,7 +59,14 @@
   </ul>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/hadrilec/insee/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -88,7 +95,7 @@
 <a href="#installation" class="anchor"></a>Installation</h2>
 <div class="sourceCode" id="cb1"><pre class="r"><span class="co"># Get the development version from GitHub</span>
 <span class="co"># install.packages("devtools")</span>
-<span class="co"># devtools::install_github("hadrilec2/insee")</span>
+<span class="co"># devtools::install_github("hadrilec/insee")</span>
 
 <span class="co"># Get the CRAN version</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"insee"</span>)</pre></div>
@@ -204,7 +211,7 @@
   <span class="fu">mutate</span>(<span class="kw">title6</span> <span class="kw">=</span> <span class="fu">case_when</span>(<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="no">title6</span>) ~ <span class="no">title5</span>,
                             <span class="fl">TRUE</span> ~ <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">title6</span>))) <span class="kw">%&gt;%</span>
   <span class="fu">mutate</span>(<span class="kw">title6</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span>(<span class="no">title6</span>, <span class="fl">1</span> , <span class="fl">22</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu">mutate</span>(<span class="kw">month</span> <span class="kw">=</span> <span class="fu"><a href="http://lubridate.tidyverse.org/reference/month.html">month</a></span>(<span class="no">DATE</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu">mutate</span>(<span class="kw">month</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/pkg/lubridate/man/month.html">month</a></span>(<span class="no">DATE</span>)) <span class="kw">%&gt;%</span>
   <span class="fu">arrange</span>(<span class="no">DATE</span>) <span class="kw">%&gt;%</span>
   <span class="fu">group_by</span>(<span class="no">title6</span>, <span class="no">month</span>) <span class="kw">%&gt;%</span>
   <span class="fu">mutate</span>(<span class="kw">growth</span> <span class="kw">=</span> <span class="fl">100</span> * (<span class="no">OBS_VALUE</span> / <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span>(<span class="no">OBS_VALUE</span>) - <span class="fl">1</span>))
@@ -379,6 +386,10 @@
 <h2>Links</h2>
 <ul class="list-unstyled">
 <li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=insee">https://​cloud.r-project.org/​package=insee</a>
+</li>
+<li>Browse source code at <br><a href="https://github.com/hadrilec/insee/">https://​github.com/​hadrilec/​insee/​</a>
+</li>
+<li>Report a bug at <br><a href="https://github.com/hadrilec/insee/issues">https://​github.com/​hadrilec/​insee/​issues</a>
 </li>
 </ul>
 </div>
