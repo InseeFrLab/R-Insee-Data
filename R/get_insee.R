@@ -169,10 +169,10 @@ get_insee = function(link){
     }
     if(!is.null(data_final)){
       saveRDS(data_final, file = file_cache)
-      cat(testthat:::colourise(sprintf("\nData cached at %s\n", file_cache), "success"))
+      cat(testthat:::colourise(sprintf("\nData cached : %s\n", file_cache), "success"))
     }
   }else{
-    cat(testthat:::colourise("Cached data has been used", "success"))
+    cat(testthat:::colourise("Cached data has been used\n", "success"))
     data_final = readRDS(file_cache)
   }
 
