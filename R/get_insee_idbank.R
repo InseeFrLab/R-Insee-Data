@@ -97,7 +97,7 @@ get_insee_idbank <- function(...,
   max_seq = ceiling(n_idbank / insee_sdmx_idbank_limit)
 
   if(n_idbank > insee_sdmx_idbank_limit){
-    msg = sprintf("\nData download and Dataframe build steps will be repeted %s times, unless cached data exists.\n", max_seq)
+    msg = sprintf("\nData download and Dataframe build steps will be repeted %s times, unless cached data exist.\n", max_seq)
     cat(msg)
   }
 
@@ -118,7 +118,7 @@ get_insee_idbank <- function(...,
       link = paste0(link, "?", param2add)
     }
 
-    df = get_insee(link)
+    df = get_insee(link = link, step = sprintf("%s/%s", j, max_seq))
 
     if(!is.null(df)){
       list_df[[length(list_df)+1]] = df

@@ -6,13 +6,14 @@
 #' The data is cached, hence all queries are only run once per R session.
 #'
 #' @param link SDMX query link
+#' @param step argument used only for internal package purposes to tweak download display
 #' @examples
 #' insee_link = "http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"
 #' insee_query = file.path(insee_link, paste0("010539365","?", "firstNObservations=1"))
 #' data = get_insee(insee_query)
 #'
 #' @export
-get_insee = function(link){
+get_insee = function(link, step = "1/1"){
 
   if(Sys.getenv("INSEE_value_as_numeric") == "TRUE"){
     insee_value_as_numeric = TRUE
@@ -32,7 +33,7 @@ get_insee = function(link){
 
   if(!file.exists(file_cache)){
 
-    cat("Data download : \n")
+    cat(sprintf("%s - Data download : \n", step))
     response = httr::GET(link, httr::progress())
     response_content = try(httr::content(response, encoding = "UTF-8"), silent = TRUE)
 
@@ -108,10 +109,11 @@ get_insee = function(link){
 
         if(!dataflow_dwn){
 
-          cat("Dataframe build : \n")
-
           if(n_series > 1){
+            cat(sprintf("%s - Dataframe build : \n", step))
             pb = txtProgressBar(min = 1, max = n_series, initial = 1, style = 3)
+          }else{
+            cat(sprintf("%s - Dataframe build : completed \n", step))
           }
 
           for (i in 1:n_series) {
