@@ -96,6 +96,11 @@ get_insee_idbank <- function(...,
 
   max_seq = ceiling(n_idbank / insee_sdmx_idbank_limit)
 
+  if(n_idbank > insee_sdmx_idbank_limit & limit){
+    msg = sprintf("\nData download and Dataframe build steps will be repeted %s times.\n", max_seq)
+    cat(msg)
+  }
+
   list_seq = lapply(1:max_seq, function(x){
       return(((x-1) * insee_sdmx_idbank_limit + 1):(x * insee_sdmx_idbank_limit))
   })
@@ -113,7 +118,7 @@ get_insee_idbank <- function(...,
       link = paste0(link, "?", param2add)
     }
 
-    df = insee::get_insee(link)
+    df = get_insee(link)
 
     if(!is.null(df)){
       list_df[[length(list_df)+1]] = df
