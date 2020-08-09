@@ -24,10 +24,10 @@ library(prettydoc)
 ## ---- message = FALSE, warning = FALSE, eval = FALSE--------------------------
 #  library(tidyverse)
 
-## ---- message = FALSE, warning = FALSE, eval = NOT_CRAN-----------------------
+## ---- message = FALSE, warning = FALSE, eval = TRUE---------------------------
 insee_dataset <- get_dataset_list() 
 
-## ----echo = FALSE, message = FALSE, warning = FALSE, eval = NOT_CRAN----------
+## ----echo = FALSE, message = FALSE, warning = FALSE, eval = TRUE--------------
 rownames(insee_dataset) <- NULL
 
 insee_dataset %>% 
@@ -36,10 +36,10 @@ insee_dataset %>%
   kable(row.names=NA) %>% 
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
 
-## ---- message=FALSE,warning=FALSE,eval=NOT_CRAN-------------------------------
+## ---- message=FALSE,warning=FALSE,eval=TRUE-----------------------------------
 idbank_list = get_idbank_list()
 
-## ----echo=FALSE, message=FALSE, warning=FALSE,eval=NOT_CRAN-------------------
+## ----echo=FALSE, message=FALSE, warning=FALSE,eval=TRUE-----------------------
 rownames(idbank_list) <- NULL
 idbank_list %>% 
           select(nomflow, idbank, cleFlow) %>%   
@@ -159,7 +159,7 @@ idbank_list %>%
 #  
 #  list_idbank = df_idbank_list_selected %>% pull(idbank)
 #  
-#  data = get_insee_idbank(list_idbank, startPeriod = "2010-01")
+#  data = get_insee_idbank(list_idbank, startPeriod = "2015-01")
 #  
 #  n_sep = str_count(data$TITLE_FR[1], " - ") + 1
 #  
@@ -262,9 +262,9 @@ idbank_list %>%
 #  
 #  list_idbank = idbank_list %>%
 #    filter(nomflow == "TCRED-ESTIMATIONS-POPULATION") %>%
-#    filter(dim6 == "00-") %>% #all population
+#    filter(dim6 == "00-") %>% #all ages
 #    filter(dim5 == 0) %>% #men and women
-#    filter(str_detect(dim4, "^D")) %>% #departement
+#    filter(str_detect(dim4, "^D")) %>% #select only departements
 #    mutate(title = get_insee_title(idbank))
 #  
 #  list_idbank_selected = list_idbank %>% pull(idbank)
@@ -272,7 +272,7 @@ idbank_list %>%
 #  # get population data by departement
 #  pop = get_insee_idbank(list_idbank_selected)
 #  
-#  #get departement limits
+#  #get departements' geographical limits
 #  FranceMap <- raster::getData(name = "GADM", country = "FRA", level = 2)
 #  
 #  # extract the population by departement in 2020
@@ -290,7 +290,7 @@ idbank_list %>%
 #  # add population data to the departement object map
 #  FranceMap@data$pop = vec_pop
 #  
-#  # extract the departement limits from the spatial object
+#  # extract the departements' limits from the spatial object
 #  FranceMap_tidy <- broom::tidy(FranceMap)
 #  
 #  # mapping table
@@ -303,7 +303,7 @@ idbank_list %>%
 #  FranceMap_tidy_final =
 #    FranceMap_tidy %>%
 #    left_join(dptm_df, by = "id") %>%
-#    select(long, lat, pop, group, id)
+#    dplyr::select(long, lat, pop, group, id)
 #  
 #  ggplot() +
 #    geom_polygon(data = FranceMap_tidy_final,
@@ -312,6 +312,6 @@ idbank_list %>%
 #    coord_map() +
 #    theme_void() +
 #    scale_fill_viridis() +
-#    ggtitle("Distribution of the population on French territory in 2020")
+#    ggtitle("Distribution of the population within French territory in 2020")
 #  
 

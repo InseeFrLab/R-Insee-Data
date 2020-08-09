@@ -80,13 +80,12 @@ get_insee_idbank <- function(...,
 
   if(n_idbank > insee_get_idbank_limit & limit){
     msg = sprintf("By default, this function has a %s-idbank limit.\n  Please set limit argument to FALSE to ignore the limit.\n  Otherwise, modify the limit with the following command : Sys.setenv(INSEE_idbank_limit = 1200).\n  Beware that it could be slow.\n  Nevertheless, the data is cached, so all queries are only run once per R session.\n  A query run twice is then almost immediate.", insee_get_idbank_limit)
-    cat(testthat:::colourise(msg, "error"))
+    cat(crayon::style(msg, "red"))
     return(NULL)
   }
-
-  if(n_idbank > insee_sdmx_idbank_limit & limit){
+  if(n_idbank > insee_sdmx_idbank_limit & limit & insee_download_verbose){
     msg = sprintf("The number of idbanks is higher than %s (insee's sdmx query limit),\n  multiple queries are then triggered.\n  To make it faster, please reduce the number of idbanks.\n  The data is cached, so all queries are only run once per R session.\n  A query run twice is then almost immediate.\n", insee_sdmx_idbank_limit)
-    cat(testthat:::colourise(msg, "error"))
+    cat(crayon::style(msg, "red"))
   }
 
   arg = c("startPeriod", "endPeriod", "firstNObservations", "lastNObservations")

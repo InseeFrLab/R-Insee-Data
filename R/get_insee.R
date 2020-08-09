@@ -18,20 +18,9 @@
 get_insee = function(link, step = "1/1"){
 
   insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
+  insee_value_as_numeric = if(Sys.getenv("INSEE_value_as_numeric") == "TRUE"){TRUE}else{FALSE}
 
-  if(Sys.getenv("INSEE_value_as_numeric") == "TRUE"){
-    insee_value_as_numeric = TRUE
-  }else{
-    insee_value_as_numeric = FALSE
-  }
-
-  if_null_na = function(x) {
-    if (is.null(x)) {
-      return(NA)
-    } else{
-      return(x)
-    }
-  }
+  if_null_na = function(x) {if(is.null(x)){return(NA)}else{return(x)}}
 
   file_cache = file.path(tempdir(), paste0(openssl::md5(link), ".rds"))
 
@@ -121,9 +110,9 @@ get_insee = function(link, step = "1/1"){
           if(insee_download_verbose){
             if(n_series > 1){
               cat(sprintf("%s - Dataframe build : \n", step))
-              pb = txtProgressBar(min = 1, max = n_series, initial = 1, style = 3)
+              pb = utils::txtProgressBar(min = 1, max = n_series, initial = 1, style = 3)
             }else{
-              cat(sprintf("%s - Dataframe build : 100% \n", step))
+              cat(sprintf("%s - Dataframe build : 100%% \n", step))
             }
           }
 
@@ -152,7 +141,7 @@ get_insee = function(link, step = "1/1"){
             }
             if(insee_download_verbose){
               if(n_series > 1){
-                setTxtProgressBar(pb,i)
+                utils::setTxtProgressBar(pb,i)
               }
             }
           }
@@ -181,15 +170,21 @@ get_insee = function(link, step = "1/1"){
       data_final = NULL
     }
     if(!is.null(data_final)){
+
       saveRDS(data_final, file = file_cache)
+
       if(insee_download_verbose){
-        cat(testthat:::colourise(sprintf("\nData cached : %s\n", file_cache), "success"))
+        msg = sprintf("\nData cached : %s\n", file_cache)
+        cat(crayon::style(msg, "green"))
       }
     }
   }else{
+
     if(insee_download_verbose){
-      cat(testthat:::colourise("Cached data has been used\n", "success"))
+      msg = "Cached data has been used\n"
+      cat(crayon::style(msg, "green"))
     }
+
     data_final = readRDS(file_cache)
   }
 
