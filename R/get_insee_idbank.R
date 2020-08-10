@@ -70,7 +70,12 @@ get_insee_idbank <- function(...,
   insee_sdmx_idbank_limit = as.numeric(Sys.getenv("INSEE_sdmx_idbank_limit"))
   insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
 
-  if(length(list(...)) == 1){
+
+  if(length(list(...)) == 0){
+    msg = "The idbank list is missing"
+    cat(crayon::style(msg, "red"))
+    return(NULL)
+  }else if(length(list(...)) == 1){
     list_idbank = list(...)[[1]]
   }else{
     list_idbank = unlist(list(...))
