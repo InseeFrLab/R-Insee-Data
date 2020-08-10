@@ -25,11 +25,13 @@ Imports:
   crayon,
   openssl
 Suggests:
-  tidyverse,
-  prettydoc,
-  htmltools,
-  kableExtra,
-  knitr,
-  rmarkdown,
-  magrittr
+    tidyverse,
+    prettydoc,
+    htmltools,
+    kableExtra,
+    knitr,
+    rmarkdown,
+    magrittr,
+    testthat,
+    covr
 RoxygenNote: 7.1.1

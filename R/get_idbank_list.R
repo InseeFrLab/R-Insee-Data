@@ -51,7 +51,7 @@ get_idbank_list = function(
     add_zero = function(x, idbank_nchar_arg = idbank_nchar){
       paste0(c(rep("0", idbank_nchar_arg-nchar(x)), x), collapse = "")}
 
-    mapping_final[,"idbank"] = sapply(mapping_final[,"idbank"], add_zero)
+    mapping_final[,"idbank"] = vapply(mapping_final[,"idbank"], add_zero, "")
 
     saveRDS(mapping_final, file = mapping_file_cache)
 

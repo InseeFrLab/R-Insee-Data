@@ -17,6 +17,11 @@
 #' @export
 get_insee = function(link, step = "1/1"){
 
+  if(missing(link)){
+    warning("link is missing")
+    return(NULL)
+  }
+
   insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
   insee_value_as_numeric = if(Sys.getenv("INSEE_value_as_numeric") == "TRUE"){TRUE}else{FALSE}
 
@@ -28,9 +33,14 @@ get_insee = function(link, step = "1/1"){
 
     if(insee_download_verbose){
       cat(sprintf("%s - Data download : \n", step))
-      response = httr::GET(link, httr::progress())
+      response = try(httr::GET(link, httr::progress()), silent = TRUE)
     }else{
-      response = httr::GET(link)
+      response = try(httr::GET(link), silent = TRUE)
+    }
+
+    if("try-error" %in% class(response)){
+      warning("Wrong query")
+      return(NULL)
     }
 
     response_content = try(httr::content(response, encoding = "UTF-8"), silent = TRUE)
@@ -165,9 +175,8 @@ get_insee = function(link, step = "1/1"){
         data_final = NULL
       }
     }else{
-      warning("Wrong query")
       print(response)
-      data_final = NULL
+      stop("Wrong query")
     }
     if(!is.null(data_final)){
 

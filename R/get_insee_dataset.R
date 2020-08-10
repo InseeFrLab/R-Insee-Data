@@ -23,6 +23,11 @@ get_insee_dataset <- function(dataset,
                               lastNObservations = NULL,
                               filter = NULL){
 
+  if(missing(dataset)){
+    warning("dataset is missing")
+    return(NULL)
+  }
+
   insee_bdm_dataset_link = Sys.getenv("INSEE_sdmx_link_dataset")
 
   if(!"character" %in% class(dataset)){
