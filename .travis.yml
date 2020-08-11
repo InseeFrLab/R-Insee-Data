@@ -11,5 +11,9 @@ apt_packages:
   - libv8-dev
   - librsvg2-dev
 
+script:
+  - ! grep -R "WARNING" "${RCHECK_DIR}/00check.log"
+
 after_success:
     - Rscript -e 'covr::codecov()'
+
