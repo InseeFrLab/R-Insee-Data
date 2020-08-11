@@ -17,3 +17,10 @@ covr::report(covr::package_coverage())
 
 # Run coverage for the entire package, including examples and vignettes
 covr::report(covr::package_coverage(type='all'))
+
+
+vec = revdep("tidyr", dependencies = "Imports")
+
+vec2 = revdep("covr", dependencies = "Suggests")
+
+pkg_dpd_tidyr = data.frame(pkg = vec[vec %in% vec2])
