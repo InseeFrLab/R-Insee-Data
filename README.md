@@ -1,6 +1,5 @@
-insee R package
+insee R package 
 ================
-
 <br> 
 
  [![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee)
@@ -12,6 +11,7 @@ insee R package
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
 
 <br>
+
 
 ## Overview
 
