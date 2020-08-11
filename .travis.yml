@@ -4,5 +4,12 @@ r:
   - oldrel
   - release
   - devel
+
+sudo: required
+
+apt_packages:
+  - libv8-dev
+  - librsvg2-dev
+
 after_success:
     - Rscript -e 'covr::codecov()'
