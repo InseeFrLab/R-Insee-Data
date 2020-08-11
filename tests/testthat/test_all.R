@@ -3,6 +3,9 @@ library(testthat)
 library(insee)
 
 test_that("test that a query returns a dataframe",{
+  skip_on_travis()
+  skip_on_cran()
+
   insee_link = "http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"
   insee_query = file.path(insee_link, paste0("010539365","?", "firstNObservations=1"))
 
@@ -19,6 +22,8 @@ test_that("test that a query returns a dataframe",{
 })
 
 test_that("test that a wrong query returns null",{
+  skip_on_cran()
+  skip_on_travis()
   # expect_error(get_insee())
   # expect_error(get_insee(""))
   # expect_output(nrow(add_insee_title(get_idbank_list()[1,])), 1)
