@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Get dataset from INSEE BDM database — get_insee_dataset • insee</title>
+<title>Changelog • insee</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,7 @@
 
 
 
-<meta property="og:title" content="Get dataset from INSEE BDM database — get_insee_dataset" />
-<meta property="og:description" content="Get dataset from INSEE BDM database" />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -59,7 +58,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-topic">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -123,75 +122,57 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Get dataset from INSEE BDM database</h1>
-    <small class="dont-index">Source: <a href='https://github.com/hadrilec/insee/blob/master/R/get_insee_dataset.R'><code>R/get_insee_dataset.R</code></a></small>
-    <div class="hidden name"><code>get_insee_dataset.Rd</code></div>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/hadrilec/insee/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="ref-description">
-    <p>Get dataset from INSEE BDM database</p>
-    </div>
-
-    <pre class="usage"><span class='fu'>get_insee_dataset</span>(
-  <span class='no'>dataset</span>,
-  <span class='kw'>startPeriod</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>endPeriod</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>firstNObservations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>lastNObservations</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>filter</span> <span class='kw'>=</span> <span class='kw'>NULL</span>
-)</pre>
-
-    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
-    <table class="ref-arguments">
-    <colgroup><col class="name" /><col class="desc" /></colgroup>
-    <tr>
-      <th>dataset</th>
-      <td><p>dataset name to be downloaded</p></td>
-    </tr>
-    <tr>
-      <th>startPeriod</th>
-      <td><p>start date of data</p></td>
-    </tr>
-    <tr>
-      <th>endPeriod</th>
-      <td><p>end date of data</p></td>
-    </tr>
-    <tr>
-      <th>firstNObservations</th>
-      <td><p>get the first N observations for each key series (idbank)</p></td>
-    </tr>
-    <tr>
-      <th>lastNObservations</th>
-      <td><p>get the last N observations for each key series (idbank)</p></td>
-    </tr>
-    <tr>
-      <th>filter</th>
-      <td><p>Use the filter to choose only some values in a dimension. It is recommended to use it for big datasets.
-A dimension left empty means all values are selected. To select multiple values in one dimension put a "+" between those values (see example)</p></td>
-    </tr>
-    </table>
-
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>Get dataset from INSEE BDM database</p>
-
-    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='no'>insee_dataset</span> <span class='kw'>=</span> <span class='fu'><a href='get_dataset_list.html'>get_dataset_list</a></span>()</div><div class='output co'>#&gt; <span style='color: #00BB00;'>Cached data has been used
-#&gt; </span><span></div><div class='input'>
-<span class='no'>data</span> <span class='kw'>=</span> <span class='fu'>get_insee_dataset</span>(<span class='st'>"IPC-2015"</span>, <span class='kw'>filter</span> <span class='kw'>=</span> <span class='st'>"M+A.........CVS."</span>, <span class='kw'>startPeriod</span> <span class='kw'>=</span> <span class='st'>"2015-03"</span>)</div><div class='output co'>#&gt; 1/1 - Data download : 
-#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%
-#&gt; 1/1 - Dataframe build : 
-#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |=======================                                               |  33%  |                                                                              |===============================================                       |  67%  |                                                                              |======================================================================| 100%</span><span style='color: #00BB00;'>Data cached : C:\Users\XLAPDO\AppData\Local\Temp\RtmpAhJp4x/108a0b957e9c4dd477b583de6d55f39e.rds
-#&gt; </span><span></div><div class='input'># }
-
-</div></span></pre>
+    <div id="insee-090" class="section level1">
+<h1 class="page-header" data-toc-text="0.9.0">
+<a href="#insee-090" class="anchor"></a>insee 0.9.0<small> Unreleased </small>
+</h1>
+<ul>
+<li>all data are cached, all queries are then run once per R session</li>
+<li>drop rsdmx dependency</li>
+<li>progress bar addition in <code>get_insee</code> function</li>
+<li>
+<code>get_insee_idbank</code> splits automatically a big query into several queries of 400-idbank each</li>
+<li>
+<code>search_insee</code> function : find datasets with a keyword</li>
+<li>
+<code>add_insee_title</code> function : find INSEE title of an unlimited amount of idbanks</li>
+<li>
+<code>split_title</code> function : split quickly the titles provided with the data</li>
+<li>new vignette</li>
+<li>new pkgdown website : <a href="https://hadrilec.github.io/insee/" class="uri">https://hadrilec.github.io/insee/</a>
+</li>
+</ul>
+</div>
+    <div id="insee-080" class="section level1">
+<h1 class="page-header" data-toc-text="0.8.0">
+<a href="#insee-080" class="anchor"></a>insee 0.8.0<small> 2020-08-02 </small>
+</h1>
+<ul>
+<li>Bug fix in <code>get_insee_title</code> function</li>
+<li>more hands-on examples</li>
+</ul>
+</div>
+    <div id="insee-070" class="section level1">
+<h1 class="page-header" data-toc-text="0.7.0">
+<a href="#insee-070" class="anchor"></a>insee 0.7.0<small> 2020-07-29 </small>
+</h1>
+<ul>
+<li>
+<code>insee 0.7.0</code> first version on CRAN</li>
+</ul>
+</div>
   </div>
+
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>
     </nav>
   </div>
+
 </div>
 
 
