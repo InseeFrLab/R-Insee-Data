@@ -1,17 +1,23 @@
 insee R package
 ================
 
-<br>
+<!-- <br> -->
 
-[![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee)
-[![CRAN checks](https://cranchecks.info/badges/worst/insee)](https://cran.r-project.org/web/checks/check_results_insee.html)
-[![Codecov test coverage](https://codecov.io/gh/hadrilec/insee/branch/master/graph/badge.svg)](https://codecov.io/gh/hadrilec/insee?branch=master)
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee)
-[![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee)
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
+<!-- [![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee) -->
 
-<br>
+<!-- [![CRAN checks](https://cranchecks.info/badges/worst/insee)](https://cran.r-project.org/web/checks/check_results_insee.html) -->
+
+<!-- [![Codecov test coverage](https://codecov.io/gh/hadrilec/insee/branch/master/graph/badge.svg)](https://codecov.io/gh/hadrilec/insee?branch=master) -->
+
+<!-- [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) -->
+
+<!-- [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee) -->
+
+<!-- [![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee) -->
+
+<!-- [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/) -->
+
+<!-- <br> -->
 
 ## Overview
 
@@ -74,7 +80,9 @@ ggplot(data, aes(x = DATE, y = OBS_VALUE)) +
   labs(subtitle = sprintf("Last updated : %s", data$TIME_PERIOD[1]))
 ```
 
-![](vignettes/gdp.png)
+<img src='vignettes/gdp.png' width=675 height=442 />
+
+<!-- ![](vignettes/gdp.png) -->
 
 ## Inflation
 
@@ -118,7 +126,9 @@ ggplot(data_plot, aes(x = DATE, y = growth)) +
   labs(subtitle = sprintf("Last updated : %s", data_plot$TIME_PERIOD[nrow(data_plot)])) 
 ```
 
-![](vignettes/inflation.png)
+<img src='vignettes/inflation.png' width=1237 height=647 />
+
+<!-- ![](vignettes/inflation.png) -->
 
 ## Unemployment rate
 
@@ -154,7 +164,9 @@ ggplot(data_plot, aes(x = DATE, y = OBS_VALUE, colour = title2)) +
   labs(subtitle = sprintf("Last updated : %s", data_plot$TIME_PERIOD[1]))
 ```
 
-![](vignettes/unem.png)
+<img src='vignettes/unem.png' width=1195 height=701 />
+
+<!-- ![](vignettes/unem.png) -->
 
 ## Population
 
@@ -193,7 +205,8 @@ ggplot(data_plot, aes(x = DATE, y = OBS_VALUE, fill = title3)) +
   labs(subtitle = sprintf("Last updated : %s", data_plot$TIME_PERIOD[1]))
 ```
 
-![](vignettes/pop.png)
+<img src='vignettes/pop.png' width=768 height=430 />
+<!-- ![](vignettes/pop.png) -->
 
 ### Population by departement
 
@@ -266,7 +279,9 @@ ggplot() +
   ggtitle("Distribution of the population within French territory in 2020")
 ```
 
-![](vignettes/pop_map.png)
+<img src='vignettes/pop_map.png' width=814 height=679 />
+
+<!-- ![](vignettes/pop_map.png) -->
 
 # How to avoid proxy issues ?
 
