@@ -17,4 +17,4 @@
 
 # insee 0.7.0
 
-* `insee 0.7.0` first version on CRAN
+* first version on CRAN
