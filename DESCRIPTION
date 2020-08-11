@@ -17,6 +17,7 @@ Imports:
   xml2,
   tibble,
   dplyr,
+  cpp11 (<= 0.1.0),
   tidyr (<= 1.1.0),
   stringr,
   lubridate,
