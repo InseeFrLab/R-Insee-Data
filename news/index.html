@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Articles • insee</title>
+<title>Changelog • insee</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,7 @@
 
 
 
-<meta property="og:title" content="Articles" />
+<meta property="og:title" content="Changelog" />
 
 
 
@@ -58,7 +58,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-article-index">
+    <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -122,19 +122,54 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Articles</h1>
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/hadrilec/insee/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div class="section ">
-      <h3>All vignettes</h3>
-      <p class="section-desc"></p>
-
-      <dl>
-        <dt><a href="insee-vignettes.html">Tutorial</a></dt>
-        <dd></dt>
-      </dl>
-    </div>
+    <div id="insee-090" class="section level1">
+<h1 class="page-header" data-toc-text="0.9.0">
+<a href="#insee-090" class="anchor"></a>insee 0.9.0<small> Unreleased </small>
+</h1>
+<ul>
+<li>all data are cached, all queries are then run one per R session</li>
+<li>drop rsdmx dependency</li>
+<li>progress bar addition in <code>get_insee</code> function</li>
+<li>
+<code>get_insee_idbank</code> splits automatically a big query into several queries of 400-idbank each</li>
+<li>
+<code>search_insee</code> function : find datasets with a keyword</li>
+<li>
+<code>add_insee_title</code> function : find INSEE title of an unlimited amount of idbanks</li>
+<li>
+<code>split_title</code> function : split quickly the titles provided with the data</li>
+<li>new vignette</li>
+<li>new pkgdown website : <a href="https://hadrilec.github.io/insee/" class="uri">https://hadrilec.github.io/insee/</a>
+</li>
+</ul>
+</div>
+    <div id="insee-080" class="section level1">
+<h1 class="page-header" data-toc-text="0.8.0">
+<a href="#insee-080" class="anchor"></a>insee 0.8.0<small> 2020-08-02 </small>
+</h1>
+<ul>
+<li>Bug fix in <code>get_insee_title</code> function</li>
+<li>more hands-on examples</li>
+</ul>
+</div>
+    <div id="insee-070" class="section level1">
+<h1 class="page-header" data-toc-text="0.7.0">
+<a href="#insee-070" class="anchor"></a>insee 0.7.0<small> 2020-07-29 </small>
+</h1>
+<p><code>insee 0.7.0</code> first version on CRAN</p>
+</div>
   </div>
+
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
+  </div>
+
 </div>
 
 
