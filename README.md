@@ -5,8 +5,8 @@ insee R package
 
 [![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee)
 [![CRAN checks](https://cranchecks.info/badges/worst/insee)](https://cran.r-project.org/web/checks/check_results_insee.html)
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Codecov test coverage](https://codecov.io/gh/hadrilec/insee/branch/master/graph/badge.svg)](https://codecov.io/gh/hadrilec/insee?branch=master)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee)
 [![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
@@ -39,57 +39,6 @@ library(tidyverse)
 library(insee)
 ```
 
-# get INSEE datasets list
-
-``` r
-dataset = get_dataset_list()
-```
-
-# get INSEE series key (idbank) list
-
-``` r
-idbank_list = get_idbank_list()
-```
-
-# select idbanks
-
-``` r
-idbank_list_selected = 
-  idbank_list %>% 
-  filter(nomflow == "ENQ-CONJ-ACT-IND") %>% #industry activity survey 
-  filter(dim4 == "A88-29") %>% # 29 : automotive industry, A88 : aggregation level - 88 sectors
-  filter(dim8  == "CVS") %>% #seasonally adjusted
-  filter(dim5 == "SOLDE_PROPORTION") %>% #balance of opinion
-  filter(dim2 == "ECAI_TPE")  #expected trend in employment
-```
-
-# get idbank title
-
-``` r
-idbank_list_selected = 
-  idbank_list_selected %>% 
-  mutate(title = get_insee_title(idbank, lang = "en")) 
-```
-
-# extract selected idbanks list
-
-``` r
-list_idbank = idbank_list_selected %>% pull(idbank)
-```
-
-# get selected idbanks data
-
-``` r
-data = get_insee_idbank(list_idbank)
-```
-
-# avoid proxy issues
-
-``` r
-Sys.setenv(http_proxy = "my_proxy_server")
-Sys.setenv(https_proxy = "my_proxy_server")
-```
-
 # Examples
 
 ## GDP growth rate
@@ -97,8 +46,13 @@ Sys.setenv(https_proxy = "my_proxy_server")
 ``` r
 library(tidyverse)
 
+# get INSEE datasets list
+dataset = get_dataset_list()
+
+# get INSEE series key (idbank) list
 idbank_list = get_idbank_list()
 
+# select idbanks 
 df_idbank_list_selected =
   idbank_list %>%
   filter(nomflow == "CNT-2014-PIB-EQB-RF") %>% # Gross domestic product balance
@@ -107,8 +61,10 @@ df_idbank_list_selected =
   filter(dim6 == "TAUX") %>% #rate
   filter(dim10 == "CVS-CJO") #SA-WDA, seasonally adjusted, working day adjusted
 
+# extract selected idbanks list
 idbank = df_idbank_list_selected %>% pull(idbank)
 
+# get data from idbank
 data = get_insee_idbank(idbank)
 
 #plot
@@ -311,6 +267,13 @@ ggplot() +
 ```
 
 ![](vignettes/pop_map.png)
+
+# How to avoid proxy issues ?
+
+``` r
+Sys.setenv(http_proxy = "my_proxy_server")
+Sys.setenv(https_proxy = "my_proxy_server")
+```
 
 # Support
 
