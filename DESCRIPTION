@@ -33,5 +33,6 @@ Suggests:
     rmarkdown,
     magrittr,
     testthat,
-    covr
+    covr,
+    png
 RoxygenNote: 7.1.1

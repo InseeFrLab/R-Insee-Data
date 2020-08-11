@@ -142,12 +142,10 @@
   |                                                                            
   |======                                                                |   9%
   |                                                                            
-  |======================                                                |  32%
-  |                                                                            
-  |======================================================                |  77%
+  |==============                                                        |  20%
   |                                                                            
   |======================================================================| 100%
-## Data cached : C:\Users\XLAPDO\AppData\Local\Temp\RtmpOccR9r/6bce20f8021f2b83467819f1e4f74d9f.rds</code></pre>
+## Data cached : C:\Users\XLAPDO\AppData\Local\Temp\RtmpI3V8ow/6bce20f8021f2b83467819f1e4f74d9f.rds</code></pre>
 <table class="table table table-striped table-hover table-condensed">
 <thead><tr>
 <th style="text-align:left;">
@@ -573,7 +571,7 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
   <span class="fu">geom_col</span>() +
   <span class="fu">ggtitle</span>(<span class="st">"French GDP growth rate, quarter-on-quarter, sa-wda"</span>) +
   <span class="fu">labs</span>(<span class="kw">subtitle</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"Last updated : %s"</span>, <span class="no">data</span>$<span class="no">TIME_PERIOD</span>[<span class="fl">1</span>]))</pre></body></html></div>
-<p><img src="gdp.png"></p>
+<p><img src="gdp.png" width="675" height="442"><!-- ![](gdp.png) --></p>
 </div>
 <div id="inflation" class="section level2">
 <h2 class="hasAnchor">
@@ -615,7 +613,7 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
   <span class="fu">facet_wrap</span>(~<span class="no">title6</span>, <span class="kw">scales</span> <span class="kw">=</span> <span class="st">"free"</span>) +
   <span class="fu">ggtitle</span>(<span class="st">"French inflation, by product categories, year-on-year"</span>) +
   <span class="fu">labs</span>(<span class="kw">subtitle</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"Last updated : %s"</span>, <span class="no">data_plot</span>$<span class="no">TIME_PERIOD</span>[<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">data_plot</span>)]))</pre></body></html></div>
-<p><img src="inflation.png"></p>
+<p><img src="inflation.png" width="1237" height="647"><!-- ![](inflation.png) --></p>
 </div>
 <div id="unemployment-rate" class="section level2">
 <h2 class="hasAnchor">
@@ -649,7 +647,8 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
   <span class="fu">geom_point</span>() +
   <span class="fu">ggtitle</span>(<span class="st">"French unemployment rate, by age"</span>) +
   <span class="fu">labs</span>(<span class="kw">subtitle</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"Last updated : %s"</span>, <span class="no">data_plot</span>$<span class="no">TIME_PERIOD</span>[<span class="fl">1</span>]))</pre></body></html></div>
-<p><img src="unem.png"></p>
+<p><img src="unem.png" width="1195" height="701"></p>
+<!-- ![](unem.png) -->
 </div>
 <div id="population" class="section level2">
 <h2 class="hasAnchor">
@@ -687,7 +686,8 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
   <span class="fu">geom_area</span>() +
   <span class="fu">ggtitle</span>(<span class="st">"French population in millions, by age"</span>) +
   <span class="fu">labs</span>(<span class="kw">subtitle</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"Last updated : %s"</span>, <span class="no">data_plot</span>$<span class="no">TIME_PERIOD</span>[<span class="fl">1</span>]))</pre></body></html></div>
-<p><img src="pop.png"></p>
+<p><img src="pop.png" width="768" height="430"></p>
+<!-- ![](pop.png) -->
 </div>
 <div id="population-by-departement" class="section level3">
 <h3 class="hasAnchor">
@@ -757,7 +757,7 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
   <span class="fu">theme_void</span>() +
   <span class="fu"><a href="https://rdrr.io/pkg/viridis/man/scale_viridis.html">scale_fill_viridis</a></span>() +
   <span class="fu">ggtitle</span>(<span class="st">"Distribution of the population within French territory in 2020"</span>)</pre></body></html></div>
-<p><img src="pop_map.png"></p>
+<p><img src="pop_map.png" width="814" height="679"><!-- ![](pop_map.png) --></p>
 </div>
 </div>
 </div>
