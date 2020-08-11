@@ -3,7 +3,7 @@ pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   insee-vignettes: insee-vignettes.html
-last_built: 2020-08-11T16:26Z
+last_built: 2020-08-11T16:40Z
 urls:
   reference: https://hadrilec.github.io/insee//reference
   article: https://hadrilec.github.io/insee//articles
