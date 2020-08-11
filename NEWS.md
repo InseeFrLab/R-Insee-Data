@@ -1,6 +1,6 @@
 # insee 0.9.0
 
-* all data are cached, all queries are then run one per R session
+* all data are cached, all queries are then run once per R session
 * drop rsdmx dependency
 * progress bar addition in `get_insee` function
 * `get_insee_idbank` splits automatically a big query into several queries of 400-idbank each
@@ -17,4 +17,4 @@
 
 # insee 0.7.0
 
-`insee 0.7.0` first version on CRAN
+* `insee 0.7.0` first version on CRAN
