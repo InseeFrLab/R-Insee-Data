@@ -35,5 +35,5 @@ Suggests:
     testthat,
     covr
 Remotes:
-  cpp11 (<= 0.1.0)
+  cpp11 (<= 0.1.0),
 RoxygenNote: 7.1.1
