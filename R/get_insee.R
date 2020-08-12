@@ -10,10 +10,11 @@
 #' @param link SDMX query link
 #' @param step argument used only for internal package purposes to tweak download display
 #' @examples
+#' \donttest{
 #' insee_link = "http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"
 #' insee_query = file.path(insee_link, paste0("010539365","?", "firstNObservations=1"))
 #' data = get_insee(insee_query)
-#'
+#' }
 #' @export
 get_insee = function(link, step = "1/1"){
 
@@ -122,7 +123,7 @@ get_insee = function(link, step = "1/1"){
               cat(sprintf("%s - Dataframe build : \n", step))
               pb = utils::txtProgressBar(min = 1, max = n_series, initial = 1, style = 3)
             }else{
-              cat(sprintf("%s - Dataframe build : 100%% \n", step))
+              cat(sprintf("%s - Dataframe build : 100%%", step))
             }
           }
 
@@ -183,7 +184,7 @@ get_insee = function(link, step = "1/1"){
       saveRDS(data_final, file = file_cache)
 
       if(insee_download_verbose){
-        msg = sprintf("Data cached : %s\n", file_cache)
+        msg = sprintf("\nData cached : %s\n", file_cache)
         cat(crayon::style(msg, "green"))
       }
     }
