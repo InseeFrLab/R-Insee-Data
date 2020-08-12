@@ -31,10 +31,10 @@ get_insee_dataset <- function(dataset,
   insee_bdm_dataset_link = Sys.getenv("INSEE_sdmx_link_dataset")
 
   if(!"character" %in% class(dataset)){
-    stop("idbank must be a character")
+    stop("dataset name must be a character")
   }
   if(length(dataset) != 1){
-    stop("idbank length must be one")
+    stop("only one dataset is expected not more")
   }
 
   link = sprintf("%s/%s", insee_bdm_dataset_link, dataset)
