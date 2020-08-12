@@ -12,6 +12,7 @@ LazyData: true
 License: GPL-2
 VignetteBuilder: knitr
 BugReports: https://github.com/hadrilec/insee/issues
+Remotes: github::r-lib/cpp11
 Imports: 
   httr,
   xml2,
@@ -35,5 +36,4 @@ Suggests:
     testthat,
     covr,
     png
-Remotes: github::r-lib/cpp11
 RoxygenNote: 7.1.1
