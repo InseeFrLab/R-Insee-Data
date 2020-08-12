@@ -29,11 +29,16 @@
 #' @export
 get_insee_title = function(..., lang = "en"){
 
-  if(length(list(...)) == 1){
+  if(length(list(...)) == 0){
+    msg = "The idbank list is missing"
+    cat(crayon::style(msg, "red"))
+    return(NULL)
+  }else if(length(list(...)) == 1){
     list_idbank = list(...)[[1]]
   }else{
     list_idbank = unlist(list(...))
   }
+  list_idbank = unique(list_idbank)
 
   df_title = get_insee_idbank(list_idbank, lastNObservations = 1, limit = FALSE)
 
