@@ -81,6 +81,7 @@ get_insee_idbank <- function(...,
     list_idbank = unlist(list(...))
   }
 
+  list_idbank = unique(list_idbank)
   n_idbank = length(list_idbank)
 
   if(n_idbank > insee_get_idbank_limit & limit){
