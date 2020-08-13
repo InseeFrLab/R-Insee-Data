@@ -6,6 +6,9 @@
 \usage{
 get_dataset_list()
 }
+\value{
+a tibble with 5 columns :  id, Name.fr, Name.en, url, n_series
+}
 \description{
 Download a full INSEE's dataset list
 }

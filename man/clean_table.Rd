@@ -9,6 +9,9 @@ clean_table(df)
 \arguments{
 \item{df}{the dataframe to be cleaned}
 }
+\value{
+a dataframe without columns containing only NA
+}
 \description{
 Remove columns filled only with NA (missing value)
 }

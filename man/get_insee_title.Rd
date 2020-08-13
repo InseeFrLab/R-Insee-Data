@@ -11,6 +11,9 @@ get_insee_title(..., lang = "en")
 
 \item{lang}{language of the title, by default it is Engligh, if lang is different from "en" then French will be the title's language}
 }
+\value{
+a character vector with the titles
+}
 \description{
 Get title from INSEE series idbank
 }

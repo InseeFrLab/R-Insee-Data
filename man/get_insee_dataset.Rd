@@ -27,6 +27,9 @@ get_insee_dataset(
 \item{filter}{Use the filter to choose only some values in a dimension. It is recommended to use it for big datasets.
 A dimension left empty means all values are selected. To select multiple values in one dimension put a "+" between those values (see example)}
 }
+\value{
+a tibble with the data
+}
 \description{
 Get dataset from INSEE BDM database
 }

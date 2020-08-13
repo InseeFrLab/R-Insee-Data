@@ -26,6 +26,9 @@ get_insee_idbank(
 
 \item{lastNObservations}{get the last N observations for each key series (idbank)}
 }
+\value{
+a tibble with the data
+}
 \description{
 Get data from INSEE series idbank
 }

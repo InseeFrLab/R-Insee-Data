@@ -17,6 +17,9 @@ add_insee_title(df, n_split, lang = "en", split = TRUE, clean = TRUE)
 
 \item{clean}{remove the columns filled with NA (missing value), by default is TRUE}
 }
+\value{
+the same dataframe but with one or several title columns
+}
 \description{
 Add a title column to the idbank list dataset
 }
