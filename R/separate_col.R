@@ -9,9 +9,11 @@ separate_col = function(df, col, sep, into){
 
         n_split = length(into)
 
-        output = as.data.frame(stringr::str_split(string = df[[col]],
+        output = data.frame(stringr::str_split(string = df[[col]],
                                                   simplify = TRUE,
-                                                  pattern = sep, n = n_split))
+                                                  pattern = sep, n = n_split),
+                            stringsAsFactors = FALSE)
+
         names(output) = into
 
         if_void_NA = function(x){
