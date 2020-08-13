@@ -111,6 +111,7 @@ get_insee = function(link, step = "1/1"){
               )
               list_df[[length(list_df) + 1]] = dataflow_df
             }
+            cat(sprintf("%s - Dataframe build : 100%%", step))
 
             data_final = tibble::as_tibble(dplyr::bind_rows(list_df))
           }
