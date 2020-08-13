@@ -18,7 +18,6 @@ Imports:
   xml2,
   tibble,
   dplyr,
-  tidyr (<= 1.1.0),
   stringr,
   lubridate,
   tidyselect,

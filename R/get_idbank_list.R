@@ -45,8 +45,11 @@ get_idbank_list = function(
     n_col = max(dot_vector) + 1
 
     # split cleFlow column by dot
-    mapping_final = tidyr::separate(data = mapping, col = "cleFlow", remove = FALSE,
-                                    fill = "right", sep = "\\.", into = paste0("dim", 1:n_col))
+    # mapping_final = tidyr::separate(data = mapping, col = "cleFlow", remove = FALSE,
+    #                                 fill = "right", sep = "\\.", into = paste0("dim", 1:n_col))
+
+    mapping_final = separate_col(df = mapping, col = "cleFlow",
+                                  sep = "\\.", into = paste0("dim", 1:n_col))
 
     add_zero = function(x, idbank_nchar_arg = idbank_nchar){
       paste0(c(rep("0", idbank_nchar_arg-nchar(x)), x), collapse = "")}

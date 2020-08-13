@@ -34,14 +34,25 @@ split_title = function(df, title_col_name, n_split = "max", lang = "en"){
 
     if(length(col_title) > 0 & nrow(df) > 0){
 
+      n_split_max = max(stringr::str_count(df[[title_col_name]], pattern = insee_title_sep)) + 1
+
       if(n_split == "max"){
-        n_split = max(stringr::str_count(df[[title_col_name]], pattern = insee_title_sep)) + 1
+        n_split = n_split_max
       }
 
-      df = tidyr::separate(data = df, col = title_col_name,
-                           into = paste0(title_col_name, 1:n_split),
-                           sep = insee_title_sep, fill = "right",
-                           extra = "merge", remove = FALSE)
+      n_split = max(1, n_split)
+
+      n_split = min(max(n_split_max, n_split))
+
+
+      # df = tidyr::separate(data = df, col = title_col_name,
+      #                      into = paste0(title_col_name, 1:n_split),
+      #                      sep = insee_title_sep, fill = "right",
+      #                      extra = "merge", remove = FALSE)
+
+      df = separate_col(df = df, col = title_col_name,
+                        into = paste0(title_col_name, 1:n_split),
+                        sep = insee_title_sep)
     }
   }
 
