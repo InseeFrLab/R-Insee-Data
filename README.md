@@ -43,14 +43,14 @@ library(insee)
 
   - [Tutorial](https://hadrilec.github.io/insee/articles/insee.html)
   - [GDP growth
-    rate](https://hadrilec.github.io/insee/articles/2_gdp-vignettes.html)
-  - [Inflation](https://hadrilec.github.io/insee/articles/3_inflation-vignettes.html)
+    rate](https://hadrilec.github.io/insee/articles/v2_gdp-vignettes.html)
+  - [Inflation](https://hadrilec.github.io/insee/articles/v3_inflation-vignettes.html)
   - [Unemployment
-    rate](https://hadrilec.github.io/insee/articles/4_unem-vignettes.html)
+    rate](https://hadrilec.github.io/insee/articles/v4_unem-vignettes.html)
   - [Population by
-    age](https://hadrilec.github.io/insee/articles/5_pop-vignettes.html)
+    age](https://hadrilec.github.io/insee/articles/v5_pop-vignettes.html)
   - [Population
-    map](https://hadrilec.github.io/insee/articles/6_pop_map-vignettes.html)
+    map](https://hadrilec.github.io/insee/articles/v6_pop_map-vignettes.html)
 
 ## How to avoid proxy issues ?
 
