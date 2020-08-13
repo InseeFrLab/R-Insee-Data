@@ -98,19 +98,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/2_gdp-vignettes.html">GDP growth rate</a>
+      <a href="../articles/v2_gdp-vignettes.html">GDP growth rate</a>
     </li>
     <li>
-      <a href="../articles/3_inflation-vignettes.html">Inflation</a>
+      <a href="../articles/v3_inflation-vignettes.html">Inflation</a>
     </li>
     <li>
-      <a href="../articles/4_unem-vignettes.html">Unemployment rate</a>
+      <a href="../articles/v4_unem-vignettes.html">Unemployment rate</a>
     </li>
     <li>
-      <a href="../articles/5_pop-vignettes.html">Population by age</a>
+      <a href="../articles/v5_pop-vignettes.html">Population by age</a>
     </li>
     <li>
-      <a href="../articles/6_pop_map-vignettes.html">Population Map</a>
+      <a href="../articles/v6_pop_map-vignettes.html">Population Map</a>
     </li>
   </ul>
 </li>
@@ -158,15 +158,17 @@
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>the dataset list table filtered with the pattern</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>the function ignores accents and cases</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='co'># example 1 : search one pattern</span>
-<span class='co'>#the correct word in French would be 'enqu\U00EAte' which means survey</span>
-<span class='no'>dataset_enquete</span> <span class='kw'>=</span> <span class='fu'>search_insee</span>(<span class='st'>"enquete"</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>Cached data has been used</span><span></span></div><div class='input'>
+<span class='co'># example 1 : search one pattern, the accents do not matter</span>
+<span class='fu'><a href='https://rdrr.io/r/base/writeLines.html'>writeLines</a></span>(<span class='st'>"the word 'enqu\U00EAte' (meaning survey in French) will match with 'enquete'"</span>)</div><div class='output co'>#&gt; the word 'enquête' (meaning survey in French) will match with 'enquete'</div><div class='input'><span class='no'>dataset_enquete</span> <span class='kw'>=</span> <span class='fu'>search_insee</span>(<span class='st'>"enquete"</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>Cached data has been used</span><span></span></div><div class='input'>
 <span class='co'># example 2 : search multiple patterns</span>
 <span class='no'>dataset_survey_gdp</span> <span class='kw'>=</span> <span class='fu'>search_insee</span>(<span class='st'>"Survey|gdp"</span>)</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Cached data has been used</span><span></span></div><div class='input'># }
 </div></span></pre>

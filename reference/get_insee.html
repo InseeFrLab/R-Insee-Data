@@ -98,19 +98,19 @@
   </a>
   <ul class="dropdown-menu" role="menu">
     <li>
-      <a href="../articles/2_gdp-vignettes.html">GDP growth rate</a>
+      <a href="../articles/v2_gdp-vignettes.html">GDP growth rate</a>
     </li>
     <li>
-      <a href="../articles/3_inflation-vignettes.html">Inflation</a>
+      <a href="../articles/v3_inflation-vignettes.html">Inflation</a>
     </li>
     <li>
-      <a href="../articles/4_unem-vignettes.html">Unemployment rate</a>
+      <a href="../articles/v4_unem-vignettes.html">Unemployment rate</a>
     </li>
     <li>
-      <a href="../articles/5_pop-vignettes.html">Population by age</a>
+      <a href="../articles/v5_pop-vignettes.html">Population by age</a>
     </li>
     <li>
-      <a href="../articles/6_pop_map-vignettes.html">Population Map</a>
+      <a href="../articles/v6_pop_map-vignettes.html">Population Map</a>
     </li>
   </ul>
 </li>
@@ -162,6 +162,9 @@
     </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>a tibble containing the data</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
     <p>Get data from INSEE BDM database with a SDMX query link.
@@ -176,7 +179,7 @@ Sys.setenv(INSEE_download_verbose = "FALSE")</p>
 <span class='no'>insee_link</span> <span class='kw'>=</span> <span class='st'>"http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"</span>
 <span class='no'>insee_query</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>insee_link</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"010539365"</span>,<span class='st'>"?"</span>, <span class='st'>"firstNObservations=1"</span>))
 <span class='no'>data</span> <span class='kw'>=</span> <span class='fu'>get_insee</span>(<span class='no'>insee_query</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #000000;'>1/1 - Data download :</span><span></span></div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Dataframe build : 100%</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'></span>
-#&gt; <span class='message'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp3JvGnx/022dd22e63655d0225105ee0f610e936.rds</span>
+#&gt; <span class='message'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp8b3Sgw/022dd22e63655d0225105ee0f610e936.rds</span>
 #&gt; <span class='message'></span><span></span></div><div class='input'># }
 </div></span></pre>
   </div>
