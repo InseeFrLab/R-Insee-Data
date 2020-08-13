@@ -74,7 +74,7 @@ get_insee_idbank <- function(...,
 
   if(length(list(...)) == 0){
     msg = "The idbank list is missing"
-    cat(crayon::style(msg, "red"))
+    message(crayon::style(msg, "red"))
     return(NULL)
   }else if(length(list(...)) == 1){
     list_idbank = list(...)[[1]]
@@ -86,13 +86,24 @@ get_insee_idbank <- function(...,
   n_idbank = length(list_idbank)
 
   if(n_idbank > insee_get_idbank_limit & limit){
-    msg = sprintf("By default, this function has a %s-idbank limit.\n  Please set limit argument to FALSE to ignore the limit.\n  Otherwise, modify the limit with the following command : Sys.setenv(INSEE_idbank_limit = 1200).\n  Beware that it could be slow.\n  Nevertheless, the data is cached, so all queries are only run once per R session.\n  A query run twice is then almost immediate.", insee_get_idbank_limit)
-    cat(crayon::style(msg, "red"))
+    msg1 = sprintf("By default, this function has a %s-idbank limit.", insee_get_idbank_limit)
+    msg2 = "Please set limit argument to FALSE to ignore the limit."
+    msg3 = "Otherwise, modify the limit with the following command : Sys.setenv(INSEE_idbank_limit = 1200)."
+    msg4 = "Beware that it could be slow."
+    msg5 = "Nevertheless, the data is cached, so all queries are only run once per R session."
+    msg6 = "A query run twice is then almost immediate."
+    msg = sprintf("%s\n  %s\n  %s\n  %s\n  %s\n  %s", msg1, msg2, msg3, msg4, msg5, msg6)
+    message(crayon::style(msg, "red"))
     return(NULL)
   }
   if(n_idbank > insee_sdmx_idbank_limit & limit & insee_download_verbose){
-    msg = sprintf("The number of idbanks is higher than %s (insee's sdmx query limit),\n  multiple queries are then triggered.\n  To make it faster, please reduce the number of idbanks.\n  The data is cached, so all queries are only run once per R session.\n  A query run twice is then almost immediate.\n", insee_sdmx_idbank_limit)
-    cat(crayon::style(msg, "red"))
+    msg1 = sprintf("The number of idbanks is higher than %s (insee's sdmx query limit),", insee_sdmx_idbank_limit)
+    msg2 = "multiple queries are then triggered."
+    msg3 = "To make it faster, please reduce the number of idbanks."
+    msg4 = "The data is cached, so all queries are only run once per R session."
+    msg5 = "A query run twice is then almost immediate."
+    msg = sprintf("%s\n  %s\n  %s\n  %s\n  %s\n", msg1, msg2, msg3, msg4, msg5)
+    message(crayon::style(msg, "red"))
   }
 
   arg = c("startPeriod", "endPeriod", "firstNObservations", "lastNObservations")
@@ -106,8 +117,9 @@ get_insee_idbank <- function(...,
   max_seq = ceiling(n_idbank / insee_sdmx_idbank_limit)
 
   if(n_idbank > insee_sdmx_idbank_limit & insee_download_verbose){
-    msg = sprintf("Data download and Dataframe build steps will be repeted %s times, unless cached data exist.\n", max_seq)
-    cat(msg)
+    msg1 = "Data download and Dataframe build steps will"
+    msg = sprintf("%s be repeted %s times, unless cached data exist.\n", msg1, max_seq)
+    message(crayon::style(msg, "black"))
   }
 
   list_seq = lapply(1:max_seq, function(x){
