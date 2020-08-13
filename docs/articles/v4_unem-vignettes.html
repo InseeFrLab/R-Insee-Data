@@ -107,8 +107,10 @@
 
     
     
-<p><img src="unem.png" width="1195" height="701"></p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
+<p><img src="unem.png" width="999" height="598"></p>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># please download the Github version</span>
+<span class="co"># devtools::install_github("hadrilec/insee")</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">insee</span>)
 
 <span class="no">dataset_list</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span>()
@@ -118,26 +120,20 @@
 <span class="no">df_idbank_list_selected</span> <span class="kw">=</span>
   <span class="no">idbank_list</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">nomflow</span> <span class="kw">==</span> <span class="st">"CHOMAGE-TRIM-NATIONAL"</span>) <span class="kw">%&gt;%</span> <span class="co">#Unemployment dataset</span>
-  <span class="fu">mutate</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_insee_title.html">get_insee_title</a></span>(<span class="no">idbank</span>)) <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="../reference/add_insee_title.html">add_insee_title</a></span>() <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim2</span> <span class="kw">==</span> <span class="st">"CTTXC"</span>) <span class="kw">%&gt;%</span> <span class="co">#unemployment rate based on ILO standards</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim4</span> <span class="kw">==</span> <span class="st">"FE"</span>) <span class="kw">%&gt;%</span>  <span class="co"># all France including overseas departements</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim5</span> <span class="kw">==</span> <span class="fl">0</span>) <span class="co"># men and women</span>
 
 <span class="no">list_idbank</span> <span class="kw">=</span> <span class="no">df_idbank_list_selected</span> <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">idbank</span>)
 
-<span class="no">data</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span>(<span class="no">list_idbank</span>, <span class="kw">startPeriod</span> <span class="kw">=</span> <span class="st">"2000-01"</span>)
+<span class="no">data</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span>(<span class="no">list_idbank</span>, <span class="kw">startPeriod</span> <span class="kw">=</span> <span class="st">"2000-01"</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/split_title.html">split_title</a></span>()
 
-<span class="no">n_sep</span> <span class="kw">=</span> <span class="fu">str_count</span>(<span class="no">data</span>$<span class="no">TITLE_FR</span>[<span class="fl">1</span>], <span class="st">" - "</span>) + <span class="fl">1</span>
-
-<span class="no">data_plot</span> <span class="kw">=</span> <span class="no">data</span> <span class="kw">%&gt;%</span>
-  <span class="fu">separate</span>(<span class="no">TITLE_EN</span>, <span class="kw">into</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"title"</span>, <span class="fl">1</span>:<span class="no">n_sep</span>),
-           <span class="kw">sep</span> <span class="kw">=</span> <span class="st">" - "</span>, <span class="kw">remove</span> <span class="kw">=</span> <span class="fl">FALSE</span>, <span class="kw">fill</span> <span class="kw">=</span> <span class="st">"right"</span>)
-
-<span class="fu">ggplot</span>(<span class="no">data_plot</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">DATE</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">OBS_VALUE</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">title2</span>)) +
+<span class="fu">ggplot</span>(<span class="no">data</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">DATE</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">OBS_VALUE</span>, <span class="kw">colour</span> <span class="kw">=</span> <span class="no">TITLE_EN2</span>)) +
   <span class="fu">geom_line</span>() +
   <span class="fu">geom_point</span>() +
   <span class="fu">ggtitle</span>(<span class="st">"French unemployment rate, by age"</span>) +
-  <span class="fu">labs</span>(<span class="kw">subtitle</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"Last updated : %s"</span>, <span class="no">data_plot</span>$<span class="no">TIME_PERIOD</span>[<span class="fl">1</span>]))</pre></body></html></div>
+  <span class="fu">labs</span>(<span class="kw">subtitle</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"Last updated : %s"</span>, <span class="no">data</span>$<span class="no">TIME_PERIOD</span>[<span class="fl">1</span>]))</pre></body></html></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

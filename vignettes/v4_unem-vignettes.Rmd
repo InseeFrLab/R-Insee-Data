@@ -44,6 +44,8 @@ embed_png("unem.png")
 ```
 
 ```{r message=FALSE, warning = FALSE, eval = FALSE}
+# please download the Github version
+# devtools::install_github("hadrilec/insee")
 library(tidyverse)
 library(insee)
 
@@ -54,26 +56,20 @@ idbank_list = get_idbank_list()
 df_idbank_list_selected =
   idbank_list %>%
   filter(nomflow == "CHOMAGE-TRIM-NATIONAL") %>% #Unemployment dataset
-  mutate(title = get_insee_title(idbank)) %>%
+  add_insee_title() %>%
   filter(dim2 == "CTTXC") %>% #unemployment rate based on ILO standards
   filter(dim4 == "FE") %>%  # all France including overseas departements
   filter(dim5 == 0) # men and women
 
 list_idbank = df_idbank_list_selected %>% pull(idbank)
 
-data = get_insee_idbank(list_idbank, startPeriod = "2000-01")
+data = get_insee_idbank(list_idbank, startPeriod = "2000-01") %>% split_title()
 
-n_sep = str_count(data$TITLE_FR[1], " - ") + 1
-
-data_plot = data %>%
-  separate(TITLE_EN, into = paste0("title", 1:n_sep),
-           sep = " - ", remove = FALSE, fill = "right")
-
-ggplot(data_plot, aes(x = DATE, y = OBS_VALUE, colour = title2)) +
+ggplot(data, aes(x = DATE, y = OBS_VALUE, colour = TITLE_EN2)) +
   geom_line() +
   geom_point() +
   ggtitle("French unemployment rate, by age") +
-  labs(subtitle = sprintf("Last updated : %s", data_plot$TIME_PERIOD[1]))
+  labs(subtitle = sprintf("Last updated : %s", data$TIME_PERIOD[1]))
 
 ```
 

@@ -44,6 +44,8 @@ library(prettydoc)
 ```
 
 ```{r message = FALSE, warning=FALSE, eval = FALSE}
+# please download the Github version
+# devtools::install_github("hadrilec/insee")
 library(tidyverse)
 library(lubridate)
 library(insee)
@@ -62,25 +64,23 @@ df_idbank_list_selected =
 
 list_idbank = df_idbank_list_selected %>% pull(idbank)
 
-data = get_insee_idbank(list_idbank, startPeriod = "2015-01")
-
-n_sep = str_count(data$TITLE_FR[1], " - ") + 1
+data = 
+  get_insee_idbank(list_idbank, startPeriod = "2015-01") %>% 
+  split_title()
 
 data_plot = data %>%
-  separate(TITLE_EN, into = paste0("title", 1:n_sep),
-           sep = " - ", remove = FALSE, fill = "right") %>%
-  mutate(title6 = case_when(is.na(title6) ~ title5,
-                            TRUE ~ as.character(title6))) %>%
-  mutate(title6 = substr(title6, 1 , 22)) %>%
+  mutate(TITLE_EN6 = case_when(is.na(TITLE_EN6) ~ TITLE_EN5,
+                            TRUE ~ as.character(TITLE_EN6))) %>%
+  mutate(TITLE_EN6 = substr(TITLE_EN6, 1 , 22)) %>%
   mutate(month = month(DATE)) %>%
   arrange(DATE) %>%
-  group_by(title6, month) %>%
+  group_by(TITLE_EN6, month) %>%
   mutate(growth = 100 * (OBS_VALUE / dplyr::lag(OBS_VALUE) - 1))
 
 ggplot(data_plot, aes(x = DATE, y = growth)) +
   geom_col() +
-  facet_wrap(~title6, scales = "free") +
-  ggtitle("French inflation, by product categories, year-on-year") +
-  labs(subtitle = sprintf("Last updated : %s", data_plot$TIME_PERIOD[nrow(data_plot)])) 
+  facet_wrap(~TITLE_EN6, scales = "free") +
+  ggtitle("French inflation, by product category, year-on-year") +
+  labs(subtitle = sprintf("Last updated : %s", data_plot$TIME_PERIOD[nrow(data_plot)]))
 
 ```
