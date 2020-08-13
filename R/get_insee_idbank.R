@@ -10,6 +10,7 @@
 #' @param firstNObservations get the first N observations for each key series (idbank)
 #' @param lastNObservations get the last N observations for each key series (idbank)
 #' @param limit by default, the function get_insee_idbank has a 1200-idbank limit. Set limit argument to FALSE to ignore the limit or modify the limit with the following command : Sys.setenv(INSEE_idbank_limit = 1200)
+#' @retun a tibble with the data
 #' @examples
 #' \donttest{
 #'
@@ -105,7 +106,7 @@ get_insee_idbank <- function(...,
   max_seq = ceiling(n_idbank / insee_sdmx_idbank_limit)
 
   if(n_idbank > insee_sdmx_idbank_limit & insee_download_verbose){
-    msg = sprintf("\nData download and Dataframe build steps will be repeted %s times, unless cached data exist.\n", max_seq)
+    msg = sprintf("Data download and Dataframe build steps will be repeted %s times, unless cached data exist.\n", max_seq)
     cat(msg)
   }
 

@@ -1,5 +1,5 @@
 
-
+#' @noRd
 get_date = function(date, freq){
 
   # semester

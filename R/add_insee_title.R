@@ -8,6 +8,7 @@
 #' @param n_split number of new columns, by default the maximum is chosen
 #' @param clean remove the columns filled with NA (missing value), by default is TRUE
 #' @param lang returns an English title, by default is "en", any other value returns a French title
+#' @return the same dataframe but with one or several title columns
 #' @examples
 #' \donttest{
 #'library(tidyverse)

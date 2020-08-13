@@ -5,11 +5,13 @@
 #' all the data is returned
 #' @examples
 #' \donttest{idbank_list = get_idbank_list()}
+#' @return a tibble the idbank dataset
 #' @export
 get_idbank_list = function(
   dataset = NULL
 ){
 
+  insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
   file_to_dwn = Sys.getenv("INSEE_idbank_dataset_path")
   mapping_file_pattern = Sys.getenv("INSEE_idbank_dataset_file")
 
@@ -44,10 +46,6 @@ get_idbank_list = function(
     dot_vector = stringr::str_count(mapping$cleFlow, pattern = "\\.")
     n_col = max(dot_vector) + 1
 
-    # split cleFlow column by dot
-    # mapping_final = tidyr::separate(data = mapping, col = "cleFlow", remove = FALSE,
-    #                                 fill = "right", sep = "\\.", into = paste0("dim", 1:n_col))
-
     mapping_final = separate_col(df = mapping, col = "cleFlow",
                                   sep = "\\.", into = paste0("dim", 1:n_col))
 
@@ -56,11 +54,21 @@ get_idbank_list = function(
 
     mapping_final[,"idbank"] = vapply(mapping_final[,"idbank"], add_zero, "")
 
+    if(insee_download_verbose){
+      msg = sprintf("\nData cached : %s\n", mapping_file_cache)
+      message(crayon::style(msg, "green"))
+    }
+
     saveRDS(mapping_final, file = mapping_file_cache)
 
   }else{
+    if(insee_download_verbose){
+      msg = "Cached data has been used"
+      message(crayon::style(msg, "green"))
+    }
+
     mapping_final = readRDS(mapping_file_cache)
   }
-
+  mapping_final = tibble::as_tibble(mapping_final)
   return(mapping_final)
 }
