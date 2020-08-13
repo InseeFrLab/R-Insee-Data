@@ -61,6 +61,7 @@ library(insee)
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 library(tidyverse)
+library(insee)
 
 # get INSEE datasets list
 dataset = get_dataset_list()
@@ -101,6 +102,7 @@ embed_png("vignettes/gdp.png")
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 library(tidyverse)
 library(lubridate)
+library(insee)
 
 idbank_list = get_idbank_list()
 
@@ -148,6 +150,7 @@ embed_png("vignettes/inflation.png")
 
 ```{r unem, eval = FALSE}
 library(tidyverse)
+library(insee)
 
 dataset_list = get_dataset_list()
 
@@ -190,6 +193,7 @@ embed_png("vignettes/unem.png")
 
 ```{r population_age, eval = FALSE}
 library(tidyverse)
+library(insee)
 
 dataset_list = get_dataset_list()
 
@@ -229,7 +233,6 @@ embed_png("vignettes/pop.png")
 ### Population by departement
 
 ```{r population_departement, eval=FALSE}
-
 library(insee)
 library(tidyverse)
 
