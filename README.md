@@ -22,6 +22,8 @@ from INSEE main database (BDM).
 Using embedded SDMX queries, get the data of more than 140 000 INSEE
 series.
 
+Have a look at the detailed SDMX web service page with the following [link](https://www.insee.fr/en/information/2868055).
+
 ## Installation & Loading
 
 ``` r
