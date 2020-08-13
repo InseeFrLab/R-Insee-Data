@@ -8,7 +8,7 @@ output:
     includes:
       # in_header: header.html
 vignette: >
-  %\VignetteIndexEntry{insee} 
+  %\VignetteIndexEntry{GDP growth rate} 
   %\VignetteEngine{knitr::rmarkdown} 
   %\VignetteEncoding{UTF-8}
   %\VignetteDepends{kableExtra,magrittr,htmltools}

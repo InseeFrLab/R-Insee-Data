@@ -1,5 +1,5 @@
 ---
-title: "Unemployment rate"
+title: "Inflation"
 output:
   prettydoc::html_pretty:
     toc: true
@@ -8,7 +8,7 @@ output:
     includes:
       # in_header: header.html
 vignette: >
-  %\VignetteIndexEntry{insee} 
+  %\VignetteIndexEntry{Inflation} 
   %\VignetteEngine{knitr::rmarkdown} 
   %\VignetteEncoding{UTF-8}
   %\VignetteDepends{kableExtra,magrittr,htmltools}
@@ -32,6 +32,10 @@ embed_png <- function(path, dpi = NULL) {
   ))}
 ```
 
+```{r, echo = FALSE}
+embed_png("inflation.png")
+```
+
 ```{r message=FALSE, warning=FALSE, include=FALSE}
 library(kableExtra)
 library(magrittr)
@@ -39,41 +43,44 @@ library(htmltools)
 library(prettydoc)
 ```
 
-```{r, echo = FALSE}
-embed_png("unem.png")
-```
-
-```{r message=FALSE, warning = FALSE, eval = FALSE}
+```{r message = FALSE, warning=FALSE, eval = FALSE}
 library(tidyverse)
+library(lubridate)
 library(insee)
-
-dataset_list = get_dataset_list()
 
 idbank_list = get_idbank_list()
 
 df_idbank_list_selected =
   idbank_list %>%
-  filter(nomflow == "CHOMAGE-TRIM-NATIONAL") %>% #Unemployment dataset
-  mutate(title = get_insee_title(idbank)) %>%
-  filter(dim2 == "CTTXC") %>% #unemployment rate based on ILO standards
-  filter(dim4 == "FE") %>%  # all France including overseas departements
-  filter(dim5 == 0) # men and women
+  filter(nomflow == "IPC-2015") %>% #Inflation dataset
+  filter(dim1 == "M") %>% # monthly
+  filter(str_detect(dim4, "^[0-9]{2}$")) %>% # coicop aggregation level
+  filter(dim6 == "INDICE") %>% # index
+  filter(dim7 == "ENSEMBLE") %>% # all kinds of household
+  filter(dim8 == "FE") %>% # all France including overseas departements
+  mutate(title = get_insee_title(idbank))
 
 list_idbank = df_idbank_list_selected %>% pull(idbank)
 
-data = get_insee_idbank(list_idbank, startPeriod = "2000-01")
+data = get_insee_idbank(list_idbank, startPeriod = "2015-01")
 
 n_sep = str_count(data$TITLE_FR[1], " - ") + 1
 
 data_plot = data %>%
   separate(TITLE_EN, into = paste0("title", 1:n_sep),
-           sep = " - ", remove = FALSE, fill = "right")
+           sep = " - ", remove = FALSE, fill = "right") %>%
+  mutate(title6 = case_when(is.na(title6) ~ title5,
+                            TRUE ~ as.character(title6))) %>%
+  mutate(title6 = substr(title6, 1 , 22)) %>%
+  mutate(month = month(DATE)) %>%
+  arrange(DATE) %>%
+  group_by(title6, month) %>%
+  mutate(growth = 100 * (OBS_VALUE / dplyr::lag(OBS_VALUE) - 1))
 
-ggplot(data_plot, aes(x = DATE, y = OBS_VALUE, colour = title2)) +
-  geom_line() +
-  geom_point() +
-  ggtitle("French unemployment rate, by age") +
-  labs(subtitle = sprintf("Last updated : %s", data_plot$TIME_PERIOD[1]))
+ggplot(data_plot, aes(x = DATE, y = growth)) +
+  geom_col() +
+  facet_wrap(~title6, scales = "free") +
+  ggtitle("French inflation, by product categories, year-on-year") +
+  labs(subtitle = sprintf("Last updated : %s", data_plot$TIME_PERIOD[nrow(data_plot)])) 
 
 ```
-
