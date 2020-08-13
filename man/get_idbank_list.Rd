@@ -10,6 +10,9 @@ get_idbank_list(dataset = NULL)
 \item{dataset}{if a dataset name is provided, only a subset of the data is delivered, otherwise
 all the data is returned}
 }
+\value{
+a tibble the idbank dataset
+}
 \description{
 Download a full INSEE's series key list
 }

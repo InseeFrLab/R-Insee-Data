@@ -9,6 +9,9 @@ search_insee(pattern)
 \arguments{
 \item{pattern}{string used to filtern the dataset list}
 }
+\value{
+the dataset list table filtered with the pattern
+}
 \description{
 Search a pattern among insee dataset names
 }
@@ -17,8 +20,8 @@ the function ignores accents and cases
 }
 \examples{
 \donttest{
-# example 1 : search one pattern
-#the correct word in French would be 'enqu\U00EAte' which means survey
+# example 1 : search one pattern, the accents do not matter
+writeLines("the word 'enqu\U00EAte' (meaning survey in French) will match with 'enquete'")
 dataset_enquete = search_insee("enquete")
 
 # example 2 : search multiple patterns

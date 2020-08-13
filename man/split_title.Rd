@@ -15,6 +15,9 @@ split_title(df, title_col_name, n_split = "max", lang = "en")
 
 \item{lang}{by default it returns an English title (its default value is "en"), any other value returns a French title}
 }
+\value{
+the same dataframe with the title column splitted
+}
 \description{
 Split the title column in several columns
 }

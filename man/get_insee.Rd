@@ -11,6 +11,9 @@ get_insee(link, step = "1/1")
 
 \item{step}{argument used only for internal package purposes to tweak download display}
 }
+\value{
+a tibble containing the data
+}
 \description{
 Get data from INSEE BDM database with a SDMX query link
 }
