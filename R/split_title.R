@@ -42,8 +42,7 @@ split_title = function(df, title_col_name, n_split = "max", lang = "en"){
 
       n_split = max(1, n_split)
 
-      n_split = min(max(n_split_max, n_split))
-
+      n_split = min(n_split_max, n_split)
 
       # df = tidyr::separate(data = df, col = title_col_name,
       #                      into = paste0(title_col_name, 1:n_split),
