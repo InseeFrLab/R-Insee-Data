@@ -33,8 +33,12 @@ get_insee = function(link, step = "1/1"){
   if(!file.exists(file_cache)){
 
     if(insee_download_verbose){
-      cat(sprintf("%s - Data download : \n", step))
+
+      msg = sprintf("%s - Data download : \n", step)
+      message(crayon::style(msg, "black"))
+
       response = try(httr::GET(link, httr::progress()), silent = TRUE)
+
     }else{
       response = try(httr::GET(link), silent = TRUE)
     }
@@ -111,7 +115,9 @@ get_insee = function(link, step = "1/1"){
               )
               list_df[[length(list_df) + 1]] = dataflow_df
             }
-            cat(sprintf("%s - Dataframe build : 100%%", step))
+
+            msg = sprintf("%s - Dataframe build : 100%%", step)
+            message(crayon::style(msg, "black"))
 
             data_final = tibble::as_tibble(dplyr::bind_rows(list_df))
           }
@@ -121,10 +127,14 @@ get_insee = function(link, step = "1/1"){
 
           if(insee_download_verbose){
             if(n_series > 1){
-              cat(sprintf("%s - Dataframe build : \n", step))
+
+              msg = sprintf("%s - Dataframe build : \n", step)
+              message(crayon::style(msg, "black"))
+
               pb = utils::txtProgressBar(min = 1, max = n_series, initial = 1, style = 3)
             }else{
-              cat(sprintf("%s - Dataframe build : 100%%", step))
+              msg = sprintf("%s - Dataframe build : 100%%", step)
+              message(crayon::style(msg, "black"))
             }
           }
 
@@ -186,14 +196,14 @@ get_insee = function(link, step = "1/1"){
 
       if(insee_download_verbose){
         msg = sprintf("\nData cached : %s\n", file_cache)
-        cat(crayon::style(msg, "green"))
+        message(crayon::style(msg, "green"))
       }
     }
   }else{
 
     if(insee_download_verbose){
       msg = "Cached data has been used\n"
-      cat(crayon::style(msg, "green"))
+      message(crayon::style(msg, "green"))
     }
 
     data_final = readRDS(file_cache)
