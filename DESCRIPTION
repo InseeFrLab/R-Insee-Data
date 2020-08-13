@@ -12,7 +12,6 @@ LazyData: true
 License: GPL-2
 VignetteBuilder: knitr
 BugReports: https://github.com/hadrilec/insee/issues
-Remotes: github::r-lib/cpp11
 Imports: 
   httr,
   xml2,
