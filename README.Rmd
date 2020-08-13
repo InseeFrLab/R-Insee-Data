@@ -47,7 +47,7 @@ library(insee)
 
 ## Examples & Tutorial
 
-* [Tutorial](https://hadrilec.github.io/insee/articles/1_insee-vignettes.html)
+* [Tutorial](https://hadrilec.github.io/insee/articles/insee.html)
 * [GDP growth rate](https://hadrilec.github.io/insee/articles/2_gdp-vignettes.html)
 * [Inflation](https://hadrilec.github.io/insee/articles/3_inflation-vignettes.html)
 * [Unemployment rate](https://hadrilec.github.io/insee/articles/4_unem-vignettes.html)
