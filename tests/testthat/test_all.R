@@ -3,7 +3,7 @@ library(testthat)
 library(insee)
 
 test_that("class tests",{
-  # skip_on_cran()
+  skip_on_cran()
 
   expect_warning(insee:::.onLoad(), regexp = NA)
 
@@ -46,7 +46,7 @@ test_that("class tests",{
 })
 
 test_that("output tests",{
-  # skip_on_cran()
+  skip_on_cran()
 
   idbank_test1 = get_idbank_list()[1,"idbank"]
   idbank_test401 = unique(get_idbank_list()[1:401,"idbank"])
@@ -58,7 +58,6 @@ test_that("output tests",{
   expect_equal(get_date("2010-Q1", "T"), as.Date("2010-01-01"))
   expect_equal(get_date("2010-S1", "S"), as.Date("2010-01-01"))
   expect_equal(get_date("2010-B1", "B"), as.Date("2010-01-01"))
-
 
   expect_equal(nrow(split_title(get_insee_idbank(idbank_test1, firstNObservations = 1))), 1)
   expect_equal(nrow(split_title(get_insee_idbank(idbank_test1, firstNObservations = 1), lang = "fr")), 1)

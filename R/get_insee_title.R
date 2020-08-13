@@ -5,6 +5,7 @@
 #' Consequently, it is not advised to use it on the whole idbank dataset, the user should filter the idbank dataset first.
 #' @param ... list of series key (idbank)
 #' @param lang language of the title, by default it is Engligh, if lang is different from "en" then French will be the title's language
+#' @return a character vector with the titles
 #' @examples
 #' #example 1 : industrial production index on manufacturing and industrial activities
 #' title = get_insee_title("010537900")

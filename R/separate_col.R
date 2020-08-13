@@ -1,4 +1,4 @@
-
+#' @noRd
 separate_col = function(df, col, sep, into){
 
   if(!is.null(df)){

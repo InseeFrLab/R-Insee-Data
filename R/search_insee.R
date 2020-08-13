@@ -3,6 +3,7 @@
 #'
 #' @details the function ignores accents and cases
 #' @param pattern string used to filtern the dataset list
+#' @return the dataset list table filtered with the pattern
 #' @examples
 #' \donttest{
 #' # example 1 : search one pattern

@@ -5,6 +5,7 @@
 #' @param n_split number of new columns, by default the maximum is chosen
 #' @param title_col_name the column name to be splitted, if missing it will be either TITLE_EN
 #' @param lang by default it returns an English title (its default value is "en"), any other value returns a French title
+#' @return the same dataframe with the title column splitted
 #' @examples
 #' \donttest{
 #' library(tidyverse)
@@ -43,11 +44,6 @@ split_title = function(df, title_col_name, n_split = "max", lang = "en"){
       n_split = max(1, n_split)
 
       n_split = min(n_split_max, n_split)
-
-      # df = tidyr::separate(data = df, col = title_col_name,
-      #                      into = paste0(title_col_name, 1:n_split),
-      #                      sep = insee_title_sep, fill = "right",
-      #                      extra = "merge", remove = FALSE)
 
       df = separate_col(df = df, col = title_col_name,
                         into = paste0(title_col_name, 1:n_split),

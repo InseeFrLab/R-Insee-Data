@@ -6,9 +6,9 @@
 #' The data is cached, hence all queries are only run once per R session.
 #' The user can disable the download display in the console with the following command :
 #' Sys.setenv(INSEE_download_verbose = "FALSE")
-#'
 #' @param link SDMX query link
 #' @param step argument used only for internal package purposes to tweak download display
+#' @return a tibble containing the data
 #' @examples
 #' \donttest{
 #' insee_link = "http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"
@@ -34,7 +34,7 @@ get_insee = function(link, step = "1/1"){
 
     if(insee_download_verbose){
 
-      msg = sprintf("%s - Data download : \n", step)
+      msg = sprintf("%s - Data download :", step)
       message(crayon::style(msg, "black"))
 
       response = try(httr::GET(link, httr::progress()), silent = TRUE)
@@ -128,7 +128,7 @@ get_insee = function(link, step = "1/1"){
           if(insee_download_verbose){
             if(n_series > 1){
 
-              msg = sprintf("%s - Dataframe build : \n", step)
+              msg = sprintf("%s - Dataframe build :", step)
               message(crayon::style(msg, "black"))
 
               pb = utils::txtProgressBar(min = 1, max = n_series, initial = 1, style = 3)
@@ -202,7 +202,7 @@ get_insee = function(link, step = "1/1"){
   }else{
 
     if(insee_download_verbose){
-      msg = "Cached data has been used\n"
+      msg = "Cached data has been used"
       message(crayon::style(msg, "green"))
     }
 

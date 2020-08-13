@@ -1,6 +1,7 @@
 #' Remove columns filled only with NA (missing value)
 #'
 #' @param df the dataframe to be cleaned
+#' @return a dataframe without columns containing only NA
 #' @examples
 #' \donttest{
 #'library(tidyverse)

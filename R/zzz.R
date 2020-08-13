@@ -1,5 +1,5 @@
 
-
+#' @noRd
 .onLoad <- function(libname, pkgname){
   Sys.setenv(INSEE_sdmx_link_dataflow = "https://bdm.insee.fr/series/sdmx/dataflow")
   Sys.setenv(INSEE_sdmx_link_idbank = "https://bdm.insee.fr/series/sdmx/data/SERIES_BDM")
