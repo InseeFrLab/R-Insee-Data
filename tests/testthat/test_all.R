@@ -5,6 +5,8 @@ library(insee)
 test_that("class tests",{
   # skip_on_cran()
 
+  expect_warning(insee:::.onLoad(), regexp = NA)
+
   expect_is(get_idbank_list(), "data.frame")
   expect_is(get_idbank_list(), "data.frame")
 
@@ -19,6 +21,7 @@ test_that("class tests",{
 
   expect_is(get_insee(insee_query), "data.frame")
   expect_is(get_insee(), "NULL")
+  expect_is(get_insee(""), "NULL")
 
   expect_is(get_insee_idbank(idbank_test1), "data.frame")
   expect_is(get_insee_idbank(), "NULL")
@@ -56,7 +59,7 @@ test_that("output tests",{
   expect_equal(get_date("2010-S1", "S"), as.Date("2010-01-01"))
   expect_equal(get_date("2010-B1", "B"), as.Date("2010-01-01"))
 
-  expect_output(get_insee(""), NULL)
+
   expect_equal(nrow(split_title(get_insee_idbank(idbank_test1, firstNObservations = 1))), 1)
   expect_equal(nrow(split_title(get_insee_idbank(idbank_test1, firstNObservations = 1), lang = "fr")), 1)
   expect_equal(nrow(get_insee_idbank(idbank_test401, firstNObservations = 1)), length(idbank_test401))
