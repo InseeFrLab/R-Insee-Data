@@ -34,9 +34,6 @@
     <loc>https://hadrilec.github.io/insee//reference/split_title.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//articles/1_insee-vignettes.html</loc>
-  </url>
-  <url>
     <loc>https://hadrilec.github.io/insee//articles/2_gdp-vignettes.html</loc>
   </url>
   <url>
@@ -50,5 +47,8 @@
   </url>
   <url>
     <loc>https://hadrilec.github.io/insee//articles/6_pop_map-vignettes.html</loc>
+  </url>
+  <url>
+    <loc>https://hadrilec.github.io/insee//articles/insee.html</loc>
   </url>
 </urlset>
