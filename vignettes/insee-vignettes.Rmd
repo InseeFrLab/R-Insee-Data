@@ -160,6 +160,7 @@ It is then advised to narrow down the idbanks list used as argument of the funct
 
 ```{r message=FALSE, warning=FALSE,eval=FALSE}
 library(tidyverse)
+library(insee)
 
 # the user can make a manual list of idbanks to get the data 
 # example 1
@@ -219,6 +220,7 @@ data =
 
 ```{r message=FALSE, warning=FALSE, eval=FALSE}
 library(tidyverse)
+library(insee)
 
 idbank_list = get_idbank_list()
 
@@ -251,6 +253,7 @@ embed_png("gdp.png")
 ```{r message = FALSE, warning=FALSE, eval = FALSE}
 library(tidyverse)
 library(lubridate)
+library(insee)
 
 idbank_list = get_idbank_list()
 
@@ -297,6 +300,7 @@ embed_png("inflation.png")
 
 ```{r message=FALSE, warning = FALSE, eval = FALSE}
 library(tidyverse)
+library(insee)
 
 dataset_list = get_dataset_list()
 
@@ -339,6 +343,7 @@ embed_png("unem.png")
 
 ```{r message=FALSE, warning=FALSE,eval=FALSE}
 library(tidyverse)
+library(insee)
 
 dataset_list = get_dataset_list()
 
@@ -379,7 +384,6 @@ embed_png("pop.png")
 ### Population by departement
 
 ```{r message=FALSE, warning=FALSE,eval=FALSE}
-
 library(insee)
 library(tidyverse)
 

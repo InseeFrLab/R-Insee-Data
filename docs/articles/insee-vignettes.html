@@ -85,7 +85,7 @@
       <h1 data-toc-skip>Tutorial</h1>
                         <h4 class="author">Hadrien Leclerc</h4>
             
-            <h4 class="date">2020-08-11</h4>
+            <h4 class="date">2020-08-13</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/hadrilec/insee/blob/master/vignettes/insee-vignettes.Rmd"><code>vignettes/insee-vignettes.Rmd</code></a></small>
       <div class="hidden name"><code>insee-vignettes.Rmd</code></div>
@@ -142,10 +142,13 @@
   |                                                                            
   |======                                                                |   9%
   |                                                                            
-  |==============                                                        |  20%
+  |======================                                                |  32%
+  |                                                                            
+  |==============================================================        |  88%
   |                                                                            
   |======================================================================| 100%
-## Data cached : C:\Users\XLAPDO\AppData\Local\Temp\RtmpI3V8ow/6bce20f8021f2b83467819f1e4f74d9f.rds</code></pre>
+## 
+## Data cached : C:\Users\XLAPDO\AppData\Local\Temp\RtmpCoud7i/6bce20f8021f2b83467819f1e4f74d9f.rds</code></pre>
 <table class="table table table-striped table-hover table-condensed">
 <thead><tr>
 <th style="text-align:left;">
@@ -495,6 +498,7 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
 <a href="#download-using-idbank" class="anchor"></a>Download using idbank</h3>
 <p>The <code>get_insee_idbank</code> function should handle up to 400 idbanks but not more. It is then advised to narrow down the idbanks list used as argument of the function.</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">insee</span>)
 
 <span class="co"># the user can make a manual list of idbanks to get the data </span>
 <span class="co"># example 1</span>
@@ -551,6 +555,7 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
 <h2 class="hasAnchor">
 <a href="#gdp-growth-rate" class="anchor"></a>GDP growth rate</h2>
 <div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">insee</span>)
 
 <span class="no">idbank_list</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span>()
 
@@ -578,6 +583,7 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
 <a href="#inflation" class="anchor"></a>Inflation</h2>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">lubridate</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">insee</span>)
 
 <span class="no">idbank_list</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span>()
 
@@ -619,6 +625,7 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
 <h2 class="hasAnchor">
 <a href="#unemployment-rate" class="anchor"></a>Unemployment rate</h2>
 <div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">insee</span>)
 
 <span class="no">dataset_list</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span>()
 
@@ -657,6 +664,7 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
 <h3 class="hasAnchor">
 <a href="#population-by-age" class="anchor"></a>Population by age</h3>
 <div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">insee</span>)
 
 <span class="no">dataset_list</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span>()
 
