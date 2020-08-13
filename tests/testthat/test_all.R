@@ -1,6 +1,7 @@
 testthat::context("class and output tests")
 library(testthat)
 library(insee)
+library(tidyverse)
 
 test_that("class tests",{
   skip_on_cran()
@@ -10,8 +11,8 @@ test_that("class tests",{
   expect_is(get_idbank_list(), "data.frame")
   expect_is(get_idbank_list(), "data.frame")
 
-  idbank_test1 = get_idbank_list()[1,"idbank"]
-  idbank_test2 = get_idbank_list()[2,"idbank"]
+  idbank_test1 = get_idbank_list() %>% slice(1) %>% pull(idbank)
+  idbank_test2 = get_idbank_list() %>% slice(2) %>% pull(idbank)
 
   expect_is(get_idbank_list("CNA-2014-CPEB"), "data.frame")
   expect_is(get_dataset_list(), "data.frame")
@@ -48,9 +49,11 @@ test_that("class tests",{
 test_that("output tests",{
   skip_on_cran()
 
-  idbank_test1 = get_idbank_list()[1,"idbank"]
-  idbank_test401 = unique(get_idbank_list()[1:401,"idbank"])
-  idbank_test1201 = unique(get_idbank_list()[1:1201,"idbank"])
+  idbank_test1 = get_idbank_list() %>% slice(1) %>% pull(idbank)
+  idbank_test401 = get_idbank_list() %>% slice(1:401) %>% pull(idbank)
+  idbank_test401 = unique(idbank_test401)
+  idbank_test1201 = get_idbank_list() %>% slice(1:1201) %>% pull(idbank)
+  idbank_test1201 = unique(idbank_test1201)
 
   expect_equal(get_date(1, ""), 1)
   expect_equal(get_date("2010-05", "M"), as.Date("2010-05-01"))
@@ -62,10 +65,10 @@ test_that("output tests",{
   expect_equal(nrow(split_title(get_insee_idbank(idbank_test1, firstNObservations = 1))), 1)
   expect_equal(nrow(split_title(get_insee_idbank(idbank_test1, firstNObservations = 1), lang = "fr")), 1)
   expect_equal(nrow(get_insee_idbank(idbank_test401, firstNObservations = 1)), length(idbank_test401))
+  expect_message(nrow(get_insee_idbank(idbank_test401, firstNObservations = 1)))
 
-  expect_output(get_insee_idbank(), NULL)
-  expect_output(get_insee_idbank(idbank_test1201, firstNObservations = 1), NULL)
   expect_equal(nrow(get_insee_idbank(idbank_test1201, firstNObservations = 1, limit = FALSE)), length(idbank_test1201))
-
+  expect_is(get_insee_idbank(idbank_test1201, firstNObservations = 1), "NULL")
+  expect_message(get_insee_idbank(idbank_test1201, firstNObservations = 1))
 })
 
