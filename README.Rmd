@@ -25,10 +25,11 @@ knitr::opts_chunk$set(
 
 ## Overview
 
-The insee package contains tools to easily download data and metadata from INSEE BDM database.
+The insee package contains tools to easily download data and metadata from INSEE main database (BDM).
+
 Using embedded SDMX queries, get the data of more than 140 000 INSEE series.
 
-## Installation and loading
+## Installation & Loading
 ```{r eval = FALSE}
 # Get the development version from GitHub
 # install.packages("devtools")

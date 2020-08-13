@@ -1,32 +1,27 @@
 insee R package
 ================
 
-<!-- <br> -->
+<br>
 
-<!-- [![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee) -->
+[![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee)
+[![CRAN checks](https://cranchecks.info/badges/worst/insee)](https://cran.r-project.org/web/checks/check_results_insee.html)
+[![Codecov test coverage](https://codecov.io/gh/hadrilec/insee/branch/master/graph/badge.svg)](https://codecov.io/gh/hadrilec/insee?branch=master)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee)
+[![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
 
-<!-- [![CRAN checks](https://cranchecks.info/badges/worst/insee)](https://cran.r-project.org/web/checks/check_results_insee.html) -->
-
-<!-- [![Codecov test coverage](https://codecov.io/gh/hadrilec/insee/branch/master/graph/badge.svg)](https://codecov.io/gh/hadrilec/insee?branch=master) -->
-
-<!-- [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) -->
-
-<!-- [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee) -->
-
-<!-- [![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee) -->
-
-<!-- [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/) -->
-
-<!-- <br> -->
+<br>
 
 ## Overview
 
 The insee package contains tools to easily download data and metadata
-from INSEE BDM database. Using embedded SDMX queries, get the data of
-more than 140 000 INSEE series from BDM database (Banque de données
-macroéconomiques).
+from INSEE main database (BDM).
 
-## Installation and loading
+Using embedded SDMX queries, get the data of more than 140 000 INSEE
+series.
+
+## Installation & Loading
 
 ``` r
 # Get the development version from GitHub
@@ -51,8 +46,8 @@ library(insee)
     rate](https://hadrilec.github.io/insee/articles/4_unem-vignettes.html)
   - [Population by
     age](https://hadrilec.github.io/insee/articles/5_pop-vignettes.html)
-  - [Population by
-    departement](https://hadrilec.github.io/insee/articles/6_pop_map-vignettes.html)
+  - [Population
+    map](https://hadrilec.github.io/insee/articles/6_pop_map-vignettes.html)
 
 ## How to avoid proxy issues ?
 
