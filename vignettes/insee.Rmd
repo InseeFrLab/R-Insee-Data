@@ -58,25 +58,22 @@ Sys.setenv(http_proxy = "my_proxy_server")
 Sys.setenv(https_proxy = "my_proxy_server")
 ```
 
-## Installation
+## Installation & Loading
 
 You can easily install [insee](https://CRAN.R-project.org/package=insee) with the following code :
 
 ```{r, message = FALSE, warning = FALSE, eval = FALSE}
-install.packages("insee")
-```
+# Get the development version from GitHub (required for the tutorial)
+# install.packages("devtools")
+devtools::install_github("hadrilec/insee")
 
-## Loading
+# CRAN version
+# install.packages("insee")
 
-You can easily load [insee](https://CRAN.R-project.org/package=insee) with the following code :
+# library Loading
 
-```{r, message = FALSE, warning = FALSE, eval = FALSE}
 library(insee)
-```
-
-This vignette uses the [tidyverse](https://CRAN.R-project.org/package=tidyverse) package to exemplify the [insee](https://CRAN.R-project.org/package=insee) package functionalities with hands-on examples.
-
-```{r, message = FALSE, warning = FALSE, eval = FALSE}
+# tutorial's examples use tidyverse's packages
 library(tidyverse)
 ```
 
@@ -91,7 +88,7 @@ Series have two identifiers the SDMX identifier and the so called idbank. Both c
 [INSEE BDM database](https://www.insee.fr/en/information/2512785) offers more than 200 Datasets. The <code>get_dataset_list()</code> function returns the datasets catalogue :
 
 ```{r, message = FALSE, warning = FALSE, eval = TRUE}
-insee_dataset <- get_dataset_list() 
+insee_dataset = get_dataset_list() 
 ```
 
 ```{r echo = FALSE, message = FALSE, warning = FALSE, eval = TRUE}
@@ -104,9 +101,9 @@ insee_dataset %>%
   kable_styling(bootstrap_options = c("striped", "hover", "condensed"))
 ```
 
-## Series Key List
+## Series Keys List
 
-[INSEE BDM database](https://www.insee.fr/en/information/2512785) currently offers more than 140 000 Series. The <code>get_idbank_list</code> function returns the series catalogue.
+[INSEE BDM database](https://www.insee.fr/en/information/2512785) currently offers more than 140 000 series. The <code>get_idbank_list</code> function returns the series catalogue.
 
 ```{r, message=FALSE,warning=FALSE,eval=TRUE}
 idbank_list = get_idbank_list()
@@ -114,6 +111,7 @@ idbank_list = get_idbank_list()
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE,eval=TRUE}
 rownames(idbank_list) <- NULL
+
 idbank_list %>% 
           select(nomflow, idbank, cleFlow) %>%   
           group_by(nomflow) %>% 
@@ -129,7 +127,7 @@ idbank_list %>%
 ## Find a series key
 
 The best way to download data is to find the right series key (idbank), but how ? Indeed, in some cases it is not easy to understand what are the differences among series, especially for non-French speakers.
-To make the search easier, the [insee](https://CRAN.R-project.org/package=insee) package provides the function <code>get_insee_title</code> to get the title related to an idbank, either in English or in French. It is not advised to use the <code>get_insee_title</code> function on the whole idbank dataset, as each SDMX query has 400-idbank limit. Then, <code>get_insee_title</code> function splits the input into several lists of 400 idbanks each and is consequently quite slow. Thus, the user should filter the idbank dataset before using the <code>get_insee_title</code> function to avoid as much as possible this bottleneck as the following example shows. 
+To make the search easier, the [insee](https://CRAN.R-project.org/package=insee) package provides the function <code>add_insee_title</code> to get titles from idbanks, either in English or in French. It is not advised to use the function on the whole idbank dataset, as each SDMX query has 400-idbank limit. Then, <code>add_insee_title</code> function splits the list into several lists of 400 idbanks each. Thus, the user should filter the idbank dataset before using the function to avoid as much as possible this bottleneck as the following example shows. After the data retrieval, it is really nice to use the <code>split_title</code> function on the dataframe to get more readable titles easy to use in plots.
 
 ```{r message=FALSE, warning=FALSE,eval=FALSE}
 idbank_list = get_idbank_list()
@@ -142,7 +140,7 @@ idbank_list_selected =
   filter(dim8 == "CVS-CJO") %>% #Working day and seasonally adjusted SA-WDA
   #automotive industry and overall industrial production
   filter(str_detect(dim4,"^29$|A10-BE")) %>% 
-  mutate(title = get_insee_title(idbank))
+  add_insee_title()
 
 idbank_list_selected
 
@@ -150,10 +148,11 @@ idbank_list_selected
 
 ## Download data
 
-### Download using idbank
+### Download using a list of idbanks
 
-The <code>get_insee_idbank</code> function should handle up to 400 idbanks but not more.
+The <code>get_insee_idbank</code> function should handle up to 1200 idbanks.
 It is then advised to narrow down the idbanks list used as argument of the function.
+Otherwise, put the limit argument to FALSE to ignore the function's idbank limit.
 
 ```{r message=FALSE, warning=FALSE,eval=FALSE}
 library(tidyverse)
@@ -172,25 +171,33 @@ idbank_dataset = get_idbank_list()
 df_idbank = idbank_dataset %>%
   filter(nomflow == "ENQ-CONJ-MENAGES") %>%  #monthly households' confidence survey
   mutate(title = get_insee_title(idbank)) %>%
-  separate(title, sep = " - ", into = paste0("title", 1:4),
-           fill = "right", remove = FALSE) %>%
   filter(dim7 == "CVS") #seasonally adjusted
-
-# dim2: IND_SYNT_CONF - Summary indicator of households' confidence
 
 list_idbank = df_idbank %>% pull(idbank)
 
-data = get_insee_idbank(list_idbank)
+data = get_insee_idbank(list_idbank) %>% split_title()
+
+# example 3 : get more than 1200 idbanks
+
+idbank_dataset = get_idbank_list()
+
+df_idbank = 
+  idbank_dataset %>%
+  slice(1:1201)
+
+list_idbank = df_idbank %>% pull(idbank)
+
+data = get_insee_idbank(list_idbank, firstNObservations = 1, limit = FALSE)
 
 ```
 
-### Download using dataset name
+### Download using a dataset name
 
 For some datasets as IPC-2015 (inflation), the filter is necessary.
 
 ```{r message=FALSE, warning=FALSE,eval=FALSE}
 
-insee_dataset <- get_dataset_list() 
+insee_dataset = get_dataset_list() 
 
 # example 1 : full dataset
 data = get_insee_dataset("CLIMAT-AFFAIRES")

@@ -123,19 +123,22 @@
 <div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="kw">http_proxy</span> <span class="kw">=</span> <span class="st">"my_proxy_server"</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="kw">https_proxy</span> <span class="kw">=</span> <span class="st">"my_proxy_server"</span>)</pre></body></html></div>
 </div>
-<div id="installation" class="section level2">
+<div id="installation-loading" class="section level2">
 <h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<a href="#installation-loading" class="anchor"></a>Installation &amp; Loading</h2>
 <p>You can easily install <a href="https://CRAN.R-project.org/package=insee">insee</a> with the following code :</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"insee"</span>)</pre></body></html></div>
-</div>
-<div id="loading" class="section level2">
-<h2 class="hasAnchor">
-<a href="#loading" class="anchor"></a>Loading</h2>
-<p>You can easily load <a href="https://CRAN.R-project.org/package=insee">insee</a> with the following code :</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">insee</span>)</pre></body></html></div>
-<p>This vignette uses the <a href="https://CRAN.R-project.org/package=tidyverse">tidyverse</a> package to exemplify the <a href="https://CRAN.R-project.org/package=insee">insee</a> package functionalities with hands-on examples.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># Get the development version from GitHub (required for the tutorial)</span>
+<span class="co"># install.packages("devtools")</span>
+<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"hadrilec/insee"</span>)
+
+<span class="co"># CRAN version</span>
+<span class="co"># install.packages("insee")</span>
+
+<span class="co"># library Loading</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">insee</span>)
+<span class="co"># tutorial's examples use tidyverse's packages</span>
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)</pre></body></html></div>
 </div>
 </div>
 <div id="functionalities" class="section level1">
@@ -147,14 +150,16 @@
 <h2 class="hasAnchor">
 <a href="#datasets-list" class="anchor"></a>Datasets List</h2>
 <p><a href="https://www.insee.fr/en/information/2512785">INSEE BDM database</a> offers more than 200 Datasets. The <code><a href="../reference/get_dataset_list.html">get_dataset_list()</a></code> function returns the datasets catalogue :</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">insee_dataset</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span>()</pre></body></html></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">insee_dataset</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span>()</pre></body></html></div>
 <pre><code>## 
   |                                                                            
   |                                                                      |   0%
   |                                                                            
   |======                                                                |   9%
   |                                                                            
-  |===========================================                           |  61%
+  |======================                                                |  32%
+  |                                                                            
+  |=============================================================         |  88%
   |                                                                            
   |======================================================================| 100%</code></pre>
 <table class="table table table-striped table-hover table-condensed">
@@ -349,11 +354,11 @@ Emploi intérieur, durée effective travaillée et productivité horaire
 </tbody>
 </table>
 </div>
-<div id="series-key-list" class="section level2">
+<div id="series-keys-list" class="section level2">
 <h2 class="hasAnchor">
-<a href="#series-key-list" class="anchor"></a>Series Key List</h2>
-<p><a href="https://www.insee.fr/en/information/2512785">INSEE BDM database</a> currently offers more than 140 000 Series. The <code>get_idbank_list</code> function returns the series catalogue.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="no">idbank_list</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span>()</pre></body></html></div>
+<a href="#series-keys-list" class="anchor"></a>Series Keys List</h2>
+<p><a href="https://www.insee.fr/en/information/2512785">INSEE BDM database</a> currently offers more than 140 000 series. The <code>get_idbank_list</code> function returns the series catalogue.</p>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">idbank_list</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span>()</pre></body></html></div>
 <table class="table table table-striped table-hover table-condensed">
 <thead><tr>
 <th style="text-align:left;">
@@ -483,8 +488,8 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
 <div id="find-a-series-key" class="section level2">
 <h2 class="hasAnchor">
 <a href="#find-a-series-key" class="anchor"></a>Find a series key</h2>
-<p>The best way to download data is to find the right series key (idbank), but how ? Indeed, in some cases it is not easy to understand what are the differences among series, especially for non-French speakers. To make the search easier, the <a href="https://CRAN.R-project.org/package=insee">insee</a> package provides the function <code>get_insee_title</code> to get the title related to an idbank, either in English or in French. It is not advised to use the <code>get_insee_title</code> function on the whole idbank dataset, as each SDMX query has 400-idbank limit. Then, <code>get_insee_title</code> function splits the input into several lists of 400 idbanks each and is consequently quite slow. Thus, the user should filter the idbank dataset before using the <code>get_insee_title</code> function to avoid as much as possible this bottleneck as the following example shows.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">idbank_list</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span>()
+<p>The best way to download data is to find the right series key (idbank), but how ? Indeed, in some cases it is not easy to understand what are the differences among series, especially for non-French speakers. To make the search easier, the <a href="https://CRAN.R-project.org/package=insee">insee</a> package provides the function <code>add_insee_title</code> to get titles from idbanks, either in English or in French. It is not advised to use the function on the whole idbank dataset, as each SDMX query has 400-idbank limit. Then, <code>add_insee_title</code> function splits the list into several lists of 400 idbanks each. Thus, the user should filter the idbank dataset before using the function to avoid as much as possible this bottleneck as the following example shows. After the data retrieval, it is really nice to use the <code>split_title</code> function on the dataframe to get more readable titles easy to use in plots.</p>
+<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">idbank_list</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span>()
 
 <span class="no">idbank_list_selected</span> <span class="kw">=</span>
   <span class="no">idbank_list</span> <span class="kw">%&gt;%</span>
@@ -494,18 +499,18 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim8</span> <span class="kw">==</span> <span class="st">"CVS-CJO"</span>) <span class="kw">%&gt;%</span> <span class="co">#Working day and seasonally adjusted SA-WDA</span>
   <span class="co">#automotive industry and overall industrial production</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="fu">str_detect</span>(<span class="no">dim4</span>,<span class="st">"^29$|A10-BE"</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu">mutate</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_insee_title.html">get_insee_title</a></span>(<span class="no">idbank</span>))
+  <span class="fu"><a href="../reference/add_insee_title.html">add_insee_title</a></span>()
 
 <span class="no">idbank_list_selected</span></pre></body></html></div>
 </div>
 <div id="download-data" class="section level2">
 <h2 class="hasAnchor">
 <a href="#download-data" class="anchor"></a>Download data</h2>
-<div id="download-using-idbank" class="section level3">
+<div id="download-using-a-list-of-idbanks" class="section level3">
 <h3 class="hasAnchor">
-<a href="#download-using-idbank" class="anchor"></a>Download using idbank</h3>
-<p>The <code>get_insee_idbank</code> function should handle up to 400 idbanks but not more. It is then advised to narrow down the idbanks list used as argument of the function.</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
+<a href="#download-using-a-list-of-idbanks" class="anchor"></a>Download using a list of idbanks</h3>
+<p>The <code>get_insee_idbank</code> function should handle up to 1200 idbanks. It is then advised to narrow down the idbanks list used as argument of the function. Otherwise, put the limit argument to FALSE to ignore the function’s idbank limit.</p>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">insee</span>)
 
 <span class="co"># the user can make a manual list of idbanks to get the data </span>
@@ -521,21 +526,29 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
 <span class="no">df_idbank</span> <span class="kw">=</span> <span class="no">idbank_dataset</span> <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">nomflow</span> <span class="kw">==</span> <span class="st">"ENQ-CONJ-MENAGES"</span>) <span class="kw">%&gt;%</span>  <span class="co">#monthly households' confidence survey</span>
   <span class="fu">mutate</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_insee_title.html">get_insee_title</a></span>(<span class="no">idbank</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu">separate</span>(<span class="no">title</span>, <span class="kw">sep</span> <span class="kw">=</span> <span class="st">" - "</span>, <span class="kw">into</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"title"</span>, <span class="fl">1</span>:<span class="fl">4</span>),
-           <span class="kw">fill</span> <span class="kw">=</span> <span class="st">"right"</span>, <span class="kw">remove</span> <span class="kw">=</span> <span class="fl">FALSE</span>) <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim7</span> <span class="kw">==</span> <span class="st">"CVS"</span>) <span class="co">#seasonally adjusted</span>
-
-<span class="co"># dim2: IND_SYNT_CONF - Summary indicator of households' confidence</span>
 
 <span class="no">list_idbank</span> <span class="kw">=</span> <span class="no">df_idbank</span> <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">idbank</span>)
 
-<span class="no">data</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span>(<span class="no">list_idbank</span>)</pre></body></html></div>
+<span class="no">data</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span>(<span class="no">list_idbank</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/split_title.html">split_title</a></span>()
+
+<span class="co"># example 3 : get more than 1200 idbanks</span>
+
+<span class="no">idbank_dataset</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span>()
+
+<span class="no">df_idbank</span> <span class="kw">=</span>
+  <span class="no">idbank_dataset</span> <span class="kw">%&gt;%</span>
+  <span class="fu">slice</span>(<span class="fl">1</span>:<span class="fl">1201</span>)
+
+<span class="no">list_idbank</span> <span class="kw">=</span> <span class="no">df_idbank</span> <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">idbank</span>)
+
+<span class="no">data</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span>(<span class="no">list_idbank</span>, <span class="kw">firstNObservations</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">limit</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
 </div>
-<div id="download-using-dataset-name" class="section level3">
+<div id="download-using-a-dataset-name" class="section level3">
 <h3 class="hasAnchor">
-<a href="#download-using-dataset-name" class="anchor"></a>Download using dataset name</h3>
+<a href="#download-using-a-dataset-name" class="anchor"></a>Download using a dataset name</h3>
 <p>For some datasets as IPC-2015 (inflation), the filter is necessary.</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">insee_dataset</span> <span class="kw">&lt;-</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span>()
+<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">insee_dataset</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span>()
 
 <span class="co"># example 1 : full dataset</span>
 <span class="no">data</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_insee_dataset.html">get_insee_dataset</a></span>(<span class="st">"CLIMAT-AFFAIRES"</span>)
