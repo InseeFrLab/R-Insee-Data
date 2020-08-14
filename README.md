@@ -22,7 +22,11 @@ from INSEE main database (BDM).
 Using embedded SDMX queries, get the data of more than 140 000 INSEE
 series.
 
-Have a look at the detailed SDMX web service page with the following [link](https://www.insee.fr/en/information/2868055).
+Have a look at the detailed SDMX web service page with the following
+[link](https://www.insee.fr/en/information/2868055).
+
+This package is a contribution to reproducible research and public data
+transparency.
 
 ## Installation & Loading
 
@@ -58,6 +62,47 @@ library(insee)
 Sys.setenv(http_proxy = "my_proxy_server")
 Sys.setenv(https_proxy = "my_proxy_server")
 ```
+
+## Other useful packages
+
+  - [rsdmx](https://cran.r-project.org/web/packages/rsdmx/index.html)
+    and
+    [eurostat](https://cran.r-project.org/web/packages/eurostat/index.html)
+    packages were my starting points when I first started to play with
+    INSEE’s data. They are of great help to retrieve data from all over
+    Europe. However, the
+    [insee](https://cran.r-project.org/web/packages/insee/index.html)
+    package might be better to access INSEE’s data, for the following
+    reasons.
+  - **Full metadata coverage** : with the `get_idbank_list` function you
+    have access to all INSEE’s series keys, which is crucial to find the
+    right data. Moreover, with the `add_insee_title` function it is easy
+    to get titles from the metadata table.
+  - **Enhanced data formatting**: a column in Date format is added to
+    the raw data and the OBS\_VALUE column is in the numeric format,
+    which good to make plots an computation.
+  - **Better queries** : with rsdmx it can be hard to know how to design
+    a query whereas with `get_insee_idbank` and `get_insee_dataset` it
+    is straighforward. Then, with `get_insee_idbank` the user can
+    trigger automatically multiple queries bypassing the sdmx limit of
+    400 series. Finaly, all the data retrieved is cached, so all queries
+    are run only once per R session which is not the case in the
+    [rsdmx](https://cran.r-project.org/web/packages/rsdmx/index.html)
+    package.
+  - **Proxy issues solved**
+
+<center>
+
+| Task                                   | [insee](https://cran.r-project.org/web/packages/insee/index.html) | [rsdmx](https://cran.r-project.org/web/packages/rsdmx/index.html) | [eurostat](https://cran.r-project.org/web/packages/eurostat/index.html) |
+| -------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
+| Full INSEE’s Metadata Coverage         | ✅                                                                 | :x:                                                               | :x:                                                                     |
+| Enhanced data formatting               | ✅                                                                 | :x:                                                               | ✅                                                                       |
+| Cached data                            | ✅                                                                 | :x:                                                               | ✅                                                                       |
+| Query in bulk with INSEE’s series keys | ✅                                                                 | :x:                                                               | :x:                                                                     |
+| Retrieve data from all over Europe     | :x:                                                               | ✅                                                                 | ✅                                                                       |
+| Avoid proxy issues easily              | ✅                                                                 | :x:                                                               | ✅                                                                       |
+
+</center>
 
 ## Support
 
