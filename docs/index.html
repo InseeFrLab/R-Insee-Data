@@ -108,6 +108,7 @@
 <p>The insee package contains tools to easily download data and metadata from INSEE main database (BDM).</p>
 <p>Using embedded SDMX queries, get the data of more than 140 000 INSEE series.</p>
 <p>Have a look at the detailed SDMX web service page with the following <a href="https://www.insee.fr/en/information/2868055">link</a>.</p>
+<p>This package is a contribution to reproducible research and public data transparency.</p>
 </div>
 <div id="installation--loading" class="section level2">
 <h2 class="hasAnchor">
@@ -140,6 +141,69 @@
 <a href="#how-to-avoid-proxy-issues-" class="anchor"></a>How to avoid proxy issues ?</h2>
 <div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="kw">http_proxy</span> <span class="kw">=</span> <span class="st">"my_proxy_server"</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="kw">https_proxy</span> <span class="kw">=</span> <span class="st">"my_proxy_server"</span>)</pre></div>
+</div>
+<div id="other-useful-packages" class="section level2">
+<h2 class="hasAnchor">
+<a href="#other-useful-packages" class="anchor"></a>Other useful packages</h2>
+<ul>
+<li>
+<a href="https://cran.r-project.org/web/packages/rsdmx/index.html">rsdmx</a> and <a href="https://cran.r-project.org/web/packages/eurostat/index.html">eurostat</a> packages were my starting points when I first started to play with INSEE’s data. They are of great help to retrieve data from all over Europe. However, the <a href="https://cran.r-project.org/web/packages/insee/index.html">insee</a> package might be better to access INSEE’s data, for the following reasons.</li>
+<li>
+<strong>Full metadata coverage</strong> : with the <code>get_idbank_list</code> function you have access to all INSEE’s series keys, which is crucial to find the right data. Moreover, with the <code>add_insee_title</code> function it is easy to get titles from the metadata table.</li>
+<li>
+<strong>Enhanced data formatting</strong>: a column in Date format is added to the raw data and the OBS_VALUE column is in the numeric format, which good to make plots an computation.</li>
+<li>
+<strong>Better queries</strong> : with rsdmx it can be hard to know how to design a query whereas with <code>get_insee_idbank</code> and <code>get_insee_dataset</code> it is straighforward. Then, with <code>get_insee_idbank</code> the user can trigger automatically multiple queries bypassing the sdmx limit of 400 series. Finaly, all the data retrieved is cached, so all queries are run only once per R session which is not the case in the <a href="https://cran.r-project.org/web/packages/rsdmx/index.html">rsdmx</a> package.</li>
+<li><strong>Proxy issues solved</strong></li>
+</ul>
+<center>
+<table class="table">
+<thead><tr class="header">
+<th>Task</th>
+<th><a href="https://cran.r-project.org/web/packages/insee/index.html">insee</a></th>
+<th><a href="https://cran.r-project.org/web/packages/rsdmx/index.html">rsdmx</a></th>
+<th><a href="https://cran.r-project.org/web/packages/eurostat/index.html">eurostat</a></th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td>Full INSEE’s Metadata Coverage</td>
+<td>✅</td>
+<td><span class="emoji" data-emoji="x">❌</span></td>
+<td><span class="emoji" data-emoji="x">❌</span></td>
+</tr>
+<tr class="even">
+<td>Enhanced data formatting</td>
+<td>✅</td>
+<td><span class="emoji" data-emoji="x">❌</span></td>
+<td>✅</td>
+</tr>
+<tr class="odd">
+<td>Cached data</td>
+<td>✅</td>
+<td><span class="emoji" data-emoji="x">❌</span></td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Query in bulk with INSEE’s series keys</td>
+<td>✅</td>
+<td><span class="emoji" data-emoji="x">❌</span></td>
+<td><span class="emoji" data-emoji="x">❌</span></td>
+</tr>
+<tr class="odd">
+<td>Retrieve data from all over Europe</td>
+<td><span class="emoji" data-emoji="x">❌</span></td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr class="even">
+<td>Avoid proxy issues easily</td>
+<td>✅</td>
+<td><span class="emoji" data-emoji="x">❌</span></td>
+<td>✅</td>
+</tr>
+</tbody>
+</table>
+</center>
 </div>
 <div id="support" class="section level2">
 <h2 class="hasAnchor">
