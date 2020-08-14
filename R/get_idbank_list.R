@@ -54,6 +54,10 @@ get_idbank_list = function(
 
     mapping_final[,"idbank"] = vapply(mapping_final[,"idbank"], add_zero, "")
 
+    if("n_series" %in% names(mapping_final)){
+      mapping_final[,"n_series"] = as.numeric(as.character(mapping_final[,"n_series"]))
+    }
+
     if(insee_download_verbose){
       msg = sprintf("\nData cached : %s\n", mapping_file_cache)
       message(crayon::style(msg, "green"))
