@@ -20,6 +20,8 @@ test_that("class tests",{
   insee_link = "http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"
   insee_query = file.path(insee_link, paste0(idbank_test1,"?", "firstNObservations=1"))
 
+  expect_is(get_last_release(), "data.frame")
+
   expect_is(get_insee(insee_query), "data.frame")
   expect_is(get_insee(), "NULL")
   expect_is(get_insee(""), "NULL")

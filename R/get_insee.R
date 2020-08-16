@@ -25,6 +25,12 @@ get_insee = function(link, step = "1/1"){
 
   insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
   insee_value_as_numeric = if(Sys.getenv("INSEE_value_as_numeric") == "TRUE"){TRUE}else{FALSE}
+  insee_print_query = if(Sys.getenv("INSEE_print_query") == "TRUE"){TRUE}else{FALSE}
+
+  if(insee_print_query == TRUE){
+    msg = sprintf("Query : %s", link)
+    message(crayon::style(msg, "black"))
+  }
 
   if_null_na = function(x) {if(is.null(x)){return(NA)}else{return(x)}}
 
