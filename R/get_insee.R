@@ -6,7 +6,7 @@
 #' The data is cached, hence all queries are only run once per R session.
 #' The user can disable the download display in the console with the following command :
 #' Sys.setenv(INSEE_download_verbose = "FALSE")
-#' With the following command allow queries are printed : Sys.setenv(INSEE_print_query = "TRUE")
+#' All queries are printed in the console with this command: Sys.setenv(INSEE_print_query = "TRUE").
 #' @param link SDMX query link
 #' @param step argument used only for internal package purposes to tweak download display
 #' @return a tibble containing the data
