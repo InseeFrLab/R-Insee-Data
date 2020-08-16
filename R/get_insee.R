@@ -6,6 +6,7 @@
 #' The data is cached, hence all queries are only run once per R session.
 #' The user can disable the download display in the console with the following command :
 #' Sys.setenv(INSEE_download_verbose = "FALSE")
+#' With the following command allow queries are printed : Sys.setenv(INSEE_print_query = "TRUE")
 #' @param link SDMX query link
 #' @param step argument used only for internal package purposes to tweak download display
 #' @return a tibble containing the data
@@ -27,12 +28,12 @@ get_insee = function(link, step = "1/1"){
   insee_value_as_numeric = if(Sys.getenv("INSEE_value_as_numeric") == "TRUE"){TRUE}else{FALSE}
   insee_print_query = if(Sys.getenv("INSEE_print_query") == "TRUE"){TRUE}else{FALSE}
 
-  if(insee_print_query == TRUE){
-    msg = sprintf("Query : %s", link)
-    message(crayon::style(msg, "black"))
+  if(insee_download_verbose){
+    if(insee_print_query == TRUE) {
+      msg = sprintf("Query : %s", link)
+      message(crayon::style(msg, "black"))
+    }
   }
-
-  if_null_na = function(x) {if(is.null(x)){return(NA)}else{return(x)}}
 
   file_cache = file.path(tempdir(), paste0(openssl::md5(link), ".rds"))
 

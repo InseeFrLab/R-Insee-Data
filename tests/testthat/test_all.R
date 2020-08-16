@@ -8,8 +8,8 @@ test_that("class tests",{
 
   expect_warning(insee:::.onLoad(), regexp = NA)
 
-  expect_is(get_idbank_list(), "data.frame")
-  expect_is(get_idbank_list(), "data.frame")
+  expect_equal(c(class(get_idbank_list())[3], class(get_idbank_list())[3]),
+               c("data.frame", "data.frame"))
 
   idbank_test1 = get_idbank_list() %>% slice(1) %>% pull(idbank)
   idbank_test2 = get_idbank_list() %>% slice(2) %>% pull(idbank)
@@ -17,6 +17,7 @@ test_that("class tests",{
   expect_is(get_idbank_list("CNA-2014-CPEB"), "data.frame")
   expect_is(get_dataset_list(), "data.frame")
 
+  Sys.setenv(INSEE_print_query = "TRUE")
   insee_link = "http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"
   insee_query = file.path(insee_link, paste0(idbank_test1,"?", "firstNObservations=1"))
 
@@ -50,6 +51,9 @@ test_that("class tests",{
 
 test_that("output tests",{
   skip_on_cran()
+
+  expect_equal(if_null_na(NULL), NA)
+  expect_equal(if_null_na(1), 1)
 
   idbank_test1 = get_idbank_list() %>% slice(1) %>% pull(idbank)
   idbank_test401 = get_idbank_list() %>% slice(1:401) %>% pull(idbank)

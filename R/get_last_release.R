@@ -25,11 +25,11 @@ get_last_release = function(){
 
       list_df = lapply(list_item, function(item){
         data.frame(
-          title = data_item[[item]]$title[[1]],
-          link = data_item[[item]]$link[[1]],
-          description = data_item[[item]]$description[[1]],
-          guid = data_item[[item]]$guid[[1]],
-          pubDate = data_item[[item]]$pubDate[[1]],
+          title = if_null_na(data_item[[item]]$title[[1]]),
+          link = if_null_na(data_item[[item]]$link[[1]]),
+          description = if_null_na(data_item[[item]]$description[[1]]),
+          guid = if_null_na(data_item[[item]]$guid[[1]]),
+          pubDate = if_null_na(data_item[[item]]$pubDate[[1]]),
           stringsAsFactors = FALSE)
       })
 
