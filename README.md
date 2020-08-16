@@ -65,13 +65,13 @@ Sys.setenv(https_proxy = "my_proxy_server")
 
 ## Other useful packages
 
-  - [rsdmx](https://cran.r-project.org/web/packages/rsdmx/index.html)
+  - [rsdmx](https://CRAN.R-project.org/package=rsdmx)
     and
-    [eurostat](https://cran.r-project.org/web/packages/eurostat/index.html)
+    [eurostat](https://CRAN.R-project.org/package=eurostat)
     packages were my starting points when I first started to play with
     INSEE’s data. They are of great help to retrieve data from all over
     Europe. However, the
-    [insee](https://cran.r-project.org/web/packages/insee/index.html)
+    [insee](https://CRAN.R-project.org/package=insee)
     package might be better to access INSEE’s data, for the following
     reasons.
   - **Full metadata coverage** : with the `get_idbank_list` function you
@@ -87,13 +87,13 @@ Sys.setenv(https_proxy = "my_proxy_server")
     trigger automatically multiple queries bypassing the sdmx limit of
     400 series. Finaly, all the data retrieved is cached, so all queries
     are run only once per R session which is not the case in the
-    [rsdmx](https://cran.r-project.org/web/packages/rsdmx/index.html)
+    [rsdmx](https://CRAN.R-project.org/package=rsdmx)
     package.
   - **Proxy issues solved**
 
 <center>
 
-| Task                                   | [insee](https://cran.r-project.org/web/packages/insee/index.html) | [rsdmx](https://cran.r-project.org/web/packages/rsdmx/index.html) | [eurostat](https://cran.r-project.org/web/packages/eurostat/index.html) |
+| Task                                   | [insee](https://CRAN.R-project.org/package=insee) | [rsdmx](https://CRAN.R-project.org/package=rsdmx) | [eurostat](https://CRAN.R-project.org/package=eurostat) |
 | -------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------- | ----------------------------------------------------------------------- |
 | Full INSEE’s Metadata Coverage         | ✅                                                                 | :x:                                                               | :x:                                                                     |
 | Enhanced data formatting               | ✅                                                                 | :x:                                                               | ✅                                                                       |

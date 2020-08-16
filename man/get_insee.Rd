@@ -24,6 +24,7 @@ It is used by the functions get_insee_dataset, get_insee_idbank and get_dataset_
 The data is cached, hence all queries are only run once per R session.
 The user can disable the download display in the console with the following command :
 Sys.setenv(INSEE_download_verbose = "FALSE")
+All queries are printed in the console with this command: Sys.setenv(INSEE_print_query = "TRUE").
 }
 \examples{
 \donttest{
