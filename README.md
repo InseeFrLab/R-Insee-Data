@@ -80,7 +80,7 @@ Sys.setenv(https_proxy = "my_proxy_server")
     to get titles from the metadata table.
   - **Enhanced data formatting**: a column in Date format is added to
     the raw data and the OBS\_VALUE column is in the numeric format,
-    which good to make plots an computation.
+    which is good to make plots an computation.
   - **Better queries** : with rsdmx it can be hard to know how to design
     a query whereas with `get_insee_idbank` and `get_insee_dataset` it
     is straighforward. Then, with `get_insee_idbank` the user can

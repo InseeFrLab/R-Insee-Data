@@ -6,6 +6,8 @@
 #' @param endPeriod end date of data
 #' @param firstNObservations get the first N observations for each key series (idbank)
 #' @param lastNObservations get the last N observations for each key series (idbank)
+#' @param includeHistory boolean to access the previous releases (not available on all series)
+#' @param updatedAfter starting point for querying the previous releases (format yyyy-mm-ddThh:mm:ss)
 #' @param filter Use the filter to choose only some values in a dimension. It is recommended to use it for big datasets.
 #' A dimension left empty means all values are selected. To select multiple values in one dimension put a "+" between those values (see example)
 #' @return a tibble with the data
@@ -13,7 +15,12 @@
 #' \donttest{
 #' insee_dataset = get_dataset_list()
 #'
+#' #example 1
 #' data = get_insee_dataset("IPC-2015", filter = "M+A.........CVS.", startPeriod = "2015-03")
+#'
+#' #example 2
+#' data = get_insee_dataset("IPC-2015", filter = "M......ENSEMBLE...CVS.2015",
+#'  includeHistory = TRUE, updatedAfter = "2017-07-11T08:45:00")
 #' }
 #'
 #' @export
@@ -22,6 +29,8 @@ get_insee_dataset <- function(dataset,
                               endPeriod = NULL,
                               firstNObservations = NULL,
                               lastNObservations = NULL,
+                              includeHistory = NULL,
+                              updatedAfter = NULL,
                               filter = NULL){
 
   if(missing(dataset)){
@@ -44,7 +53,12 @@ get_insee_dataset <- function(dataset,
     link = paste0(link, "/", filter)
   }
 
-  arg = c("startPeriod", "endPeriod", "firstNObservations", "lastNObservations")
+  if(!is.null(includeHistory)){
+    if(includeHistory == TRUE){includeHistory = "true"}
+  }
+
+  arg = c("startPeriod", "endPeriod", "firstNObservations", "lastNObservations",
+          "includeHistory", "updatedAfter")
   null_arg_vector = unlist(lapply(arg, function(x) is.null(get(x))))
 
   if(!all(null_arg_vector)){

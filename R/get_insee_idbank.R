@@ -1,6 +1,6 @@
 #' Get data from INSEE series idbank
 #'
-#' @details Get data from INSEE series idbanks
+#' @details Get data from INSEE series idbanks.
 #' The user can disable the download display in the console with the following command :
 #' Sys.setenv(INSEE_download_verbose = "FALSE")
 #'
@@ -9,6 +9,8 @@
 #' @param endPeriod end date of data
 #' @param firstNObservations get the first N observations for each key series (idbank)
 #' @param lastNObservations get the last N observations for each key series (idbank)
+#' @param includeHistory boolean to access the previous releases (not available on all series)
+#' @param updatedAfter starting point for querying the previous releases (format yyyy-mm-ddThh:mm:ss)
 #' @param limit by default, the function get_insee_idbank has a 1200-idbank limit. Set limit argument to FALSE to ignore the limit or modify the limit with the following command : Sys.setenv(INSEE_idbank_limit = 1200)
 #' @return a tibble with the data
 #' @examples
@@ -64,7 +66,9 @@ get_insee_idbank <- function(...,
                              startPeriod = NULL,
                              endPeriod = NULL,
                              firstNObservations = NULL,
-                             lastNObservations = NULL){
+                             lastNObservations = NULL,
+                             includeHistory = NULL,
+                             updatedAfter = NULL){
 
   insee_bdm_series_link = Sys.getenv("INSEE_sdmx_link_idbank")
   insee_get_idbank_limit = as.numeric(Sys.getenv("INSEE_get_idbank_limit"))
@@ -106,7 +110,12 @@ get_insee_idbank <- function(...,
     message(crayon::style(msg, "red"))
   }
 
-  arg = c("startPeriod", "endPeriod", "firstNObservations", "lastNObservations")
+  if(!is.null(includeHistory)){
+    if(includeHistory == TRUE){includeHistory = "true"}
+  }
+
+  arg = c("startPeriod", "endPeriod", "firstNObservations", "lastNObservations",
+          "includeHistory", "updatedAfter")
   null_arg_vector = unlist(lapply(arg, function(x) is.null(get(x))))
 
   if(!all(null_arg_vector)){
