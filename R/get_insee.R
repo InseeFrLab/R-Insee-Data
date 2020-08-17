@@ -62,12 +62,26 @@ get_insee = function(link, step = "1/1"){
       content_list = xml2::as_list(response_content)
       data = tibble::as_tibble(content_list)
 
-      n_line = length(data[[1]])
+      n_data_obs = length(data[[1]])
 
-      if(n_line > 1){
+      n_series_tot = sum(unlist(lapply(2:n_data_obs,
+                                       function(x){
+                                         n_series = length(data[[1]][[x]])
+
+                                         sum(unlist(lapply(1:n_series,
+                                                           function(i){
+                                                             length(data[[1]][[x]][[i]])
+                                                           }
+                                                           )))
+
+                                         }
+                                       )))
+
+      list_df = list()
+
+      if(n_data_obs > 1){
 
         n_series = length(data[[1]][[2]])
-        list_df = list()
 
         dataflow_dwn = FALSE
 
@@ -117,7 +131,7 @@ get_insee = function(link, step = "1/1"){
                 Name.fr = dataset_name_fr,
                 Name.en = dataset_name_en,
                 url = dataset_url,
-                n_series = dataset_n_series,
+                n_series = as.numeric(dataset_n_series),
                 stringsAsFactors = FALSE
               )
               list_df[[length(list_df) + 1]] = dataflow_df
@@ -132,51 +146,66 @@ get_insee = function(link, step = "1/1"){
 
         if(!dataflow_dwn){
 
+          # progress bar
           if(insee_download_verbose){
-            if(n_series > 1){
+            if(n_series_tot > 1){
 
               msg = sprintf("%s - Dataframe build :", step)
               message(crayon::style(msg, "black"))
 
-              pb = utils::txtProgressBar(min = 1, max = n_series, initial = 1, style = 3)
+              pb = utils::txtProgressBar(min = 1, max = n_series_tot, initial = 1, style = 3)
             }else{
               msg = sprintf("%s - Dataframe build : 100%%", step)
               message(crayon::style(msg, "black"))
             }
           }
+          # print(n_series_tot)
+          count_series = 0
 
-          for (i in 1:n_series) {
+          for(j in 2:n_data_obs){
+            # print(j)
 
-            data_series = lapply(data[[1]][[2]][[i]], attributes)
-            data_series = dplyr::bind_rows(data_series)
+            n_series = length(data[[1]][[j]])
 
-            metadata = attributes(data[[1]][[2]][[i]])
-            names_in_metadata = which(names(metadata) == "names")
+            for (i in 1:n_series) {
+              # print(i)
 
-            if (length(names_in_metadata) > 0) {
-              metadata = metadata[-names_in_metadata]
-            }
-            if (nrow(data_series) > 0) {
-              for (metadata_item in names(metadata)) {
-                data_series[, metadata_item] = metadata[[metadata_item]]
+              n_obs = length(data[[1]][[j]][[i]])
+              count_series = count_series + n_obs
+              # print(count_series)
+
+              data_series = lapply(data[[1]][[j]][[i]], attributes)
+              data_series = dplyr::bind_rows(data_series)
+
+              metadata = attributes(data[[1]][[j]][[i]])
+              names_in_metadata = which(names(metadata) == "names")
+
+              if (length(names_in_metadata) > 0) {
+                metadata = metadata[-names_in_metadata]
               }
-              if (all(c("TIME_PERIOD", "FREQ") %in% names(data_series))) {
-                col_date = dplyr::pull(.data = data_series, "TIME_PERIOD")
-                freq_data = as.character(unique(data_series$FREQ)[1])
-                data_series[, "DATE"] = suppressWarnings(get_date(col_date, freq = freq_data))
+              if (nrow(data_series) > 0) {
+                for (metadata_item in names(metadata)) {
+                  data_series[, metadata_item] = metadata[[metadata_item]]
+                }
+                if (all(c("TIME_PERIOD", "FREQ") %in% names(data_series))) {
+                  col_date = dplyr::pull(.data = data_series, "TIME_PERIOD")
+                  freq_data = as.character(unique(data_series$FREQ)[1])
+                  data_series[, "DATE"] = suppressWarnings(get_date(col_date, freq = freq_data))
+                }
+
+                list_df[[length(list_df) + 1]] = data_series
               }
 
-              list_df[[length(list_df) + 1]] = data_series
-            }
-            if(insee_download_verbose){
-              if(n_series > 1){
-                utils::setTxtProgressBar(pb,i)
+              if(insee_download_verbose){
+                if(n_series_tot > 1){
+                  utils::setTxtProgressBar(pb, count_series)
+                }
               }
             }
           }
-
-          data_final = dplyr::bind_rows(list_df)
         }
+
+        data_final = dplyr::bind_rows(list_df)
 
         if(insee_value_as_numeric & "OBS_VALUE" %in% names(data_final)){
           data_final = dplyr::mutate(.data = data_final,

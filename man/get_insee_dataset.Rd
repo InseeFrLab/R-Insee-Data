@@ -10,6 +10,8 @@ get_insee_dataset(
   endPeriod = NULL,
   firstNObservations = NULL,
   lastNObservations = NULL,
+  includeHistory = NULL,
+  updatedAfter = NULL,
   filter = NULL
 )
 }
@@ -23,6 +25,10 @@ get_insee_dataset(
 \item{firstNObservations}{get the first N observations for each key series (idbank)}
 
 \item{lastNObservations}{get the last N observations for each key series (idbank)}
+
+\item{includeHistory}{boolean to access the previous releases (not available on all series)}
+
+\item{updatedAfter}{starting point for querying the previous releases (formar yyyy-mm-ddThh:mm:ss)}
 
 \item{filter}{Use the filter to choose only some values in a dimension. It is recommended to use it for big datasets.
 A dimension left empty means all values are selected. To select multiple values in one dimension put a "+" between those values (see example)}
@@ -40,7 +46,12 @@ Get dataset from INSEE BDM database
 \donttest{
 insee_dataset = get_dataset_list()
 
+#example 1
 data = get_insee_dataset("IPC-2015", filter = "M+A.........CVS.", startPeriod = "2015-03")
+
+#example 2
+data = get_insee_dataset("IPC-2015", filter = "M......ENSEMBLE...CVS.2015",
+ includeHistory = TRUE, updatedAfter = "2017-07-11T08:45:00")
 }
 
 }

@@ -10,7 +10,9 @@ get_insee_idbank(
   startPeriod = NULL,
   endPeriod = NULL,
   firstNObservations = NULL,
-  lastNObservations = NULL
+  lastNObservations = NULL,
+  includeHistory = NULL,
+  updatedAfter = NULL
 )
 }
 \arguments{
@@ -25,6 +27,10 @@ get_insee_idbank(
 \item{firstNObservations}{get the first N observations for each key series (idbank)}
 
 \item{lastNObservations}{get the last N observations for each key series (idbank)}
+
+\item{includeHistory}{boolean to access the previous releases (not available on all series)}
+
+\item{updatedAfter}{starting point for querying the previous releases (formar yyyy-mm-ddThh:mm:ss)}
 }
 \value{
 a tibble with the data
