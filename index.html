@@ -151,7 +151,7 @@
 <li>
 <strong>Full metadata coverage</strong> : with the <code>get_idbank_list</code> function you have access to all INSEE’s series keys, which is crucial to find the right data. Moreover, with the <code>add_insee_title</code> function it is easy to get titles from the metadata table.</li>
 <li>
-<strong>Enhanced data formatting</strong>: a column in Date format is added to the raw data and the OBS_VALUE column is in the numeric format, which good to make plots an computation.</li>
+<strong>Enhanced data formatting</strong>: a column in Date format is added to the raw data and the OBS_VALUE column is in the numeric format, which is good to make plots an computation.</li>
 <li>
 <strong>Better queries</strong> : with rsdmx it can be hard to know how to design a query whereas with <code>get_insee_idbank</code> and <code>get_insee_dataset</code> it is straighforward. Then, with <code>get_insee_idbank</code> the user can trigger automatically multiple queries bypassing the sdmx limit of 400 series. Finaly, all the data retrieved is cached, so all queries are run only once per R session which is not the case in the <a href="https://CRAN.R-project.org/package=rsdmx">rsdmx</a> package.</li>
 <li><strong>Proxy issues solved</strong></li>
