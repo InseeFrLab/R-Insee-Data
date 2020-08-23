@@ -87,7 +87,4 @@ Sys.setenv(https_proxy = "my_proxy_server")
 
 
 ## Support
-Feel free to contact me with any question about this package using this [e-mail address](mailto:leclerc.hadrien@gmail.com?subject=[r-package][insee]).
-
-## Disclaimer
-This package is in no way officially related to or endorsed by INSEE.
+Feel free to contact me with any question about this package using this [e-mail address](mailto:hadrien.leclerc@insee.fr?subject=[r-package][insee]).

@@ -28,7 +28,7 @@ get_insee_dataset(
 
 \item{includeHistory}{boolean to access the previous releases (not available on all series)}
 
-\item{updatedAfter}{starting point for querying the previous releases (formar yyyy-mm-ddThh:mm:ss)}
+\item{updatedAfter}{starting point for querying the previous releases (format yyyy-mm-ddThh:mm:ss)}
 
 \item{filter}{Use the filter to choose only some values in a dimension. It is recommended to use it for big datasets.
 A dimension left empty means all values are selected. To select multiple values in one dimension put a "+" between those values (see example)}

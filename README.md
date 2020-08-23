@@ -108,8 +108,4 @@ Sys.setenv(https_proxy = "my_proxy_server")
 
 Feel free to contact me with any question about this package using this
 [e-mail
-address](mailto:leclerc.hadrien@gmail.com?subject=%5Br-package%5D%5Binsee%5D).
-
-## Disclaimer
-
-This package is in no way officially related to or endorsed by INSEE.
+address](mailto:hadrien.leclerc@insee.fr?subject=%5Br-package%5D%5Binsee%5D).
