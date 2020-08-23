@@ -30,7 +30,7 @@ get_insee_idbank(
 
 \item{includeHistory}{boolean to access the previous releases (not available on all series)}
 
-\item{updatedAfter}{starting point for querying the previous releases (formar yyyy-mm-ddThh:mm:ss)}
+\item{updatedAfter}{starting point for querying the previous releases (format yyyy-mm-ddThh:mm:ss)}
 }
 \value{
 a tibble with the data
@@ -39,7 +39,7 @@ a tibble with the data
 Get data from INSEE series idbank
 }
 \details{
-Get data from INSEE series idbanks
+Get data from INSEE series idbanks.
 The user can disable the download display in the console with the following command :
 Sys.setenv(INSEE_download_verbose = "FALSE")
 }
