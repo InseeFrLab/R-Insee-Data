@@ -20,7 +20,7 @@ insee R package
 The insee package contains tools to easily download data and metadata
 from INSEE main database (BDM).
 
-Using embedded SDMX queries, get the data of more than 140 000 INSEE
+Using embedded SDMX queries, get the data of more than 150 000 INSEE
 series.
 
 Have a look at the detailed SDMX web service page with the following

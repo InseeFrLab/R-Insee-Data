@@ -7,7 +7,7 @@ Authors@R:
     person("INSEE", role = "cph"))
 Author: Hadrien Leclerc [aut, cre], INSEE [cph]
 Maintainer: Hadrien Leclerc <hadrien.leclerc@insee.fr>
-Description: Using embedded sdmx queries, get the data of more than 140 000 insee series from bdm database. Have a look at the detailed sdmx web service page with the following link : <https://www.insee.fr/en/information/2868055>.
+Description: Using embedded sdmx queries, get the data of more than 150 000 insee series from bdm database. Have a look at the detailed sdmx web service page with the following link : <https://www.insee.fr/en/information/2868055>.
 URL: https://hadrilec.github.io/insee/
 Encoding: UTF-8
 LazyData: true

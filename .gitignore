@@ -6,3 +6,4 @@ doc
 README.html
 README.Rmd
 inst/doc
+.httr-oauth
