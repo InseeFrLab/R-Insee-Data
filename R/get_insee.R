@@ -159,20 +159,16 @@ get_insee = function(link, step = "1/1"){
               message(crayon::style(msg, "black"))
             }
           }
-          # print(n_series_tot)
           count_series = 0
 
           for(j in 2:n_data_obs){
-            # print(j)
 
             n_series = length(data[[1]][[j]])
 
             for (i in 1:n_series) {
-              # print(i)
 
               n_obs = length(data[[1]][[j]][[i]])
               count_series = count_series + n_obs
-              # print(count_series)
 
               data_series = lapply(data[[1]][[j]][[i]], attributes)
               data_series = dplyr::bind_rows(data_series)
