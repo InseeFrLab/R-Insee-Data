@@ -43,6 +43,22 @@ get_insee_title = function(..., lang = "en"){
 
   df_title = get_insee_idbank(list_idbank, lastNObservations = 1, limit = FALSE)
 
+  df_title = dplyr::select(.data = df_title, c("IDBANK", "TITLE_EN", "TITLE_FR"))
+
+  list_idbank_obtained = dplyr::pull(.data = df_title, "IDBANK")
+  list_idbank_missing_id = which(!list_idbank %in% list_idbank_obtained)
+
+  if(length(list_idbank_missing_id) > 0){
+
+    df_title_missing = data.frame(
+      IDBANK = list_idbank[list_idbank_missing_id],
+      TITLE_EN = NA,
+      TITLE_FR = NA,
+      stringsAsFactors = FALSE)
+
+    df_title = dplyr::bind_rows(df_title, df_title_missing)
+  }
+
   df_title = dplyr::mutate(.data = df_title,
                            IDBANK = factor(.data$IDBANK, levels = list_idbank))
 
