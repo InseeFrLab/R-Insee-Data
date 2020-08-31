@@ -1,6 +1,10 @@
 #' Download a full INSEE's series key list
 #'
-#' @details Download a mapping dataset betwen INSEE series keys (idbank) and SDMX series names
+#' @details Download a mapping dataset betwen INSEE series keys (idbank) and SDMX series names.
+#' Under the hood the get_idbank_list uses download.file function from utils, the user can change the mode argument with the following
+#' command : Sys.getenv(INSEE_download_option_idbank_list = "wb")
+#' If makes an update, the user can also change the zip file downloaded, the data file contained in the zip and data the separator  :
+#' Sys.setenv(INSEE_idbank_dataset_path = "new_zip_file_link");Sys.setenv(INSEE_idbank_sep = ",");Sys.setenv(INSEE_idbank_dataset_file = "new_data_file_name")
 #' @param dataset if a dataset name is provided, only a subset of the data is delivered, otherwise
 #' all the data is returned
 #' @examples
@@ -13,6 +17,7 @@ get_idbank_list = function(
 
   insee_no_cache_use = if(Sys.getenv("INSEE_no_cache_use") == "TRUE"){TRUE}else{FALSE}
   insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
+  insee_download_option_idbank_list = Sys.getenv("INSEE_download_option_idbank_list")
   file_to_dwn = Sys.getenv("INSEE_idbank_dataset_path")
   mapping_file_pattern = Sys.getenv("INSEE_idbank_dataset_file")
 
@@ -29,7 +34,8 @@ get_idbank_list = function(
   # download and unzip
   if(!file.exists(mapping_file_cache) | insee_no_cache_use){
 
-    utils::download.file(file_to_dwn, temp_file, mode = "wb", quiet = TRUE)
+    utils::download.file(file_to_dwn, temp_file,
+                         mode = insee_download_option_idbank_list, quiet = TRUE)
     utils::unzip(temp_file, exdir = temp_dir)
 
     mapping_file = file.path(temp_dir, list.files(temp_dir, pattern = mapping_file_pattern)[1])
