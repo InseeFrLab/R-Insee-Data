@@ -14,6 +14,7 @@
   Sys.setenv(INSEE_title_sep = " - | — | – ")
   Sys.setenv(INSEE_value_as_numeric = "TRUE")
   Sys.setenv(INSEE_download_verbose = "TRUE")
+  Sys.setenv(INSEE_download_option_idbank_list = "wb")
   Sys.setenv(INSEE_no_cache_use = "FALSE")
   Sys.setenv(INSEE_print_query = "FALSE")
 }
