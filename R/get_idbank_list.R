@@ -11,6 +11,7 @@ get_idbank_list = function(
   dataset = NULL
 ){
 
+  insee_no_cache_use = if(Sys.getenv("INSEE_no_cache_use") == "TRUE"){TRUE}else{FALSE}
   insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
   file_to_dwn = Sys.getenv("INSEE_idbank_dataset_path")
   mapping_file_pattern = Sys.getenv("INSEE_idbank_dataset_file")
@@ -23,10 +24,10 @@ get_idbank_list = function(
   temp_file = tempfile()
   temp_dir = tempdir()
 
-  mapping_file_cache = file.path(temp_dir, paste0(mapping_file_pattern, ".rds"))
+  mapping_file_cache = file.path(temp_dir, paste0(openssl::md5(mapping_file_pattern), ".rds"))
 
   # download and unzip
-  if(!file.exists(mapping_file_cache)){
+  if(!file.exists(mapping_file_cache) | insee_no_cache_use){
 
     utils::download.file(file_to_dwn, temp_file, mode = "wb", quiet = TRUE)
     utils::unzip(temp_file, exdir = temp_dir)
