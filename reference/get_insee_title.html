@@ -174,7 +174,7 @@ Consequently, it is not advised to use it on the whole idbank dataset, the user 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>#example 1 : industrial production index on manufacturing and industrial activities</span>
 <span class='no'>title</span> <span class='kw'>=</span> <span class='fu'>get_insee_title</span>(<span class='st'>"010537900"</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #000000;'>1/1 - Data download :</span><span></span></div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Dataframe build : 100%</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'></span>
-#&gt; <span class='message'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpV3bw3p/8c931ff633c5c50d595e5c3d4503773a.rds</span>
+#&gt; <span class='message'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpC7TNMN/8c931ff633c5c50d595e5c3d4503773a.rds</span>
 #&gt; <span class='message'></span><span></span></div><div class='input'>
 <span class='co'># \donttest{</span>
 <span class='co'>#example 2 : automotive industry and overall industrial production</span>
@@ -190,7 +190,7 @@ Consequently, it is not advised to use it on the whole idbank dataset, the user 
  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='fu'>str_detect</span>(<span class='no'>dim4</span>,<span class='st'>"^29$|A10-BE"</span>)) <span class='kw'>%&gt;%</span> <span class='co'>#automotive industry and overall industrial production</span>
  <span class='fu'>mutate</span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='fu'>get_insee_title</span>(<span class='no'>idbank</span>))</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/0 - Data download :</span><span></span></div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%
 #&gt; Response [https://bdm.insee.fr/series/sdmx/data/SERIES_BDM/NA?lastNObservations=1]
-#&gt;   Date: 2020-08-31 09:13
+#&gt;   Date: 2020-08-31 09:34
 #&gt;   Status: 404
 #&gt;   Content-Type: application/json
 #&gt;   Size: 315 B
