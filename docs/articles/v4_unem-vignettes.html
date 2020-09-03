@@ -122,7 +122,7 @@
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">nomflow</span> <span class="kw">==</span> <span class="st">"CHOMAGE-TRIM-NATIONAL"</span>) <span class="kw">%&gt;%</span> <span class="co">#Unemployment dataset</span>
   <span class="fu"><a href="../reference/add_insee_title.html">add_insee_title</a></span>() <span class="kw">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim2</span> <span class="kw">==</span> <span class="st">"CTTXC"</span>) <span class="kw">%&gt;%</span> <span class="co">#unemployment rate based on ILO standards</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim4</span> <span class="kw">==</span> <span class="st">"FE"</span>) <span class="kw">%&gt;%</span>  <span class="co"># all France including overseas departements</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim4</span> <span class="kw">==</span> <span class="st">"FM"</span>) <span class="kw">%&gt;%</span>  <span class="co"># all France excluding overseas departements</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim5</span> <span class="kw">==</span> <span class="fl">0</span>) <span class="co"># men and women</span>
 
 <span class="no">list_idbank</span> <span class="kw">=</span> <span class="no">df_idbank_list_selected</span> <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">idbank</span>)

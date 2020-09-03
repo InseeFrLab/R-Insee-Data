@@ -146,8 +146,8 @@
 <a href="#insee-090" class="anchor"></a>insee 0.9.0<small> Unreleased </small>
 </h1>
 <ul>
-<li>progress bar addition in <code>get_insee</code> function</li>
 <li>all data is cached, and then all queries are run once per R session</li>
+<li>RapidXML C++ library is used by default in <code>get_insee</code> function through readsdmx package</li>
 <li>
 <code>get_insee_idbank</code> splits automatically a big query into several queries of 400-idbank each</li>
 <li>
@@ -156,10 +156,10 @@
 <code>add_insee_title</code> function : find INSEE title of an unlimited amount of idbanks</li>
 <li>
 <code>split_title</code> function : split quickly the titles provided with the data</li>
-<li>new vignette</li>
-<li>new pkgdown website : <a href="https://hadrilec.github.io/insee/" class="uri">https://hadrilec.github.io/insee/</a>
+<li>pkgdown website : <a href="https://hadrilec.github.io/insee/" class="uri">https://hadrilec.github.io/insee/</a>
 </li>
-<li>rsdmx and tidyr dependencies dropped</li>
+<li>code coverage with unit tests &gt; 90%</li>
+<li>rsdmx and tidyr dependencies dropped, readsdmx added</li>
 </ul>
 </div>
     <div id="insee-080" class="section level1">
