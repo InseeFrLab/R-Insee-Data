@@ -11,7 +11,8 @@
   Sys.setenv(INSEE_get_idbank_limit = 1200)
   Sys.setenv(INSEE_sdmx_idbank_limit = 400)
   Sys.setenv(INSEE_idbank_sep = ",")
-  Sys.setenv(INSEE_title_sep = " - | — | – ")
+  Sys.setenv(INSEE_title_sep = sprintf(" %s | %s | %s ", "-",
+                                       intToUtf8("0x2014"), intToUtf8("0x2013")))
   Sys.setenv(INSEE_value_as_numeric = "TRUE")
   Sys.setenv(INSEE_download_verbose = "TRUE")
   Sys.setenv(INSEE_download_option_idbank_list = "wb")
