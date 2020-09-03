@@ -17,6 +17,7 @@ BugReports: https://github.com/hadrilec/insee/issues
 Imports: 
   httr,
   xml2,
+  readsdmx,
   tibble,
   dplyr,
   stringr,
