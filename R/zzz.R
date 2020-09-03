@@ -17,4 +17,5 @@
   Sys.setenv(INSEE_download_option_idbank_list = "wb")
   Sys.setenv(INSEE_no_cache_use = "FALSE")
   Sys.setenv(INSEE_print_query = "FALSE")
+  Sys.setenv(INSEE_use_read_sdmx_slow = "FALSE")
 }
