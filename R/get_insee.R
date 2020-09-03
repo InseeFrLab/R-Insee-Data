@@ -8,6 +8,8 @@
 #' Sys.setenv(INSEE_download_verbose = "FALSE")
 #' The use of cached data can be disabled with : Sys.setenv(INSEE_no_cache_use = "TRUE")
 #' All queries are printed in the console with this command: Sys.setenv(INSEE_print_query = "TRUE").
+#' By default the RapidXML C++ library is used through the readsdmx package.
+#' The previous parser can still be used with this command : Sys.setenv(INSEE_read_sdmx_slow = "TRUE")
 #' @param link SDMX query link
 #' @param step argument used only for internal package purposes to tweak download display
 #' @return a tibble containing the data
@@ -43,13 +45,15 @@ get_insee = function(link, step = "1/1"){
 
     use_read_sdmx_fast = TRUE
 
-    if(link == Sys.getenv("INSEE_sdmx_link_dataflow")){
+    if(Sys.getenv("INSEE_read_sdmx_slow") == "TRUE"){
       use_read_sdmx_fast = FALSE
     }
+
     if(stringr::str_detect(link, "includeHistory")){
       use_read_sdmx_fast = FALSE
     }
-    if(Sys.getenv("INSEE_use_read_sdmx_slow") == "TRUE"){
+
+    if(link == Sys.getenv("INSEE_sdmx_link_dataflow")){
       use_read_sdmx_fast = FALSE
     }
 

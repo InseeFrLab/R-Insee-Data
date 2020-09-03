@@ -15,7 +15,7 @@
 #'
 #'idbank_list = get_idbank_list() #idbank list
 #'
-#'idbank_empl = idbank_list %>%#'
+#'idbank_empl = idbank_list %>%
 #'  filter(nomflow == "EMPLOI-SALARIE-TRIM-NATIONAL") %>% #employment
 #'  slice(1:15) %>%
 #'  add_insee_title()
@@ -34,7 +34,8 @@ add_insee_title = function(df, n_split, lang = "en", split = TRUE, clean = TRUE)
       col_idbank_name = names(df)[col_idbank]
 
       df = dplyr::mutate(.data = df,
-                         title = insee::get_insee_title(.data[[!!col_idbank_name]], lang = lang))
+                         title = insee::get_insee_title(.data[[!!col_idbank_name]],
+                                                        lang = lang))
 
       if(missing(n_split)){
         n_split = "max"

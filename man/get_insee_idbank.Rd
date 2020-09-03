@@ -18,7 +18,8 @@ get_insee_idbank(
 \arguments{
 \item{...}{one or several series key (idbank)}
 
-\item{limit}{by default, the function get_insee_idbank has a 1200-idbank limit. Set limit argument to FALSE to ignore the limit or modify the limit with the following command : Sys.setenv(INSEE_idbank_limit = 1200)}
+\item{limit}{by default, the function get_insee_idbank has a 1200-idbank limit.
+Set limit argument to FALSE to ignore the limit or modify the limit with the following command : Sys.setenv(INSEE_idbank_limit = 1200)}
 
 \item{startPeriod}{start date of data}
 
