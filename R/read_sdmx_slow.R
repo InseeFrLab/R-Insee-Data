@@ -1,6 +1,6 @@
 
 #' @noRd
-read_sdmx_slow = function(link, step){
+read_sdmx_slow = function(link, step = "1/1"){
 
   insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
   insee_value_as_numeric = if(Sys.getenv("INSEE_value_as_numeric") == "TRUE"){TRUE}else{FALSE}
