@@ -54,9 +54,18 @@ get_insee = function(link, step = "1/1"){
     }
 
     if(use_read_sdmx_fast){
-      data_final = read_sdmx_fast(link)
-    }else{
-      data_final = read_sdmx_slow(link)
+      data_final = read_sdmx_fast(link, step)
+    }
+
+    # read_sdmx_slow is used as a backup solution in case read_sdmx_fast is not working
+    if(use_read_sdmx_fast == TRUE){
+      if(is.null(data_final)){
+        use_read_sdmx_fast = FALSE
+      }
+    }
+
+    if(use_read_sdmx_fast == FALSE){
+      data_final = read_sdmx_slow(link, step)
     }
 
     if(!is.null(data_final)){
@@ -64,7 +73,12 @@ get_insee = function(link, step = "1/1"){
       saveRDS(data_final, file = file_cache)
 
       if(insee_download_verbose){
-        msg = sprintf("\nData cached : %s\n", file_cache)
+        if(use_read_sdmx_fast){
+          msg = sprintf("Data cached : %s\n", file_cache)
+        }else{
+          msg = sprintf("\nData cached : %s\n", file_cache)
+        }
+
         message(crayon::style(msg, "green"))
       }
     }

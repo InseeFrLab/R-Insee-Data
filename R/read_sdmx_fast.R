@@ -5,7 +5,7 @@ read_sdmx_fast = function(link, step = "1/1"){
   insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
 
   if(insee_download_verbose == TRUE){
-    msg = sprintf("%s Data download & Dataframe build", step)
+    msg = sprintf("%s - Data download & Dataframe build", step)
     message(crayon::style(msg, "black"))
   }
 
@@ -24,7 +24,14 @@ read_sdmx_fast = function(link, step = "1/1"){
                          "IDBANK", "FREQ", "TITLE_FR", "TITLE_EN", "LAST_UPDATE", "UNIT_MEASURE",
                          "UNIT_MULT", "REF_AREA", "DECIMALS")
 
-      data_final = tibble::as_tibble(data[, colnames_order])
+      other_columns_id = which(!names(data) %in% colnames_order)
+      if(length(other_columns_id) > 0){
+        col_names_order = c(colnames_order, names(data)[other_columns_id])
+      }
+
+      data = dplyr::select(.data = data, tidyselect::all_of(col_names_order))
+
+      data_final = tibble::as_tibble(data)
     }else{
       data_final = NULL
     }
