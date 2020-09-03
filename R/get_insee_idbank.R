@@ -11,7 +11,8 @@
 #' @param lastNObservations get the last N observations for each key series (idbank)
 #' @param includeHistory boolean to access the previous releases (not available on all series)
 #' @param updatedAfter starting point for querying the previous releases (format yyyy-mm-ddThh:mm:ss)
-#' @param limit by default, the function get_insee_idbank has a 1200-idbank limit. Set limit argument to FALSE to ignore the limit or modify the limit with the following command : Sys.setenv(INSEE_idbank_limit = 1200)
+#' @param limit by default, the function get_insee_idbank has a 1200-idbank limit.
+#' Set limit argument to FALSE to ignore the limit or modify the limit with the following command : Sys.setenv(INSEE_idbank_limit = 1200)
 #' @return a tibble with the data
 #' @examples
 #' \donttest{

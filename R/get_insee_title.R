@@ -41,7 +41,8 @@ get_insee_title = function(..., lang = "en"){
   }
   list_idbank = unique(list_idbank)
 
-  df_title = get_insee_idbank(list_idbank, lastNObservations = 1, limit = FALSE)
+  df_title = get_insee_idbank(list_idbank, lastNObservations = 1,
+                              limit = FALSE)
 
   df_title = dplyr::select(.data = df_title, c("IDBANK", "TITLE_EN", "TITLE_FR"))
 
