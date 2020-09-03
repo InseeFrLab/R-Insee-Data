@@ -33,9 +33,11 @@ read_sdmx_fast = function(link, step = "1/1"){
 
       data_final = tibble::as_tibble(data)
     }else{
+      warning("Wrong query")
       data_final = NULL
     }
   }else{
+    warning("Wrong query")
     data_final = NULL
   }
 
