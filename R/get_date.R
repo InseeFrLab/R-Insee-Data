@@ -2,6 +2,8 @@
 #' @noRd
 get_date = function(date, freq){
 
+  freq = unique(freq)[1]
+
   # semester
   if(freq == "S"){
     date = stringr::str_replace_all(date, c("-S1" = "-Q1",

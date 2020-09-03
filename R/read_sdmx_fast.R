@@ -15,10 +15,10 @@ read_sdmx_fast = function(link, step = "1/1"){
     if(nrow(data) > 0){
       data$OBS_VALUE = as.numeric(data$OBS_VALUE)
 
-      data = dplyr::group_by(.data = data, IDBANK)
+      data = dplyr::group_by(.data = data, .data$IDBANK)
 
       data = dplyr::mutate(.data = data,
-                           DATE = insee:::get_date(TIME_PERIOD, unique(FREQ)))
+                           DATE = get_date(.data$TIME_PERIOD, .data$FREQ))
 
       colnames_order = c("DATE", "TIME_PERIOD", "OBS_VALUE", "OBS_STATUS", "OBS_QUAL", "OBS_TYPE",
                          "IDBANK", "FREQ", "TITLE_FR", "TITLE_EN", "LAST_UPDATE", "UNIT_MEASURE",
@@ -26,10 +26,10 @@ read_sdmx_fast = function(link, step = "1/1"){
 
       other_columns_id = which(!names(data) %in% colnames_order)
       if(length(other_columns_id) > 0){
-        col_names_order = c(colnames_order, names(data)[other_columns_id])
+        colnames_order = c(colnames_order, names(data)[other_columns_id])
       }
 
-      data = dplyr::select(.data = data, tidyselect::all_of(col_names_order))
+      data = dplyr::select(.data = data, tidyselect::all_of(colnames_order))
 
       data_final = tibble::as_tibble(data)
     }else{

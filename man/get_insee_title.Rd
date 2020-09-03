@@ -23,23 +23,23 @@ Any query to INSEE database can handle around 400 idbanks at maximum, if necessa
 Consequently, it is not advised to use it on the whole idbank dataset, the user should filter the idbank dataset first.
 }
 \examples{
+\donttest{
 #example 1 : industrial production index on manufacturing and industrial activities
 title = get_insee_title("010537900")
 
-\donttest{
 #example 2 : automotive industry and overall industrial production
 library(tidyverse)
 
 idbank_list = get_idbank_list()
 
 idbank_list_selected =
- idbank_list \%>\%
- filter(nomflow == "IPI-2015") \%>\% #industrial production index dataset
- filter(dim1 == "M") \%>\% #monthly
- filter(dim5 == "INDICE") \%>\% #index
- filter(dim8  == "CVS-CJO") \%>\% #Working day and seasonally adjusted SA-WDA
- filter(str_detect(dim4,"^29$|A10-BE")) \%>\% #automotive industry and overall industrial production
- mutate(title = get_insee_title(idbank))
+  idbank_list \%>\%
+  filter(nomflow == "IPI-2015") \%>\% #industrial production index dataset
+  filter(dim1 == "M") \%>\% #monthly
+  filter(dim6 == "INDICE") \%>\% #index
+  filter(dim9  == "CVS-CJO") \%>\% #Working day and seasonally adjusted SA-WDA
+  filter(str_detect(dim5,"^29$|A10-BE")) \%>\% #automotive industry and overall industrial production
+  mutate(title = get_insee_title(idbank))
 }
 
 }
