@@ -164,7 +164,11 @@ all the data is returned</p></td>
     <p>a tibble the idbank dataset</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Download a mapping dataset betwen INSEE series keys (idbank) and SDMX series names</p>
+    <p>Download a mapping dataset betwen INSEE series keys (idbank) and SDMX series names.
+Under the hood the get_idbank_list uses download.file function from utils, the user can change the mode argument with the following
+command : Sys.getenv(INSEE_download_option_idbank_list = "wb")
+If makes an update, the user can also change the zip file downloaded, the data file contained in the zip and data the separator  :
+Sys.setenv(INSEE_idbank_dataset_path = "new_zip_file_link");Sys.setenv(INSEE_idbank_sep = ",");Sys.setenv(INSEE_idbank_dataset_file = "new_data_file_name")</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='no'>idbank_list</span> <span class='kw'>=</span> <span class='fu'>get_idbank_list</span>()</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>Cached data has been used</span><span></span></div></span></pre>
