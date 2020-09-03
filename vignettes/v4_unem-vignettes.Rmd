@@ -58,7 +58,7 @@ df_idbank_list_selected =
   filter(nomflow == "CHOMAGE-TRIM-NATIONAL") %>% #Unemployment dataset
   add_insee_title() %>%
   filter(dim2 == "CTTXC") %>% #unemployment rate based on ILO standards
-  filter(dim4 == "FE") %>%  # all France including overseas departements
+  filter(dim4 == "FM") %>%  # all France excluding overseas departements
   filter(dim5 == 0) # men and women
 
 list_idbank = df_idbank_list_selected %>% pull(idbank)
