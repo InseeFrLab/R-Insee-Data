@@ -31,12 +31,13 @@ get_idbank_list = function(
                                              dataset = dataset), silent = TRUE)
 
     if(class(mapping_final) == "try-error"){
+
+      mapping_final = idbank_list
+
       msg1 = "Idbank list download failed."
       msg2 = "Package's internal data has been used instead."
       msg3 = "\nPlease contact the package maintainer if this error persists."
       warning(sprintf("%s %s %s", msg1, msg2, msg3))
-
-      mapping_final = data(idbank_list)
     }
 
   }else{
