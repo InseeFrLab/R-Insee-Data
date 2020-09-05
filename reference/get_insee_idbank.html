@@ -209,7 +209,7 @@ Sys.setenv(INSEE_download_verbose = "FALSE")</p>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 
 <span class='co'>#example 1 : import price index of industrial products and turnover index : manufacture of wood</span>
-<span class='no'>data</span> <span class='kw'>=</span> <span class='fu'>get_insee_idbank</span>(<span class='st'>"001558315"</span>, <span class='st'>"010540726"</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpyW3yrn/0340378351af7c9c4993852409c6853b.rds</span>
+<span class='no'>data</span> <span class='kw'>=</span> <span class='fu'>get_insee_idbank</span>(<span class='st'>"001558315"</span>, <span class='st'>"010540726"</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp5But4j/0340378351af7c9c4993852409c6853b.rds</span>
 #&gt; <span class='message'></span><span></span></div><div class='input'>
 <span class='co'>#example 2 : unemployment data</span>
 
@@ -220,11 +220,11 @@ Sys.setenv(INSEE_download_verbose = "FALSE")</p>
   <span class='no'>idbank_list</span> <span class='kw'>%&gt;%</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='no'>nomflow</span> <span class='kw'>==</span> <span class='st'>"CHOMAGE-TRIM-NATIONAL"</span>) <span class='kw'>%&gt;%</span>  <span class='co'>#unemployment dataset</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span>(<span class='no'>dim5</span> <span class='kw'>==</span> <span class='fl'>0</span>) <span class='kw'>%&gt;%</span> <span class='co'>#men and women</span>
-  <span class='fu'>mutate</span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='fu'><a href='get_insee_title.html'>get_insee_title</a></span>(<span class='no'>idbank</span>))</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpyW3yrn/a03de67a056ac488b056a6a4b67c1cf3.rds</span>
+  <span class='fu'>mutate</span>(<span class='kw'>title</span> <span class='kw'>=</span> <span class='fu'><a href='get_insee_title.html'>get_insee_title</a></span>(<span class='no'>idbank</span>))</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp5But4j/a03de67a056ac488b056a6a4b67c1cf3.rds</span>
 #&gt; <span class='message'></span><span></span></div><div class='input'>
 <span class='no'>idbank_list_selected</span> <span class='kw'>=</span> <span class='no'>df_idbank_list_selected</span> <span class='kw'>%&gt;%</span> <span class='fu'>pull</span>(<span class='no'>idbank</span>)
 
-<span class='no'>unem</span> <span class='kw'>=</span> <span class='fu'>get_insee_idbank</span>(<span class='no'>idbank_list_selected</span>)</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpyW3yrn/8281f4b4beab4d8f14a48c5a396bba04.rds</span>
+<span class='no'>unem</span> <span class='kw'>=</span> <span class='fu'>get_insee_idbank</span>(<span class='no'>idbank_list_selected</span>)</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp5But4j/8281f4b4beab4d8f14a48c5a396bba04.rds</span>
 #&gt; <span class='message'></span><span></span></div><div class='input'>
 <span class='co'>#example 3 : French GDP growth rate</span>
 
@@ -241,7 +241,7 @@ Sys.setenv(INSEE_download_verbose = "FALSE")</p>
 
 <span class='no'>idbank</span> <span class='kw'>=</span> <span class='no'>df_idbank_list_selected</span> <span class='kw'>%&gt;%</span> <span class='fu'>pull</span>(<span class='no'>idbank</span>)
 
-<span class='no'>data</span> <span class='kw'>=</span> <span class='fu'>get_insee_idbank</span>(<span class='no'>idbank</span>)</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpyW3yrn/75180c15d5ecfe6ca41459680972f91d.rds</span>
+<span class='no'>data</span> <span class='kw'>=</span> <span class='fu'>get_insee_idbank</span>(<span class='no'>idbank</span>)</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp5But4j/75180c15d5ecfe6ca41459680972f91d.rds</span>
 #&gt; <span class='message'></span><span></span></div><div class='input'>
 <span class='co'>#plot</span>
 <span class='fu'>ggplot</span>(<span class='no'>data</span>, <span class='fu'>aes</span>(<span class='kw'>x</span> <span class='kw'>=</span> <span class='no'>DATE</span>, <span class='kw'>y</span> <span class='kw'>=</span> <span class='no'>OBS_VALUE</span>)) +
