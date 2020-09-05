@@ -34,43 +34,49 @@ get_idbank_list = function(
   # download and unzip
   if(!file.exists(mapping_file_cache) | insee_no_cache_use){
 
-    utils::download.file(file_to_dwn, temp_file,
-                         mode = insee_download_option_idbank_list, quiet = TRUE)
-    utils::unzip(temp_file, exdir = temp_dir)
+    dwn = try(utils::download.file(file_to_dwn, temp_file,
+                         mode = insee_download_option_idbank_list, quiet = TRUE), silent = TRUE)
 
-    mapping_file = file.path(temp_dir, list.files(temp_dir, pattern = mapping_file_pattern)[1])
-    # load data
-    mapping = utils::read.delim(mapping_file, sep = mapping_file_sep, stringsAsFactors = F)
+    if(class(dwn) != "try-error"){
+      utils::unzip(temp_file, exdir = temp_dir)
 
-    # filter data
-    if(!is.null(dataset)){
-      dataset_list = unique(mapping[, "nomflow"])
-      if(dataset %in% dataset_list){
-        mapping = mapping[which(mapping[, "nomflow"] == dataset),]
+      mapping_file = file.path(temp_dir, list.files(temp_dir, pattern = mapping_file_pattern)[1])
+      # load data
+      mapping = utils::read.delim(mapping_file, sep = mapping_file_sep, stringsAsFactors = F)
+
+      # filter data
+      if(!is.null(dataset)){
+        dataset_list = unique(mapping[, "nomflow"])
+        if(dataset %in% dataset_list){
+          mapping = mapping[which(mapping[, "nomflow"] == dataset),]
+        }
       }
+
+      dot_vector = stringr::str_count(mapping$cleFlow, pattern = "\\.")
+      n_col = max(dot_vector) + 1
+
+      mapping_final = separate_col(df = mapping, col = "cleFlow",
+                                   sep = "\\.", into = paste0("dim", 1:n_col))
+
+      add_zero = function(x, idbank_nchar_arg = idbank_nchar){
+        paste0(c(rep("0", idbank_nchar_arg-nchar(x)), x), collapse = "")}
+
+      mapping_final[,"idbank"] = vapply(mapping_final[,"idbank"], add_zero, "")
+
+      if("n_series" %in% names(mapping_final)){
+        mapping_final[,"n_series"] = as.numeric(as.character(mapping_final[,"n_series"]))
+      }
+
+      if(insee_download_verbose){
+        msg = sprintf("\nData cached : %s\n", mapping_file_cache)
+        message(crayon::style(msg, "green"))
+      }
+
+      saveRDS(mapping_final, file = mapping_file_cache)
+    }else{
+      mapping_final = data(idbank_list)
     }
 
-    dot_vector = stringr::str_count(mapping$cleFlow, pattern = "\\.")
-    n_col = max(dot_vector) + 1
-
-    mapping_final = separate_col(df = mapping, col = "cleFlow",
-                                  sep = "\\.", into = paste0("dim", 1:n_col))
-
-    add_zero = function(x, idbank_nchar_arg = idbank_nchar){
-      paste0(c(rep("0", idbank_nchar_arg-nchar(x)), x), collapse = "")}
-
-    mapping_final[,"idbank"] = vapply(mapping_final[,"idbank"], add_zero, "")
-
-    if("n_series" %in% names(mapping_final)){
-      mapping_final[,"n_series"] = as.numeric(as.character(mapping_final[,"n_series"]))
-    }
-
-    if(insee_download_verbose){
-      msg = sprintf("\nData cached : %s\n", mapping_file_cache)
-      message(crayon::style(msg, "green"))
-    }
-
-    saveRDS(mapping_final, file = mapping_file_cache)
 
   }else{
     if(insee_download_verbose){
