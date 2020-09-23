@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">insee</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
       </span>
     </div>
 
@@ -124,12 +124,38 @@
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">insee</span>)</pre></div>
 </div>
+<div id="french-gdp-growth-rate" class="section level2">
+<h2 class="hasAnchor">
+<a href="#french-gdp-growth-rate" class="anchor"></a>French GDP growth rate</h2>
+<p><img src="articles/gdp.png"></p>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">insee</span>)
+
+<span class="no">idbank_list</span> <span class="kw">=</span> <span class="fu"><a href="reference/get_idbank_list.html">get_idbank_list</a></span>()
+
+<span class="no">df_idbank_list_selected</span> <span class="kw">=</span>
+  <span class="no">idbank_list</span> <span class="kw">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">nomflow</span> <span class="kw">==</span> <span class="st">"CNT-2014-PIB-EQB-RF"</span>) <span class="kw">%&gt;%</span> <span class="co"># Gross domestic product balance</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim1</span> <span class="kw">==</span> <span class="st">"T"</span>) <span class="kw">%&gt;%</span> <span class="co">#quarter</span>
+  <span class="fu"><a href="reference/add_insee_title.html">add_insee_title</a></span>() <span class="kw">%&gt;%</span> <span class="co">#add titles</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim4</span> <span class="kw">==</span> <span class="st">"PIB"</span>) <span class="kw">%&gt;%</span> <span class="co">#GDP</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim6</span> <span class="kw">==</span> <span class="st">"TAUX"</span>) <span class="kw">%&gt;%</span> <span class="co">#rate</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim10</span> <span class="kw">==</span> <span class="st">"CVS-CJO"</span>) <span class="co">#SA-WDA, seasonally adjusted, working day adjusted</span>
+
+<span class="no">idbank</span> <span class="kw">=</span> <span class="no">df_idbank_list_selected</span> <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">idbank</span>)
+
+<span class="no">data</span> <span class="kw">=</span> <span class="fu"><a href="reference/get_insee_idbank.html">get_insee_idbank</a></span>(<span class="no">idbank</span>)
+
+<span class="fu">ggplot</span>(<span class="no">data</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">DATE</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">OBS_VALUE</span>)) +
+  <span class="fu">geom_col</span>() +
+  <span class="fu">ggtitle</span>(<span class="st">"French GDP growth rate, quarter-on-quarter, sa-wda"</span>) +
+  <span class="fu">labs</span>(<span class="kw">subtitle</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"Last updated : %s"</span>, <span class="no">data</span>$<span class="no">TIME_PERIOD</span>[<span class="fl">1</span>]))</pre></div>
+</div>
 <div id="examples--tutorial" class="section level2">
 <h2 class="hasAnchor">
 <a href="#examples--tutorial" class="anchor"></a>Examples &amp; Tutorial</h2>
 <ul>
 <li><a href="https://hadrilec.github.io/insee/articles/insee.html">Tutorial</a></li>
-<li><a href="https://hadrilec.github.io/insee/articles/v2_gdp-vignettes.html">GDP growth rate</a></li>
 <li><a href="https://hadrilec.github.io/insee/articles/v3_inflation-vignettes.html">Inflation</a></li>
 <li><a href="https://hadrilec.github.io/insee/articles/v4_unem-vignettes.html">Unemployment rate</a></li>
 <li><a href="https://hadrilec.github.io/insee/articles/v5_pop-vignettes.html">Population by age</a></li>
@@ -139,7 +165,7 @@
 <div id="how-to-avoid-proxy-issues-" class="section level2">
 <h2 class="hasAnchor">
 <a href="#how-to-avoid-proxy-issues-" class="anchor"></a>How to avoid proxy issues ?</h2>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="kw">http_proxy</span> <span class="kw">=</span> <span class="st">"my_proxy_server"</span>)
+<div class="sourceCode" id="cb3"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="kw">http_proxy</span> <span class="kw">=</span> <span class="st">"my_proxy_server"</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="kw">https_proxy</span> <span class="kw">=</span> <span class="st">"my_proxy_server"</span>)</pre></div>
 </div>
 <div id="support" class="section level2">
