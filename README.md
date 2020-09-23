@@ -44,11 +44,38 @@ library(tidyverse)
 library(insee)
 ```
 
+## French GDP growth rate
+
+![](vignettes/gdp.png)
+
+``` r
+library(tidyverse)
+library(insee)
+
+idbank_list = get_idbank_list()
+
+df_idbank_list_selected =
+  idbank_list %>%
+  filter(nomflow == "CNT-2014-PIB-EQB-RF") %>% # Gross domestic product balance
+  filter(dim1 == "T") %>% #quarter
+  add_insee_title() %>% #add titles
+  filter(dim4 == "PIB") %>% #GDP
+  filter(dim6 == "TAUX") %>% #rate
+  filter(dim10 == "CVS-CJO") #SA-WDA, seasonally adjusted, working day adjusted
+
+idbank = df_idbank_list_selected %>% pull(idbank)
+
+data = get_insee_idbank(idbank)
+
+ggplot(data, aes(x = DATE, y = OBS_VALUE)) +
+  geom_col() +
+  ggtitle("French GDP growth rate, quarter-on-quarter, sa-wda") +
+  labs(subtitle = sprintf("Last updated : %s", data$TIME_PERIOD[1]))
+```
+
 ## Examples & Tutorial
 
   - [Tutorial](https://hadrilec.github.io/insee/articles/insee.html)
-  - [GDP growth
-    rate](https://hadrilec.github.io/insee/articles/v2_gdp-vignettes.html)
   - [Inflation](https://hadrilec.github.io/insee/articles/v3_inflation-vignettes.html)
   - [Unemployment
     rate](https://hadrilec.github.io/insee/articles/v4_unem-vignettes.html)
