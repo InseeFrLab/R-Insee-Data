@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">insee</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
       </span>
     </div>
 
@@ -108,71 +108,73 @@
     
     
 <p><img src="pop_map.png" width="680" height="568"></p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">insee</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://hadrilec.github.io/insee">insee</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span>)
 
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">raster</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">rgdal</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">broom</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">viridis</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">raster</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">rgdal</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://broom.tidymodels.org">broom</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw">viridis</span>)
 
-<span class="no">idbank_list</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span>()
+<span class="kw">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span>()
 
-<span class="no">dataset_list</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span>()
+<span class="kw">dataset_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span>()
 
-<span class="no">list_idbank</span> <span class="kw">=</span> <span class="no">idbank_list</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">nomflow</span> <span class="kw">==</span> <span class="st">"TCRED-ESTIMATIONS-POPULATION"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim6</span> <span class="kw">==</span> <span class="st">"00-"</span>) <span class="kw">%&gt;%</span> <span class="co">#all ages</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim5</span> <span class="kw">==</span> <span class="fl">0</span>) <span class="kw">%&gt;%</span> <span class="co">#men and women</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="fu">str_detect</span>(<span class="no">dim4</span>, <span class="st">"^D"</span>)) <span class="kw">%&gt;%</span> <span class="co">#select only departements</span>
-  <span class="fu">mutate</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_insee_title.html">get_insee_title</a></span>(<span class="no">idbank</span>))
+<span class="kw">list_idbank</span> <span class="op">=</span> <span class="kw">idbank_list</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">nomflow</span> <span class="op">==</span> <span class="st">"TCRED-ESTIMATIONS-POPULATION"</span>) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">dim6</span> <span class="op">==</span> <span class="st">"00-"</span>) <span class="op">%&gt;%</span> <span class="co">#all ages</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">dim5</span> <span class="op">==</span> <span class="fl">0</span>) <span class="op">%&gt;%</span> <span class="co">#men and women</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="fu">str_detect</span>(<span class="kw">dim4</span>, <span class="st">"^D"</span>)) <span class="op">%&gt;%</span> <span class="co">#select only departements</span>
+  <span class="fu">mutate</span>(title = <span class="fu"><a href="../reference/get_insee_title.html">get_insee_title</a></span>(<span class="kw">idbank</span>))
 
-<span class="no">list_idbank_selected</span> <span class="kw">=</span> <span class="no">list_idbank</span> <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">idbank</span>)
+<span class="kw">list_idbank_selected</span> <span class="op">=</span> <span class="kw">list_idbank</span> <span class="op">%&gt;%</span> <span class="fu">pull</span>(<span class="kw">idbank</span>)
 
 <span class="co"># get population data by departement</span>
-<span class="no">pop</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span>(<span class="no">list_idbank_selected</span>)
+<span class="kw">pop</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span>(<span class="kw">list_idbank_selected</span>)
 
 <span class="co">#get departements' geographical limits</span>
-<span class="no">FranceMap</span> <span class="kw">&lt;-</span> <span class="kw pkg">raster</span><span class="kw ns">::</span><span class="fu">getData</span>(<span class="kw">name</span> <span class="kw">=</span> <span class="st">"GADM"</span>, <span class="kw">country</span> <span class="kw">=</span> <span class="st">"FRA"</span>, <span class="kw">level</span> <span class="kw">=</span> <span class="fl">2</span>)
+<span class="kw">FranceMap</span> <span class="op">&lt;-</span> <span class="kw">raster</span>::<span class="fu">getData</span>(name = <span class="st">"GADM"</span>, country = <span class="st">"FRA"</span>, level = <span class="fl">2</span>)
 
 <span class="co"># extract the population by departement in 2020</span>
-<span class="no">pop_plot</span> <span class="kw">=</span> <span class="no">pop</span> <span class="kw">%&gt;%</span>
-  <span class="fu">group_by</span>(<span class="no">TITLE_EN</span>) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">DATE</span> <span class="kw">==</span> <span class="st">"2020-01-01"</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">mutate</span>(<span class="kw">dptm</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="st">"D"</span>, <span class="st">""</span>, <span class="no">REF_AREA</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dptm</span> <span class="kw">%in%</span> <span class="no">FranceMap</span>@<span class="kw">data</span>$<span class="no">CC_2</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">mutate</span>(<span class="kw">dptm</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="no">dptm</span>, <span class="kw">levels</span> <span class="kw">=</span> <span class="no">FranceMap</span>@<span class="kw">data</span>$<span class="no">CC_2</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu">arrange</span>(<span class="no">dptm</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">mutate</span>(<span class="kw">id</span> <span class="kw">=</span> <span class="no">dptm</span>)
+<span class="kw">pop_plot</span> <span class="op">=</span> <span class="kw">pop</span> <span class="op">%&gt;%</span>
+  <span class="fu">group_by</span>(<span class="kw">TITLE_EN</span>) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">DATE</span> <span class="op">==</span> <span class="st">"2020-01-01"</span>) <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span>(dptm = <span class="fu"><a href="https://rdrr.io/r/base/grep.html">gsub</a></span>(<span class="st">"D"</span>, <span class="st">""</span>, <span class="kw">REF_AREA</span>)) <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">dptm</span> <span class="op">%in%</span> <span class="kw">FranceMap</span><span class="op">@</span>data<span class="op">$</span><span class="kw">CC_2</span>) <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span>(dptm = <span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span>(<span class="kw">dptm</span>, levels = <span class="kw">FranceMap</span><span class="op">@</span>data<span class="op">$</span><span class="kw">CC_2</span>)) <span class="op">%&gt;%</span>
+  <span class="fu">arrange</span>(<span class="kw">dptm</span>) <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span>(id = <span class="kw">dptm</span>)
 
-<span class="no">vec_pop</span> <span class="kw">=</span> <span class="no">pop_plot</span> <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">OBS_VALUE</span>)
+<span class="kw">vec_pop</span> <span class="op">=</span> <span class="kw">pop_plot</span> <span class="op">%&gt;%</span> <span class="fu">pull</span>(<span class="kw">OBS_VALUE</span>)
 
 <span class="co"># add population data to the departement object map</span>
-<span class="no">FranceMap</span>@<span class="kw">data</span>$<span class="no">pop</span> <span class="kw">=</span> <span class="no">vec_pop</span>
+<span class="kw">FranceMap</span><span class="op">@</span>data<span class="op">$</span><span class="kw">pop</span> <span class="op">=</span> <span class="kw">vec_pop</span>
 
 <span class="co"># extract the departements' limits from the spatial object</span>
-<span class="no">FranceMap_tidy</span> <span class="kw">&lt;-</span> <span class="kw pkg">broom</span><span class="kw ns">::</span><span class="fu"><a href="https://broom.tidymodels.org/reference/reexports.html">tidy</a></span>(<span class="no">FranceMap</span>)
+<span class="kw">FranceMap_tidy</span> <span class="op">&lt;-</span> <span class="kw">broom</span>::<span class="fu"><a href="https://rdrr.io/pkg/generics/man/tidy.html">tidy</a></span>(<span class="kw">FranceMap</span>)
 
 <span class="co"># mapping table</span>
-<span class="no">dptm_df</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw">dptm</span> <span class="kw">=</span> <span class="no">FranceMap</span>@<span class="kw">data</span>$<span class="no">CC_2</span>,
-                     <span class="kw">dptm_name</span> <span class="kw">=</span> <span class="no">FranceMap</span>@<span class="kw">data</span>$<span class="no">NAME_2</span>,
-                     <span class="kw">pop</span> <span class="kw">=</span> <span class="no">FranceMap</span>@<span class="kw">data</span>$<span class="no">pop</span>,
-                     <span class="kw">id</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(<span class="no">FranceMap</span>@<span class="kw">data</span>))
+<span class="kw">dptm_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(dptm = <span class="kw">FranceMap</span><span class="op">@</span>data<span class="op">$</span><span class="kw">CC_2</span>,
+                     dptm_name = <span class="kw">FranceMap</span><span class="op">@</span>data<span class="op">$</span><span class="kw">NAME_2</span>,
+                     pop = <span class="kw">FranceMap</span><span class="op">@</span>data<span class="op">$</span><span class="kw">pop</span>,
+                     id = <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(<span class="kw">FranceMap</span><span class="op">@</span>data))
 
 <span class="co"># add population data to departement dataframe</span>
-<span class="no">FranceMap_tidy_final</span> <span class="kw">=</span>
-  <span class="no">FranceMap_tidy</span> <span class="kw">%&gt;%</span>
-  <span class="fu">left_join</span>(<span class="no">dptm_df</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="st">"id"</span>) <span class="kw">%&gt;%</span>
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="no">long</span>, <span class="no">lat</span>, <span class="no">pop</span>, <span class="no">group</span>, <span class="no">id</span>)
+<span class="kw">FranceMap_tidy_final</span> <span class="op">=</span>
+  <span class="kw">FranceMap_tidy</span> <span class="op">%&gt;%</span>
+  <span class="fu">left_join</span>(<span class="kw">dptm_df</span>, by = <span class="st">"id"</span>) <span class="op">%&gt;%</span>
+  <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/select.html">select</a></span>(<span class="kw">long</span>, <span class="kw">lat</span>, <span class="kw">pop</span>, <span class="kw">group</span>, <span class="kw">id</span>)
 
-<span class="fu">ggplot</span>() +
-  <span class="fu">geom_polygon</span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">FranceMap_tidy_final</span>,
-               <span class="fu">aes</span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="no">pop</span>, <span class="kw">x</span> <span class="kw">=</span> <span class="no">long</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">lat</span>, <span class="kw">group</span> <span class="kw">=</span> <span class="no">group</span>) ,
-               <span class="kw">size</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">0.9</span>) +
-  <span class="fu">coord_map</span>() +
-  <span class="fu">theme_void</span>() +
-  <span class="fu">scale_fill_viridis</span>() +
-  <span class="fu">ggtitle</span>(<span class="st">"Distribution of the population within French territory in 2020"</span>)</pre></body></html></div>
+<span class="fu">ggplot</span>() <span class="op">+</span>
+  <span class="fu">geom_polygon</span>(data = <span class="kw">FranceMap_tidy_final</span>,
+               <span class="fu">aes</span>(fill = <span class="kw">pop</span>, x = <span class="kw">long</span>, y = <span class="kw">lat</span>, group = <span class="kw">group</span>) ,
+               size = <span class="fl">0</span>, alpha = <span class="fl">0.9</span>) <span class="op">+</span>
+  <span class="fu">coord_map</span>() <span class="op">+</span>
+  <span class="fu">theme_void</span>() <span class="op">+</span>
+  <span class="fu">scale_fill_viridis</span>() <span class="op">+</span>
+  <span class="fu">ggtitle</span>(<span class="st">"Distribution of the population within French territory in 2020"</span>)
+</pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -188,7 +190,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

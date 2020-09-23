@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">insee</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
       </span>
     </div>
 
@@ -108,44 +108,46 @@
     
     
 <p><img src="inflation.png" width="997" height="601"></p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="co"># please download the Github version</span>
+<div class="sourceCode" id="cb1"><pre class="downlit">
+<span class="co"># please download the Github version</span>
 <span class="co"># devtools::install_github("hadrilec/insee")</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">lubridate</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">insee</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://lubridate.tidyverse.org">lubridate</a></span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://hadrilec.github.io/insee">insee</a></span>)
 
-<span class="no">idbank_list</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span>()
+<span class="kw">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span>()
 
-<span class="no">df_idbank_list_selected</span> <span class="kw">=</span>
-  <span class="no">idbank_list</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">nomflow</span> <span class="kw">==</span> <span class="st">"IPC-2015"</span>) <span class="kw">%&gt;%</span> <span class="co">#Inflation dataset</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim1</span> <span class="kw">==</span> <span class="st">"M"</span>) <span class="kw">%&gt;%</span> <span class="co"># monthly</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="fu">str_detect</span>(<span class="no">dim4</span>, <span class="st">"^[0-9]{2}$"</span>)) <span class="kw">%&gt;%</span> <span class="co"># coicop aggregation level</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim6</span> <span class="kw">==</span> <span class="st">"INDICE"</span>) <span class="kw">%&gt;%</span> <span class="co"># index</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim7</span> <span class="kw">==</span> <span class="st">"ENSEMBLE"</span>) <span class="kw">%&gt;%</span> <span class="co"># all kinds of household</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim8</span> <span class="kw">==</span> <span class="st">"FE"</span>) <span class="kw">%&gt;%</span> <span class="co"># all France including overseas departements</span>
-  <span class="fu">mutate</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_insee_title.html">get_insee_title</a></span>(<span class="no">idbank</span>))
+<span class="kw">df_idbank_list_selected</span> <span class="op">=</span>
+  <span class="kw">idbank_list</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">nomflow</span> <span class="op">==</span> <span class="st">"IPC-2015"</span>) <span class="op">%&gt;%</span> <span class="co">#Inflation dataset</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">dim1</span> <span class="op">==</span> <span class="st">"M"</span>) <span class="op">%&gt;%</span> <span class="co"># monthly</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="fu">str_detect</span>(<span class="kw">dim4</span>, <span class="st">"^[0-9]{2}$"</span>)) <span class="op">%&gt;%</span> <span class="co"># coicop aggregation level</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">dim6</span> <span class="op">==</span> <span class="st">"INDICE"</span>) <span class="op">%&gt;%</span> <span class="co"># index</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">dim7</span> <span class="op">==</span> <span class="st">"ENSEMBLE"</span>) <span class="op">%&gt;%</span> <span class="co"># all kinds of household</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">dim8</span> <span class="op">==</span> <span class="st">"FE"</span>) <span class="op">%&gt;%</span> <span class="co"># all France including overseas departements</span>
+  <span class="fu">mutate</span>(title = <span class="fu"><a href="../reference/get_insee_title.html">get_insee_title</a></span>(<span class="kw">idbank</span>))
 
-<span class="no">list_idbank</span> <span class="kw">=</span> <span class="no">df_idbank_list_selected</span> <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">idbank</span>)
+<span class="kw">list_idbank</span> <span class="op">=</span> <span class="kw">df_idbank_list_selected</span> <span class="op">%&gt;%</span> <span class="fu">pull</span>(<span class="kw">idbank</span>)
 
-<span class="no">data</span> <span class="kw">=</span>
-  <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span>(<span class="no">list_idbank</span>, <span class="kw">startPeriod</span> <span class="kw">=</span> <span class="st">"2015-01"</span>) <span class="kw">%&gt;%</span>
+<span class="kw">data</span> <span class="op">=</span> 
+  <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span>(<span class="kw">list_idbank</span>, startPeriod = <span class="st">"2015-01"</span>) <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/split_title.html">split_title</a></span>()
 
-<span class="no">data_plot</span> <span class="kw">=</span> <span class="no">data</span> <span class="kw">%&gt;%</span>
-  <span class="fu">mutate</span>(<span class="kw">TITLE_EN6</span> <span class="kw">=</span> <span class="fu">case_when</span>(<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="no">TITLE_EN6</span>) ~ <span class="no">TITLE_EN5</span>,
-                            <span class="fl">TRUE</span> ~ <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">TITLE_EN6</span>))) <span class="kw">%&gt;%</span>
-  <span class="fu">mutate</span>(<span class="kw">TITLE_EN6</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span>(<span class="no">TITLE_EN6</span>, <span class="fl">1</span> , <span class="fl">22</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu">mutate</span>(<span class="kw">month</span> <span class="kw">=</span> <span class="fu"><a href="http://lubridate.tidyverse.org/reference/month.html">month</a></span>(<span class="no">DATE</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu">arrange</span>(<span class="no">DATE</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">group_by</span>(<span class="no">TITLE_EN6</span>, <span class="no">month</span>) <span class="kw">%&gt;%</span>
-  <span class="fu">mutate</span>(<span class="kw">growth</span> <span class="kw">=</span> <span class="fl">100</span> * (<span class="no">OBS_VALUE</span> / <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span>(<span class="no">OBS_VALUE</span>) - <span class="fl">1</span>))
+<span class="kw">data_plot</span> <span class="op">=</span> <span class="kw">data</span> <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span>(TITLE_EN6 = <span class="fu">case_when</span>(<span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="kw">TITLE_EN6</span>) <span class="op">~</span> <span class="kw">TITLE_EN5</span>,
+                            <span class="fl">TRUE</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="kw">TITLE_EN6</span>))) <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span>(TITLE_EN6 = <span class="fu"><a href="https://rdrr.io/r/base/substr.html">substr</a></span>(<span class="kw">TITLE_EN6</span>, <span class="fl">1</span> , <span class="fl">22</span>)) <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span>(month = <span class="fu"><a href="http://lubridate.tidyverse.org/reference/month.html">month</a></span>(<span class="kw">DATE</span>)) <span class="op">%&gt;%</span>
+  <span class="fu">arrange</span>(<span class="kw">DATE</span>) <span class="op">%&gt;%</span>
+  <span class="fu">group_by</span>(<span class="kw">TITLE_EN6</span>, <span class="kw">month</span>) <span class="op">%&gt;%</span>
+  <span class="fu">mutate</span>(growth = <span class="fl">100</span> <span class="op">*</span> (<span class="kw">OBS_VALUE</span> <span class="op">/</span> <span class="kw">dplyr</span>::<span class="fu"><a href="https://dplyr.tidyverse.org/reference/lead-lag.html">lag</a></span>(<span class="kw">OBS_VALUE</span>) <span class="op">-</span> <span class="fl">1</span>))
 
-<span class="fu">ggplot</span>(<span class="no">data_plot</span>, <span class="fu">aes</span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">DATE</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">growth</span>)) +
-  <span class="fu">geom_col</span>() +
-  <span class="fu">facet_wrap</span>(~<span class="no">TITLE_EN6</span>, <span class="kw">scales</span> <span class="kw">=</span> <span class="st">"free"</span>) +
-  <span class="fu">ggtitle</span>(<span class="st">"French inflation, by product category, year-on-year"</span>) +
-  <span class="fu">labs</span>(<span class="kw">subtitle</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"Last updated : %s"</span>, <span class="no">data_plot</span>$<span class="no">TIME_PERIOD</span>[<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">data_plot</span>)]))</pre></body></html></div>
+<span class="fu">ggplot</span>(<span class="kw">data_plot</span>, <span class="fu">aes</span>(x = <span class="kw">DATE</span>, y = <span class="kw">growth</span>)) <span class="op">+</span>
+  <span class="fu">geom_col</span>() <span class="op">+</span>
+  <span class="fu">facet_wrap</span>(<span class="op">~</span><span class="kw">TITLE_EN6</span>, scales = <span class="st">"free"</span>) <span class="op">+</span>
+  <span class="fu">ggtitle</span>(<span class="st">"French inflation, by product category, year-on-year"</span>) <span class="op">+</span>
+  <span class="fu">labs</span>(subtitle = <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"Last updated : %s"</span>, <span class="kw">data_plot</span><span class="op">$</span><span class="kw">TIME_PERIOD</span>[<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="kw">data_plot</span>)]))
+</pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -161,7 +163,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
