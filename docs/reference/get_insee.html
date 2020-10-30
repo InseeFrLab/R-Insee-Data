@@ -175,14 +175,14 @@ The user can disable the download display in the console with the following comm
 Sys.setenv(INSEE_download_verbose = "FALSE")
 The use of cached data can be disabled with : Sys.setenv(INSEE_no_cache_use = "TRUE")
 All queries are printed in the console with this command: Sys.setenv(INSEE_print_query = "TRUE").
-By default the RapidXML C++ library is used through the readsdmx package.
+The RapidXML C++ library is used optionally thanks to the readsdmx package if it is installed.
 The previous parser can still be used with this command : Sys.setenv(INSEE_read_sdmx_slow = "TRUE")</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='no'>insee_link</span> <span class='kw'>=</span> <span class='st'>"http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"</span>
 <span class='no'>insee_query</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>insee_link</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"010539365"</span>,<span class='st'>"?"</span>, <span class='st'>"firstNObservations=1"</span>))
-<span class='no'>data</span> <span class='kw'>=</span> <span class='fu'>get_insee</span>(<span class='no'>insee_query</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : C:\Users\XLAPDO\AppData\Local\Temp\Rtmpcb3cvB/022dd22e63655d0225105ee0f610e936.rds</span>
+<span class='no'>data</span> <span class='kw'>=</span> <span class='fu'>get_insee</span>(<span class='no'>insee_query</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : C:\Users\XLAPDO\AppData\Local\Temp\RtmpwPn8CN/022dd22e63655d0225105ee0f610e936.rds</span>
 #&gt; <span class='message'></span><span></span></div><div class='input'># }
 </div></span></pre>
   </div>
