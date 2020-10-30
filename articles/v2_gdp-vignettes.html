@@ -94,7 +94,8 @@
 
       
 
-      </header><script src="v2_gdp-vignettes_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="v2_gdp-vignettes_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="v2_gdp-vignettes_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="v2_gdp-vignettes_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>GDP growth rate</h1>
@@ -107,31 +108,30 @@
 
     
     
-<p><img src="gdp.png" width="675" height="442"></p>
+<p><img src="gdp.png" width="1363" height="701"></p>
 <div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://hadrilec.github.io/insee">insee</a></span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://hadrilec.github.io/insee/">insee</a></span><span class="op">)</span>
 
-<span class="kw">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span>()
+<span class="va">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="kw">df_idbank_list_selected</span> <span class="op">=</span>
-  <span class="kw">idbank_list</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">nomflow</span> <span class="op">==</span> <span class="st">"CNT-2014-PIB-EQB-RF"</span>) <span class="op">%&gt;%</span> <span class="co"># Gross domestic product balance</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">dim1</span> <span class="op">==</span> <span class="st">"T"</span>) <span class="op">%&gt;%</span> <span class="co">#quarter</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">dim4</span> <span class="op">==</span> <span class="st">"PIB"</span>) <span class="op">%&gt;%</span> <span class="co">#GDP</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">dim6</span> <span class="op">==</span> <span class="st">"TAUX"</span>) <span class="op">%&gt;%</span> <span class="co">#rate</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">dim10</span> <span class="op">==</span> <span class="st">"CVS-CJO"</span>) <span class="co">#SA-WDA, seasonally adjusted, working day adjusted</span>
+<span class="va">df_idbank_list_selected</span> <span class="op">=</span>
+  <span class="va">idbank_list</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">nomflow</span> <span class="op">==</span> <span class="st">"CNT-2014-PIB-EQB-RF"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co"># Gross domestic product balance</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim1</span> <span class="op">==</span> <span class="st">"T"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#quarter</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim4</span> <span class="op">==</span> <span class="st">"PIB"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#GDP</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim6</span> <span class="op">==</span> <span class="st">"TAUX"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#rate</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim10</span> <span class="op">==</span> <span class="st">"CVS-CJO"</span><span class="op">)</span> <span class="co">#SA-WDA, seasonally adjusted, working day adjusted</span>
 
-<span class="kw">idbank</span> <span class="op">=</span> <span class="kw">df_idbank_list_selected</span> <span class="op">%&gt;%</span> <span class="fu">pull</span>(<span class="kw">idbank</span>)
+<span class="va">idbank</span> <span class="op">=</span> <span class="va">df_idbank_list_selected</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">idbank</span><span class="op">)</span>
 
-<span class="kw">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span>(<span class="kw">idbank</span>)
+<span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span><span class="op">(</span><span class="va">idbank</span><span class="op">)</span>
 
 <span class="co">#plot</span>
-<span class="fu">ggplot</span>(<span class="kw">data</span>, <span class="fu">aes</span>(x = <span class="kw">DATE</span>, y = <span class="kw">OBS_VALUE</span>)) <span class="op">+</span>
-  <span class="fu">geom_col</span>() <span class="op">+</span>
-  <span class="fu">ggtitle</span>(<span class="st">"French GDP growth rate, quarter-on-quarter, sa-wda"</span>) <span class="op">+</span>
-  <span class="fu">labs</span>(subtitle = <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"Last updated : %s"</span>, <span class="kw">data</span><span class="op">$</span><span class="kw">TIME_PERIOD</span>[<span class="fl">1</span>]))
-</pre></div>
+<span class="fu">ggplot</span><span class="op">(</span><span class="va">data</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">DATE</span>, y <span class="op">=</span> <span class="va">OBS_VALUE</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_col</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"French GDP growth rate, quarter-on-quarter, sa-wda"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">labs</span><span class="op">(</span>subtitle <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"Last updated : %s"</span>, <span class="va">data</span><span class="op">$</span><span class="va">TIME_PERIOD</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

@@ -94,7 +94,8 @@
 
       
 
-      </header><script src="v5_pop-vignettes_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+      </header><script src="v5_pop-vignettes_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="v5_pop-vignettes_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="v5_pop-vignettes_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Population by age</h1>
@@ -111,35 +112,34 @@
 <div class="sourceCode" id="cb1"><pre class="downlit">
 <span class="co"># please download the Github version</span>
 <span class="co"># devtools::install_github("hadrilec/insee")</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="kw"><a href="https://hadrilec.github.io/insee">insee</a></span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://hadrilec.github.io/insee/">insee</a></span><span class="op">)</span>
 
-<span class="kw">dataset_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span>()
+<span class="va">dataset_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="kw">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span>()
+<span class="va">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="kw">df_idbank_list_selected</span> <span class="op">=</span>
-  <span class="kw">idbank_list</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">nomflow</span> <span class="op">==</span> <span class="st">"POPULATION-STRUCTURE"</span>) <span class="op">%&gt;%</span> <span class="co">#population dataset</span>
-  <span class="fu"><a href="../reference/add_insee_title.html">add_insee_title</a></span>() <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">dim2</span> <span class="op">==</span> <span class="st">"POPULATION_1ER_JANVIER"</span>) <span class="op">%&gt;%</span> <span class="co">#population at the beginning of the year</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">dim5</span> <span class="op">==</span> <span class="st">"FE"</span>) <span class="op">%&gt;%</span>  <span class="co"># all France including overseas departements</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">dim6</span> <span class="op">==</span> <span class="fl">0</span>) <span class="op">%&gt;%</span>  <span class="co"># men and women</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="kw">dim7</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"00-19"</span>, <span class="st">"20-59"</span>, <span class="st">"60-"</span>)) <span class="co">#age ranges</span>
+<span class="va">df_idbank_list_selected</span> <span class="op">=</span>
+  <span class="va">idbank_list</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">nomflow</span> <span class="op">==</span> <span class="st">"POPULATION-STRUCTURE"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#population dataset</span>
+  <span class="fu"><a href="../reference/add_insee_title.html">add_insee_title</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim2</span> <span class="op">==</span> <span class="st">"POPULATION_1ER_JANVIER"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#population at the beginning of the year</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim5</span> <span class="op">==</span> <span class="st">"FE"</span><span class="op">)</span> <span class="op">%&gt;%</span>  <span class="co"># all France including overseas departements</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim6</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span> <span class="op">%&gt;%</span>  <span class="co"># men and women</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim7</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"00-19"</span>, <span class="st">"20-59"</span>, <span class="st">"60-"</span><span class="op">)</span><span class="op">)</span> <span class="co">#age ranges</span>
 
-<span class="kw">list_idbank</span> <span class="op">=</span> <span class="kw">df_idbank_list_selected</span> <span class="op">%&gt;%</span> <span class="fu">pull</span>(<span class="kw">idbank</span>)
+<span class="va">list_idbank</span> <span class="op">=</span> <span class="va">df_idbank_list_selected</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">idbank</span><span class="op">)</span>
 
-<span class="kw">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span>(<span class="kw">list_idbank</span>)
+<span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span><span class="op">(</span><span class="va">list_idbank</span><span class="op">)</span>
 
-<span class="kw">data_plot</span> <span class="op">=</span> <span class="kw">data</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="../reference/split_title.html">split_title</a></span>() <span class="op">%&gt;%</span> 
-  <span class="fu">mutate</span>(OBS_VALUE = <span class="kw">OBS_VALUE</span> <span class="op">/</span> <span class="fl">10</span><span class="op">^</span><span class="fl">6</span>)
+<span class="va">data_plot</span> <span class="op">=</span> <span class="va">data</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/split_title.html">split_title</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mutate</span><span class="op">(</span>OBS_VALUE <span class="op">=</span> <span class="va">OBS_VALUE</span> <span class="op">/</span> <span class="fl">10</span><span class="op">^</span><span class="fl">6</span><span class="op">)</span>
 
-<span class="fu">ggplot</span>(<span class="kw">data_plot</span>, <span class="fu">aes</span>(x = <span class="kw">DATE</span>, y = <span class="kw">OBS_VALUE</span>, fill = <span class="kw">TITLE_EN3</span>)) <span class="op">+</span>
-  <span class="fu">geom_area</span>() <span class="op">+</span>
-  <span class="fu">ggtitle</span>(<span class="st">"French population in millions, by age"</span>) <span class="op">+</span>
-  <span class="fu">labs</span>(subtitle = <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span>(<span class="st">"Last updated : %s"</span>, <span class="kw">data_plot</span><span class="op">$</span><span class="kw">TIME_PERIOD</span>[<span class="fl">1</span>]))
-</pre></div>
+<span class="fu">ggplot</span><span class="op">(</span><span class="va">data_plot</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">DATE</span>, y <span class="op">=</span> <span class="va">OBS_VALUE</span>, fill <span class="op">=</span> <span class="va">TITLE_EN3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">geom_area</span><span class="op">(</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">ggtitle</span><span class="op">(</span><span class="st">"French population in millions, by age"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu">labs</span><span class="op">(</span>subtitle <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"Last updated : %s"</span>, <span class="va">data_plot</span><span class="op">$</span><span class="va">TIME_PERIOD</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span><span class="op">)</span><span class="op">)</span></pre></div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
