@@ -1,8 +1,9 @@
 # insee 1.0.0
 
-* get clean metadata with `get_idbank_list` if dataset names are provided (code breaker)
+* if dataset names are provided, get clean metadata with `get_idbank_list` (code breaks likely)
+* add metadata to raw data with the function `add_insee_metadata`
 * backup idbank list stored inside the package
-* readsdmx optional, removed as dependency
+* readsdmx optional, removed as a dependency
 
 # insee 0.9.0
 

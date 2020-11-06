@@ -7,13 +7,16 @@
 #' Sys.setenv(INSEE_idbank_dataset_path = "new_zip_file_link")
 #' Sys.setenv(INSEE_idbank_sep = ",")
 #' Sys.setenv(INSEE_idbank_dataset_file = "new_data_file_name")
+#' @param ... one or several dataset names
 #' @param dataset if a dataset name is provided, only a subset of the data is delivered, otherwise
-#' all the data is returned
+#' all the data is returned, and column names refer directly to data dimensions
+#' @param label if TRUE titles are provided for each dimension value, by default it is FALSE
 #' @examples
 #' \donttest{idbank_list = get_idbank_list()}
 #' @return a tibble the idbank dataset
 #' @export
 get_idbank_list = function(
+  ...,
   dataset = NULL,
   label = FALSE
 ){
@@ -21,6 +24,19 @@ get_idbank_list = function(
   insee_no_cache_use = if(Sys.getenv("INSEE_no_cache_use") == "TRUE"){TRUE}else{FALSE}
   insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
   mapping_file_pattern = Sys.getenv("INSEE_idbank_dataset_file")
+
+  if(length(list(...)) > 0){
+    if(length(list(...)) == 1){
+      list_dataset = list(...)[[1]]
+    }else{
+      list_dataset = unlist(list(...))
+    }
+    if(is.null(dataset)){
+      dataset = list_dataset
+    }else{
+      dataset = c(dataset, list_dataset)
+    }
+  }
 
   # temporary files
   temp_dir = tempdir()
