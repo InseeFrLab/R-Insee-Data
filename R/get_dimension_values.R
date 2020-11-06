@@ -55,8 +55,6 @@ get_dimension_values = function(dimension){
 
         }else{return(NULL)}
 
-
-
     }else{return(NULL)}
 
   }else{

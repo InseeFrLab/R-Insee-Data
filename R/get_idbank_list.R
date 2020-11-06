@@ -15,7 +15,7 @@
 #' @export
 get_idbank_list = function(
   dataset = NULL,
-  label = NULL
+  label = FALSE
 ){
 
   insee_no_cache_use = if(Sys.getenv("INSEE_no_cache_use") == "TRUE"){TRUE}else{FALSE}
@@ -29,7 +29,7 @@ get_idbank_list = function(
   dataset_hash = ""
 
    if(!is.null(dataset)){
-      dataset_hash = dataset
+      dataset_hash = paste0(dataset, collapse = "_")
     if(is.null(label)){
       label_hash = "T"
     }else{
@@ -72,99 +72,3 @@ get_idbank_list = function(
   return(mapping_final)
 }
 
-#' @noRd
-download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label = NULL){
-
-  insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
-  insee_download_option_idbank_list = Sys.getenv("INSEE_download_option_idbank_list")
-  file_to_dwn = Sys.getenv("INSEE_idbank_dataset_path")
-  mapping_file_pattern = Sys.getenv("INSEE_idbank_dataset_file")
-
-  mapping_file_sep = Sys.getenv("INSEE_idbank_sep")
-  idbank_nchar = as.numeric(Sys.getenv("INSEE_idbank_nchar"))
-
-  if(is.na(idbank_nchar)){idbank_nchar = 9}
-
-  temp_file = tempfile()
-  temp_dir = tempdir()
-
-  if(missing(mapping_file_cache)){
-    dataset_hash = if(is.null(dataset)){""}else{dataset}
-
-    mapping_file_cache = file.path(temp_dir,
-                                   paste0(openssl::md5(paste0(mapping_file_pattern, dataset_hash)), ".rds"))
-
-  }
-
-  dwn = utils::download.file(file_to_dwn, temp_file,
-                             mode = insee_download_option_idbank_list, quiet = TRUE)
-
-  uzp = utils::unzip(temp_file, exdir = temp_dir)
-
-  mapping_file = file.path(temp_dir, list.files(temp_dir, pattern = mapping_file_pattern)[1])
-  # load data
-  mapping = utils::read.delim(mapping_file, sep = mapping_file_sep,
-                              stringsAsFactors = F)
-
-  # filter data
-  add_labels = FALSE
-
-  if(!is.null(dataset)){
-    dataset_list = unique(mapping[, "nomflow"])
-    if(dataset %in% dataset_list){
-      mapping = mapping[which(mapping[, "nomflow"] == dataset),]
-
-      new_col_names = get_dataset_dimension(dataset = dataset)
-
-      add_labels = TRUE
-
-    }else{
-      warning("Dataset name does not exist, labels will not be provided")
-      new_col_names = paste0("dim", 1:n_col)
-    }
-  }else{
-    warning("Dataset name is missing, labels will not be provided")
-    new_col_names = paste0("dim", 1:n_col)
-  }
-
-  if(!is.null(label)){
-    if(label == FALSE){
-      add_labels = FALSE
-    }
-  }
-
-  dot_vector = stringr::str_count(mapping$cleFlow, pattern = "\\.")
-  n_col = max(dot_vector) + 1
-
-  mapping_final = separate_col(df = mapping, col = "cleFlow",
-                               sep = "\\.", into = new_col_names)
-
-  if(add_labels == TRUE){
-    for(new_col_name in new_col_names){
-      dimension_labels = get_dimension_values(dimension = new_col_name)
-      if(!is.null(dimension_labels)){
-        mapping_final = dplyr::left_join(mapping_final, dimension_labels, by = new_col_name)
-      }
-    }
-  }
-
-  names(mapping_final) = gsub("-", "_", names(mapping_final))
-
-  add_zero = function(x, idbank_nchar_arg = idbank_nchar){
-    paste0(c(rep("0", idbank_nchar_arg-nchar(x)), x), collapse = "")}
-
-  mapping_final[,"idbank"] = vapply(mapping_final[,"idbank"], add_zero, "")
-
-  if("n_series" %in% names(mapping_final)){
-    mapping_final[,"n_series"] = as.numeric(as.character(mapping_final[,"n_series"]))
-  }
-
-  if(insee_download_verbose){
-    msg = sprintf("\nData cached : %s\n", mapping_file_cache)
-    message(crayon::style(msg, "green"))
-  }
-
-  saveRDS(mapping_final, file = mapping_file_cache)
-
-  return(mapping_final)
-}
