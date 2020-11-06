@@ -8,6 +8,7 @@ get_dimension_values = function(dimension){
   dimension_file_cache = file.path(temp_dir, paste0(openssl::md5(link), ".rds"))
 
   if(!file.exists(dimension_file_cache)){
+
     response = try(httr::GET(link), silent = TRUE)
 
     if(class(response) != "try-error"){
@@ -26,8 +27,6 @@ get_dimension_values = function(dimension){
 
             data_code = data_code[code_element]
 
-            data_code[which(names(data_code) == "Code")]
-
             labels = dplyr::bind_rows(lapply(1:length(data_code), function(i){
 
               if(attr(data_code[[i]][[1]], "lang") == "fr"){
@@ -42,12 +41,12 @@ get_dimension_values = function(dimension){
                               label_fr = label_fr,
                               label_en = label_en)
 
-              saveRDS(df, file = dimension_file_cache)
-
               return(df)
             }))
 
             names(labels) = c(dimension, paste0(dimension, "_label_fr"), paste0(dimension, "_label_en"))
+
+            saveRDS(labels, file = dimension_file_cache)
 
             return(labels)
 
@@ -58,7 +57,7 @@ get_dimension_values = function(dimension){
     }else{return(NULL)}
 
   }else{
-    df = readRDS(dimension_file_cache)
-    return(df)
+    labels = readRDS(dimension_file_cache)
+    return(labels)
   }
 }
