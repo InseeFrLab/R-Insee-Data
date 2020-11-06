@@ -1,3 +1,9 @@
+# insee 1.0.0
+
+* get clean metadata with `get_idbank_list` if dataset names are provided (code breaker)
+* backup idbank list stored inside the package
+* readsdmx optional, removed as dependency
+
 # insee 0.9.0
 
 * all data is cached, and then all queries are run once per R session
