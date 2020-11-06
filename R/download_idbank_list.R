@@ -14,6 +14,27 @@ download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label
   temp_file = tempfile()
   temp_dir = tempdir()
 
+  if(missing(mapping_file_cache)){
+
+    label_hash = ""
+    dataset_hash = ""
+
+    if(!is.null(dataset)){
+      dataset_hash = paste0(dataset, collapse = "_")
+      if(is.null(label)){
+        label_hash = "T"
+      }else{
+        if(label == TRUE){
+          label_hash = "T"
+        }
+      }
+    }
+
+    mapping_file_cache = file.path(temp_dir,
+                                   paste0(openssl::md5(paste0(mapping_file_pattern, dataset_hash, label_hash)), ".rds"))
+
+  }
+
   dwn = utils::download.file(file_to_dwn, temp_file,
                              mode = insee_download_option_idbank_list, quiet = TRUE)
 
@@ -52,9 +73,11 @@ download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label
                    if(label == TRUE){
                      for(new_col_name in new_col_names){
                        dimension_labels = get_dimension_values(dimension = new_col_name)
+
                        if(!is.null(dimension_labels)){
                          mapping_dataset_sep = dplyr::left_join(mapping_dataset_sep, dimension_labels, by = new_col_name)
                        }
+
                      }
                    }
 
@@ -78,6 +101,11 @@ download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label
   }
 
   names(mapping_final) = gsub("-", "_", names(mapping_final))
+
+  label_col = names(mapping_final)[grep("_label_", names(mapping_final))]
+  other_col = names(mapping_final)[which(!names(mapping_final) %in% label_col)]
+
+  mapping_final = mapping_final[,c(other_col, label_col)]
 
   add_zero = function(x, idbank_nchar_arg = idbank_nchar){
     paste0(c(rep("0", idbank_nchar_arg-nchar(x)), x), collapse = "")}
