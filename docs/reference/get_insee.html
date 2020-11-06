@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">insee</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -147,7 +147,7 @@
     <p>Get data from INSEE BDM database with a SDMX query link</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_insee</span>(<span class='no'>link</span>, <span class='kw'>step</span> <span class='kw'>=</span> <span class='st'>"1/1"</span>)</pre>
+    <pre class="usage"><span class='fu'>get_insee</span><span class='op'>(</span><span class='va'>link</span>, step <span class='op'>=</span> <span class='st'>"1/1"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -180,10 +180,12 @@ The previous parser can still be used with this command : Sys.setenv(INSEE_read_
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='no'>insee_link</span> <span class='kw'>=</span> <span class='st'>"http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"</span>
-<span class='no'>insee_query</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span>(<span class='no'>insee_link</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"010539365"</span>,<span class='st'>"?"</span>, <span class='st'>"firstNObservations=1"</span>))
-<span class='no'>data</span> <span class='kw'>=</span> <span class='fu'>get_insee</span>(<span class='no'>insee_query</span>)</div><div class='output co'>#&gt; <span class='message'><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : C:\Users\XLAPDO\AppData\Local\Temp\RtmpwPn8CN/022dd22e63655d0225105ee0f610e936.rds</span>
-#&gt; <span class='message'></span><span></span></div><div class='input'># }
+<span class='va'>insee_link</span> <span class='op'>=</span> <span class='st'>"http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"</span>
+<span class='va'>insee_query</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/file.path.html'>file.path</a></span><span class='op'>(</span><span class='va'>insee_link</span>, <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"010539365"</span>,<span class='st'>"?"</span>, <span class='st'>"firstNObservations=1"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>data</span> <span class='op'>=</span> <span class='fu'>get_insee</span><span class='op'>(</span><span class='va'>insee_query</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='warning'>Warning: URL 'https://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM/010539365?firstNObservations=1': status was 'Failure when receiving data from the peer'</span></div><div class='output co'>#&gt; <span class='warning'>Warning: Wrong query</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Data download :</span><span></span></div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |======================================================================| 100%</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Dataframe build : 100%</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'></span>
+#&gt; <span class='message'>Data cached : C:\Users\eurhope\AppData\Local\Temp\RtmpmQ5xxq/022dd22e63655d0225105ee0f610e936.rds</span>
+#&gt; <span class='message'></span><span></span></div><div class='input'><span class='co'># }</span>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -200,7 +202,7 @@ The previous parser can still be used with this command : Sys.setenv(INSEE_read_
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
