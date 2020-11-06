@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">insee</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -94,7 +94,8 @@
 
       
 
-      </header><script src="insee_files/kePrint-0.0.1/kePrint.js"></script><div class="row">
+      </header><script src="insee_files/kePrint-0.0.1/kePrint.js"></script><link href="insee_files/lightable-0.0.1/lightable.css" rel="stylesheet">
+<div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Tutorial</h1>
@@ -120,25 +121,27 @@
 <font color="red"> <strong>Requirement for INSEE employees</strong></font>
 </center>
 <p>In order for someone working behind a proxy server to be able to use <a href="https://CRAN.R-project.org/package=insee">insee</a>, it is necessary to modify system variables as follow.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="kw">http_proxy</span> <span class="kw">=</span> <span class="st">"my_proxy_server"</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span>(<span class="kw">https_proxy</span> <span class="kw">=</span> <span class="st">"my_proxy_server"</span>)</pre></body></html></div>
+<div class="sourceCode"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span>http_proxy <span class="op">=</span> <span class="st">"my_proxy_server"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span>https_proxy <span class="op">=</span> <span class="st">"my_proxy_server"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="installation-loading" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation-loading" class="anchor"></a>Installation &amp; Loading</h2>
 <p>You can easily install <a href="https://CRAN.R-project.org/package=insee">insee</a> with the following code :</p>
-<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co"># Get the development version from GitHub (required for the tutorial)</span>
+<div class="sourceCode"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Get the development version from GitHub (required for the tutorial)</span>
 <span class="co"># install.packages("devtools")</span>
-<span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"hadrilec/insee"</span>)
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"hadrilec/insee"</span><span class="op">)</span>
 
 <span class="co"># CRAN version</span>
 <span class="co"># install.packages("insee")</span>
 
 <span class="co"># library Loading</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">insee</span>)
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://hadrilec.github.io/insee/">insee</a></span><span class="op">)</span>
 <span class="co"># tutorial's examples use tidyverse's packages</span>
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)</pre></body></html></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="functionalities" class="section level1">
@@ -150,18 +153,15 @@
 <h2 class="hasAnchor">
 <a href="#datasets-list" class="anchor"></a>Datasets List</h2>
 <p><a href="https://www.insee.fr/en/information/2512785">INSEE BDM database</a> offers more than 200 Datasets. The <code><a href="../reference/get_dataset_list.html">get_dataset_list()</a></code> function returns the datasets catalogue :</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">insee_dataset</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span>()</pre></body></html></div>
+<div class="sourceCode"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">insee_dataset</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span><span class="op">(</span><span class="op">)</span> </code></pre></div>
 <pre><code>## 
   |                                                                            
   |                                                                      |   0%
   |                                                                            
   |======                                                                |   9%
   |                                                                            
-  |==============                                                        |  20%
-  |                                                                            
-  |=============================                                         |  41%
-  |                                                                            
-  |===========================================================           |  84%
+  |====================================                                  |  52%
   |                                                                            
   |======================================================================| 100%</code></pre>
 <table class="table table table-striped table-hover table-condensed">
@@ -239,7 +239,7 @@ Indicateurs synthétiques du climat des affaires
 CNA-2010-CONSO-MEN
 </td>
 <td style="text-align:left;">
-Households’ consumption - Results by product, function and durability
+Households' consumption - Results by product, function and durability
 </td>
 <td style="text-align:left;">
 Consommation des ménages - Résultats par produit, fonction et durabilité
@@ -360,7 +360,8 @@ Emploi intérieur, durée effective travaillée et productivité horaire
 <h2 class="hasAnchor">
 <a href="#series-keys-list" class="anchor"></a>Series Keys List</h2>
 <p><a href="https://www.insee.fr/en/information/2512785">INSEE BDM database</a> currently offers more than 140 000 series. The <code>get_idbank_list</code> function returns the series catalogue.</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="no">idbank_list</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span>()</pre></body></html></div>
+<div class="sourceCode"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table table table-striped table-hover table-condensed">
 <thead><tr>
 <th style="text-align:left;">
@@ -491,19 +492,20 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
 <h2 class="hasAnchor">
 <a href="#find-a-series-key" class="anchor"></a>Find a series key</h2>
 <p>The best way to download data is to find the right series key (idbank), but how ? Indeed, in some cases it is not easy to understand what are the differences among series, especially for non-French speakers. To make the search easier, the <a href="https://CRAN.R-project.org/package=insee">insee</a> package provides the function <code>add_insee_title</code> to get titles from idbanks, either in English or in French. It is not advised to use the function on the whole idbank dataset, as each SDMX query has 400-idbank limit. Then, <code>add_insee_title</code> function splits the list into several lists of 400 idbanks each. Thus, the user should filter the idbank dataset before using the function to avoid as much as possible this bottleneck as the following example shows. After the data retrieval, it is really nice to use the <code>split_title</code> function on the dataframe to get more readable titles easy to use in plots.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="no">idbank_list</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span>()
+<div class="sourceCode"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">idbank_list_selected</span> <span class="kw">=</span>
-  <span class="no">idbank_list</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">nomflow</span> <span class="kw">==</span> <span class="st">"IPI-2015"</span>) <span class="kw">%&gt;%</span> <span class="co">#industrial production index dataset</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim1</span> <span class="kw">==</span> <span class="st">"M"</span>) <span class="kw">%&gt;%</span> <span class="co">#monthly</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim5</span> <span class="kw">==</span> <span class="st">"INDICE"</span>) <span class="kw">%&gt;%</span> <span class="co">#index</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim8</span> <span class="kw">==</span> <span class="st">"CVS-CJO"</span>) <span class="kw">%&gt;%</span> <span class="co">#Working day and seasonally adjusted SA-WDA</span>
+<span class="va">idbank_list_selected</span> <span class="op">=</span>
+  <span class="va">idbank_list</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">nomflow</span> <span class="op">==</span> <span class="st">"IPI-2015"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#industrial production index dataset</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim1</span> <span class="op">==</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#monthly</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim5</span> <span class="op">==</span> <span class="st">"INDICE"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#index</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim8</span> <span class="op">==</span> <span class="st">"CVS-CJO"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#Working day and seasonally adjusted SA-WDA</span>
   <span class="co">#automotive industry and overall industrial production</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="fu">str_detect</span>(<span class="no">dim4</span>,<span class="st">"^29$|A10-BE"</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="../reference/add_insee_title.html">add_insee_title</a></span>()
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">str_detect</span><span class="op">(</span><span class="va">dim4</span>,<span class="st">"^29$|A10-BE"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_insee_title.html">add_insee_title</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">idbank_list_selected</span></pre></body></html></div>
+<span class="va">idbank_list_selected</span></code></pre></div>
 </div>
 <div id="download-data" class="section level2">
 <h2 class="hasAnchor">
@@ -511,63 +513,65 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
 <div id="download-using-a-list-of-idbanks" class="section level3">
 <h3 class="hasAnchor">
 <a href="#download-using-a-list-of-idbanks" class="anchor"></a>Download using a list of idbanks</h3>
-<p>The <code>get_insee_idbank</code> function should handle up to 1200 idbanks. It is then advised to narrow down the idbanks list used as argument of the function. Otherwise, put the limit argument to FALSE to ignore the function’s idbank limit.</p>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">tidyverse</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">insee</span>)
+<p>The <code>get_insee_idbank</code> function should handle up to 1200 idbanks. It is then advised to narrow down the idbanks list used as argument of the function. Otherwise, put the limit argument to FALSE to ignore the function's idbank limit.</p>
+<div class="sourceCode"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://hadrilec.github.io/insee/">insee</a></span><span class="op">)</span>
 
 <span class="co"># the user can make a manual list of idbanks to get the data </span>
 <span class="co"># example 1</span>
 
-<span class="no">data</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span>(<span class="st">"001558315"</span>, <span class="st">"010540726"</span>)
+<span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span><span class="op">(</span><span class="st">"001558315"</span>, <span class="st">"010540726"</span><span class="op">)</span>
 
 <span class="co"># using a list of idbanks extracted from the insee idbank dataset</span>
 <span class="co"># example 2 : household's confidence survey</span>
 
-<span class="no">idbank_dataset</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span>()
+<span class="va">idbank_dataset</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">df_idbank</span> <span class="kw">=</span> <span class="no">idbank_dataset</span> <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">nomflow</span> <span class="kw">==</span> <span class="st">"ENQ-CONJ-MENAGES"</span>) <span class="kw">%&gt;%</span>  <span class="co">#monthly households' confidence survey</span>
-  <span class="fu">mutate</span>(<span class="kw">title</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_insee_title.html">get_insee_title</a></span>(<span class="no">idbank</span>)) <span class="kw">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span>(<span class="no">dim7</span> <span class="kw">==</span> <span class="st">"CVS"</span>) <span class="co">#seasonally adjusted</span>
+<span class="va">df_idbank</span> <span class="op">=</span> <span class="va">idbank_dataset</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">nomflow</span> <span class="op">==</span> <span class="st">"ENQ-CONJ-MENAGES"</span><span class="op">)</span> <span class="op">%&gt;%</span>  <span class="co">#monthly households' confidence survey</span>
+  <span class="fu">mutate</span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="../reference/get_insee_title.html">get_insee_title</a></span><span class="op">(</span><span class="va">idbank</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim7</span> <span class="op">==</span> <span class="st">"CVS"</span><span class="op">)</span> <span class="co">#seasonally adjusted</span>
 
-<span class="no">list_idbank</span> <span class="kw">=</span> <span class="no">df_idbank</span> <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">idbank</span>)
+<span class="va">list_idbank</span> <span class="op">=</span> <span class="va">df_idbank</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">idbank</span><span class="op">)</span>
 
-<span class="no">data</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span>(<span class="no">list_idbank</span>) <span class="kw">%&gt;%</span> <span class="fu"><a href="../reference/split_title.html">split_title</a></span>()
+<span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span><span class="op">(</span><span class="va">list_idbank</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/split_title.html">split_title</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># example 3 : get more than 1200 idbanks</span>
 
-<span class="no">idbank_dataset</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span>()
+<span class="va">idbank_dataset</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">df_idbank</span> <span class="kw">=</span>
-  <span class="no">idbank_dataset</span> <span class="kw">%&gt;%</span>
-  <span class="fu">slice</span>(<span class="fl">1</span>:<span class="fl">1201</span>)
+<span class="va">df_idbank</span> <span class="op">=</span> 
+  <span class="va">idbank_dataset</span> <span class="op">%&gt;%</span>
+  <span class="fu">slice</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">1201</span><span class="op">)</span>
 
-<span class="no">list_idbank</span> <span class="kw">=</span> <span class="no">df_idbank</span> <span class="kw">%&gt;%</span> <span class="fu">pull</span>(<span class="no">idbank</span>)
+<span class="va">list_idbank</span> <span class="op">=</span> <span class="va">df_idbank</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">idbank</span><span class="op">)</span>
 
-<span class="no">data</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span>(<span class="no">list_idbank</span>, <span class="kw">firstNObservations</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">limit</span> <span class="kw">=</span> <span class="fl">FALSE</span>)</pre></body></html></div>
+<span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span><span class="op">(</span><span class="va">list_idbank</span>, firstNObservations <span class="op">=</span> <span class="fl">1</span>, limit <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="download-using-a-dataset-name" class="section level3">
 <h3 class="hasAnchor">
 <a href="#download-using-a-dataset-name" class="anchor"></a>Download using a dataset name</h3>
 <p>For some datasets as IPC-2015 (inflation), the filter is necessary.</p>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">insee_dataset</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span>()
+<div class="sourceCode"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">insee_dataset</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span><span class="op">(</span><span class="op">)</span> 
 
 <span class="co"># example 1 : full dataset</span>
-<span class="no">data</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_insee_dataset.html">get_insee_dataset</a></span>(<span class="st">"CLIMAT-AFFAIRES"</span>)
+<span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_insee_dataset.html">get_insee_dataset</a></span><span class="op">(</span><span class="st">"CLIMAT-AFFAIRES"</span><span class="op">)</span>
 
 <span class="co"># example 2 : filtered dataset </span>
 <span class="co"># the user can filter the data</span>
-<span class="no">data</span> <span class="kw">=</span> <span class="fu"><a href="../reference/get_insee_dataset.html">get_insee_dataset</a></span>(<span class="st">"IPC-2015"</span>, <span class="kw">filter</span> <span class="kw">=</span> <span class="st">"M+A.........CVS."</span>, <span class="kw">startPeriod</span> <span class="kw">=</span> <span class="st">"2015-03"</span>)
+<span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_insee_dataset.html">get_insee_dataset</a></span><span class="op">(</span><span class="st">"IPC-2015"</span>, filter <span class="op">=</span> <span class="st">"M+A.........CVS."</span>, startPeriod <span class="op">=</span> <span class="st">"2015-03"</span><span class="op">)</span>
 
 <span class="co"># in the filter, the + is used to select several values in one dimension, like an "and" statement</span>
 <span class="co"># the void means "all" values available</span>
 
 <span class="co"># example 3 : only one series</span>
 <span class="co"># by filtering with the full SDMX series key, the user will get only one series</span>
-<span class="no">data</span> <span class="kw">=</span>
-  <span class="fu"><a href="../reference/get_insee_dataset.html">get_insee_dataset</a></span>(<span class="st">"CNA-2014-CPEB"</span>,
-                    <span class="kw">filter</span> <span class="kw">=</span> <span class="st">"A.CNA_CPEB.A38-CB.VAL.D39.VALEUR_ABSOLUE.FE.EUROS_COURANTS.BRUT"</span>,
-                    <span class="kw">lastNObservations</span> <span class="kw">=</span> <span class="fl">10</span>)</pre></body></html></div>
+<span class="va">data</span> <span class="op">=</span> 
+  <span class="fu"><a href="../reference/get_insee_dataset.html">get_insee_dataset</a></span><span class="op">(</span><span class="st">"CNA-2014-CPEB"</span>,
+                    filter <span class="op">=</span> <span class="st">"A.CNA_CPEB.A38-CB.VAL.D39.VALEUR_ABSOLUE.FE.EUROS_COURANTS.BRUT"</span>,
+                    lastNObservations <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 </div>
@@ -604,7 +608,7 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
