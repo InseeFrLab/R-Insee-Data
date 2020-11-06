@@ -46,6 +46,8 @@ download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label
                               stringsAsFactors = F)
 
   # filter data
+  idbank_list_defaul_value = FALSE
+
   if(!is.null(dataset)){
     dataset_list = unique(mapping[, "nomflow"])
 
@@ -57,6 +59,24 @@ download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label
 
       mapping = mapping[which(mapping[, "nomflow"] %in% dataset_in_list),]
 
+      dot_vector = stringr::str_count(mapping$cleFlow, pattern = "\\.")
+      n_col = max(dot_vector) + 1
+      mapping = separate_col(df = mapping, col = "cleFlow",
+                             sep = "\\.", into = paste0("dim", 1:n_col))
+
+      file_warning_deprecated = file.path(temp_dir, paste0(openssl::md5("dimdeprecated"), ".rds"))
+
+      if(!file.exists(file_warning_deprecated)){
+        msg1 = "!!! in get_idbank_list function, if the dataset name is provided by the user then"
+        msg2 = "!!! dim columns will no longer be included in the dataframe in a future version of this package"
+        msg3 = "!!! CHANGES ARE NEEDED, Use new column names instead as FREQ INDICATEUR etc."
+        msg4 = "!!! if the user relies on column's indices to handle dim columns, this new version is a CODE BREAKER"
+        msg5 = "this message is displayed once per R session"
+        msg = sprintf("%s\n%s\n%s\n%s\n%s", msg1, msg2, msg3, msg4, msg5)
+        warning(msg)
+        save(msg, file = file_warning_deprecated)
+      }
+
       mapping_final =
         dplyr::bind_rows(
           lapply(dataset_in_list,
@@ -64,7 +84,7 @@ download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label
 
                    new_col_names = get_dataset_dimension(dataset = dataset_name)
 
-                   mapping_dataset = dplyr::filter(.data = mapping, nomflow == dataset_name)
+                   mapping_dataset = dplyr::filter(.data = mapping, .data$nomflow == dataset_name)
 
                    mapping_dataset_sep =
                      separate_col(df = mapping_dataset, col = "cleFlow",
@@ -85,10 +105,14 @@ download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label
                  }))
 
     }else{
+      idbank_list_defaul_value = TRUE
       warning("Dataset names do not exist")
     }
   }else{
+    idbank_list_defaul_value = TRUE
+  }
 
+  if(idbank_list_defaul_value == TRUE){
     dot_vector = stringr::str_count(mapping$cleFlow, pattern = "\\.")
     n_col = max(dot_vector) + 1
 
@@ -103,9 +127,15 @@ download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label
   names(mapping_final) = gsub("-", "_", names(mapping_final))
 
   label_col = names(mapping_final)[grep("_label_", names(mapping_final))]
-  other_col = names(mapping_final)[which(!names(mapping_final) %in% label_col)]
+  dim_col = names(mapping_final)[grep("^dim", names(mapping_final))]
 
-  mapping_final = mapping_final[,c(other_col, label_col)]
+  if(length(label_col) > 0){
+    other_col = names(mapping_final)[which(!names(mapping_final) %in% c(dim_col, label_col))]
+    mapping_final = mapping_final[,c(other_col, label_col, dim_col)]
+  }else{
+    other_col = names(mapping_final)[which(!names(mapping_final) %in% c(dim_col))]
+    mapping_final = mapping_final[,c(other_col, dim_col)]
+  }
 
   add_zero = function(x, idbank_nchar_arg = idbank_nchar){
     paste0(c(rep("0", idbank_nchar_arg-nchar(x)), x), collapse = "")}
