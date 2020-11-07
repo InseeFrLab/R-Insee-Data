@@ -53,16 +53,14 @@ library(geosphere)
 library(broom)
 library(viridis)
 
-idbank_list = get_idbank_list()
-
 dataset_list = get_dataset_list()
 
-list_idbank = idbank_list %>%
-  filter(nomflow == "TCRED-ESTIMATIONS-POPULATION") %>%
-  filter(dim6 == "00-") %>% #all ages
-  filter(dim5 == 0) %>% #men and women
-  filter(str_detect(dim4, "^D")) %>% #select only departements
-  mutate(title = get_insee_title(idbank))
+list_idbank = 
+  get_idbank_list("TCRED-ESTIMATIONS-POPULATION") %>%
+  filter(AGE == "00-") %>% #all ages
+  filter(SEXE == 0) %>% #men and women
+  filter(str_detect(REF_AREA, "^D")) %>% #select only departements
+  add_insee_title()
 
 list_idbank_selected = list_idbank %>% pull(idbank)
 
@@ -113,32 +111,32 @@ FranceMap_tidy_final_all =
   left_join(dptm_df, by = "id") %>%
   mutate(pop_density = pop/area) %>% 
   mutate(density_range = case_when(pop_density < 40 ~ "< 40",
-                                   pop_density >= 40 & pop_density < 50 ~ "[40, 50[",
-                                   pop_density >= 50 & pop_density < 70 ~ "[50, 70[",
-                                   pop_density >= 70 & pop_density < 100 ~ "[70, 100[",
-                                   pop_density >= 100 & pop_density < 120 ~ "[100, 120[",
-                                   pop_density >= 120 & pop_density < 160 ~ "[120, 160[",
-                                   pop_density >= 160 & pop_density < 200 ~ "[160, 200[",
-                                   pop_density >= 200 & pop_density < 240 ~ "[200, 240[",
-                                   pop_density >= 240 & pop_density < 260 ~ "[240, 260[",
-                                   pop_density >= 260 & pop_density < 410 ~ "[260, 410[",
-                                   pop_density >= 410 & pop_density < 600 ~ "[410, 600[",
-                                   pop_density >= 600 & pop_density < 1000 ~ "[600, 1000[",
-                                   pop_density >= 5000 & pop_density < 10000 ~ "[5000, 10000[",
+                                   pop_density >= 40 & pop_density < 50 ~ "[40, 50]",
+                                   pop_density >= 50 & pop_density < 70 ~ "[50, 70]",
+                                   pop_density >= 70 & pop_density < 100 ~ "[70, 100]",
+                                   pop_density >= 100 & pop_density < 120 ~ "[100, 120]",
+                                   pop_density >= 120 & pop_density < 160 ~ "[120, 160]",
+                                   pop_density >= 160 & pop_density < 200 ~ "[160, 200]",
+                                   pop_density >= 200 & pop_density < 240 ~ "[200, 240]",
+                                   pop_density >= 240 & pop_density < 260 ~ "[240, 260]",
+                                   pop_density >= 260 & pop_density < 410 ~ "[260, 410]",
+                                   pop_density >= 410 & pop_density < 600 ~ "[410, 600]",
+                                   pop_density >= 600 & pop_density < 1000 ~ "[600, 1000]",
+                                   pop_density >= 5000 & pop_density < 10000 ~ "[5000, 10000]",
                                    pop_density >= 20000 ~ ">= 20000"
   )) %>% 
   mutate(`people per square kilometer` = factor(density_range,
-                                levels = c("< 40","[40, 50[", "[50, 70[","[70, 100[",
-                                           "[100, 120[", "[120, 160[", "[160, 200[",
-                                           "[200, 240[", "[240, 260[", "[260, 410[",
-                                           "[410, 600[",  "[600, 1000[",
-                                           "[5000, 10000[", ">= 20000")))
+                                levels = c("< 40","[40, 50]", "[50, 70]","[70, 100]",
+                                           "[100, 120]", "[120, 160]", "[160, 200]",
+                                           "[200, 240]", "[240, 260]", "[260, 410]",
+                                           "[410, 600]",  "[600, 1000]",
+                                           "[5000, 10000]", ">= 20000")))
 
-ggplot() +
-  geom_polygon(data = FranceMap_tidy_final_all,
+ggplot(data = FranceMap_tidy_final_all,
                aes(fill = `people per square kilometer`, x = long, y = lat, group = group) ,
                size = 0, alpha = 0.9) +
-  geom_path(data = FranceMap_tidy_final_all, aes(x = long, y = lat, group = group), colour = "white") +
+  geom_polygon() +
+  geom_path(colour = "white") +
   coord_map() +
   theme_void() +
   scale_fill_viridis(discrete = T) + 

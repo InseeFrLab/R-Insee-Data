@@ -50,17 +50,14 @@ library(tidyverse)
 library(lubridate)
 library(insee)
 
-idbank_list = get_idbank_list()
-
 df_idbank_list_selected =
-  idbank_list %>%
-  filter(nomflow == "IPC-2015") %>% #Inflation dataset
-  filter(dim1 == "M") %>% # monthly
-  filter(str_detect(dim4, "^[0-9]{2}$")) %>% # coicop aggregation level
-  filter(dim6 == "INDICE") %>% # index
-  filter(dim7 == "ENSEMBLE") %>% # all kinds of household
-  filter(dim8 == "FE") %>% # all France including overseas departements
-  mutate(title = get_insee_title(idbank))
+  get_idbank_list("IPC-2015") %>% #Inflation dataset
+  filter(FREQ == "M") %>% # monthly
+  filter(str_detect(COICOP2016, "^[0-9]{2}$")) %>% # coicop aggregation level
+  filter(NATURE == "INDICE") %>% # index
+  filter(MENAGES_IPC == "ENSEMBLE") %>% # all kinds of household
+  filter(REF_AREA == "FE") %>% # all France including overseas departements
+  add_insee_title()
 
 list_idbank = df_idbank_list_selected %>% pull(idbank)
 

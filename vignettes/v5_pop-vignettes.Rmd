@@ -51,23 +51,22 @@ library(insee)
 
 dataset_list = get_dataset_list()
 
-idbank_list = get_idbank_list()
-
 df_idbank_list_selected =
-  idbank_list %>%
-  filter(nomflow == "POPULATION-STRUCTURE") %>% #population dataset
+  get_idbank_list("POPULATION-STRUCTURE") %>% #population dataset
   add_insee_title() %>% 
-  filter(dim2 == "POPULATION_1ER_JANVIER") %>% #population at the beginning of the year
-  filter(dim5 == "FE") %>%  # all France including overseas departements
-  filter(dim6 == 0) %>%  # men and women
-  filter(dim7 %in% c("00-19", "20-59", "60-")) #age ranges
+  filter(INDICATEUR == "POPULATION_1ER_JANVIER") %>% #population at the beginning of the year
+  filter(REF_AREA == "FE") %>%  # all France including overseas departements
+  filter(SEXE == 0) %>%  # men and women
+  filter(AGE %in% c("00-19", "20-59", "60-")) #age ranges
 
 list_idbank = df_idbank_list_selected %>% pull(idbank)
 
 data = get_insee_idbank(list_idbank)
 
-data_plot = data %>%
+data_plot = 
+  data %>%
   split_title() %>% 
+  add_insee_metadata() %>% 
   mutate(OBS_VALUE = OBS_VALUE / 10^6)
 
 ggplot(data_plot, aes(x = DATE, y = OBS_VALUE, fill = TITLE_EN3)) +
