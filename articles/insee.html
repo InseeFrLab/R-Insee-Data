@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">insee</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.9.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
       </span>
     </div>
 
@@ -122,16 +122,16 @@
 <font color="red"> <strong>Requirement for INSEE employees</strong></font>
 </center>
 <p>In order for someone working behind a proxy server to be able to use <a href="https://CRAN.R-project.org/package=insee">insee</a>, it is necessary to modify system variables as follow.</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span>http_proxy <span class="op">=</span> <span class="st">"my_proxy_server"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span>https_proxy <span class="op">=</span> <span class="st">"my_proxy_server"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span>http_proxy <span class="op">=</span> <span class="st">"my_proxy_server"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/Sys.setenv.html">Sys.setenv</a></span><span class="op">(</span>https_proxy <span class="op">=</span> <span class="st">"my_proxy_server"</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="installation-loading" class="section level2">
 <h2 class="hasAnchor">
 <a href="#installation-loading" class="anchor"></a>Installation &amp; Loading</h2>
 <p>You can easily install <a href="https://CRAN.R-project.org/package=insee">insee</a> with the following code :</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co"># Get the development version from GitHub (required for the tutorial)</span>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Get the development version from GitHub (required for the tutorial)</span>
 <span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"hadrilec/insee"</span><span class="op">)</span>
 
@@ -142,7 +142,7 @@
 
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://hadrilec.github.io/insee/">insee</a></span><span class="op">)</span>
 <span class="co"># tutorial's examples use tidyverse's packages</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></pre></div>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 <div id="functionalities" class="section level1">
@@ -154,8 +154,8 @@
 <h2 class="hasAnchor">
 <a href="#datasets-list" class="anchor"></a>Datasets List</h2>
 <p><a href="https://www.insee.fr/en/information/2512785">INSEE BDM database</a> offers more than 200 Datasets. The <code><a href="../reference/get_dataset_list.html">get_dataset_list()</a></code> function returns the datasets catalogue :</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="va">insee_dataset</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span><span class="op">(</span><span class="op">)</span> </pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">insee_dataset</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span><span class="op">(</span><span class="op">)</span> </code></pre></div>
 <pre><code>## 
   |                                                                            
   |                                                                      |   0%
@@ -170,13 +170,13 @@
   |                                                                            
   |====================================                                  |  52%
   |                                                                            
-  |============================================                          |  62%
+  |=========================================                             |  58%
   |                                                                            
-  |===================================================                   |  73%
+  |================================================                      |  69%
   |                                                                            
-  |===========================================================           |  84%
+  |========================================================              |  80%
   |                                                                            
-  |==================================================================    |  95%
+  |===============================================================       |  90%
   |                                                                            
   |======================================================================| 100%</code></pre>
 <table class="table table table-striped table-hover table-condensed">
@@ -375,8 +375,8 @@ Emploi intérieur, durée effective travaillée et productivité horaire
 <h2 class="hasAnchor">
 <a href="#series-keys-list" class="anchor"></a>Series Keys List</h2>
 <p><a href="https://www.insee.fr/en/information/2512785">INSEE BDM database</a> currently offers more than 140 000 series. The <code>get_idbank_list</code> function returns the series catalogue.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="va">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 <table class="table table table-striped table-hover table-condensed">
 <thead><tr>
 <th style="text-align:left;">
@@ -507,8 +507,8 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
 <h2 class="hasAnchor">
 <a href="#find-a-series-key" class="anchor"></a>Find a series key</h2>
 <p>The best way to download data is to find the right series key (idbank), but how ? Indeed, in some cases it is not easy to understand what are the differences among series, especially for non-French speakers. To make the search easier, the <a href="https://CRAN.R-project.org/package=insee">insee</a> package provides the function <code>add_insee_title</code> to get titles from idbanks, either in English or in French. It is not advised to use the function on the whole idbank dataset, as each SDMX query has 400-idbank limit. Then, <code>add_insee_title</code> function splits the list into several lists of 400 idbanks each. Thus, the user should filter the idbank dataset before using the function to avoid as much as possible this bottleneck as the following example shows. After the data retrieval, it is really nice to use the <code>split_title</code> function on the dataframe to get more readable titles easy to use in plots.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit">
-<span class="va">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="op">)</span>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="va">idbank_list_selected</span> <span class="op">=</span>
   <span class="va">idbank_list</span> <span class="op">%&gt;%</span>
@@ -520,7 +520,7 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">str_detect</span><span class="op">(</span><span class="va">dim4</span>,<span class="st">"^29$|A10-BE"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="../reference/add_insee_title.html">add_insee_title</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="va">idbank_list_selected</span></pre></div>
+<span class="va">idbank_list_selected</span></code></pre></div>
 </div>
 <div id="download-data" class="section level2">
 <h2 class="hasAnchor">
@@ -529,8 +529,8 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
 <h3 class="hasAnchor">
 <a href="#download-using-a-list-of-idbanks" class="anchor"></a>Download using a list of idbanks</h3>
 <p>The <code>get_insee_idbank</code> function should handle up to 1200 idbanks. It is then advised to narrow down the idbanks list used as argument of the function. Otherwise, put the limit argument to FALSE to ignore the function’s idbank limit.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://hadrilec.github.io/insee/">insee</a></span><span class="op">)</span>
 
 <span class="co"># the user can make a manual list of idbanks to get the data </span>
@@ -562,14 +562,14 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
 
 <span class="va">list_idbank</span> <span class="op">=</span> <span class="va">df_idbank</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">idbank</span><span class="op">)</span>
 
-<span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span><span class="op">(</span><span class="va">list_idbank</span>, firstNObservations <span class="op">=</span> <span class="fl">1</span>, limit <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></pre></div>
+<span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span><span class="op">(</span><span class="va">list_idbank</span>, firstNObservations <span class="op">=</span> <span class="fl">1</span>, limit <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="download-using-a-dataset-name" class="section level3">
 <h3 class="hasAnchor">
 <a href="#download-using-a-dataset-name" class="anchor"></a>Download using a dataset name</h3>
 <p>For some datasets as IPC-2015 (inflation), the filter is necessary.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit">
-<span class="va">insee_dataset</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span><span class="op">(</span><span class="op">)</span> 
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">insee_dataset</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span><span class="op">(</span><span class="op">)</span> 
 
 <span class="co"># example 1 : full dataset</span>
 <span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_insee_dataset.html">get_insee_dataset</a></span><span class="op">(</span><span class="st">"CLIMAT-AFFAIRES"</span><span class="op">)</span>
@@ -586,7 +586,7 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
 <span class="va">data</span> <span class="op">=</span> 
   <span class="fu"><a href="../reference/get_insee_dataset.html">get_insee_dataset</a></span><span class="op">(</span><span class="st">"CNA-2014-CPEB"</span>,
                     filter <span class="op">=</span> <span class="st">"A.CNA_CPEB.A38-CB.VAL.D39.VALEUR_ABSOLUE.FE.EUROS_COURANTS.BRUT"</span>,
-                    lastNObservations <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></pre></div>
+                    lastNObservations <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
 </div>
 </div>
 </div>
