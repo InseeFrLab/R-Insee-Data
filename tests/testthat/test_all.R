@@ -53,6 +53,10 @@ test_that("class tests",{
   expect_is(download_idbank_list(label = TRUE), "data.frame")
   expect_is(download_idbank_list(dataset = "CNA-2010-TOF", label = TRUE), "data.frame")
 
+  expect_is(get_column_title("CNA-2014-CONSO-MEN"), "data.frame")
+  expect_is(get_column_title("CNA-2014-CONSO-MEN"), "data.frame")
+  expect_is(get_column_title(), "data.frame")
+
 })
 
 test_that("output tests",{
