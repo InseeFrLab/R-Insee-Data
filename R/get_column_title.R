@@ -4,8 +4,11 @@
 #' @return a dataframe
 #' @examples
 #' \donttest{
+#' column_titles_all_dataset = get_column_title()
+#'
 #' column_titles = get_column_title("CNA-2014-CONSO-MEN")
 #' }
+#' @export
 get_column_title = function(dataset = NULL){
 
   if(!is.null(dataset)){
@@ -31,6 +34,9 @@ get_column_title = function(dataset = NULL){
                return(df_dim)
                })
     )
+
+    dimension_name_df[,"dimension"] = gsub("-", "_", dimension_name_df[,"dimension"])
+
     return(dimension_name_df)
   }else{
     return(NULL)

@@ -3,6 +3,7 @@
 export(add_insee_metadata)
 export(add_insee_title)
 export(clean_table)
+export(get_column_title)
 export(get_dataset_list)
 export(get_idbank_list)
 export(get_insee)
