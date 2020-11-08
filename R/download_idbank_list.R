@@ -83,25 +83,31 @@ download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label
                  function(dataset_name){
 
                    new_col_names = get_dataset_dimension(dataset = dataset_name)
-
                    mapping_dataset = dplyr::filter(.data = mapping, .data$nomflow == dataset_name)
 
-                   mapping_dataset_sep =
-                     separate_col(df = mapping_dataset, col = "cleFlow",
-                                  sep = "\\.", into = new_col_names)
+                   if(!is.null(new_col_names)){
 
-                   if(label == TRUE){
-                     for(new_col_name in new_col_names){
-                       dimension_labels = get_dimension_values(dimension = new_col_name)
+                     mapping_dataset_sep =
+                       separate_col(df = mapping_dataset, col = "cleFlow",
+                                    sep = "\\.", into = new_col_names)
 
-                       if(!is.null(dimension_labels)){
-                         mapping_dataset_sep = dplyr::left_join(mapping_dataset_sep, dimension_labels, by = new_col_name)
+                     if(label == TRUE){
+                       for(new_col_name in new_col_names){
+                         dimension_labels = get_dimension_values(dimension = new_col_name)
+
+                         if(!is.null(dimension_labels)){
+                           mapping_dataset_sep = dplyr::left_join(mapping_dataset_sep, dimension_labels, by = new_col_name)
+                         }
+
                        }
-
                      }
+
+                     return(mapping_dataset_sep)
+                   }else{
+                     return(mapping_dataset)
                    }
 
-                   return(mapping_dataset_sep)
+
                  }))
 
     }else{

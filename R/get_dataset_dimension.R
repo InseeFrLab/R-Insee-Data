@@ -14,11 +14,17 @@ get_dataset_dimension = function(dataset){
     content_list = xml2::as_list(response_content)
     data = tibble::as_tibble(content_list)
 
-    l = data[[1]][[2]]$DataStructures$DataStructure$DataStructureComponents$AttributeList$Attribute$AttributeRelationship
+    l = try(data[[1]][[2]]$DataStructures$DataStructure$DataStructureComponents$AttributeList$Attribute$AttributeRelationship, silent = TRUE)
 
-    list_dimension = unlist(lapply(1:length(l), function(i){return(attr(l[[i]]$Ref,"id"))}))
+    if(class(l) != "try-error"){
+      if(!is.null(l)){
+        list_dimension = unlist(lapply(1:length(l), function(i){return(attr(l[[i]]$Ref,"id"))}))
 
-    saveRDS(list_dimension, file = dataset_dim_file_cache)
+        saveRDS(list_dimension, file = dataset_dim_file_cache)
+
+      }else{return(NULL)}
+    }else{return(NULL)}
+
   }else{
     list_dimension = readRDS(file = dataset_dim_file_cache)
   }

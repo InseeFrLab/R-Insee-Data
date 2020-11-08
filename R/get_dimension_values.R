@@ -30,11 +30,18 @@ get_dimension_values = function(dimension){
             labels = dplyr::bind_rows(lapply(1:length(data_code), function(i){
 
               if(attr(data_code[[i]][[1]], "lang") == "fr"){
-                label_fr = data_code[[i]][[1]][[1]]
-                label_en = data_code[[i]][[2]][[1]]
+                label_fr = try(data_code[[i]][[1]][[1]], silent = TRUE)
+                label_en = try(data_code[[i]][[2]][[1]], silent = TRUE)
               }else{
-                label_fr = data_code[[i]][[2]][[1]]
-                label_en = data_code[[i]][[1]][[1]]
+                label_fr = try(data_code[[i]][[2]][[1]], silent = TRUE)
+                label_en = try(data_code[[i]][[1]][[1]], silent = TRUE)
+              }
+
+              if(class(label_fr) == "try-error"){
+                label_fr = "Missing"
+              }
+              if(class(label_en) == "try-error"){
+                label_en = "Missing"
               }
 
               df = data.frame(code = attr(data_code[[i]], "id"),
