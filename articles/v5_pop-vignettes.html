@@ -132,7 +132,7 @@
 <span class="va">data_plot</span> <span class="op">=</span> 
   <span class="va">data</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="../reference/split_title.html">split_title</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">add_insee_metadata</span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_insee_metadata.html">add_insee_metadata</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>OBS_VALUE <span class="op">=</span> <span class="va">OBS_VALUE</span> <span class="op">/</span> <span class="fl">10</span><span class="op">^</span><span class="fl">6</span><span class="op">)</span>
 
 <span class="fu">ggplot</span><span class="op">(</span><span class="va">data_plot</span>, <span class="fu">aes</span><span class="op">(</span>x <span class="op">=</span> <span class="va">DATE</span>, y <span class="op">=</span> <span class="va">OBS_VALUE</span>, fill <span class="op">=</span> <span class="va">TITLE_EN3</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>

@@ -210,7 +210,7 @@ Sys.setenv(INSEE_download_verbose = "FALSE")</p>
 
 <span class='co'>#example 1 : import price index of industrial products and turnover index : manufacture of wood</span>
 <span class='va'>data</span> <span class='op'>=</span> <span class='fu'>get_insee_idbank</span><span class='op'>(</span><span class='st'>"001558315"</span>, <span class='st'>"010540726"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpESyArk/0340378351af7c9c4993852409c6853b.rds</span>
+</div><div class='output co'>#&gt; <span class='message'><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpxnTfTx/0340378351af7c9c4993852409c6853b.rds</span>
 #&gt; <span class='message'></span><span></span></div><div class='input'>
 <span class='co'>#example 2 : unemployment data</span>
 
@@ -223,38 +223,37 @@ Sys.setenv(INSEE_download_verbose = "FALSE")</p>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>nomflow</span> <span class='op'>==</span> <span class='st'>"CHOMAGE-TRIM-NATIONAL"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>  <span class='co'>#unemployment dataset</span>
   <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>dim5</span> <span class='op'>==</span> <span class='fl'>0</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='co'>#men and women</span>
   <span class='fu'>mutate</span><span class='op'>(</span>title <span class='op'>=</span> <span class='fu'><a href='get_insee_title.html'>get_insee_title</a></span><span class='op'>(</span><span class='va'>idbank</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpESyArk/a03de67a056ac488b056a6a4b67c1cf3.rds</span>
+</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpxnTfTx/a03de67a056ac488b056a6a4b67c1cf3.rds</span>
 #&gt; <span class='message'></span><span></span></div><div class='input'>
 <span class='va'>idbank_list_selected</span> <span class='op'>=</span> <span class='va'>df_idbank_list_selected</span> <span class='op'>%&gt;%</span> <span class='fu'>pull</span><span class='op'>(</span><span class='va'>idbank</span><span class='op'>)</span>
 
 <span class='va'>unem</span> <span class='op'>=</span> <span class='fu'>get_insee_idbank</span><span class='op'>(</span><span class='va'>idbank_list_selected</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpESyArk/8281f4b4beab4d8f14a48c5a396bba04.rds</span>
+</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpxnTfTx/8281f4b4beab4d8f14a48c5a396bba04.rds</span>
 #&gt; <span class='message'></span><span></span></div><div class='input'>
 <span class='co'>#example 3 : French GDP growth rate</span>
 
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
 
-<span class='va'>idbank_list</span> <span class='op'>=</span> <span class='fu'><a href='get_idbank_list.html'>get_idbank_list</a></span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Cached data has been used</span><span></span></div><div class='input'>
 <span class='va'>df_idbank_list_selected</span> <span class='op'>=</span>
-  <span class='va'>idbank_list</span> <span class='op'>%&gt;%</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>nomflow</span> <span class='op'>==</span> <span class='st'>"CNT-2014-PIB-EQB-RF"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>  <span class='co'># Gross domestic product balance</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>dim1</span> <span class='op'>==</span> <span class='st'>"T"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='co'>#quarter</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>dim4</span> <span class='op'>==</span> <span class='st'>"PIB"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='co'>#GDP</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>dim6</span> <span class='op'>==</span> <span class='st'>"TAUX"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='co'>#rate</span>
-  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>dim10</span> <span class='op'>==</span> <span class='st'>"CVS-CJO"</span><span class='op'>)</span> <span class='co'>#SA-WDA, seasonally adjusted, working day adjusted</span>
-
+  <span class='fu'>getidbank_list</span><span class='op'>(</span><span class='st'>"CNT-2014-PIB-EQB-RF"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>  <span class='co'># Gross domestic product balance</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>FREQ</span> <span class='op'>==</span> <span class='st'>"T"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='co'>#quarter</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>OPERATION</span> <span class='op'>==</span> <span class='st'>"PIB"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='co'>#GDP</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>NATURE</span> <span class='op'>==</span> <span class='st'>"TAUX"</span><span class='op'>)</span> <span class='op'>%&gt;%</span> <span class='co'>#rate</span>
+  <span class='fu'><a href='https://rdrr.io/r/stats/filter.html'>filter</a></span><span class='op'>(</span><span class='va'>CORRECTION</span> <span class='op'>==</span> <span class='st'>"CVS-CJO"</span><span class='op'>)</span> <span class='co'>#SA-WDA, seasonally adjusted, working day adjusted</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in getidbank_list("CNT-2014-PIB-EQB-RF"): could not find function "getidbank_list"</span></div><div class='input'>
 <span class='va'>idbank</span> <span class='op'>=</span> <span class='va'>df_idbank_list_selected</span> <span class='op'>%&gt;%</span> <span class='fu'>pull</span><span class='op'>(</span><span class='va'>idbank</span><span class='op'>)</span>
 
-<span class='va'>data</span> <span class='op'>=</span> <span class='fu'>get_insee_idbank</span><span class='op'>(</span><span class='va'>idbank</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpESyArk/75180c15d5ecfe6ca41459680972f91d.rds</span>
+<span class='va'>data</span> <span class='op'>=</span> <span class='fu'>get_insee_idbank</span><span class='op'>(</span><span class='va'>idbank</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+  <span class='fu'><a href='add_insee_metadata.html'>add_insee_metadata</a></span><span class='op'>(</span>label <span class='op'>=</span> <span class='cn'>TRUE</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Cached data has been used</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'></span>
+#&gt; <span class='message'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpxnTfTx/1da60d91046342ace1bd7205411dffb5.rds</span>
 #&gt; <span class='message'></span><span></span></div><div class='input'>
 <span class='co'>#plot</span>
 <span class='fu'>ggplot</span><span class='op'>(</span><span class='va'>data</span>, <span class='fu'>aes</span><span class='op'>(</span>x <span class='op'>=</span> <span class='va'>DATE</span>, y <span class='op'>=</span> <span class='va'>OBS_VALUE</span><span class='op'>)</span><span class='op'>)</span> <span class='op'>+</span>
 <span class='fu'>geom_col</span><span class='op'>(</span><span class='op'>)</span> <span class='op'>+</span>
 <span class='fu'>ggtitle</span><span class='op'>(</span><span class='st'>"French GDP growth rate, quarter-on-quarter, sa-wda"</span><span class='op'>)</span> <span class='op'>+</span>
 <span class='fu'>labs</span><span class='op'>(</span>subtitle <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span><span class='op'>(</span><span class='st'>"Last updated : %s"</span>, <span class='va'>data</span><span class='op'>$</span><span class='va'>TIME_PERIOD</span><span class='op'>[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='warning'>Warning: Removed 1 rows containing missing values (position_stack).</span></div><div class='img'><img src='get_insee_idbank-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># }</span>
+</div><div class='img'><img src='get_insee_idbank-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='co'># }</span>
 
 </div></span></pre>
   </div>

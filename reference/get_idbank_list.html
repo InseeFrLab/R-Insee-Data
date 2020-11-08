@@ -147,15 +147,23 @@
     <p>Download a full INSEE's series key list</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_idbank_list</span><span class='op'>(</span>dataset <span class='op'>=</span> <span class='cn'>NULL</span>, label <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_idbank_list</span><span class='op'>(</span><span class='va'>...</span>, dataset <span class='op'>=</span> <span class='cn'>NULL</span>, label <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
+      <th>...</th>
+      <td><p>one or several dataset names</p></td>
+    </tr>
+    <tr>
       <th>dataset</th>
       <td><p>if a dataset name is provided, only a subset of the data is delivered, otherwise
-all the data is returned</p></td>
+all the data is returned, and column names refer directly to data dimensions</p></td>
+    </tr>
+    <tr>
+      <th>label</th>
+      <td><p>if TRUE titles are provided for each dimension value, by default it is FALSE</p></td>
     </tr>
     </table>
 
