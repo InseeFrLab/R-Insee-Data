@@ -16,7 +16,7 @@ test_that("class tests",{
 
   expect_is(get_idbank_list("CNA-2014-CPEB"), "data.frame")
   expect_is(get_idbank_list("BALANCE-PAIEMENTS", "CNA-2014-CPEB",
-                            dataset = "CNA-2010-FBCF-BRANCHE",label = TRUE), "data.frame")
+                            dataset = "CNA-2010-FBCF-BRANCHE", label = TRUE), "data.frame")
   expect_is(get_dataset_list(), "data.frame")
 
   Sys.setenv(INSEE_print_query = "TRUE")
@@ -52,6 +52,7 @@ test_that("class tests",{
 
   expect_is(download_idbank_list(label = TRUE), "data.frame")
   expect_is(download_idbank_list(dataset = "CNA-2010-TOF", label = TRUE), "data.frame")
+
 })
 
 test_that("output tests",{
@@ -93,6 +94,8 @@ test_that("output tests",{
 
   expect_equal(ncol(get_insee_idbank("001769682") %>% add_insee_metadata())
                > ncol(get_insee_idbank("001769682")), TRUE)
+
+
 
 })
 
