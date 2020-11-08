@@ -4,11 +4,15 @@
 \alias{get_idbank_list}
 \title{Download a full INSEE's series key list}
 \usage{
-get_idbank_list(dataset = NULL, label = FALSE)
+get_idbank_list(..., dataset = NULL, label = FALSE)
 }
 \arguments{
+\item{...}{one or several dataset names}
+
 \item{dataset}{if a dataset name is provided, only a subset of the data is delivered, otherwise
-all the data is returned}
+all the data is returned, and column names refer directly to data dimensions}
+
+\item{label}{if TRUE titles are provided for each dimension value, by default it is FALSE}
 }
 \value{
 a tibble the idbank dataset
