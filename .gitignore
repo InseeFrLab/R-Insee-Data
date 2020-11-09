@@ -1,9 +1,7 @@
 .Rhistory
-.Rbuildignore
 .Rproj.user
 Meta
 doc
 README.html
-README.Rmd
 inst/doc
 .httr-oauth
