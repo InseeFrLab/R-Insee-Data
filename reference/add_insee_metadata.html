@@ -156,6 +156,10 @@
       <th>df</th>
       <td><p>a dataframe containing data obtained from get_insee_idbank or get_insee_dataset</p></td>
     </tr>
+    <tr>
+      <th>label</th>
+      <td><p>if TRUE, labels for the dimensions are provided</p></td>
+    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
@@ -177,9 +181,12 @@
 <span class='va'>data</span> <span class='op'>=</span>
  <span class='fu'><a href='get_insee_idbank.html'>get_insee_idbank</a></span><span class='op'>(</span><span class='st'>"001694061"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
  <span class='fu'>add_insee_metadata</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//RtmpmZ2T58/fcdad636cc51d27630f60fbfe871d094.rds</span>
-#&gt; <span class='message'></span><span></span></div><div class='output co'>#&gt; <span class='warning'>Warning: Idbank list download failed. Package's internal data has been used instead. </span>
-#&gt; <span class='warning'>Please contact the package maintainer if this error persists.</span></div><div class='input'><span class='co'># }</span>
+</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp707Zs1/fcdad636cc51d27630f60fbfe871d094.rds</span>
+#&gt; <span class='message'></span><span></span></div><div class='output co'>#&gt; <span class='warning'>Warning: !!! The use of dim columns is DEPRECATED</span>
+#&gt; <span class='warning'> !!! Use new column names instead as FREQ INDICATEUR etc.</span>
+#&gt; <span class='warning'> This message is displayed once per R session</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'></span>
+#&gt; <span class='message'>Data cached : /var/folders/24/8k48jl6d249_n_qfxwsl6xvm0000gn/T//Rtmp707Zs1/cca8563e833b49403f979064254a324c.rds</span>
+#&gt; <span class='message'></span><span></span></div><div class='input'><span class='co'># }</span>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
