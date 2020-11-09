@@ -35,15 +35,25 @@ download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label
 
   }
 
-  dwn = utils::download.file(file_to_dwn, temp_file,
-                             mode = insee_download_option_idbank_list, quiet = TRUE)
+ idbank_list_file_cache = file.path(temp_dir,
+                                 paste0(openssl::md5(file_to_dwn), ".rds"))
 
-  uzp = utils::unzip(temp_file, exdir = temp_dir)
+ if(!file.exists(idbank_list_file_cache)){
 
-  mapping_file = file.path(temp_dir, list.files(temp_dir, pattern = mapping_file_pattern)[1])
-  # load data
-  mapping = utils::read.delim(mapping_file, sep = mapping_file_sep,
-                              stringsAsFactors = F)
+   dwn = utils::download.file(file_to_dwn, temp_file,
+                              mode = insee_download_option_idbank_list, quiet = TRUE)
+
+   uzp = utils::unzip(temp_file, exdir = temp_dir)
+
+   mapping_file = file.path(temp_dir, list.files(temp_dir, pattern = mapping_file_pattern)[1])
+   # load data
+   mapping = utils::read.delim(mapping_file, sep = mapping_file_sep,
+                               stringsAsFactors = F)
+
+   saveRDS(mapping, file = idbank_list_file_cache)
+ }else{
+   mapping = readRDS(idbank_list_file_cache)
+ }
 
   # filter data
   idbank_list_defaul_value = FALSE
@@ -67,12 +77,10 @@ download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label
       file_warning_deprecated = file.path(temp_dir, paste0(openssl::md5("dimdeprecated"), ".rds"))
 
       if(!file.exists(file_warning_deprecated)){
-        msg1 = "!!! in get_idbank_list function, if the dataset name is provided by the user then"
-        msg2 = "!!! dim columns will no longer be included in the dataframe in a future version of this package"
-        msg3 = "!!! CHANGES ARE NEEDED, Use new column names instead as FREQ INDICATEUR etc."
-        msg4 = "!!! if the user relies on column's indices to handle dim columns, this new version is a CODE BREAKER"
-        msg5 = "this message is displayed once per R session"
-        msg = sprintf("%s\n%s\n%s\n%s\n%s", msg1, msg2, msg3, msg4, msg5)
+        msg1 = "!!! The use of dim columns is DEPRECATED"
+        msg2 = " !!! Use new column names instead as FREQ INDICATEUR etc."
+        msg3 = " This message is displayed once per R session"
+        msg = sprintf("%s\n%s\n%s\n%s", msg1, msg2, msg3)
         warning(msg)
         save(msg, file = file_warning_deprecated)
       }
