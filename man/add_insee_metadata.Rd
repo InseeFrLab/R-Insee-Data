@@ -8,6 +8,8 @@ add_insee_metadata(df, label = TRUE)
 }
 \arguments{
 \item{df}{a dataframe containing data obtained from get_insee_idbank or get_insee_dataset}
+
+\item{label}{if TRUE, labels for the dimensions are provided}
 }
 \value{
 a tibble with the data given as parameter plus the corresponding metadata

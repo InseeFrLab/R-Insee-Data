@@ -1,0 +1,9 @@
+^.*\.Rproj$
+^\.Rproj\.user$
+^\.github$
+^_pkgdown\.yml$
+^codecov\.yml$
+^docs$
+^pkg_tools.R$
+^cran-comments.md$
+^README.Rmd$

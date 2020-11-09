@@ -2,6 +2,7 @@
 #'
 #' @details Add metadata to the raw data obtained from get_insee_idbank or get_insee_dataset
 #' @param df a dataframe containing data obtained from get_insee_idbank or get_insee_dataset
+#' @param label if TRUE, labels for the dimensions are provided
 #' @return a tibble with the data given as parameter plus the corresponding metadata
 #' @examples
 #' \donttest{
