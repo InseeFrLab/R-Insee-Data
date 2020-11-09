@@ -8,6 +8,7 @@ get_dataset_dimension = function(dataset){
   dataset_dim_file_cache = file.path(temp_dir, paste0(openssl::md5(link), ".rds"))
 
   if(!file.exists(dataset_dim_file_cache)){
+
     response = try(httr::GET(link), silent = TRUE)
     response_content = try(httr::content(response, encoding = "UTF-8"), silent = TRUE)
 

@@ -11,35 +11,43 @@ get_last_release = function(){
 
   insee_last_release_link = Sys.getenv("INSEE_last_release_link")
 
-  response = httr::GET(insee_last_release_link)
+  file_cache = file.path(tempdir(), paste0(openssl::md5(insee_last_release_link), ".rds"))
 
-  data_xml = xml2::read_xml(response)
-  data_list = xml2::as_list(data_xml)
-  data_item = data_list$rss$channel
+  if(!file.exists(file_cache)){
+    response = httr::GET(insee_last_release_link)
 
-  if(!is.null(data_item)){
+    data_xml = xml2::read_xml(response)
+    data_list = xml2::as_list(data_xml)
+    data_item = data_list$rss$channel
 
-    list_item = which(names(data_item) == "item")
+    if(!is.null(data_item)){
 
-    if(length(list_item) > 0){
+      list_item = which(names(data_item) == "item")
 
-      list_df = lapply(list_item, function(item){
-        data.frame(
-          title = if_null_na(data_item[[item]]$title[[1]]),
-          link = if_null_na(data_item[[item]]$link[[1]]),
-          description = if_null_na(data_item[[item]]$description[[1]]),
-          guid = if_null_na(data_item[[item]]$guid[[1]]),
-          pubDate = if_null_na(data_item[[item]]$pubDate[[1]]),
-          stringsAsFactors = FALSE)
-      })
+      if(length(list_item) > 0){
 
-      data_final = tibble::as_tibble(dplyr::bind_rows(list_df))
+        list_df = lapply(list_item, function(item){
+          data.frame(
+            title = if_null_na(data_item[[item]]$title[[1]]),
+            link = if_null_na(data_item[[item]]$link[[1]]),
+            description = if_null_na(data_item[[item]]$description[[1]]),
+            guid = if_null_na(data_item[[item]]$guid[[1]]),
+            pubDate = if_null_na(data_item[[item]]$pubDate[[1]]),
+            stringsAsFactors = FALSE)
+        })
 
+        data_final = tibble::as_tibble(dplyr::bind_rows(list_df))
+
+        saveRDS(data_final, file = file_cache)
+
+      }else{
+        data_final = NULL
+      }
     }else{
       data_final = NULL
     }
   }else{
-    data_final = NULL
+    data_final = readRDS(file_cache)
   }
 
   return(data_final)
