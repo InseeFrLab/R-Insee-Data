@@ -17,6 +17,8 @@ Get the title of dataset's columns
 }
 \examples{
 \donttest{
+column_titles_all_dataset = get_column_title()
+
 column_titles = get_column_title("CNA-2014-CONSO-MEN")
 }
 }

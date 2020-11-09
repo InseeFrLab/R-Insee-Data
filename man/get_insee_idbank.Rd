@@ -54,12 +54,9 @@ data = get_insee_idbank("001558315", "010540726")
 
 library(tidyverse)
 
-idbank_list = get_idbank_list()
-
 df_idbank_list_selected =
-  idbank_list \%>\%
-  filter(nomflow == "CHOMAGE-TRIM-NATIONAL") \%>\%  #unemployment dataset
-  filter(dim5 == 0) \%>\% #men and women
+  get_idbank_list("CHOMAGE-TRIM-NATIONAL") \%>\%  #unemployment dataset
+  filter(SEXE == 0) \%>\% #men and women
   mutate(title = get_insee_title(idbank))
 
 idbank_list_selected = df_idbank_list_selected \%>\% pull(idbank)
@@ -71,7 +68,7 @@ unem = get_insee_idbank(idbank_list_selected)
 library(tidyverse)
 
 df_idbank_list_selected =
-  getidbank_list("CNT-2014-PIB-EQB-RF") \%>\%  # Gross domestic product balance
+  get_idbank_list("CNT-2014-PIB-EQB-RF") \%>\%  # Gross domestic product balance
   filter(FREQ == "T") \%>\% #quarter
   filter(OPERATION == "PIB") \%>\% #GDP
   filter(NATURE == "TAUX") \%>\% #rate
