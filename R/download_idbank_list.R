@@ -80,7 +80,7 @@ download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label
         msg1 = "!!! The use of dim columns is DEPRECATED"
         msg2 = " !!! Use new column names instead as FREQ INDICATEUR etc."
         msg3 = " This message is displayed once per R session"
-        msg = sprintf("%s\n%s\n%s\n%s", msg1, msg2, msg3)
+        msg = sprintf("%s\n%s\n%s", msg1, msg2, msg3)
         warning(msg)
         save(msg, file = file_warning_deprecated)
       }
