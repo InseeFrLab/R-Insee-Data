@@ -1,5 +1,5 @@
 #' @noRd
-download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label = FALSE){
+download_idbank_list = function(dataset = NULL, label = FALSE, update = FALSE){
 
   insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
   insee_download_option_idbank_list = Sys.getenv("INSEE_download_option_idbank_list")
@@ -13,27 +13,6 @@ download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label
 
   temp_file = tempfile()
   temp_dir = tempdir()
-
-  if(missing(mapping_file_cache)){
-
-    label_hash = ""
-    dataset_hash = ""
-
-    if(!is.null(dataset)){
-      dataset_hash = paste0(dataset, collapse = "_")
-      if(is.null(label)){
-        label_hash = "T"
-      }else{
-        if(label == TRUE){
-          label_hash = "T"
-        }
-      }
-    }
-
-    mapping_file_cache = file.path(temp_dir,
-                                   paste0(openssl::md5(paste0(mapping_file_pattern, dataset_hash, label_hash)), ".rds"))
-
-  }
 
  idbank_list_file_cache = file.path(temp_dir,
                                  paste0(openssl::md5(file_to_dwn), ".rds"))
@@ -77,18 +56,24 @@ download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label
       file_warning_deprecated = file.path(temp_dir, paste0(openssl::md5("dimdeprecated"), ".rds"))
 
       if(!file.exists(file_warning_deprecated)){
-        msg1 = "!!! The use of dim columns is DEPRECATED"
-        msg2 = " !!! Use new column names instead as FREQ INDICATEUR etc."
-        msg3 = " This message is displayed once per R session"
+        msg1 = "\n!!! The use of dim columns is DEPRECATED"
+        msg2 = "!!! Use new column names instead as FREQ INDICATEUR etc."
+        msg3 = "This message is displayed once per R session"
         msg = sprintf("%s\n%s\n%s", msg1, msg2, msg3)
-        warning(msg)
+        message(crayon::style(msg, "red"))
         save(msg, file = file_warning_deprecated)
+      }
+
+      if(length(dataset_in_list) > 1){
+        pb = utils::txtProgressBar(min = 1, max = length(dataset_in_list), initial = 1, style = 3)
       }
 
       mapping_final =
         dplyr::bind_rows(
-          lapply(dataset_in_list,
-                 function(dataset_name){
+          lapply(1:length(dataset_in_list),
+                 function(j){
+
+                   dataset_name = dataset_in_list[j]
 
                    new_col_names = get_dataset_dimension(dataset = dataset_name)
                    mapping_dataset = dplyr::filter(.data = mapping, .data$nomflow == dataset_name)
@@ -108,6 +93,18 @@ download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label
                          }
 
                        }
+
+                     }
+
+                     mapping_dataset_sep = clean_table(set_metadata_col(mapping_dataset_sep))
+
+                     dataset_metadata_file_cache = file.path(rappdirs::user_data_dir("insee"),
+                                                             paste0(openssl::md5(sprintf("%s_metadata_file", dataset_name)), ".rds"))
+
+                     saveRDS(mapping_dataset_sep, file = dataset_metadata_file_cache)
+
+                     if(length(dataset_in_list) > 1){
+                       utils::setTxtProgressBar(pb, j)
                      }
 
                      return(mapping_dataset_sep)
@@ -138,6 +135,18 @@ download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label
     }
   }
 
+  mapping_final = set_metadata_col(mapping_final)
+
+  return(mapping_final)
+}
+
+#' @noRd
+set_metadata_col = function(mapping_final){
+
+  idbank_nchar = as.numeric(Sys.getenv("INSEE_idbank_nchar"))
+
+  if(is.na(idbank_nchar)){idbank_nchar = 9}
+
   names(mapping_final) = gsub("-", "_", names(mapping_final))
 
   label_col = names(mapping_final)[grep("_label_", names(mapping_final))]
@@ -160,12 +169,7 @@ download_idbank_list = function(mapping_file_cache = NULL, dataset = NULL, label
     mapping_final[,"n_series"] = as.numeric(as.character(mapping_final[,"n_series"]))
   }
 
-  if(insee_download_verbose){
-    msg = sprintf("\nData cached : %s\n", mapping_file_cache)
-    message(crayon::style(msg, "green"))
-  }
-
-  saveRDS(mapping_final, file = mapping_file_cache)
+  mapping_final = tibble::as_tibble(mapping_final)
 
   return(mapping_final)
 }

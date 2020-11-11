@@ -23,10 +23,7 @@ vec2 = revdep("covr", dependencies = "Suggests")
 
 pkg_dpd_tidyr = data.frame(pkg = vec[vec %in% vec2])
 
-
-# TODO settle goodpractice issues
-# TODO paper.md
-
-
+# internal data update
+# usethis::use_data(idbank_list_internal, internal = TRUE, overwrite = TRUE)
 
 

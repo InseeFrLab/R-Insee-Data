@@ -4,7 +4,7 @@
 \alias{get_idbank_list}
 \title{Download a full INSEE's series key list}
 \usage{
-get_idbank_list(..., dataset = NULL, label = FALSE)
+get_idbank_list(..., dataset = NULL, update = FALSE)
 }
 \arguments{
 \item{...}{one or several dataset names}
@@ -12,7 +12,7 @@ get_idbank_list(..., dataset = NULL, label = FALSE)
 \item{dataset}{if a dataset name is provided, only a subset of the data is delivered, otherwise
 all the data is returned, and column names refer directly to data dimensions}
 
-\item{label}{if TRUE titles are provided for each dimension value, by default it is FALSE}
+\item{update}{It is FALSE by default, if it is set to TRUE, it triggers the metadata update. This update is automatically triggered once every 6 months.}
 }
 \value{
 a tibble the idbank dataset

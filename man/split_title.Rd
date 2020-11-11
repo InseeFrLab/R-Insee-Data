@@ -4,7 +4,7 @@
 \alias{split_title}
 \title{Split the title column in several columns}
 \usage{
-split_title(df, title_col_name, n_split = "max", lang = "en")
+split_title(df, title_col_name, n_split = "max", lang = NULL)
 }
 \arguments{
 \item{df}{a dataframe containing a title column}
@@ -13,7 +13,7 @@ split_title(df, title_col_name, n_split = "max", lang = "en")
 
 \item{n_split}{number of new columns, by default the maximum is chosen}
 
-\item{lang}{by default it returns an English title (its default value is "en"), any other value returns a French title}
+\item{lang}{by default it returns both the French and the English title provided by INSEE}
 }
 \value{
 the same dataframe with the title column splitted

@@ -4,12 +4,10 @@
 \alias{add_insee_metadata}
 \title{Add metadata to the raw data}
 \usage{
-add_insee_metadata(df, label = TRUE)
+add_insee_metadata(df)
 }
 \arguments{
 \item{df}{a dataframe containing data obtained from get_insee_idbank or get_insee_dataset}
-
-\item{label}{if TRUE, labels for the dimensions are provided}
 }
 \value{
 a tibble with the data given as parameter plus the corresponding metadata

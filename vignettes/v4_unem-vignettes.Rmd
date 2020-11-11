@@ -44,8 +44,7 @@ embed_png("unem.png")
 ```
 
 ```{r message=FALSE, warning = FALSE, eval = FALSE}
-# please download the Github version
-# devtools::install_github("hadrilec/insee")
+
 library(tidyverse)
 library(insee)
 

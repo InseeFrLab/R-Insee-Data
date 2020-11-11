@@ -8,8 +8,7 @@ test_that("class tests",{
 
   expect_warning(insee:::.onLoad(), regexp = NA)
 
-  expect_equal(c(class(get_idbank_list())[3], class(get_idbank_list())[3]),
-               c("data.frame", "data.frame"))
+  expect_equal(any(class(get_idbank_list()) == 'data.frame'), TRUE)
 
   idbank_test1 = get_idbank_list() %>% slice(1) %>% pull(idbank)
   idbank_test2 = get_idbank_list() %>% slice(2) %>% pull(idbank)
