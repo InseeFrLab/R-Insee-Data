@@ -2,7 +2,6 @@
 #'
 #' @details Add metadata to the raw data obtained from get_insee_idbank or get_insee_dataset
 #' @param df a dataframe containing data obtained from get_insee_idbank or get_insee_dataset
-#' @param label if TRUE, labels for the dimensions are provided
 #' @return a tibble with the data given as parameter plus the corresponding metadata
 #' @examples
 #' \donttest{
@@ -13,7 +12,7 @@
 #'  add_insee_metadata()
 #' }
 #' @export
-add_insee_metadata = function(df, label = TRUE){
+add_insee_metadata = function(df){
 
   if(any(class(df) %in% c("data.frame"))){
     if("IDBANK" %in% names(df)){
@@ -29,7 +28,7 @@ add_insee_metadata = function(df, label = TRUE){
       list_dataset_selected_df = dplyr::distinct(.data = idbank_list_short, .data$nomflow)
       list_dataset_selected = dplyr::pull(.data = list_dataset_selected_df, .data$nomflow)
 
-      metadata = get_idbank_list(list_dataset_selected, label = label)
+      metadata = get_idbank_list(list_dataset_selected)
 
       metadata = dplyr::filter(.data = metadata,
                                         .data$idbank %in% list_idbank_selected)

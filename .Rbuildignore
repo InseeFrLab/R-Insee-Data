@@ -3,6 +3,7 @@
 ^\.github$
 ^_pkgdown\.yml$
 ^codecov\.yml$
+^\.travis\.yml$
 ^docs$
 ^pkg_tools.R$
 ^cran-comments.md$

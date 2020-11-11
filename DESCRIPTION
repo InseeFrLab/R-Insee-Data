@@ -24,7 +24,8 @@ Imports:
   tidyselect,
   rlang,
   crayon,
-  openssl
+  openssl,
+  rappdirs
 Suggests:
     readsdmx,
     tidyverse,

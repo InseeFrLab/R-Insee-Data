@@ -47,7 +47,7 @@
 #' idbank = df_idbank_list_selected %>% pull(idbank)
 #'
 #' data = get_insee_idbank(idbank) %>%
-#'   add_insee_metadata(label = TRUE)
+#'   add_insee_metadata()
 #'
 #' #plot
 #' ggplot(data, aes(x = DATE, y = OBS_VALUE)) +
