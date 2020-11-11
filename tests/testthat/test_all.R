@@ -15,7 +15,7 @@ test_that("class tests",{
 
   expect_is(get_idbank_list("CNA-2014-CPEB"), "data.frame")
   expect_is(get_idbank_list("BALANCE-PAIEMENTS", "CNA-2014-CPEB",
-                            dataset = "CNA-2010-FBCF-BRANCHE", label = TRUE), "data.frame")
+                            dataset = "CNA-2010-FBCF-BRANCHE"), "data.frame")
   expect_is(get_dataset_list(), "data.frame")
 
   Sys.setenv(INSEE_print_query = "TRUE")
