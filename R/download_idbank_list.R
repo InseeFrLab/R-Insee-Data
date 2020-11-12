@@ -1,5 +1,5 @@
 #' @noRd
-download_idbank_list = function(dataset = NULL, label = FALSE, update = FALSE){
+download_idbank_list = function(dataset = NULL, label = FALSE){
 
   insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
   insee_download_option_idbank_list = Sys.getenv("INSEE_download_option_idbank_list")
@@ -163,10 +163,15 @@ set_metadata_col = function(mapping_final){
   add_zero = function(x, idbank_nchar_arg = idbank_nchar){
     paste0(c(rep("0", idbank_nchar_arg-nchar(x)), x), collapse = "")}
 
-  mapping_final[,"idbank"] = vapply(mapping_final[,"idbank"], add_zero, "")
+  mapping_final = dplyr::mutate(.data = mapping_final,
+                                idbank = purrr::map(.data$idbank, add_zero))
+
+  # mapping_final[,"idbank"] = vapply(mapping_final[,"idbank"], add_zero, "")
 
   if("n_series" %in% names(mapping_final)){
-    mapping_final[,"n_series"] = as.numeric(as.character(mapping_final[,"n_series"]))
+    # mapping_final[,"n_series"] = as.numeric(as.character(mapping_final[,"n_series"]))
+    mapping_final = dplyr::mutate(.data = mapping_final,
+                                  n_series = as.numeric(as.character(.data$n_series)))
   }
 
   mapping_final = tibble::as_tibble(mapping_final)

@@ -106,7 +106,7 @@ get_idbank_list = function(
   if(update == FALSE){
     idbank_list = read_dataset_metadata(dataset = dataset,
                                         dataset_metadata_file_cache = dataset_metadata_file_cache)
-    if(class(idbank_list) != "data.frame"){
+    if(all(class(idbank_list) != "data.frame")){
       if(idbank_list == TRUE){
         auto = TRUE
         update = TRUE
