@@ -23,6 +23,7 @@ Imports:
   lubridate,
   tidyselect,
   rlang,
+  purrr,
   crayon,
   openssl,
   rappdirs

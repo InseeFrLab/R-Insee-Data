@@ -13,10 +13,11 @@ test_that("class tests",{
   idbank_test1 = get_idbank_list() %>% slice(1) %>% pull(idbank)
   idbank_test2 = get_idbank_list() %>% slice(2) %>% pull(idbank)
 
-  expect_is(get_idbank_list("CNA-2014-CPEB"), "data.frame")
-  expect_is(get_idbank_list("BALANCE-PAIEMENTS", "CNA-2014-CPEB",
-                            dataset = "CNA-2010-FBCF-BRANCHE"), "data.frame")
-  expect_is(get_dataset_list(), "data.frame")
+  expect_equal(any(class(get_idbank_list("CNA-2014-CPEB")) == 'data.frame'), TRUE)
+  expect_equal(any(class(get_idbank_list("BALANCE-PAIEMENTS", "CNA-2014-CPEB",
+                                         dataset = "CNA-2010-FBCF-BRANCHE")) == 'data.frame'), TRUE)
+
+  expect_equal(any(class(get_dataset_list()) == 'data.frame'), TRUE)
 
   Sys.setenv(INSEE_print_query = "TRUE")
   insee_link = "http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"
