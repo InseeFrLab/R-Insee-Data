@@ -8,6 +8,7 @@ test_that("class tests",{
 
   expect_warning(insee:::.onLoad(), regexp = NA)
 
+  expect_equal(any(class(get_idbank_list(update = TRUE)) == 'data.frame'), TRUE)
   expect_equal(any(class(get_idbank_list()) == 'data.frame'), TRUE)
 
   idbank_test1 = get_idbank_list() %>% slice(1) %>% pull(idbank)
