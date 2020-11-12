@@ -106,5 +106,11 @@ test_that("output tests",{
 
   expect_equal(ncol(get_idbank_list("CNA-2014-CPEB")) > 0, TRUE)
 
+  clean_function_test = function(){
+    clean_insee_folder()
+    return(get_idbank_list())
+  }
+  expect_warning(clean_function_test(), regexp = NA)
+
 })
 
