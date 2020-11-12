@@ -27,7 +27,7 @@ get_idbank_list = function(
 
   if(length(list(...)) > 0){
     if(length(list(...)) == 1){
-      list_dataset = list(...)[[1]]
+      list_dataset = unlist(list(...)[[1]])
     }else{
       list_dataset = unlist(list(...))
     }

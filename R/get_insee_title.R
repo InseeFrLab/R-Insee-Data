@@ -35,7 +35,7 @@ get_insee_title = function(..., lang = "en"){
     cat(crayon::style(msg, "red"))
     return(NULL)
   }else if(length(list(...)) == 1){
-    list_idbank = list(...)[[1]]
+    list_idbank = unlist(list(...)[[1]])
   }else{
     list_idbank = unlist(list(...))
   }
