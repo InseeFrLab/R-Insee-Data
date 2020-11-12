@@ -106,11 +106,14 @@ test_that("output tests",{
 
   expect_equal(ncol(get_idbank_list("CNA-2014-CPEB")) > 0, TRUE)
 
-  clean_function_test = function(){
-    clean_insee_folder()
-    return(get_idbank_list())
-  }
-  expect_warning(clean_function_test(), regexp = NA)
+  Sys.setenv("INSEE_no_cache_use" = "TRUE")
+  expect_equal("data.frame" %in% class(get_insee_idbank("001769682")), TRUE)
+  Sys.setenv("INSEE_no_cache_use" = "FALSE")
+
+  expect_equal("data.frame" %in%
+                 class(read_dataset_metadata("BALANCE-PAIEMENTS", "CLIMAT-AFFAIRES")), TRUE)
+
+  expect_warning(clean_insee_folder(), regexp = NA)
 
 })
 

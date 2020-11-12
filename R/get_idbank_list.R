@@ -171,9 +171,15 @@ get_idbank_list = function(
 #' @noRd
 read_dataset_metadata = function(dataset, dataset_metadata_file_cache){
 
-  insee_no_cache_use = if(Sys.getenv("INSEE_no_cache_use") == "TRUE"){TRUE}else{FALSE}
+  if(missing(dataset_metadata_file_cache)){
 
-    if(!file.exists(dataset_metadata_file_cache) | insee_no_cache_use){
+    dataset_hash = paste0(dataset, collapse = "_")
+
+    dataset_metadata_file_cache = file.path(rappdirs::user_data_dir("insee"),
+                                            paste0(openssl::md5(sprintf("%s_metadata_file", dataset_hash)), ".rds"))
+  }
+
+    if(!file.exists(dataset_metadata_file_cache)){
 
       if(!is.null(dataset)){
         sub_dataset_metadata_file = unlist(lapply(dataset,
@@ -197,8 +203,6 @@ read_dataset_metadata = function(dataset, dataset_metadata_file_cache){
           return(TRUE)
         }
       }
-
-
     }else{
 
       idbank_list = readRDS(dataset_metadata_file_cache)
@@ -214,9 +218,10 @@ clean_insee_folder = function(){
   list_file_insee = file.path(rappdirs::user_data_dir("insee"),
                               list.files(rappdirs::user_data_dir("insee")))
 
-  for(file_name in list_file_insee){
-    file.remove(file_name)
+  if(length(list_file_insee) > 0){
+    for(file_name in list_file_insee){
+      file.remove(file_name)
+    }
   }
-
 }
 
