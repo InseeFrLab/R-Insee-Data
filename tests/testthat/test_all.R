@@ -97,10 +97,14 @@ test_that("output tests",{
                    includeHistory = TRUE,
                    updatedAfter = "2017-07-11T08:45:00")), TRUE)
 
+  Sys.setenv("INSEE_download_verbose" = "TRUE")
+  Sys.setenv("INSEE_read_sdmx_slow"= "TRUE")
+  Sys.setenv("INSEE_no_cache_use" = "TRUE")
+
   expect_equal(ncol(get_insee_idbank("001769682") %>% add_insee_metadata())
                > ncol(get_insee_idbank("001769682")), TRUE)
 
-
+  expect_equal(ncol(get_idbank_list("CNA-2014-CPEB")) > 0, TRUE)
 
 })
 
