@@ -110,8 +110,10 @@ test_that("output tests",{
   expect_equal("data.frame" %in% class(get_insee_idbank("001769682")), TRUE)
   Sys.setenv("INSEE_no_cache_use" = "FALSE")
 
+  expect_equal(is.null(get_idbank_list("a")), TRUE)
+
   expect_equal("data.frame" %in%
-                 class(read_dataset_metadata("BALANCE-PAIEMENTS", "CLIMAT-AFFAIRES")), TRUE)
+                 class(read_dataset_metadata(dataset = c("BALANCE-PAIEMENTS", "CLIMAT-AFFAIRES"))), TRUE)
 
   expect_warning(clean_insee_folder(), regexp = NA)
 
