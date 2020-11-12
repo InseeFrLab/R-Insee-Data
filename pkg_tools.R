@@ -4,6 +4,10 @@ checks_to_omit = c("lintr_assignment_linter")
 checks = setdiff(checks, checks_to_omit)
 (gp=goodpractice::gp(checks=checks))
 
+# build package env var
+Sys.setenv("_R_CHECK_SYSTEM_CLOCK_" = 0)
+# Sys.setenv("_R_CHECK_DONTTEST_EXAMPLES_" = FALSE)
+
 # vignette
 pkgdown::build_site()
 
