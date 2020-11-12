@@ -22,7 +22,6 @@ get_idbank_list = function(
 ){
 
   insee_no_cache_use = if(Sys.getenv("INSEE_no_cache_use") == "TRUE"){TRUE}else{FALSE}
-  insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
   mapping_file_pattern = Sys.getenv("INSEE_idbank_dataset_file")
 
   if(length(list(...)) > 0){
