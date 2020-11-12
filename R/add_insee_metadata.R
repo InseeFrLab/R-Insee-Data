@@ -36,6 +36,9 @@ add_insee_metadata = function(df){
       col_to_keep = names(metadata)[!names(metadata) %in% c(names(df), paste0("dim", 1:50))]
 
       metadata = metadata[,col_to_keep]
+      metadata = dplyr::mutate(.data = metadata, idbank = as.character(.data$idbank))
+
+      df = dplyr::mutate(.data = df, IDBANK = as.character(.data$IDBANK))
 
       df = dplyr::left_join(df, metadata, by = c("IDBANK" = "idbank"))
     }
