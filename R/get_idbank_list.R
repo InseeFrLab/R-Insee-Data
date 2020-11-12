@@ -171,8 +171,9 @@ get_idbank_list = function(
 #' @noRd
 read_dataset_metadata = function(dataset, dataset_metadata_file_cache){
 
+  insee_no_cache_use = if(Sys.getenv("INSEE_no_cache_use") == "TRUE"){TRUE}else{FALSE}
 
-    if(!file.exists(dataset_metadata_file_cache)){
+    if(!file.exists(dataset_metadata_file_cache) | insee_no_cache_use){
 
       if(!is.null(dataset)){
         sub_dataset_metadata_file = unlist(lapply(dataset,
