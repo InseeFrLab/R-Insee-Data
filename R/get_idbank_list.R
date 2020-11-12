@@ -137,7 +137,7 @@ get_idbank_list = function(
 
       idbank_list = try(download_idbank_list(), silent = TRUE)
 
-      if(class(idbank_list) == "try-error"){
+      if("try-error" %in% class(idbank_list)){
 
         idbank_list = clean_table(
           dplyr::filter(.data = idbank_list_internal, .data$nomflow %in% dataset)
