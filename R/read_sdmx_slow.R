@@ -30,22 +30,22 @@ read_sdmx_slow = function(link, step = "1/1"){
 
     n_data_obs = length(data[[1]])
 
-    n_series_tot = sum(unlist(lapply(2:n_data_obs,
-                                     function(x){
-                                       n_series = length(data[[1]][[x]])
-
-                                       sum(unlist(lapply(1:n_series,
-                                                         function(i){
-                                                           length(data[[1]][[x]][[i]])
-                                                         }
-                                       )))
-
-                                     }
-    )))
-
-    list_df = list()
-
     if(n_data_obs > 1){
+
+      n_series_tot = sum(unlist(lapply(2:n_data_obs,
+                                       function(x){
+                                         n_series = length(data[[1]][[x]])
+
+                                         sum(unlist(lapply(1:n_series,
+                                                           function(i){
+                                                             length(data[[1]][[x]][[i]])
+                                                           }
+                                         )))
+
+                                       }
+      )))
+
+      list_df = list()
 
       n_series = length(data[[1]][[2]])
 

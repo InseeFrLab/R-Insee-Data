@@ -115,6 +115,12 @@ test_that("output tests",{
   expect_equal("data.frame" %in%
                  class(read_dataset_metadata(dataset = c("BALANCE-PAIEMENTS", "CLIMAT-AFFAIRES"))), TRUE)
 
+  Sys.setenv("INSEE_download_verbose" = "FALSE")
+  link = "https://bdm.insee.fr/series/sdmx/data/IPC-2015"
+
+  expect_is(read_sdmx_slow(link), "NULL")
+  expect_is(read_sdmx_fast(""), "NULL")
+
   expect_warning(clean_insee_folder(), regexp = NA)
 
 })
