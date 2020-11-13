@@ -21,6 +21,7 @@ get_idbank_list = function(
   update = FALSE
 ){
 
+  insee_today_date = as.Date(Sys.getenv("INSEE_today_date"))
   insee_no_cache_use = if(Sys.getenv("INSEE_no_cache_use") == "TRUE"){TRUE}else{FALSE}
   mapping_file_pattern = Sys.getenv("INSEE_idbank_dataset_file")
 
@@ -79,14 +80,13 @@ get_idbank_list = function(
   # Check when was the last metadata update, update triggered if the metadata is older than 6 months
   #
 
-  today_date = Sys.Date()
   auto = FALSE
 
   if(file.exists(metadata_file_cache_date)){
 
     date_last_update = readRDS(metadata_file_cache_date)
 
-    if(difftime(today_date, date_last_update, units = "days") > 180){
+    if(difftime(insee_today_date, date_last_update, units = "days") > 180){
       update = TRUE
       auto = TRUE
     }
@@ -150,7 +150,7 @@ get_idbank_list = function(
       }else{
 
         saveRDS(idbank_list, file = metadata_file_cache)
-        saveRDS(today_date, file = metadata_file_cache_date)
+        saveRDS(insee_today_date, file = metadata_file_cache_date)
 
         msg = sprintf("\nData cached : %s", metadata_file_cache)
         message(crayon::style(msg, "green"))
