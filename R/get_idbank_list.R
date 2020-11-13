@@ -131,6 +131,9 @@ get_idbank_list = function(
       msg2 = "\nIt may last several minutes"
       message(crayon::style(sprintf("%s %s", msg1, msg2), "red"))
 
+      # delete all metadata
+      clean_insee_folder()
+
       idbank_list = try(download_idbank_list(dataset = dataset_list,
                                              label = TRUE), silent = TRUE)
 
