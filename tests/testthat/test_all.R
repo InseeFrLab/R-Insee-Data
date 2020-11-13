@@ -14,7 +14,7 @@ test_that("class tests",{
 
   Sys.setenv("INSEE_today_date" = as.character(lubridate::today() %m+% days(181)))
   expect_equal(any(class(get_idbank_list()) == 'data.frame'), TRUE)
-  Sys.setenv("INSEE_today_date" = lubridate::today())
+  Sys.setenv("INSEE_today_date" = as.character(lubridate::today()))
 
   idbank_test1 = get_idbank_list() %>% slice(1) %>% pull(idbank)
   idbank_test2 = get_idbank_list() %>% slice(2) %>% pull(idbank)
