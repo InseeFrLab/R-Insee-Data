@@ -21,7 +21,9 @@ get_idbank_list = function(
   update = FALSE
 ){
 
+  print(Sys.getenv("INSEE_today_date"))
   insee_today_date = as.Date(Sys.getenv("INSEE_today_date"))
+
   insee_no_cache_use = if(Sys.getenv("INSEE_no_cache_use") == "TRUE"){TRUE}else{FALSE}
   mapping_file_pattern = Sys.getenv("INSEE_idbank_dataset_file")
 
