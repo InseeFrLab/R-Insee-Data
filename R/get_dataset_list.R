@@ -11,6 +11,7 @@ get_dataset_list = function(){
   link_dataflow = Sys.getenv("INSEE_sdmx_link_dataflow")
 
   df = get_insee(link_dataflow)
+  df = dplyr::filter(.data = df, !is.na(.data$Name.fr))
 
   return(df)
 }

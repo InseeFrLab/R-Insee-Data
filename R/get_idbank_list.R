@@ -53,6 +53,18 @@ get_idbank_list = function(
   metadata_file_cache_date = file.path(rappdirs::user_data_dir("insee"),
                                        paste0(openssl::md5("insee_metadata_file_date"), ".rds"))
 
+  file_warning_deprecated = file.path(tempdir(), paste0(openssl::md5("dimdeprecated"), ".rds"))
+
+  if(!file.exists(file_warning_deprecated)){
+    msg1 = "\n!!! The use of dim columns is DEPRECATED"
+    msg2 = "!!! First, please use datasets' name as input of this function"
+    msg3 = "!!! Then, please use new columns' name instead as FREQ and INDICATEUR etc"
+    msg4 = "This message is displayed once per R session"
+    msg = sprintf("%s\n%s\n%s\n%s\n", msg1, msg2, msg3, msg4)
+    message(crayon::style(msg, "red"))
+    save(msg, file = file_warning_deprecated)
+  }
+
   if(!is.null(dataset)){
     dataset_hash = paste0(dataset, collapse = "_")
 
