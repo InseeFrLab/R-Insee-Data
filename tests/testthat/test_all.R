@@ -2,6 +2,7 @@ testthat::context("class and output tests")
 library(testthat)
 library(insee)
 library(tidyverse)
+library(lubridate)
 
 test_that("class tests",{
   skip_on_cran()
@@ -9,6 +10,9 @@ test_that("class tests",{
   expect_warning(insee:::.onLoad(), regexp = NA)
 
   expect_equal(any(class(get_idbank_list(update = TRUE)) == 'data.frame'), TRUE)
+  expect_equal(any(class(get_idbank_list()) == 'data.frame'), TRUE)
+
+  Sys.setenv("INSEE_today_date" = lubridate::today() %m+% days(181))
   expect_equal(any(class(get_idbank_list()) == 'data.frame'), TRUE)
 
   idbank_test1 = get_idbank_list() %>% slice(1) %>% pull(idbank)
