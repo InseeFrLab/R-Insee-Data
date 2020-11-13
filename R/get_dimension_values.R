@@ -6,7 +6,8 @@ get_dimension_values = function(dimension, name = FALSE){
 
   temp_dir = tempdir()
   dimension_file_cache = file.path(temp_dir, paste0(openssl::md5(link), ".rds"))
-  dimension_name_file_cache = file.path(temp_dir, paste0(openssl::md5(paste0(link, "Name")), ".rds"))
+  dimension_name_file_cache = file.path(rappdirs::user_data_dir("insee"),
+                                        paste0(openssl::md5(paste0(link, "Name")), ".rds"))
 
   if(name){
     if(file.exists(dimension_name_file_cache)){
