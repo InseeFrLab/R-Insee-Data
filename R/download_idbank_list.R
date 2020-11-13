@@ -53,17 +53,6 @@ download_idbank_list = function(dataset = NULL, label = FALSE){
       mapping = separate_col(df = mapping, col = "cleFlow",
                              sep = "\\.", into = paste0("dim", 1:n_col))
 
-      file_warning_deprecated = file.path(temp_dir, paste0(openssl::md5("dimdeprecated"), ".rds"))
-
-      if(!file.exists(file_warning_deprecated)){
-        msg1 = "\n!!! The use of dim columns is DEPRECATED"
-        msg2 = "!!! Use new column names instead as FREQ INDICATEUR etc."
-        msg3 = "This message is displayed once per R session"
-        msg = sprintf("%s\n%s\n%s", msg1, msg2, msg3)
-        message(crayon::style(msg, "red"))
-        save(msg, file = file_warning_deprecated)
-      }
-
       if(length(dataset_in_list) > 1){
         pb = utils::txtProgressBar(min = 1, max = length(dataset_in_list), initial = 1, style = 3)
       }
