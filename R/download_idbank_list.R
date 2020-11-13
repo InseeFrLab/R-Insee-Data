@@ -164,7 +164,7 @@ set_metadata_col = function(mapping_final){
     paste0(c(rep("0", idbank_nchar_arg-nchar(x)), x), collapse = "")}
 
   mapping_final = dplyr::mutate(.data = mapping_final,
-                                idbank = purrr::map(.data$idbank, add_zero))
+                                idbank = purrr::map_chr(.data$idbank, add_zero))
 
   # mapping_final[,"idbank"] = vapply(mapping_final[,"idbank"], add_zero, "")
 
