@@ -37,6 +37,8 @@ get_column_title = function(dataset = NULL){
 
     dimension_name_df[,"dimension"] = gsub("-", "_", dimension_name_df[,"dimension"])
 
+    dimension_name_df = tibble::as_tibble(dimension_name_df)
+
     return(dimension_name_df)
   }else{
     return(NULL)

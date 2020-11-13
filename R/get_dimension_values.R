@@ -1,11 +1,21 @@
 #' @noRd
 get_dimension_values = function(dimension, name = FALSE){
 
+  insee_folder = file.path(rappdirs::user_data_dir(), "insee")
+  list_folders = c(insee_folder, file.path(insee_folder, "insee"))
+
+  for(ifile in 1:length(list_folders)){
+    if(!file.exists(list_folders[ifile])){
+      dir.create(list_folders[ifile])
+    }
+  }
+
   insee_sdmx_link_codelist =  Sys.getenv("INSEE_sdmx_link_codelist")
   link = sprintf("%s%s", insee_sdmx_link_codelist, dimension)
 
-  temp_dir = tempdir()
-  dimension_file_cache = file.path(temp_dir, paste0(openssl::md5(link), ".rds"))
+  dimension_file_cache = file.path(rappdirs::user_data_dir("insee"),
+                                   paste0(openssl::md5(link), ".rds"))
+
   dimension_name_file_cache = file.path(rappdirs::user_data_dir("insee"),
                                         paste0(openssl::md5(paste0(link, "Name")), ".rds"))
 
