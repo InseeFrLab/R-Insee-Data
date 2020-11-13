@@ -4,8 +4,8 @@ get_dataset_dimension = function(dataset){
   insee_sdmx_link_datastructure = Sys.getenv("INSEE_sdmx_link_datastructure")
   link = file.path(insee_sdmx_link_datastructure, dataset)
 
-  temp_dir = tempdir()
-  dataset_dim_file_cache = file.path(temp_dir, paste0(openssl::md5(link), ".rds"))
+  dataset_dim_file_cache = file.path(rappdirs::user_data_dir("insee"),
+                                     paste0(openssl::md5(link), ".rds"))
 
   if(!file.exists(dataset_dim_file_cache)){
 
