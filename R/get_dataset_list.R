@@ -13,5 +13,7 @@ get_dataset_list = function(){
   df = get_insee(link_dataflow)
   df = dplyr::filter(.data = df, !is.na(.data$Name.fr))
 
+  # df = tibble::as_tibble(df)
+
   return(df)
 }
