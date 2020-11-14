@@ -60,7 +60,7 @@ test_that("class tests",{
   Sys.setenv("INSEE_download_option_idbank_list" = "a")
   expect_is(download_idbank_list(label = TRUE), "data.frame")
   expect_is(download_idbank_list(dataset = "CNA-2010-TOF", label = TRUE), "data.frame")
-  expect_warning(download_idbank_list("a"), regexp = NA)
+  expect_warning(download_idbank_list("a"))
 
   expect_is(get_column_title("CNA-2014-CONSO-MEN"), "data.frame")
   expect_is(get_column_title("CNA-2014-CONSO-MEN"), "data.frame")
