@@ -30,6 +30,7 @@ test_that("class tests",{
   insee_query = file.path(insee_link, paste0(idbank_test1,"?", "firstNObservations=1"))
 
   expect_equal(any(class(get_last_release()) == 'data.frame'), TRUE)
+  expect_equal(any(class(get_last_release()) == 'data.frame'), TRUE)
 
   expect_equal(any(class(get_insee(insee_query)) == 'data.frame'), TRUE)
   expect_is(get_insee(), "NULL")
@@ -56,12 +57,18 @@ test_that("class tests",{
 
   expect_is(search_insee("gdp"), "data.frame")
 
+  Sys.setenv("INSEE_download_option_idbank_list" = "a")
   expect_is(download_idbank_list(label = TRUE), "data.frame")
   expect_is(download_idbank_list(dataset = "CNA-2010-TOF", label = TRUE), "data.frame")
+  expect_warning(download_idbank_list("a"), regexp = NA)
 
   expect_is(get_column_title("CNA-2014-CONSO-MEN"), "data.frame")
   expect_is(get_column_title("CNA-2014-CONSO-MEN"), "data.frame")
   expect_is(get_column_title(), "data.frame")
+  expect_is(get_column_title("a"), "NULL")
+
+  expect_is(get_dataset_dimension("a"), "NULL")
+
 
 })
 
@@ -86,6 +93,7 @@ test_that("output tests",{
 
   expect_equal(nrow(split_title(get_insee_idbank(idbank_test1, firstNObservations = 1))), 1)
   expect_equal(nrow(split_title(get_insee_idbank(idbank_test1, firstNObservations = 1), lang = "fr")), 1)
+  expect_equal(nrow(split_title(get_insee_idbank(idbank_test1, firstNObservations = 1), lang = "en")), 1)
   expect_equal(nrow(get_insee_idbank(idbank_test401, firstNObservations = 1)), length(idbank_test401))
   expect_message(nrow(get_insee_idbank(idbank_test401, firstNObservations = 1)))
 
@@ -127,6 +135,7 @@ test_that("output tests",{
   expect_is(read_sdmx_fast(""), "NULL")
 
   expect_warning(clean_insee_folder(), regexp = NA)
+  expect_equal('data.frame' %in% class(get_dimension_values('NATURE', name = TRUE)), TRUE)
 
 })
 

@@ -41,6 +41,7 @@ get_column_title = function(dataset = NULL){
 
     return(dimension_name_df)
   }else{
+    warning("This dataset might not exist, get datasets' list with get_dataset_list()")
     return(NULL)
   }
 }

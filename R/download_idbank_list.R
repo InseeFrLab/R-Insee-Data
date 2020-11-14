@@ -1,7 +1,7 @@
 #' @noRd
 download_idbank_list = function(dataset = NULL, label = FALSE){
 
-  insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
+  # insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
   insee_download_option_idbank_list = Sys.getenv("INSEE_download_option_idbank_list")
   file_to_dwn = Sys.getenv("INSEE_idbank_dataset_path")
   mapping_file_pattern = Sys.getenv("INSEE_idbank_dataset_file")
@@ -106,7 +106,7 @@ download_idbank_list = function(dataset = NULL, label = FALSE){
 
     }else{
       idbank_list_defaul_value = TRUE
-      warning("Dataset names do not exist")
+      warning("Dataset names do not exist, the table by default is provided")
     }
   }else{
     idbank_list_defaul_value = TRUE
@@ -157,11 +157,11 @@ set_metadata_col = function(mapping_final){
 
   # mapping_final[,"idbank"] = vapply(mapping_final[,"idbank"], add_zero, "")
 
-  if("n_series" %in% names(mapping_final)){
-    # mapping_final[,"n_series"] = as.numeric(as.character(mapping_final[,"n_series"]))
-    mapping_final = dplyr::mutate(.data = mapping_final,
-                                  n_series = as.numeric(as.character(.data$n_series)))
-  }
+  # if("n_series" %in% names(mapping_final)){
+  #   # mapping_final[,"n_series"] = as.numeric(as.character(mapping_final[,"n_series"]))
+  #   mapping_final = dplyr::mutate(.data = mapping_final,
+  #                                 n_series = as.numeric(as.character(.data$n_series)))
+  # }
 
   mapping_final = tibble::as_tibble(mapping_final)
 
