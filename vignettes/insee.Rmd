@@ -16,6 +16,7 @@ vignette: >
 
 ```{r setup,echo=FALSE, include=FALSE}
 # setup chunk
+# Sys.setenv("NOT_CRAN" = "TRUE")
 NOT_CRAN <- identical(tolower(Sys.getenv("NOT_CRAN")),"true")
 knitr::opts_chunk$set(purl = NOT_CRAN)
 library(insee)
@@ -63,7 +64,7 @@ Sys.setenv(https_proxy = "my_proxy_server")
 You can easily install [insee](https://CRAN.R-project.org/package=insee) with the following code :
 
 ```{r, message = FALSE, warning = FALSE, eval = FALSE}
-# Get the development version from GitHub (required for the tutorial)
+# Get the development version from GitHub 
 # install.packages("devtools")
 devtools::install_github("hadrilec/insee")
 
@@ -87,11 +88,11 @@ Series have two identifiers the SDMX identifier and the so called idbank. Both c
 
 [INSEE BDM database](https://www.insee.fr/en/information/2512785) offers more than 200 Datasets. The <code>get_dataset_list()</code> function returns the datasets catalogue :
 
-```{r, message = FALSE, warning = FALSE, eval = TRUE}
+```{r, message = FALSE, warning = FALSE, eval = NOT_CRAN}
 insee_dataset = get_dataset_list() 
 ```
 
-```{r echo = FALSE, message = FALSE, warning = FALSE, eval = TRUE}
+```{r echo = FALSE, message = FALSE, warning = FALSE, eval = NOT_CRAN}
 rownames(insee_dataset) <- NULL
 
 insee_dataset %>% 
@@ -105,11 +106,11 @@ insee_dataset %>%
 
 [INSEE BDM database](https://www.insee.fr/en/information/2512785) currently offers more than 140 000 series. The <code>get_idbank_list</code> function returns the series catalogue.
 
-```{r, message=FALSE,warning=FALSE,eval=TRUE}
+```{r, message=FALSE,warning=FALSE,eval=NOT_CRAN}
 idbank_list = get_idbank_list()
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE,eval=TRUE}
+```{r echo=FALSE, message=FALSE, warning=FALSE,eval=NOT_CRAN}
 rownames(idbank_list) <- NULL
 
 idbank_list %>% 
