@@ -45,6 +45,7 @@ Get dataset from INSEE BDM database
 \examples{
 \donttest{
 insee_dataset = get_dataset_list()
+idbank_ipc = get_idbank_list("IPC-2015")
 
 #example 1
 data = get_insee_dataset("IPC-2015", filter = "M+A.........CVS.", startPeriod = "2015-03")

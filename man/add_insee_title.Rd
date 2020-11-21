@@ -32,10 +32,8 @@ The number of separators in the official INSEE title can vary and is not normali
 \donttest{
 library(tidyverse)
 
-idbank_list = get_idbank_list() #idbank list
-
-idbank_empl = idbank_list \%>\%
- filter(nomflow == "EMPLOI-SALARIE-TRIM-NATIONAL") \%>\% #employment
+idbank_empl =
+ get_idbank_list("EMPLOI-SALARIE-TRIM-NATIONAL") \%>\% #employment
  slice(1:15) \%>\%
  add_insee_title()
 }

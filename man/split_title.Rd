@@ -32,6 +32,6 @@ library(tidyverse)
 data_raw = get_insee_idbank("001577236")
 
 data = data_raw \%>\%
-  split_title(lang = "fr")
+  split_title()
 }
 }
