@@ -72,9 +72,7 @@ devtools::install_github("hadrilec/insee")
 # install.packages("insee")
 
 # library Loading
-
 library(insee)
-# tutorial's examples use tidyverse's packages
 library(tidyverse)
 ```
 
@@ -107,10 +105,12 @@ insee_dataset %>%
 [INSEE BDM database](https://www.insee.fr/en/information/2512785) currently offers more than 140 000 series. The <code>get_idbank_list</code> function returns the series catalogue.
 
 ```{r, message=FALSE,warning=FALSE,eval=NOT_CRAN}
-idbank_list = get_idbank_list()
+idbank_list = get_idbank_list('BALANCE-PAIEMENTS')
 ```
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE,eval=NOT_CRAN}
+idbank_list = get_idbank_list()
+
 rownames(idbank_list) <- NULL
 
 idbank_list %>% 
@@ -131,11 +131,9 @@ The best way to download data is to find the right series key (idbank), but how 
 To make the search easier, the [insee](https://CRAN.R-project.org/package=insee) package provides the function <code>add_insee_title</code> to get titles from idbanks, either in English or in French. It is not advised to use the function on the whole idbank dataset, as each SDMX query has 400-idbank limit. Then, <code>add_insee_title</code> function splits the list into several lists of 400 idbanks each. Thus, the user should filter the idbank dataset before using the function to avoid as much as possible this bottleneck as the following example shows. After the data retrieval, it is really nice to use the <code>split_title</code> function on the dataframe to get more readable titles easy to use in plots.
 
 ```{r message=FALSE, warning=FALSE,eval=FALSE}
-idbank_list = get_idbank_list()
 
 idbank_list_selected =
-  idbank_list %>%
-  filter(nomflow == "IPI-2015") %>% #industrial production index dataset
+  get_idbank_list("IPI-2015") %>% #industrial production index dataset
   filter(dim1 == "M") %>% #monthly
   filter(dim5 == "INDICE") %>% #index
   filter(dim8 == "CVS-CJO") %>% #Working day and seasonally adjusted SA-WDA
@@ -167,10 +165,8 @@ data = get_insee_idbank("001558315", "010540726")
 # using a list of idbanks extracted from the insee idbank dataset
 # example 2 : household's confidence survey
 
-idbank_dataset = get_idbank_list()
-
-df_idbank = idbank_dataset %>%
-  filter(nomflow == "ENQ-CONJ-MENAGES") %>%  #monthly households' confidence survey
+df_idbank = 
+  get_idbank_list("ENQ-CONJ-MENAGES") %>%  #monthly households' confidence survey
   mutate(title = get_insee_title(idbank)) %>%
   filter(dim7 == "CVS") #seasonally adjusted
 
