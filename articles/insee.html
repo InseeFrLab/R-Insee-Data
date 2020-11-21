@@ -139,9 +139,7 @@
 <span class="co"># install.packages("insee")</span>
 
 <span class="co"># library Loading</span>
-
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://hadrilec.github.io/insee/">insee</a></span><span class="op">)</span>
-<span class="co"># tutorial's examples use tidyverse's packages</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
 </div>
 </div>
@@ -170,9 +168,7 @@
   |                                                                            
   |====================================                                  |  52%
   |                                                                            
-  |=========================================                             |  58%
-  |                                                                            
-  |================================================                      |  69%
+  |============================================                          |  62%
   |                                                                            
   |===================================================                   |  73%
   |                                                                            
@@ -378,7 +374,7 @@ Emploi intérieur, durée effective travaillée et productivité horaire
 <a href="#series-keys-list" class="anchor"></a>Series Keys List</h2>
 <p><a href="https://www.insee.fr/en/information/2512785">INSEE BDM database</a> currently offers more than 140 000 series. The <code>get_idbank_list</code> function returns the series catalogue.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="va">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="st">'BALANCE-PAIEMENTS'</span><span class="op">)</span></code></pre></div>
 <table class="table table table-striped table-hover table-condensed">
 <thead><tr>
 <th style="text-align:left;">
@@ -510,11 +506,8 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
 <a href="#find-a-series-key" class="anchor"></a>Find a series key</h2>
 <p>The best way to download data is to find the right series key (idbank), but how ? Indeed, in some cases it is not easy to understand what are the differences among series, especially for non-French speakers. To make the search easier, the <a href="https://CRAN.R-project.org/package=insee">insee</a> package provides the function <code>add_insee_title</code> to get titles from idbanks, either in English or in French. It is not advised to use the function on the whole idbank dataset, as each SDMX query has 400-idbank limit. Then, <code>add_insee_title</code> function splits the list into several lists of 400 idbanks each. Thus, the user should filter the idbank dataset before using the function to avoid as much as possible this bottleneck as the following example shows. After the data retrieval, it is really nice to use the <code>split_title</code> function on the dataframe to get more readable titles easy to use in plots.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="va">idbank_list_selected</span> <span class="op">=</span>
-  <span class="va">idbank_list</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">nomflow</span> <span class="op">==</span> <span class="st">"IPI-2015"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#industrial production index dataset</span>
+<code class="sourceCode R"><span class="va">idbank_list_selected</span> <span class="op">=</span>
+  <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="st">"IPI-2015"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#industrial production index dataset</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim1</span> <span class="op">==</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#monthly</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim5</span> <span class="op">==</span> <span class="st">"INDICE"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#index</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim8</span> <span class="op">==</span> <span class="st">"CVS-CJO"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#Working day and seasonally adjusted SA-WDA</span>
@@ -543,10 +536,8 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
 <span class="co"># using a list of idbanks extracted from the insee idbank dataset</span>
 <span class="co"># example 2 : household's confidence survey</span>
 
-<span class="va">idbank_dataset</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="va">df_idbank</span> <span class="op">=</span> <span class="va">idbank_dataset</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">nomflow</span> <span class="op">==</span> <span class="st">"ENQ-CONJ-MENAGES"</span><span class="op">)</span> <span class="op">%&gt;%</span>  <span class="co">#monthly households' confidence survey</span>
+<span class="va">df_idbank</span> <span class="op">=</span> 
+  <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="st">"ENQ-CONJ-MENAGES"</span><span class="op">)</span> <span class="op">%&gt;%</span>  <span class="co">#monthly households' confidence survey</span>
   <span class="fu">mutate</span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="../reference/get_insee_title.html">get_insee_title</a></span><span class="op">(</span><span class="va">idbank</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim7</span> <span class="op">==</span> <span class="st">"CVS"</span><span class="op">)</span> <span class="co">#seasonally adjusted</span>
 
