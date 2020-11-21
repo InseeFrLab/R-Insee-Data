@@ -94,8 +94,7 @@
 
       
 
-      </header><script src="insee_files/kePrint-0.0.1/kePrint.js"></script><link href="insee_files/lightable-0.0.1/lightable.css" rel="stylesheet">
-<div class="row">
+      </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Tutorial</h1>
@@ -130,7 +129,7 @@
 <a href="#installation-loading" class="anchor"></a>Installation &amp; Loading</h2>
 <p>You can easily install <a href="https://CRAN.R-project.org/package=insee">insee</a> with the following code :</p>
 <div class="sourceCode"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># Get the development version from GitHub (required for the tutorial)</span>
+<code class="sourceCode R"><span class="co"># Get the development version from GitHub </span>
 <span class="co"># install.packages("devtools")</span>
 <span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"hadrilec/insee"</span><span class="op">)</span>
 
@@ -138,9 +137,7 @@
 <span class="co"># install.packages("insee")</span>
 
 <span class="co"># library Loading</span>
-
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://hadrilec.github.io/insee/">insee</a></span><span class="op">)</span>
-<span class="co"># tutorial's examples use tidyverse's packages</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span></code></pre></div>
 </div>
 </div>
@@ -155,347 +152,21 @@
 <p><a href="https://www.insee.fr/en/information/2512785">INSEE BDM database</a> offers more than 200 Datasets. The <code><a href="../reference/get_dataset_list.html">get_dataset_list()</a></code> function returns the datasets catalogue :</p>
 <div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">insee_dataset</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_dataset_list.html">get_dataset_list</a></span><span class="op">(</span><span class="op">)</span> </code></pre></div>
-<pre><code>## 
-  |                                                                            
-  |                                                                      |   0%
-  |                                                                            
-  |=============================                                         |  41%
-  |                                                                            
-  |======================================================================| 100%</code></pre>
-<table class="table table table-striped table-hover table-condensed">
-<thead><tr>
-<th style="text-align:left;">
-id
-</th>
-<th style="text-align:left;">
-Name.en
-</th>
-<th style="text-align:left;">
-Name.fr
-</th>
-<th style="text-align:left;">
-url
-</th>
-<th style="text-align:right;">
-n_series
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-BALANCE-PAIEMENTS
-</td>
-<td style="text-align:left;">
-Balance of payments
-</td>
-<td style="text-align:left;">
-Balance des paiements
-</td>
-<td style="text-align:left;">
-<a href="https://www.insee.fr/fr/statistiques/series/103212755" class="uri">https://www.insee.fr/fr/statistiques/series/103212755</a>
-</td>
-<td style="text-align:right;">
-197
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CHOMAGE-TRIM-NATIONAL
-</td>
-<td style="text-align:left;">
-Unemployment, unemployment rate and halo by sex and age (ILO)
-</td>
-<td style="text-align:left;">
-Chômage, taux de chômage par sexe et âge (sens BIT)
-</td>
-<td style="text-align:left;">
-<a href="https://www.insee.fr/fr/statistiques/series/103167923" class="uri">https://www.insee.fr/fr/statistiques/series/103167923</a>
-</td>
-<td style="text-align:right;">
-166
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CLIMAT-AFFAIRES
-</td>
-<td style="text-align:left;">
-Business climate composite indicators
-</td>
-<td style="text-align:left;">
-Indicateurs synthétiques du climat des affaires
-</td>
-<td style="text-align:left;">
-<a href="https://www.insee.fr/fr/statistiques/series/103047029" class="uri">https://www.insee.fr/fr/statistiques/series/103047029</a>
-</td>
-<td style="text-align:right;">
-3
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CNA-2010-CONSO-MEN
-</td>
-<td style="text-align:left;">
-Households' consumption - Results by product, function and durability
-</td>
-<td style="text-align:left;">
-Consommation des ménages - Résultats par produit, fonction et durabilité
-</td>
-<td style="text-align:left;">
-<a href="https://www.insee.fr/fr/statistiques/series/102331845" class="uri">https://www.insee.fr/fr/statistiques/series/102331845</a>
-</td>
-<td style="text-align:right;">
-2247
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CNA-2010-CONSO-SI
-</td>
-<td style="text-align:left;">
-Final consumption expenditure by institutional sectors - Results by transaction and product
-</td>
-<td style="text-align:left;">
-Dépenses de consommation finale par secteur institutionnel - Résultats par opération et produit
-</td>
-<td style="text-align:left;">
-<a href="https://www.insee.fr/fr/statistiques/series/102809534" class="uri">https://www.insee.fr/fr/statistiques/series/102809534</a>
-</td>
-<td style="text-align:right;">
-1391
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CNA-2010-CPEB
-</td>
-<td style="text-align:left;">
-Production and operating accounts by branch
-</td>
-<td style="text-align:left;">
-Comptes de production et d’exploitation par branche
-</td>
-<td style="text-align:left;">
-<a href="https://www.insee.fr/fr/statistiques/series/102852781" class="uri">https://www.insee.fr/fr/statistiques/series/102852781</a>
-</td>
-<td style="text-align:right;">
-2739
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CNA-2010-CSI
-</td>
-<td style="text-align:left;">
-Institutional sectors accounts - Annual results
-</td>
-<td style="text-align:left;">
-Comptes des secteurs institutionnels - Résultats annuels
-</td>
-<td style="text-align:left;">
-<a href="https://www.insee.fr/fr/statistiques/series/102321506" class="uri">https://www.insee.fr/fr/statistiques/series/102321506</a>
-</td>
-<td style="text-align:right;">
-1173
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CNA-2010-DEP-APU
-</td>
-<td style="text-align:left;">
-General government expenditure - Result by function and operation
-</td>
-<td style="text-align:left;">
-Dépenses des administrations publiques - Résultats par fonction et opération
-</td>
-<td style="text-align:left;">
-<a href="https://www.insee.fr/fr/statistiques/series/102334196" class="uri">https://www.insee.fr/fr/statistiques/series/102334196</a>
-</td>
-<td style="text-align:right;">
-4400
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CNA-2010-DETTE-APU
-</td>
-<td style="text-align:left;">
-Maastricht general government debt and public deficit
-</td>
-<td style="text-align:left;">
-Dette et déficit des administrations publiques au sens de Maastricht
-</td>
-<td style="text-align:left;">
-<a href="https://www.insee.fr/fr/statistiques/series/103212800" class="uri">https://www.insee.fr/fr/statistiques/series/103212800</a>
-</td>
-<td style="text-align:right;">
-72
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CNA-2010-EMPLOI
-</td>
-<td style="text-align:left;">
-Domestic employment, hours worked and hourly productivity
-</td>
-<td style="text-align:left;">
-Emploi intérieur, durée effective travaillée et productivité horaire
-</td>
-<td style="text-align:left;">
-<a href="https://www.insee.fr/fr/statistiques/series/102800357" class="uri">https://www.insee.fr/fr/statistiques/series/102800357</a>
-</td>
-<td style="text-align:right;">
-702
-</td>
-</tr>
-</tbody>
-</table>
 </div>
 <div id="series-keys-list" class="section level2">
 <h2 class="hasAnchor">
 <a href="#series-keys-list" class="anchor"></a>Series Keys List</h2>
 <p><a href="https://www.insee.fr/en/information/2512785">INSEE BDM database</a> currently offers more than 140 000 series. The <code>get_idbank_list</code> function returns the series catalogue.</p>
 <div class="sourceCode"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
-<table class="table table table-striped table-hover table-condensed">
-<thead><tr>
-<th style="text-align:left;">
-nomflow
-</th>
-<th style="text-align:left;">
-idbank
-</th>
-<th style="text-align:left;">
-cleFlow
-</th>
-</tr></thead>
-<tbody>
-<tr>
-<td style="text-align:left;">
-BALANCE-PAIEMENTS
-</td>
-<td style="text-align:left;">
-001694056
-</td>
-<td style="text-align:left;">
-M.BALANCE_DES_PAIEMENTS.CREDITS.009.VALEUR_ABSOLUE.FE.EUROS.BRUT.SO
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CHOMAGE-TRIM-NATIONAL
-</td>
-<td style="text-align:left;">
-001688370
-</td>
-<td style="text-align:left;">
-T.CTCHC.VALEUR_ABSOLUE.FM.1.00-24.INDIVIDUS.CVS
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CLIMAT-AFFAIRES
-</td>
-<td style="text-align:left;">
-001565530
-</td>
-<td style="text-align:left;">
-M.CLIMAT_AFFAIRES.ALL_SECT.INDICE.FM.SO.BRUT
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CNA-2010-CONSO-MEN
-</td>
-<td style="text-align:left;">
-001691912
-</td>
-<td style="text-align:left;">
-A.CNA_CONSO_MENAGES_FONCTION.PCH.P4.FON01.VALEUR_ABSOLUE..FR-D976.EUR2010.BRUT.2010
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CNA-2010-CONSO-SI
-</td>
-<td style="text-align:left;">
-001703713
-</td>
-<td style="text-align:left;">
-A.CNA_CONSO_SI.S13.PCH.P3.A10-JZ.VALEUR_ABSOLUE.FE.EUR2010.BRUT
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CNA-2010-CPEB
-</td>
-<td style="text-align:left;">
-001710115
-</td>
-<td style="text-align:left;">
-A.CNA_CPEB.A10-RU.IPCH.P1.INDICE.FE.SO.BRUT
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CNA-2010-CSI
-</td>
-<td style="text-align:left;">
-001719388
-</td>
-<td style="text-align:left;">
-A.CNA_COMPTES_SI_EA.S0.EA.D7S.SO.FR-D976.EUROS_COURANTS.BRUT
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CNA-2010-DEP-APU
-</td>
-<td style="text-align:left;">
-001730327
-</td>
-<td style="text-align:left;">
-A.CNA_DEP_APU.S1313.D1.VALEUR_ABSOLUE.FONTOTAL.FR-D976.EUROS_COURANTS.BRUT.2010
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CNA-2010-DETTE-APU
-</td>
-<td style="text-align:left;">
-001710846
-</td>
-<td style="text-align:left;">
-A.CNA_FINANCES_DETTE.S13.VAL.VALEUR_ABSOLUE.FE.EUROS_COURANTS.BRUT
-</td>
-</tr>
-<tr>
-<td style="text-align:left;">
-CNA-2010-EMPLOI
-</td>
-<td style="text-align:left;">
-001693569
-</td>
-<td style="text-align:left;">
-A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP.BRUT
-</td>
-</tr>
-</tbody>
-</table>
+<code class="sourceCode R"><span class="va">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="st">'BALANCE-PAIEMENTS'</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="find-a-series-key" class="section level2">
 <h2 class="hasAnchor">
 <a href="#find-a-series-key" class="anchor"></a>Find a series key</h2>
 <p>The best way to download data is to find the right series key (idbank), but how ? Indeed, in some cases it is not easy to understand what are the differences among series, especially for non-French speakers. To make the search easier, the <a href="https://CRAN.R-project.org/package=insee">insee</a> package provides the function <code>add_insee_title</code> to get titles from idbanks, either in English or in French. It is not advised to use the function on the whole idbank dataset, as each SDMX query has 400-idbank limit. Then, <code>add_insee_title</code> function splits the list into several lists of 400 idbanks each. Thus, the user should filter the idbank dataset before using the function to avoid as much as possible this bottleneck as the following example shows. After the data retrieval, it is really nice to use the <code>split_title</code> function on the dataframe to get more readable titles easy to use in plots.</p>
 <div class="sourceCode"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="va">idbank_list_selected</span> <span class="op">=</span>
-  <span class="va">idbank_list</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">nomflow</span> <span class="op">==</span> <span class="st">"IPI-2015"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#industrial production index dataset</span>
+<code class="sourceCode R"><span class="va">idbank_list_selected</span> <span class="op">=</span>
+  <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="st">"IPI-2015"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#industrial production index dataset</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim1</span> <span class="op">==</span> <span class="st">"M"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#monthly</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim5</span> <span class="op">==</span> <span class="st">"INDICE"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#index</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim8</span> <span class="op">==</span> <span class="st">"CVS-CJO"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#Working day and seasonally adjusted SA-WDA</span>
@@ -524,10 +195,8 @@ A.CNA_EMPLOI_INTERIEUR.A10-RU.S10.VALEUR_ABSOLUE.E10.FE.NOMBRE_ACTIFS_OCCUPES_PP
 <span class="co"># using a list of idbanks extracted from the insee idbank dataset</span>
 <span class="co"># example 2 : household's confidence survey</span>
 
-<span class="va">idbank_dataset</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="va">df_idbank</span> <span class="op">=</span> <span class="va">idbank_dataset</span> <span class="op">%&gt;%</span>
-  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">nomflow</span> <span class="op">==</span> <span class="st">"ENQ-CONJ-MENAGES"</span><span class="op">)</span> <span class="op">%&gt;%</span>  <span class="co">#monthly households' confidence survey</span>
+<span class="va">df_idbank</span> <span class="op">=</span> 
+  <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="st">"ENQ-CONJ-MENAGES"</span><span class="op">)</span> <span class="op">%&gt;%</span>  <span class="co">#monthly households' confidence survey</span>
   <span class="fu">mutate</span><span class="op">(</span>title <span class="op">=</span> <span class="fu"><a href="../reference/get_insee_title.html">get_insee_title</a></span><span class="op">(</span><span class="va">idbank</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">dim7</span> <span class="op">==</span> <span class="st">"CVS"</span><span class="op">)</span> <span class="co">#seasonally adjusted</span>
 
