@@ -37,6 +37,9 @@ get_column_title = function(dataset = NULL){
 
     dimension_name_df[,"dimension"] = gsub("-", "_", dimension_name_df[,"dimension"])
 
+    dimension_name_df = dplyr::bind_rows(dimension_name_df, add_type_qual_conf_rev_title())
+    dimension_name_df = dplyr::arrange(.data = dimension_name_df, .data$dimension)
+
     dimension_name_df = tibble::as_tibble(dimension_name_df)
 
     return(dimension_name_df)

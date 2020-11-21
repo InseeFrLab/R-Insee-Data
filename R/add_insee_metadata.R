@@ -41,6 +41,7 @@ add_insee_metadata = function(df){
       df = dplyr::mutate(.data = df, IDBANK = as.character(.data$IDBANK))
 
       df = dplyr::left_join(df, metadata, by = c("IDBANK" = "idbank"))
+      df = add_type_qual_conf_rev_metadata(df)
     }
   }
   return(df)
