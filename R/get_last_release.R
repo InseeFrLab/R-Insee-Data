@@ -36,7 +36,21 @@ get_last_release = function(){
             stringsAsFactors = FALSE)
         })
 
+        extract_dataset = function(x){
+          str_start = stringr::str_locate(x, "\\[")[[1]] + 1
+          str_end = stringr::str_locate(x, "\\]")[[1]] - 1
+          if(!is.na(str_start) & !is.na(str_end)){
+            x = substr(x, str_start, str_end)
+          }
+          return(x)
+        }
+
         data_final = tibble::as_tibble(dplyr::bind_rows(list_df))
+
+        if("title" %in% names(data_final)){
+          data_final = dplyr::mutate(.data = data_final,
+                                     dataset = purrr::map_chr(.data$title, extract_dataset))
+        }
 
         saveRDS(data_final, file = file_cache)
 

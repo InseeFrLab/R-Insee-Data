@@ -27,7 +27,7 @@
 #' df_idbank_list_selected =
 #'   get_idbank_list("CHOMAGE-TRIM-NATIONAL") %>%  #unemployment dataset
 #'   filter(SEXE == 0) %>% #men and women
-#'   mutate(title = get_insee_title(idbank))
+#'   add_insee_title()
 #'
 #' idbank_list_selected = df_idbank_list_selected %>% pull(idbank)
 #'

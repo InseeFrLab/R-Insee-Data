@@ -14,15 +14,12 @@
 #' #example 2 : automotive industry and overall industrial production
 #' library(tidyverse)
 #'
-#' idbank_list = get_idbank_list()
-#'
 #' idbank_list_selected =
-#'   idbank_list %>%
-#'   filter(nomflow == "IPI-2015") %>% #industrial production index dataset
-#'   filter(dim1 == "M") %>% #monthly
-#'   filter(dim6 == "INDICE") %>% #index
-#'   filter(dim9  == "CVS-CJO") %>% #Working day and seasonally adjusted SA-WDA
-#'   filter(str_detect(dim5,"^29$|A10-BE")) %>% #automotive industry and overall industrial production
+#'   get_idbank_list("IPI-2015") %>% #industrial production index dataset
+#'   filter(FREQ == "M") %>% #monthly
+#'   filter(NATURE == "INDICE") %>% #index
+#'   filter(CORRECTION  == "CVS-CJO") %>% #Working day and seasonally adjusted SA-WDA
+#'   filter(str_detect(NAF2,"^29$|A10-BE")) %>% #automotive industry and overall industrial production
 #'   mutate(title = get_insee_title(idbank))
 #' }
 #'

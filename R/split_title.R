@@ -14,7 +14,7 @@
 #' data_raw = get_insee_idbank("001577236")
 #'
 #' data = data_raw %>%
-#'   split_title(lang = "fr")
+#'   split_title()
 #' }
 #' @export
 split_title = function(df, title_col_name, n_split = "max", lang = NULL){
