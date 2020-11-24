@@ -2,6 +2,7 @@ insee R package
 ================
 
 <br>
+
 [![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee)
 [![CRAN checks](https://cranchecks.info/badges/worst/insee)](https://cran.r-project.org/web/checks/check_results_insee.html)
 [![Codecov test coverage](https://codecov.io/gh/hadrilec/insee/branch/master/graph/badge.svg)](https://codecov.io/gh/hadrilec/insee?branch=master)
@@ -11,6 +12,7 @@ insee R package
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
 [![Build Status](https://travis-ci.com/hadrilec/insee.svg?branch=master)](https://travis-ci.org/hadrilec/insee)
 [![R build status](https://github.com/hadrilec/insee/workflows/R-CMD-check/badge.svg)](https://github.com/InseeFr/R-Insee-Data/actions)
+
 <br>
 
 Overview
@@ -58,6 +60,8 @@ French GDP growth rate
 ``` r
 library(tidyverse)
 library(insee)
+
+dataset_list = get_dataset_list()
 
 df_idbank_list_selected =
   get_idbank_list("CNT-2014-PIB-EQB-RF") %>% # Gross domestic product balance
