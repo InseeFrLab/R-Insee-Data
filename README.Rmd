@@ -66,6 +66,8 @@ library(insee)
 library(tidyverse)
 library(insee)
 
+dataset_list = get_dataset_list()
+
 df_idbank_list_selected =
   get_idbank_list("CNT-2014-PIB-EQB-RF") %>% # Gross domestic product balance
   filter(FREQ == "T") %>% #quarter
