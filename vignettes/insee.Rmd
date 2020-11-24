@@ -66,7 +66,7 @@ You can easily install [insee](https://CRAN.R-project.org/package=insee) with th
 ```{r, message = FALSE, warning = FALSE, eval = FALSE}
 # Get the development version from GitHub 
 # install.packages("devtools")
-devtools::install_github("hadrilec/insee")
+devtools::install_github("InseeFr/R-Insee-Data")
 
 # CRAN version
 # install.packages("insee")

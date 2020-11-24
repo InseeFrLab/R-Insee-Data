@@ -1,20 +1,18 @@
 insee R package
 ================
 
- <br> 
- 
- [![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee) 
- [![CRAN checks](https://cranchecks.info/badges/worst/insee)](https://cran.r-project.org/web/checks/check_results_insee.html) 
- [![Codecov test coverage](https://codecov.io/gh/hadrilec/insee/branch/master/graph/badge.svg)](https://codecov.io/gh/hadrilec/insee?branch=master) 
- [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) 
- [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee) 
- [![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee) 
- [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/) 
- [![Build Status](https://travis-ci.com/hadrilec/insee.svg?branch=master)](https://travis-ci.org/hadrilec/insee) 
- [![R build status](https://github.com/hadrilec/insee/workflows/R-CMD-check/badge.svg)](https://github.com/hadrilec/insee/actions) 
- 
- <br> 
- 
+<br>
+[![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee)
+[![CRAN checks](https://cranchecks.info/badges/worst/insee)](https://cran.r-project.org/web/checks/check_results_insee.html)
+[![Codecov test coverage](https://codecov.io/gh/hadrilec/insee/branch/master/graph/badge.svg)](https://codecov.io/gh/hadrilec/insee?branch=master)
+[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
+[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee)
+[![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee)
+[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
+[![Build Status](https://travis-ci.com/hadrilec/insee.svg?branch=master)](https://travis-ci.org/hadrilec/insee)
+[![R build status](https://github.com/hadrilec/insee/workflows/R-CMD-check/badge.svg)](https://github.com/InseeFr/R-Insee-Data/actions)
+<br>
+
 Overview
 --------
 
@@ -32,7 +30,7 @@ Installation & Loading
 ``` r
 # Get the development version from GitHub
 # install.packages("devtools")
-# devtools::install_github("hadrilec/insee")
+# devtools::install_github("InseeFr/R-Insee-Data")
 
 # Get the CRAN version
 install.packages("insee")
@@ -45,12 +43,12 @@ library(insee)
 Examples & Tutorial
 -------------------
 
--   [Tutorial](https://hadrilec.github.io/insee/articles/insee.html)
--   [GDP](https://hadrilec.github.io/insee/articles/v2_gdp-vignettes.html)
--   [Inflation](https://hadrilec.github.io/insee/articles/v3_inflation-vignettes.html)
--   [Unemployment rate](https://hadrilec.github.io/insee/articles/v4_unem-vignettes.html)
--   [Population by age](https://hadrilec.github.io/insee/articles/v5_pop-vignettes.html)
--   [Population map](https://hadrilec.github.io/insee/articles/v6_pop_map-vignettes.html)
+-   [Tutorial](https://inseefr.github.io/R-Insee-Data/articles/insee.html)
+-   [GDP](https://inseefr.github.io/R-Insee-Data/articles/v2_gdp-vignettes.html)
+-   [Inflation](https://inseefr.github.io/R-Insee-Data/articles/v3_inflation-vignettes.html)
+-   [Unemployment rate](https://inseefr.github.io/R-Insee-Data/articles/v4_unem-vignettes.html)
+-   [Population by age](https://inseefr.github.io/R-Insee-Data/articles/v5_pop-vignettes.html)
+-   [Population map](https://inseefr.github.io/R-Insee-Data/articles/v6_pop_map-vignettes.html)
 
 French GDP growth rate
 ----------------------
