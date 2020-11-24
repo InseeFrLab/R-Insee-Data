@@ -225,5 +225,3 @@ read_dataset_metadata = function(dataset, dataset_metadata_file_cache){
     }
 
 }
-
-%>%
