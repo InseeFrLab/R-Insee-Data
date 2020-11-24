@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://hadrilec.github.io/insee//index.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//index.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//reference/add_insee_metadata.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//reference/add_insee_metadata.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//reference/add_insee_title.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//reference/add_insee_title.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//reference/clean_table.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//reference/clean_table.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//reference/get_column_title.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//reference/get_column_title.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//reference/get_dataset_list.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//reference/get_dataset_list.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//reference/get_idbank_list.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//reference/get_idbank_list.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//reference/get_insee.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//reference/get_insee.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//reference/get_insee_dataset.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//reference/get_insee_dataset.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//reference/get_insee_idbank.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//reference/get_insee_idbank.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//reference/get_insee_title.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//reference/get_insee_title.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//reference/get_last_release.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//reference/get_last_release.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//reference/search_insee.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//reference/search_insee.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//reference/split_title.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//reference/split_title.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//articles/insee.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//articles/insee.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//articles/v2_gdp-vignettes.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//articles/v2_gdp-vignettes.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//articles/v3_inflation-vignettes.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//articles/v3_inflation-vignettes.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//articles/v4_unem-vignettes.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//articles/v4_unem-vignettes.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//articles/v5_pop-vignettes.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//articles/v5_pop-vignettes.html</loc>
   </url>
   <url>
-    <loc>https://hadrilec.github.io/insee//articles/v6_pop_map-vignettes.html</loc>
+    <loc>https://InseeFr.github.io/R-Insee-Data//articles/v6_pop_map-vignettes.html</loc>
   </url>
 </urlset>
