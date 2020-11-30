@@ -38,20 +38,17 @@ get_idbank_list = function(
     }
   }
 
-  insee_folder = file.path(rappdirs::user_data_dir(), "insee")
-  list_folders = c(insee_folder, file.path(insee_folder, "insee"))
+  dir_creation_fail = try(create_insee_dir(), silent = TRUE)
 
-  for(ifile in 1:length(list_folders)){
-    if(!file.exists(list_folders[ifile])){
-      dir.create(list_folders[ifile])
-    }
+  if(!"try-error" %in% class(dir_creation_fail)){
+    insee_local_dir = rappdirs::user_data_dir("insee")
+  }else{
+    insee_local_dir = tempdir()
   }
 
-  metadata_file_cache = file.path(rappdirs::user_data_dir("insee"),
-                                  paste0(openssl::md5("insee_metadata_file"), ".rds"))
+  metadata_file_cache = file.path(insee_local_dir, paste0(openssl::md5("insee_metadata_file"), ".rds"))
 
-  metadata_file_cache_date = file.path(rappdirs::user_data_dir("insee"),
-                                       paste0(openssl::md5("insee_metadata_file_date"), ".rds"))
+  metadata_file_cache_date = file.path(insee_local_dir, paste0(openssl::md5("insee_metadata_file_date"), ".rds"))
 
   file_warning_deprecated = file.path(tempdir(), paste0(openssl::md5("dimdeprecated"), ".rds"))
 
@@ -68,7 +65,7 @@ get_idbank_list = function(
   if(!is.null(dataset)){
     dataset_hash = paste0(dataset, collapse = "_")
 
-    dataset_metadata_file_cache = file.path(rappdirs::user_data_dir("insee"),
+    dataset_metadata_file_cache = file.path(insee_local_dir,
                                             paste0(openssl::md5(sprintf("%s_metadata_file", dataset_hash)), ".rds"))
 
   }else{
@@ -185,11 +182,19 @@ get_idbank_list = function(
 #' @noRd
 read_dataset_metadata = function(dataset, dataset_metadata_file_cache){
 
+  dir_creation_fail = try(create_insee_dir(), silent = TRUE)
+
+  if(!"try-error" %in% class(dir_creation_fail)){
+    insee_local_dir = rappdirs::user_data_dir("insee")
+  }else{
+    insee_local_dir = tempdir()
+  }
+
   if(missing(dataset_metadata_file_cache)){
 
     dataset_hash = paste0(dataset, collapse = "_")
 
-    dataset_metadata_file_cache = file.path(rappdirs::user_data_dir("insee"),
+    dataset_metadata_file_cache = file.path(insee_local_dir,
                                             paste0(openssl::md5(sprintf("%s_metadata_file", dataset_hash)), ".rds"))
   }
 
@@ -198,7 +203,7 @@ read_dataset_metadata = function(dataset, dataset_metadata_file_cache){
       if(!is.null(dataset)){
         sub_dataset_metadata_file = unlist(lapply(dataset,
                                                   function(dt){
-                                                    return(file.path(rappdirs::user_data_dir("insee"),
+                                                    return(file.path(insee_local_dir,
                                                                      paste0(openssl::md5(sprintf("%s_metadata_file", dt)), ".rds")))
                                                   }))
 
