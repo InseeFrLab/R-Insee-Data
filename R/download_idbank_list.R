@@ -1,6 +1,14 @@
 #' @noRd
 download_idbank_list = function(dataset = NULL, label = FALSE){
 
+  dir_creation_fail = try(create_insee_dir(), silent = TRUE)
+
+  if(!"try-error" %in% class(dir_creation_fail)){
+    insee_local_dir = rappdirs::user_data_dir("insee")
+  }else{
+    insee_local_dir = tempdir()
+  }
+
   # insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
   insee_download_option_idbank_list = Sys.getenv("INSEE_download_option_idbank_list")
   file_to_dwn = Sys.getenv("INSEE_idbank_dataset_path")
@@ -87,7 +95,7 @@ download_idbank_list = function(dataset = NULL, label = FALSE){
 
                      mapping_dataset_sep = clean_table(set_metadata_col(mapping_dataset_sep))
 
-                     dataset_metadata_file_cache = file.path(rappdirs::user_data_dir("insee"),
+                     dataset_metadata_file_cache = file.path(insee_local_dir,
                                                              paste0(openssl::md5(sprintf("%s_metadata_file", dataset_name)), ".rds"))
 
                      saveRDS(mapping_dataset_sep, file = dataset_metadata_file_cache)
