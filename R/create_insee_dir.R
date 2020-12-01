@@ -10,4 +10,11 @@ create_insee_dir = function(){
     }
   }
 
+  if(!file.exists(test_file)){
+    test_file = file.path(insee_folder, "insee", paste0(openssl::md5("test_file"), ".rds"))
+    test = 1
+    saveRDS(test, file = test_file)
+  }
+
+
 }
