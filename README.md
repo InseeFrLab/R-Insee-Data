@@ -1,23 +1,18 @@
 insee R package
 ================
 
-<br>
-
-[![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee)
-[![CRAN checks](https://cranchecks.info/badges/worst/insee)](https://cran.r-project.org/web/checks/check_results_insee.html)
-[![Codecov test coverage](https://codecov.io/gh/InseeFr/R-Insee-Data/branch/master/graph/badge.svg)](https://codecov.io/gh/hadrilec/insee?branch=master)
-[![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing)
-[![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee)
-[![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee)
-[![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
-[![Build Status](https://travis-ci.org/InseeFr/R-Insee-Data.svg?branch=master)](https://travis-ci.org/InseeFr/R-Insee-Data)
-[![R build status](https://github.com/hadrilec/insee/workflows/R-CMD-check/badge.svg)](https://github.com/InseeFr/R-Insee-Data/actions)
-
-
-<br>
-
-Overview
---------
+<!-- <br> -->
+<!-- [![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee) -->
+<!-- [![CRAN checks](https://cranchecks.info/badges/worst/insee)](https://cran.r-project.org/web/checks/check_results_insee.html) -->
+<!-- [![Codecov test coverage](https://codecov.io/gh/hadrilec/insee/branch/master/graph/badge.svg)](https://codecov.io/gh/hadrilec/insee?branch=master) -->
+<!-- [![lifecycle](https://img.shields.io/badge/lifecycle-maturing-blue.svg)](https://www.tidyverse.org/lifecycle/#maturing) -->
+<!-- [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee) -->
+<!-- [![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee) -->
+<!-- [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/) -->
+<!-- [![Build Status](https://travis-ci.org/InseeFr/R-Insee-Data.svg?branch=master)](https://travis-ci.org/InseeFr/R-Insee-Data) -->
+<!-- [![R build status](https://github.com/hadrilec/insee/workflows/R-CMD-check/badge.svg)](https://github.com/InseeFr/R-Insee-Data/actions) -->
+<!-- <br> -->
+## Overview
 
 The insee package contains tools to easily download data and metadata from INSEE main database (BDM).
 
@@ -27,8 +22,7 @@ Have a look at the detailed SDMX web service page with the following [link](http
 
 This package is a contribution to reproducible research and public data transparency.
 
-Installation & Loading
-----------------------
+## Installation & Loading
 
 ``` r
 # Get the development version from GitHub
@@ -43,8 +37,7 @@ library(tidyverse)
 library(insee)
 ```
 
-Examples & Tutorial
--------------------
+## Examples & Tutorial
 
 -   [Tutorial](https://inseefr.github.io/R-Insee-Data/articles/insee.html)
 -   [GDP](https://inseefr.github.io/R-Insee-Data/articles/v2_gdp-vignettes.html)
@@ -52,9 +45,9 @@ Examples & Tutorial
 -   [Unemployment rate](https://inseefr.github.io/R-Insee-Data/articles/v4_unem-vignettes.html)
 -   [Population by age](https://inseefr.github.io/R-Insee-Data/articles/v5_pop-vignettes.html)
 -   [Population map](https://inseefr.github.io/R-Insee-Data/articles/v6_pop_map-vignettes.html)
+-   [Deaths and Births](https://inseefr.github.io/R-Insee-Data/articles/v7_death_birth-vignettes.html)
 
-French GDP growth rate
-----------------------
+## French GDP growth rate
 
 ![](vignettes/gdp.png)
 
@@ -84,8 +77,51 @@ ggplot(data, aes(x = DATE, y = OBS_VALUE)) +
   labs(subtitle = sprintf("Last updated : %s", data$TIME_PERIOD[1]))
 ```
 
-Population Map
---------------
+## Deaths and Births
+
+![](vignettes/death_birth.png)
+
+``` r
+library(insee)
+library(tidyverse)
+
+insee_dataset = get_dataset_list()
+
+list_idbank_selected = 
+  get_idbank_list("DECES-MORTALITE", "NAISSANCES-FECONDITE") %>% 
+  filter(FREQ == "M") %>% #monthly
+  filter(REF_AREA == "FM") %>% #metropolitan territory
+  filter(DEMOGRAPHIE %in% c("NAISS", "DECES"))
+
+idbank_selected = list_idbank_selected %>% pull(idbank)
+
+data = 
+  get_insee_idbank(idbank_selected) %>% 
+  split_title() %>% 
+  mutate(period = case_when(DATE < "1975-01-01" ~ "1948 - 1974",
+                            DATE >= "1975-01-01" & DATE < "2000-01-01" ~ "1975 - 1999",
+                            DATE >= "2000-01-01" ~ "2000 - today"
+                            ))
+
+x_dates = seq.Date(from = as.Date("1940-01-01"), to = Sys.Date(), by = "5 years")
+last_date = data %>% pull(DATE) %>% max()
+
+ggplot(data, aes(x = DATE, y = OBS_VALUE, colour = TITLE_EN2)) +
+  facet_wrap(~period, scales = "free_x", ncol = 1) +
+  geom_line() +
+  geom_point(size = 0.9) +
+  ggtitle("Deaths and Births in France since 1948") +
+  labs(subtitle = sprintf("Last update : %s", last_date)) +
+  scale_x_date(breaks = x_dates, date_labels = "%Y") +
+  theme(
+    legend.position = "bottom",
+    legend.title = element_blank(),
+    axis.title.x = element_blank(),
+    axis.title.y = element_blank()
+    )
+```
+
+## Population Map
 
 ![](vignettes/pop_map.png)
 
@@ -192,15 +228,13 @@ ggplot(data = FranceMap_tidy_final_all,
   
 ```
 
-How to avoid proxy issues ?
----------------------------
+## How to avoid proxy issues ?
 
 ``` r
 Sys.setenv(http_proxy = "my_proxy_server")
 Sys.setenv(https_proxy = "my_proxy_server")
 ```
 
-Support
--------
+## Support
 
 Feel free to contact me with any question about this package using this [e-mail address](mailto:hadrien.leclerc@insee.fr?subject=%5Br-package%5D%5Binsee%5D).

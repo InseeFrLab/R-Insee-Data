@@ -112,6 +112,9 @@
     <li>
       <a href="../articles/v6_pop_map-vignettes.html">Population Map</a>
     </li>
+    <li>
+      <a href="../articles/v7_death_birth-vignettes.html">Deaths and Births</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -120,7 +123,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/hadrilec/insee/">
+  <a href="https://github.com/InseeFr/R-Insee-Data/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -139,7 +142,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Split the title column in several columns</h1>
-    <small class="dont-index">Source: <a href='https://github.com/hadrilec/insee/blob/master/R/split_title.R'><code>R/split_title.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/InseeFr/R-Insee-Data/blob/master/R/split_title.R'><code>R/split_title.R</code></a></small>
     <div class="hidden name"><code>split_title.Rd</code></div>
     </div>
 
@@ -183,10 +186,10 @@
 
 <span class='co'># quarterly payroll enrollment in the construction sector</span>
 <span class='va'>data_raw</span> <span class='op'>=</span> <span class='fu'><a href='get_insee_idbank.html'>get_insee_idbank</a></span><span class='op'>(</span><span class='st'>"001577236"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : C:\Users\eurhope\AppData\Local\Temp\RtmpYdHd11/797a46473c738b8d386d20866b100aac.rds</span>
+</div><div class='output co'>#&gt; <span class='message'><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : C:\Users\eurhope\AppData\Local\Temp\RtmpW6GWp7/797a46473c738b8d386d20866b100aac.rds</span>
 #&gt; <span class='message'></span><span></span></div><div class='input'>
 <span class='va'>data</span> <span class='op'>=</span> <span class='va'>data_raw</span> <span class='op'>%&gt;%</span>
-  <span class='fu'>split_title</span><span class='op'>(</span>lang <span class='op'>=</span> <span class='st'>"fr"</span><span class='op'>)</span>
+  <span class='fu'>split_title</span><span class='op'>(</span><span class='op'>)</span>
 <span class='co'># }</span>
 </div></span></pre>
   </div>

@@ -112,6 +112,9 @@
     <li>
       <a href="../articles/v6_pop_map-vignettes.html">Population Map</a>
     </li>
+    <li>
+      <a href="../articles/v7_death_birth-vignettes.html">Deaths and Births</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -120,7 +123,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/hadrilec/insee/">
+  <a href="https://github.com/InseeFr/R-Insee-Data/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -139,7 +142,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Add metadata to the raw data</h1>
-    <small class="dont-index">Source: <a href='https://github.com/hadrilec/insee/blob/master/R/add_insee_metadata.R'><code>R/add_insee_metadata.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/InseeFr/R-Insee-Data/blob/master/R/add_insee_metadata.R'><code>R/add_insee_metadata.R</code></a></small>
     <div class="hidden name"><code>add_insee_metadata.Rd</code></div>
     </div>
 
@@ -168,17 +171,17 @@
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='kw'><a href='https://rdrr.io/r/base/library.html'>library</a></span><span class='op'>(</span><span class='va'><a href='http://tidyverse.tidyverse.org'>tidyverse</a></span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'>-- <span style='font-weight: bold;'>Attaching packages</span><span> --------------------------------------------------------------- tidyverse 1.3.0 --</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>ggplot2</span><span> 3.3.2     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>purrr  </span><span> 0.3.4</span>
-#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>tibble </span><span> 3.0.3     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>dplyr  </span><span> 1.0.2</span>
+</div><div class='output co'>#&gt; <span class='message'>-- <span style='font-weight: bold;'>Attaching packages</span><span> --------------------------------------- tidyverse 1.3.0 --</span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>ggplot2</span><span> 3.3.2     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>purrr  </span><span> 0.3.4</span>
+#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>tibble </span><span> 3.0.4     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>dplyr  </span><span> 1.0.2</span>
 #&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>tidyr  </span><span> 1.1.2     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>stringr</span><span> 1.4.0</span>
-#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>readr  </span><span> 1.3.1     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>forcats</span><span> 0.5.0</span></div><div class='output co'>#&gt; <span class='message'>-- </span><span style='font-weight: bold;'>Conflicts</span><span> ------------------------------------------------------------------ tidyverse_conflicts() --</span>
+#&gt; <span class='message'></span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>readr  </span><span> 1.4.0     </span><span style='color: #00BB00;'>v</span><span> </span><span style='color: #0000BB;'>forcats</span><span> 0.5.0</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'tibble' was built under R version 4.0.3</span></div><div class='output co'>#&gt; <span class='warning'>Warning: package 'readr' was built under R version 4.0.3</span></div><div class='output co'>#&gt; <span class='message'>-- </span><span style='font-weight: bold;'>Conflicts</span><span> ------------------------------------------ tidyverse_conflicts() --</span>
 #&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>filter()</span><span> masks </span><span style='color: #0000BB;'>stats</span><span>::filter()</span>
 #&gt; <span class='message'></span><span style='color: #BB0000;'>x</span><span> </span><span style='color: #0000BB;'>dplyr</span><span>::</span><span style='color: #00BB00;'>lag()</span><span>    masks </span><span style='color: #0000BB;'>stats</span><span>::lag()</span></div><div class='input'>
 <span class='va'>data</span> <span class='op'>=</span>
  <span class='fu'><a href='get_insee_idbank.html'>get_insee_idbank</a></span><span class='op'>(</span><span class='st'>"001694061"</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
  <span class='fu'>add_insee_metadata</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : C:\Users\eurhope\AppData\Local\Temp\RtmpYdHd11/fcdad636cc51d27630f60fbfe871d094.rds</span>
-#&gt; <span class='message'></span><span></span></div><div class='output co'>#&gt; <span class='error'>Error in add_insee_metadata(.): could not find function "add_insee_metadata"</span></div><div class='input'><span class='co'># }</span>
+</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #000000;'>1/1 - Data download &amp; Dataframe build</span><span></span></div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Data cached : C:\Users\eurhope\AppData\Local\Temp\RtmpW6GWp7/fcdad636cc51d27630f60fbfe871d094.rds</span>
+#&gt; <span class='message'></span><span></span></div><div class='output co'>#&gt;   |                                                                              |                                                                      |   0%  |                                                                              |=====================                                                 |  30%  |                                                                              |=============================                                         |  41%  |                                                                              |=========================================                             |  59%  |                                                                              |=================================================                     |  69%  |                                                                              |======================================================================| 100%</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Cached data has been used</span><span></span></div><div class='input'><span class='co'># }</span>
 </div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
