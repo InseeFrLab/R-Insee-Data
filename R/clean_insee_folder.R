@@ -14,7 +14,7 @@ clean_insee_folder = function(){
 
   if(length(list_file_insee) > 0){
     for(file_name in list_file_insee){
-      file.remove(file_name)
+      try(file.remove(file_name), silent = TRUE)
     }
   }
 }
