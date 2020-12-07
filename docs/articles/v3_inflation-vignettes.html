@@ -71,6 +71,9 @@
     <li>
       <a href="../articles/v6_pop_map-vignettes.html">Population Map</a>
     </li>
+    <li>
+      <a href="../articles/v7_death_birth-vignettes.html">Deaths and Births</a>
+    </li>
   </ul>
 </li>
 <li>
@@ -79,7 +82,7 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/hadrilec/insee/">
+  <a href="https://github.com/InseeFr/R-Insee-Data/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -94,13 +97,14 @@
 
       
 
-      </header><div class="row">
+      </header><link href="v3_inflation-vignettes_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
+<script src="v3_inflation-vignettes_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Inflation</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/hadrilec/insee/blob/master/vignettes/v3_inflation-vignettes.Rmd"><code>vignettes/v3_inflation-vignettes.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/InseeFr/R-Insee-Data/blob/master/vignettes/v3_inflation-vignettes.Rmd"><code>vignettes/v3_inflation-vignettes.Rmd</code></a></small>
       <div class="hidden name"><code>v3_inflation-vignettes.Rmd</code></div>
 
     </div>
@@ -112,8 +116,8 @@
 <code class="sourceCode R"><span class="co"># please download the Github version</span>
 <span class="co"># devtools::install_github("hadrilec/insee")</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://tidyverse.tidyverse.org">tidyverse</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://hadrilec.github.io/insee/">insee</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://lubridate.tidyverse.org">lubridate</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://InseeFr.github.io/R-Insee-Data/">insee</a></span><span class="op">)</span>
 
 <span class="va">df_idbank_list_selected</span> <span class="op">=</span>
   <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="st">"IPC-2015"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#Inflation dataset</span>
