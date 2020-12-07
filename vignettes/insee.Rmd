@@ -2,6 +2,7 @@
 title: "Tutorial"
 output:
   prettydoc::html_pretty:
+    self_contained: no
     toc: true
     theme: architect
     highlight: github
