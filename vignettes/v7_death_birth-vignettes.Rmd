@@ -8,7 +8,7 @@ output:
     includes:
       # in_header: header.html
 vignette: >
-  %\VignetteIndexEntry{Population Map} 
+  %\VignetteIndexEntry{Deaths and Births} 
   %\VignetteEngine{knitr::rmarkdown} 
   %\VignetteEncoding{UTF-8}
   %\VignetteDepends{kableExtra,magrittr,htmltools}
