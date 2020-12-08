@@ -43,6 +43,6 @@ jobs:
 
       - name: Deploy package
         run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
+          git config --local user.email "leclerc.hadrien@gmail.com"
+          git config --local user.name "hadrilec"
           Rscript -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
