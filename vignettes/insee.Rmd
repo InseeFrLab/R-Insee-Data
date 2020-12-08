@@ -223,7 +223,7 @@ data =
 * [Unemployment rate](https://hadrilec.github.io/insee/articles/v4_unem-vignettes.html)
 * [Population by age](https://hadrilec.github.io/insee/articles/v5_pop-vignettes.html)
 * [Population map](https://hadrilec.github.io/insee/articles/v6_pop_map-vignettes.html)
-
+* [Deaths and Births](https://hadrilec.github.io/insee/articles/v7_death_birth-vignettes.html)
 
 # Support
 Feel free to contact me with any question about this package using this [e-mail address](mailto:leclerc.hadrien@gmail.com?subject=[r-package][insee]).
