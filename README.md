@@ -79,7 +79,7 @@ ggplot(data, aes(x = DATE, y = OBS_VALUE)) +
 
 ## Deaths and Births
 
-![](vignettes/death_birth.png)
+![](docs/articles/death_birth.png)
 
 ``` r
 library(insee)
