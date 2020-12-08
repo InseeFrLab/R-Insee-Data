@@ -160,14 +160,14 @@
 <div id="series-keys-list" class="section level2">
 <h2 class="hasAnchor">
 <a href="#series-keys-list" class="anchor"></a>Series Keys List</h2>
-<p><a href="https://www.insee.fr/en/information/2512785">INSEE BDM database</a> currently offers more than 140 000 series. The <code>get_idbank_list</code> function returns the series catalogue.</p>
+<p><a href="https://www.insee.fr/en/information/2512785">INSEE BDM database</a> currently offers more than 150 000 series. The <code>get_idbank_list</code> function returns the series catalogue from a dataset name.</p>
 <div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">idbank_list</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="st">'BALANCE-PAIEMENTS'</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="find-a-series-key" class="section level2">
 <h2 class="hasAnchor">
 <a href="#find-a-series-key" class="anchor"></a>Find a series key</h2>
-<p>The best way to download data is to find the right series key (idbank), but how ? Indeed, in some cases it is not easy to understand what are the differences among series, especially for non-French speakers. To make the search easier, the <a href="https://CRAN.R-project.org/package=insee">insee</a> package provides the function <code>add_insee_title</code> to get titles from idbanks, either in English or in French. It is not advised to use the function on the whole idbank dataset, as each SDMX query has 400-idbank limit. Then, <code>add_insee_title</code> function splits the list into several lists of 400 idbanks each. Thus, the user should filter the idbank dataset before using the function to avoid as much as possible this bottleneck as the following example shows. After the data retrieval, it is really nice to use the <code>split_title</code> function on the dataframe to get more readable titles easy to use in plots.</p>
+<p>The best way to download data is to find the right series key (idbank), but how ? Indeed, in some cases it is not easy to understand what are the differences among series, especially for non-French speakers. To make the search easier, the best way is to use the <code>get_idbank_list</code> function with a dataset name, then it can be helpfult to filter with the columns FREQ, NATURE, UNIT etc. Moreover, the <a href="https://CRAN.R-project.org/package=insee">insee</a> package provides the function <code>add_insee_title</code> to get titles from idbanks, either in English or in French. It is not advised to use the function on the whole idbank dataset, as each SDMX query has 400-idbank limit. Then, <code>add_insee_title</code> function splits the list into several lists of 400 idbanks each. Thus, the user should filter the idbank dataset before using the function to avoid as much as possible this bottleneck as the following example shows. After the data retrieval, it is really nice to use the <code>split_title</code> function on the dataframe to get more readable titles easy to use in plots and <code>add_insee_metadata</code> to get the metadata with the data.</p>
 <div class="sourceCode"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">idbank_list_selected</span> <span class="op">=</span>
   <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="st">"IPI-2015"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#industrial production index dataset</span>
@@ -176,9 +176,7 @@
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="va">CORRECTION</span> <span class="op">==</span> <span class="st">"CVS-CJO"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#Working day and seasonally adjusted SA-WDA</span>
   <span class="co">#automotive industry and overall industrial production</span>
   <span class="fu"><a href="https://rdrr.io/r/stats/filter.html">filter</a></span><span class="op">(</span><span class="fu">str_detect</span><span class="op">(</span><span class="va">NAF2</span>,<span class="st">"^29$|A10-BE"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="../reference/add_insee_title.html">add_insee_title</a></span><span class="op">(</span><span class="op">)</span>
-
-<span class="va">idbank_list_selected</span></code></pre></div>
+  <span class="fu"><a href="../reference/add_insee_title.html">add_insee_title</a></span><span class="op">(</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="download-data" class="section level2">
 <h2 class="hasAnchor">
@@ -194,7 +192,9 @@
 <span class="co"># the user can make a manual list of idbanks to get the data </span>
 <span class="co"># example 1</span>
 
-<span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span><span class="op">(</span><span class="st">"001558315"</span>, <span class="st">"010540726"</span><span class="op">)</span>
+<span class="va">data</span> <span class="op">=</span> 
+  <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span><span class="op">(</span><span class="st">"001558315"</span>, <span class="st">"010540726"</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_insee_metadata.html">add_insee_metadata</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># using a list of idbanks extracted from the insee idbank dataset</span>
 <span class="co"># example 2 : household's confidence survey</span>
@@ -206,7 +206,10 @@
 
 <span class="va">list_idbank</span> <span class="op">=</span> <span class="va">df_idbank</span> <span class="op">%&gt;%</span> <span class="fu">pull</span><span class="op">(</span><span class="va">idbank</span><span class="op">)</span>
 
-<span class="va">data</span> <span class="op">=</span> <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span><span class="op">(</span><span class="va">list_idbank</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="fu"><a href="../reference/split_title.html">split_title</a></span><span class="op">(</span><span class="op">)</span>
+<span class="va">data</span> <span class="op">=</span> 
+  <span class="fu"><a href="../reference/get_insee_idbank.html">get_insee_idbank</a></span><span class="op">(</span><span class="va">list_idbank</span><span class="op">)</span> <span class="op">%&gt;%</span>
+  <span class="fu"><a href="../reference/split_title.html">split_title</a></span><span class="op">(</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="../reference/add_insee_metadata.html">add_insee_metadata</a></span><span class="op">(</span><span class="op">)</span>
 
 <span class="co"># example 3 : get more than 1200 idbanks</span>
 
