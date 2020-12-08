@@ -9,6 +9,7 @@ insee R package
 [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee)
 [![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee)
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/)
+[![Build Status](https://travis-ci.org/InseeFr/R-Insee-Data.svg?branch=master)](https://travis-ci.org/InseeFr/R-Insee-Data)
 [![R build status](https://github.com/hadrilec/insee/workflows/R-CMD-check/badge.svg)](https://github.com/InseeFr/R-Insee-Data/actions)
 <br>
 
