@@ -102,13 +102,13 @@ insee_dataset %>%
 
 ## Series Keys List
 
-[INSEE BDM database](https://www.insee.fr/en/information/2512785) currently offers more than 140 000 series. The <code>get_idbank_list</code> function returns the series catalogue.
+[INSEE BDM database](https://www.insee.fr/en/information/2512785) currently offers more than 150 000 series. The <code>get_idbank_list</code> function returns the series catalogue from a dataset name.
 
-```{r, message=FALSE,warning=FALSE,eval=NOT_CRAN}
+```{r, message=FALSE,warning=FALSE,eval=FALSE}
 idbank_list = get_idbank_list('BALANCE-PAIEMENTS')
 ```
 
-```{r echo=FALSE, message=FALSE, warning=FALSE,eval=NOT_CRAN}
+```{r echo=FALSE, message=FALSE, warning=FALSE,eval=FALSE}
 idbank_list = get_idbank_list()
 
 rownames(idbank_list) <- NULL
@@ -128,7 +128,9 @@ idbank_list %>%
 ## Find a series key
 
 The best way to download data is to find the right series key (idbank), but how ? Indeed, in some cases it is not easy to understand what are the differences among series, especially for non-French speakers.
-To make the search easier, the [insee](https://CRAN.R-project.org/package=insee) package provides the function <code>add_insee_title</code> to get titles from idbanks, either in English or in French. It is not advised to use the function on the whole idbank dataset, as each SDMX query has 400-idbank limit. Then, <code>add_insee_title</code> function splits the list into several lists of 400 idbanks each. Thus, the user should filter the idbank dataset before using the function to avoid as much as possible this bottleneck as the following example shows. After the data retrieval, it is really nice to use the <code>split_title</code> function on the dataframe to get more readable titles easy to use in plots.
+To make the search easier, the best way is to use the <code>get_idbank_list</code> function with a dataset name, then it can be helpfult to filter with the columns FREQ, NATURE, UNIT etc.
+Moreover, the [insee](https://CRAN.R-project.org/package=insee) package provides the function <code>add_insee_title</code> to get titles from idbanks, either in English or in French. It is not advised to use the function on the whole idbank dataset, as each SDMX query has 400-idbank limit. Then, <code>add_insee_title</code> function splits the list into several lists of 400 idbanks each. Thus, the user should filter the idbank dataset before using the function to avoid as much as possible this bottleneck as the following example shows. After the data retrieval, it is really nice to use the <code>split_title</code> function on the dataframe to get more readable titles easy to use in plots and 
+<code>add_insee_metadata</code> to get the metadata with the data.
 
 ```{r message=FALSE, warning=FALSE,eval=FALSE}
 
@@ -140,8 +142,6 @@ idbank_list_selected =
   #automotive industry and overall industrial production
   filter(str_detect(NAF2,"^29$|A10-BE")) %>% 
   add_insee_title()
-
-idbank_list_selected
 
 ```
 
@@ -160,7 +160,9 @@ library(insee)
 # the user can make a manual list of idbanks to get the data 
 # example 1
 
-data = get_insee_idbank("001558315", "010540726")
+data = 
+  get_insee_idbank("001558315", "010540726") %>% 
+  add_insee_metadata()
 
 # using a list of idbanks extracted from the insee idbank dataset
 # example 2 : household's confidence survey
@@ -172,7 +174,10 @@ df_idbank =
 
 list_idbank = df_idbank %>% pull(idbank)
 
-data = get_insee_idbank(list_idbank) %>% split_title()
+data = 
+  get_insee_idbank(list_idbank) %>%
+  split_title() %>% 
+  add_insee_metadata()
 
 # example 3 : get more than 1200 idbanks
 
