@@ -86,11 +86,11 @@ Series have two identifiers the SDMX identifier and the so called idbank. Both c
 
 [INSEE BDM database](https://www.insee.fr/en/information/2512785) offers more than 200 Datasets. The <code>get_dataset_list()</code> function returns the datasets catalogue :
 
-```{r, message = FALSE, warning = FALSE, eval = NOT_CRAN}
+```{r, message = FALSE, warning = FALSE, eval = FALSE}
 insee_dataset = get_dataset_list() 
 ```
 
-```{r echo = FALSE, message = FALSE, warning = FALSE, eval = NOT_CRAN}
+```{r echo = FALSE, message = FALSE, warning = FALSE, eval = FALSE}
 rownames(insee_dataset) <- NULL
 
 insee_dataset %>% 
