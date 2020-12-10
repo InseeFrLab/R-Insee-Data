@@ -5,6 +5,7 @@
 #' @param n_split number of new columns, by default the maximum is chosen
 #' @param title_col_name the column name to be splitted, if missing it will be either TITLE_EN
 #' @param lang by default it returns both the French and the English title provided by INSEE
+#' @param pattern the value by default is stored in the package and it is advised to use it, but in some cases it is useful to use one's pattern
 #' @return the same dataframe with the title column splitted
 #' @examples
 #' \donttest{
@@ -17,12 +18,16 @@
 #'   split_title()
 #' }
 #' @export
-split_title = function(df, title_col_name, n_split = "max", lang = NULL){
+split_title = function(df, title_col_name, pattern, n_split = "max", lang = NULL){
 
   if(any(class(df) %in% c("data.frame"))){
     if(!is.null(df)){
 
-      insee_title_sep = Sys.getenv("INSEE_title_sep")
+      if(missing(pattern)){
+        insee_title_sep = Sys.getenv("INSEE_title_sep")
+      }else{
+        insee_title_sep = pattern
+      }
 
       if(missing(title_col_name)){
         if(is.null(lang)){
