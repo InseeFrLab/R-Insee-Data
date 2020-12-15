@@ -16,9 +16,15 @@
 #'
 #' # example 3 : data about paris
 #' data_paris = search_insee('paris')
+#'
+#' # example 4 : all data
+#' data_paris = search_insee()
 #' }
 #' @export
-search_insee = function(pattern){
+search_insee = function(pattern = '.*'){
+
+  if(is.null(pattern)){pattern = '.*'}
+  if(pattern == ''){pattern = '.*'}
 
   dataset_list = get_dataset_list()
 
