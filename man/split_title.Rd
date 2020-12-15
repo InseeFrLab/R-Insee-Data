@@ -4,12 +4,14 @@
 \alias{split_title}
 \title{Split the title column in several columns}
 \usage{
-split_title(df, title_col_name, n_split = "max", lang = NULL)
+split_title(df, title_col_name, pattern, n_split = "max", lang = NULL)
 }
 \arguments{
 \item{df}{a dataframe containing a title column}
 
 \item{title_col_name}{the column name to be splitted, if missing it will be either TITLE_EN}
+
+\item{pattern}{the value by default is stored in the package and it is advised to use it, but in some cases it is useful to use one's pattern}
 
 \item{n_split}{number of new columns, by default the maximum is chosen}
 
