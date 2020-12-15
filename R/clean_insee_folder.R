@@ -16,7 +16,8 @@ clean_insee_folder = function(){
 
     if(length(list_file_insee) > 0){
       for(file_name in list_file_insee){
-        try(file.remove(file_name), silent = TRUE)
+        # try(file.remove(file_name), silent = TRUE)
+        unlink(file_name, recursive = TRUE)
       }
     }
 
