@@ -7,6 +7,7 @@ library(lubridate)
 test_that("class tests",{
   skip_on_cran()
 
+  expect_warning(create_insee_folder(), regexp = NA)
   expect_warning(insee:::.onLoad(), regexp = NA)
 
   expect_equal(any(class(get_idbank_list(update = TRUE)) == 'data.frame'), TRUE)
