@@ -2,10 +2,10 @@
 #'
 #' @details The number of separators in the official INSEE title can vary and is not normalized. Beware all title columns created may not be a cleaned dimension label.
 #' @param df a dataframe containing a title column
-#' @param n_split number of new columns, by default the maximum is chosen
 #' @param title_col_name the column name to be splitted, if missing it will be either TITLE_EN
-#' @param lang by default it returns both the French and the English title provided by INSEE
 #' @param pattern the value by default is stored in the package and it is advised to use it, but in some cases it is useful to use one's pattern
+#' @param n_split number of new columns, by default the maximum is chosen
+#' @param lang by default it returns both the French and the English title provided by INSEE
 #' @return the same dataframe with the title column splitted
 #' @examples
 #' \donttest{
