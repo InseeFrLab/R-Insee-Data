@@ -4,7 +4,7 @@ get_dataset_dimension = function(dataset){
   insee_sdmx_link_datastructure = Sys.getenv("INSEE_sdmx_link_datastructure")
   link = file.path(insee_sdmx_link_datastructure, dataset)
 
-  dir_creation_fail = try(create_insee_dir(), silent = TRUE)
+  dir_creation_fail = try(create_insee_folder(), silent = TRUE)
 
   if(!"try-error" %in% class(dir_creation_fail)){
     insee_local_dir = rappdirs::user_data_dir("insee")

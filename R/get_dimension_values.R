@@ -1,7 +1,7 @@
 #' @noRd
 get_dimension_values = function(dimension, name = FALSE){
 
-  dir_creation_fail = try(create_insee_dir(), silent = TRUE)
+  dir_creation_fail = try(create_insee_folder(), silent = TRUE)
 
   if(!"try-error" %in% class(dir_creation_fail)){
     insee_local_dir = rappdirs::user_data_dir("insee")

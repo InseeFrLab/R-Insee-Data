@@ -1,5 +1,5 @@
 #' @noRd
-create_insee_dir = function(){
+create_insee_folder = function(){
 
   insee_folder = file.path(rappdirs::user_data_dir(), "insee")
   list_folders = c(insee_folder, file.path(insee_folder, "insee"))
@@ -10,8 +10,8 @@ create_insee_dir = function(){
     }
   }
 
+  test_file = file.path(insee_folder, "insee", paste0(openssl::md5("test_file"), ".rds"))
   if(!file.exists(test_file)){
-    test_file = file.path(insee_folder, "insee", paste0(openssl::md5("test_file"), ".rds"))
     test = 1
     saveRDS(test, file = test_file)
   }
