@@ -95,7 +95,7 @@ get_idbank_list = function(
 
     date_last_update = readRDS(metadata_file_cache_date)
 
-    if(difftime(insee_today_date, date_last_update, units = "days") > 180){
+    if(difftime(insee_today_date, date_last_update, units = "days") > 90){
       update = TRUE
       auto = TRUE
     }
@@ -131,7 +131,7 @@ get_idbank_list = function(
 
     if(update){
       if(auto){
-        msg1bis = "\nEither because it is older than 6 months, or because some files are missing"
+        msg1bis = "\nEither because it is older than 3 months, or because some files are missing"
         msg1 = sprintf("Metadata update has been triggered automatically%s", msg1bis)
       }else{
         msg1 = "Metadata update triggered manually"

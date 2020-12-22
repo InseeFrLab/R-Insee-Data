@@ -13,7 +13,7 @@ test_that("class tests",{
   expect_equal(any(class(get_idbank_list(update = TRUE)) == 'data.frame'), TRUE)
   expect_equal(any(class(get_idbank_list()) == 'data.frame'), TRUE)
 
-  Sys.setenv("INSEE_today_date" = as.character(lubridate::today() %m+% days(181)))
+  Sys.setenv("INSEE_today_date" = as.character(lubridate::today() %m+% days(91)))
   expect_equal(any(class(get_idbank_list()) == 'data.frame'), TRUE)
   Sys.setenv("INSEE_today_date" = as.character(lubridate::today()))
 
