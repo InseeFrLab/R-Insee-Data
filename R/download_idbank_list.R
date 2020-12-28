@@ -83,7 +83,11 @@ download_idbank_list = function(dataset = NULL, label = FALSE){
 
                      if(label == TRUE){
                        for(new_col_name in new_col_names){
-                         dimension_labels = get_dimension_values(dimension = new_col_name)
+
+                         i_col = which(new_col_names == new_col_name)
+                         cl_col = attr(new_col_names,'cl')[i_col]
+
+                         dimension_labels = get_dimension_values(dimension = cl_col, col_name = new_col_name)
 
                          if(!is.null(dimension_labels)){
                            mapping_dataset_sep = dplyr::left_join(mapping_dataset_sep, dimension_labels, by = new_col_name)

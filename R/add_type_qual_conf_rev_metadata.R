@@ -2,11 +2,11 @@
 #' @noRd
 add_type_qual_conf_rev_metadata = function(df){
 
-  df_status = get_dimension_values("OBS_STATUS")
-  df_qual = get_dimension_values("OBS_QUAL")
-  df_type = get_dimension_values("OBS_TYPE")
-  df_rev = get_dimension_values("OBS_REV")
-  df_conf = get_dimension_values("OBS_CONF")
+  df_status = get_dimension_values("CL_OBS_STATUS", "OBS_STATUS")
+  df_qual = get_dimension_values("CL_OBS_QUAL", "OBS_QUAL")
+  df_type = get_dimension_values("CL_OBS_TYPE", "OBS_TYPE")
+  df_rev = get_dimension_values("CL_OBS_REV", "OBS_REV")
+  df_conf = get_dimension_values("CL_OBS_CONF", "OBS_CONF")
 
   if("OBS_STATUS" %in% names(df)){
     df = dplyr::left_join(df, df_status, by = "OBS_STATUS")

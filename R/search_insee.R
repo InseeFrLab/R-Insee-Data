@@ -18,7 +18,7 @@
 #' data_paris = search_insee('paris')
 #'
 #' # example 4 : all data
-#' data_paris = search_insee()
+#' data_all = search_insee()
 #' }
 #' @export
 search_insee = function(pattern = '.*'){
