@@ -60,7 +60,7 @@ get_dimension_values = function(dimension, col_name ,name = FALSE){
                 if(class(dimension_label_en) == "try-error"){
                   dimension_label_en = "Missing"
                 }
-                dimension_name = data.frame(dimension = dimension,
+                dimension_name = data.frame(dimension = col_name,
                                              label_fr = dimension_label_fr,
                                              label_en = dimension_label_en,
                                              stringsAsFactors = F)
