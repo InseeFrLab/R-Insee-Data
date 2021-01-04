@@ -2,21 +2,22 @@
 % Please edit documentation in R/search_insee.R
 \name{search_insee}
 \alias{search_insee}
-\title{Search a pattern among insee dataset names}
+\title{Search a pattern among insee datasets and idbanks}
 \usage{
-search_insee(pattern)
+search_insee(pattern = ".*")
 }
 \arguments{
-\item{pattern}{string used to filtern the dataset list}
+\item{pattern}{string used to filter the dataset and idbank list}
 }
 \value{
-the dataset list table filtered with the pattern
+the dataset and idbank table filtered with the pattern
 }
 \description{
-Search a pattern among insee dataset names
+Search a pattern among insee datasets and idbanks
 }
 \details{
-the function ignores accents and cases
+The data related to idbanks is stored internally in the package and might the most up to date.
+The function ignores accents and cases.
 }
 \examples{
 \donttest{
@@ -26,5 +27,11 @@ dataset_enquete = search_insee("enquete")
 
 # example 2 : search multiple patterns
 dataset_survey_gdp = search_insee("Survey|gdp")
+
+# example 3 : data about paris
+data_paris = search_insee('paris')
+
+# example 4 : all data
+data_paris = search_insee()
 }
 }

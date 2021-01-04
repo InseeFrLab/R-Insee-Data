@@ -4,7 +4,7 @@
 * use of dim columns in the idbank list is then deprecated
 * add metadata to raw data with the function `add_insee_metadata`
 * get columns' name with the function `get_column_title`
-* `search_insee` function is now using on the idbank list
+* `search_insee` function is now using the idbank and the dataset lists
 * option to choose the separator with the `split_title` function
 * vignette : deaths and births example added
 * backup idbank list stored inside the package
