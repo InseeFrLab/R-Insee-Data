@@ -72,8 +72,8 @@ search_insee = function(pattern = '.*'){
                                    id = .data$idbank)
 
   dataset_selected = dplyr::rename(.data = dataset_selected,
-                                   title_fr = Name.fr,
-                                   title_en = Name.en)
+                                   title_fr = .data$Name.fr,
+                                   title_en = .data$Name.en)
 
   search_results = dplyr::bind_rows(dataset_selected, idbank_list_search)
 
