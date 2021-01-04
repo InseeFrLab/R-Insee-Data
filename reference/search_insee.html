@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Search a pattern among insee dataset names — search_insee • insee</title>
+<title>Search a pattern among insee datasets and idbanks — search_insee • insee</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Search a pattern among insee dataset names — search_insee" />
-<meta property="og:description" content="Search a pattern among insee dataset names" />
+<meta property="og:title" content="Search a pattern among insee datasets and idbanks — search_insee" />
+<meta property="og:description" content="Search a pattern among insee datasets and idbanks" />
 
 
 
@@ -141,32 +141,33 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Search a pattern among insee dataset names</h1>
+    <h1>Search a pattern among insee datasets and idbanks</h1>
     <small class="dont-index">Source: <a href='https://github.com/InseeFr/R-Insee-Data/blob/master/R/search_insee.R'><code>R/search_insee.R</code></a></small>
     <div class="hidden name"><code>search_insee.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Search a pattern among insee dataset names</p>
+    <p>Search a pattern among insee datasets and idbanks</p>
     </div>
 
-    <pre class="usage"><span class='fu'>search_insee</span><span class='op'>(</span><span class='va'>pattern</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>search_insee</span><span class='op'>(</span>pattern <span class='op'>=</span> <span class='st'>".*"</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>pattern</th>
-      <td><p>string used to filtern the dataset list</p></td>
+      <td><p>string used to filter the dataset and idbank list</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>the dataset list table filtered with the pattern</p>
+    <p>the dataset and idbank table filtered with the pattern</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>the function ignores accents and cases</p>
+    <p>The data related to idbanks is stored internally in the package and might the most up to date.
+The function ignores accents and cases.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
@@ -176,6 +177,12 @@
 </div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>Cached data has been used</span><span></span></div><div class='input'>
 <span class='co'># example 2 : search multiple patterns</span>
 <span class='va'>dataset_survey_gdp</span> <span class='op'>=</span> <span class='fu'>search_insee</span><span class='op'>(</span><span class='st'>"Survey|gdp"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Cached data has been used</span><span></span></div><div class='input'>
+<span class='co'># example 3 : data about paris</span>
+<span class='va'>data_paris</span> <span class='op'>=</span> <span class='fu'>search_insee</span><span class='op'>(</span><span class='st'>'paris'</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Cached data has been used</span><span></span></div><div class='input'>
+<span class='co'># example 4 : all data</span>
+<span class='va'>data_paris</span> <span class='op'>=</span> <span class='fu'>search_insee</span><span class='op'>(</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; <span class='message'></span><span style='color: #00BB00;'>Cached data has been used</span><span></span></div><div class='input'><span class='co'># }</span>
 </div></span></pre>
   </div>

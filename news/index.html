@@ -149,11 +149,19 @@
 <a href="#insee-100" class="anchor"></a>insee 1.0.0<small> Unreleased </small>
 </h1>
 <ul>
-<li>if dataset names are provided, get clean metadata with <code>get_idbank_list</code> (code breaks likely)</li>
+<li>if dataset names are provided, get clean metadata with <code>get_idbank_list</code> (code breaks likely). The metadata is then stored locally on the computer. The update is automatically done every 3 months, and can be manually triggered</li>
+<li>use of dim columns in the idbank list is then deprecated</li>
 <li>add metadata to raw data with the function <code>add_insee_metadata</code>
 </li>
+<li>get columns’ name with the function <code>get_column_title</code>
+</li>
+<li>
+<code>search_insee</code> function is now using the idbank and the dataset lists</li>
+<li>option to choose the separator with the <code>split_title</code> function</li>
+<li>vignette : deaths and births example added</li>
 <li>backup idbank list stored inside the package</li>
 <li>readsdmx optional, removed as a dependency</li>
+<li>package now officially supported by INSEE, source code and issue reports are moved to INSEE’s official GitHub page</li>
 </ul>
 </div>
     <div id="insee-090" class="section level1">
