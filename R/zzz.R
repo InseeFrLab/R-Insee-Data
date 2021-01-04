@@ -2,7 +2,7 @@
 #' @noRd
 .onLoad <- function(libname, pkgname){
 
-  Sys.setenv(INSEE_sdmx_link_codelist = "https://www.bdm.insee.fr/series/sdmx/codelist/FR1/CL_")
+  Sys.setenv(INSEE_sdmx_link_codelist = "https://www.bdm.insee.fr/series/sdmx/codelist/FR1")
   Sys.setenv(INSEE_sdmx_link_datastructure = "https://www.bdm.insee.fr/series/sdmx/datastructure/FR1")
   Sys.setenv(INSEE_sdmx_link_dataflow = "https://bdm.insee.fr/series/sdmx/dataflow")
   Sys.setenv(INSEE_sdmx_link_idbank = "https://bdm.insee.fr/series/sdmx/data/SERIES_BDM")

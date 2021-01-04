@@ -1,5 +1,5 @@
 #' @noRd
-get_dimension_values = function(dimension, name = FALSE){
+get_dimension_values = function(dimension, col_name ,name = FALSE){
 
   dir_creation_fail = try(create_insee_folder(), silent = TRUE)
 
@@ -10,7 +10,7 @@ get_dimension_values = function(dimension, name = FALSE){
   }
 
   insee_sdmx_link_codelist =  Sys.getenv("INSEE_sdmx_link_codelist")
-  link = sprintf("%s%s", insee_sdmx_link_codelist, dimension)
+  link = sprintf("%s/%s", insee_sdmx_link_codelist, dimension)
 
   dimension_file_cache = file.path(insee_local_dir,
                                    paste0(openssl::md5(link), ".rds"))
@@ -60,7 +60,7 @@ get_dimension_values = function(dimension, name = FALSE){
                 if(class(dimension_label_en) == "try-error"){
                   dimension_label_en = "Missing"
                 }
-                dimension_name = data.frame(dimension = dimension,
+                dimension_name = data.frame(dimension = col_name,
                                              label_fr = dimension_label_fr,
                                              label_en = dimension_label_en,
                                              stringsAsFactors = F)
@@ -105,7 +105,7 @@ get_dimension_values = function(dimension, name = FALSE){
                 return(df)
               }))
 
-              names(labels) = c(dimension, paste0(dimension, "_label_fr"), paste0(dimension, "_label_en"))
+              names(labels) = c(col_name, paste0(col_name, "_label_fr"), paste0(col_name, "_label_en"))
 
               saveRDS(labels, file = dimension_file_cache)
 

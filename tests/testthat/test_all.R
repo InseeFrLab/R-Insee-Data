@@ -136,7 +136,7 @@ test_that("output tests",{
   expect_is(read_sdmx_fast(""), "NULL")
 
   expect_warning(clean_insee_folder(), regexp = NA)
-  expect_equal('data.frame' %in% class(get_dimension_values('NATURE', name = TRUE)), TRUE)
+  expect_equal('data.frame' %in% class(get_dimension_values('CL_NATURE', 'NATURE', name = TRUE)), TRUE)
 
 })
 
