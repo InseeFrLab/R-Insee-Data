@@ -20,39 +20,41 @@ get_dataset_dimension = function(dataset){
     response = try(httr::GET(link), silent = TRUE)
     response_content = try(httr::content(response, encoding = "UTF-8"), silent = TRUE)
 
-    content_list = xml2::as_list(response_content)
-    data = tibble::as_tibble(content_list)
+    if(class(response_content) != "try-error"){
 
-    # l = try(data[[1]][[2]]$DataStructures$DataStructure$DataStructureComponents$AttributeList$Attribute$AttributeRelationship, silent = TRUE)
+      content_list = xml2::as_list(response_content)
+      data = tibble::as_tibble(content_list)
 
-    l = try(data[[1]][["Structures"]][["DataStructures"]][["DataStructure"]][["DataStructureComponents"]][["DimensionList"]])#[["Dimension"]]
+      # l = try(data[[1]][[2]]$DataStructures$DataStructure$DataStructureComponents$AttributeList$Attribute$AttributeRelationship, silent = TRUE)
+
+      l = try(data[[1]][["Structures"]][["DataStructures"]][["DataStructure"]][["DataStructureComponents"]][["DimensionList"]])#[["Dimension"]]
 
 
-    if(class(l) != "try-error"){
-      if(!is.null(l)){
+      if(class(l) != "try-error"){
+        if(!is.null(l)){
 
-        list_dimension = unlist(lapply(1:length(l),
-                                       function(i){
-                                         dim = attr(l[[i]], 'id')
-                                         return(dim)
-          }))
+          list_dimension = unlist(lapply(1:length(l),
+                                         function(i){
+                                           dim = attr(l[[i]], 'id')
+                                           return(dim)
+                                         }))
 
-        list_dimension_cl = unlist(lapply(1:length(l),
-                                       function(i){
-                                         cl_dim = if_null_na(attr(l[[i]]$LocalRepresentation$Enumeration$Ref, 'id'))
-                                         return(cl_dim)
-                                       }))
+          list_dimension_cl = unlist(lapply(1:length(l),
+                                            function(i){
+                                              cl_dim = if_null_na(attr(l[[i]]$LocalRepresentation$Enumeration$Ref, 'id'))
+                                              return(cl_dim)
+                                            }))
 
-        list_dimension = list_dimension[!is.na(list_dimension_cl)]
-        list_dimension_cl = list_dimension_cl[!is.na(list_dimension_cl)]
+          list_dimension = list_dimension[!is.na(list_dimension_cl)]
+          list_dimension_cl = list_dimension_cl[!is.na(list_dimension_cl)]
 
-        attr(list_dimension, 'cl') = list_dimension_cl
+          attr(list_dimension, 'cl') = list_dimension_cl
 
-        saveRDS(list_dimension, file = dataset_dim_file_cache)
+          saveRDS(list_dimension, file = dataset_dim_file_cache)
 
+        }else{return(NULL)}
       }else{return(NULL)}
     }else{return(NULL)}
-
   }else{
     list_dimension = readRDS(file = dataset_dim_file_cache)
   }
