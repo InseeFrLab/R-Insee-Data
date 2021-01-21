@@ -31,12 +31,11 @@ get_column_title = function(dataset = NULL){
 
     df_dataset_dimension = dplyr::distinct(.data = df_dataset_dimension)
 
-    dataset_dimension = dplyr::pull(.data = df_dataset_dimension, dim)
-    attr(dataset_dimension, 'cl') = dplyr::pull(.data = df_dataset_dimension, cl)
+    dataset_dimension = dplyr::pull(.data = df_dataset_dimension, .data$dim)
+    attr(dataset_dimension, 'cl') = dplyr::pull(.data = df_dataset_dimension, .data$cl)
   }
 
   if(!is.null(dataset_dimension)){
-    # dataset_dimension = sort(dataset_dimension)
 
     dimension_name_df = dplyr::bind_rows(
       lapply(1:length(dataset_dimension),

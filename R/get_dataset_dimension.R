@@ -25,10 +25,7 @@ get_dataset_dimension = function(dataset){
       content_list = xml2::as_list(response_content)
       data = tibble::as_tibble(content_list)
 
-      # l = try(data[[1]][[2]]$DataStructures$DataStructure$DataStructureComponents$AttributeList$Attribute$AttributeRelationship, silent = TRUE)
-
-      l = try(data[[1]][["Structures"]][["DataStructures"]][["DataStructure"]][["DataStructureComponents"]][["DimensionList"]])#[["Dimension"]]
-
+      l = try(data[[1]][["Structures"]][["DataStructures"]][["DataStructure"]][["DataStructureComponents"]][["DimensionList"]])
 
       if(class(l) != "try-error"){
         if(!is.null(l)){
