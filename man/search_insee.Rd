@@ -32,6 +32,6 @@ dataset_survey_gdp = search_insee("Survey|gdp")
 data_paris = search_insee('paris')
 
 # example 4 : all data
-data_paris = search_insee()
+data_all = search_insee()
 }
 }

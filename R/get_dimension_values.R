@@ -120,8 +120,6 @@ get_dimension_values = function(dimension, col_name ,name = FALSE){
 
         }else{return(NULL)}
 
-
-
     }else{return(NULL)}
 
   }else{
