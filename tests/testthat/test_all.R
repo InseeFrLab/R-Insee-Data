@@ -10,6 +10,11 @@ test_that("class tests",{
   expect_warning(create_insee_folder(), regexp = NA)
   expect_warning(insee:::.onLoad(), regexp = NA)
 
+  INSEE_idbank_dataset_path = Sys.getenv("INSEE_idbank_dataset_path")
+  Sys.setenv(INSEE_idbank_dataset_path = "https://www.insee.fr/en/statistiques/fichier/fake_file.zip")
+  expect_equal(any(class(get_idbank_list("CLIMAT-AFFAIRES")) == 'data.frame'), TRUE)
+  Sys.setenv(INSEE_idbank_dataset_path = INSEE_idbank_dataset_path)
+
   expect_equal(any(class(get_idbank_list(update = TRUE)) == 'data.frame'), TRUE)
   expect_equal(any(class(get_idbank_list()) == 'data.frame'), TRUE)
 
