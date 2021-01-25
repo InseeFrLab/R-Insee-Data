@@ -166,7 +166,7 @@
 <div id="find-a-series-key" class="section level2">
 <h2 class="hasAnchor">
 <a href="#find-a-series-key" class="anchor"></a>Find a series key</h2>
-<p>The best way to download data is to find the right series key (idbank), but how ? Indeed, in some cases it is not easy to understand what are the differences among series, especially for non-French speakers. To make the search easier, the best way is to use the <code>get_idbank_list</code> function with a dataset name, then it can be helpfult to filter with the columns FREQ, NATURE, UNIT etc. Moreover, the <a href="https://CRAN.R-project.org/package=insee">insee</a> package provides the function <code>add_insee_title</code> to get titles from idbanks, either in English or in French. It is not advised to use the function on the whole idbank dataset, as each SDMX query has 400-idbank limit. Then, <code>add_insee_title</code> function splits the list into several lists of 400 idbanks each. Thus, the user should filter the idbank dataset before using the function to avoid as much as possible this bottleneck as the following example shows. After the data retrieval, it is really nice to use the <code>split_title</code> function on the dataframe to get more readable titles easy to use in plots and <code>add_insee_metadata</code> to get the metadata with the data.</p>
+<p>The best way to download data is to find the right series key (idbank), but how ? Indeed, in some cases it is not easy to understand what are the differences among series, especially for non-French speakers. To make the search easier, the best way is to use the <code>get_idbank_list</code> function with a dataset name, then it can be helpful to filter with the columns FREQ, NATURE, UNIT etc. Moreover, the <a href="https://CRAN.R-project.org/package=insee">insee</a> package provides the function <code>add_insee_title</code> to get titles from idbanks, either in English or in French. It is not advised to use the function on the whole idbank dataset, as each SDMX query has 400-idbank limit. Then, <code>add_insee_title</code> function splits the list into several lists of 400 idbanks each. Thus, the user should filter the idbank dataset before using the function to avoid as much as possible this bottleneck as the following example shows. After the data retrieval, it is really nice to use the <code>split_title</code> function on the dataframe to get more readable titles easy to use in plots and <code>add_insee_metadata</code> to get the metadata with the data.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">idbank_list_selected</span> <span class="op">=</span>
   <span class="fu"><a href="../reference/get_idbank_list.html">get_idbank_list</a></span><span class="op">(</span><span class="st">"IPI-2015"</span><span class="op">)</span> <span class="op">%&gt;%</span> <span class="co">#industrial production index dataset</span>
@@ -252,18 +252,18 @@
 <h1 class="hasAnchor">
 <a href="#examples" class="anchor"></a>Examples</h1>
 <ul>
-<li><a href="https://hadrilec.github.io/insee/articles/v2_gdp-vignettes.html">GDP growth rate</a></li>
-<li><a href="https://hadrilec.github.io/insee/articles/v3_inflation-vignettes.html">Inflation</a></li>
-<li><a href="https://hadrilec.github.io/insee/articles/v4_unem-vignettes.html">Unemployment rate</a></li>
-<li><a href="https://hadrilec.github.io/insee/articles/v5_pop-vignettes.html">Population by age</a></li>
-<li><a href="https://hadrilec.github.io/insee/articles/v6_pop_map-vignettes.html">Population map</a></li>
-<li><a href="https://hadrilec.github.io/insee/articles/v7_death_birth-vignettes.html">Deaths and Births</a></li>
+<li><a href="https://inseefr.github.io/R-Insee-Data/articles/v2_gdp-vignettes.html">GDP growth rate</a></li>
+<li><a href="https://inseefr.github.io/R-Insee-Data/articles/v3_inflation-vignettes.html">Inflation</a></li>
+<li><a href="https://inseefr.github.io/R-Insee-Data/articles/v4_unem-vignettes.html">Unemployment rate</a></li>
+<li><a href="https://inseefr.github.io/R-Insee-Data/articles/v5_pop-vignettes.html">Population by age</a></li>
+<li><a href="https://inseefr.github.io/R-Insee-Data/articles/v6_pop_map-vignettes.html">Population map</a></li>
+<li><a href="https://inseefr.github.io/R-Insee-Data/articles/v7_death_birth-vignettes.html">Deaths and Births</a></li>
 </ul>
 </div>
 <div id="support" class="section level1">
 <h1 class="hasAnchor">
 <a href="#support" class="anchor"></a>Support</h1>
-<p>Feel free to contact me with any question about this package using this <a href="mailto:leclerc.hadrien@gmail.com?subject=%5Br-package%5D%5Binsee%5D">e-mail address</a>.</p>
+<p>Feel free to contact me with any question about this package using this <a href="mailto:hadrien.leclerc@insee.fr?subject=%5Br-package%5D%5Binsee%5D">e-mail address</a>.</p>
 </div>
   </div>
 
