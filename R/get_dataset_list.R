@@ -11,7 +11,9 @@ get_dataset_list = function(){
   link_dataflow = Sys.getenv("INSEE_sdmx_link_dataflow")
 
   df = get_insee(link_dataflow)
-  df = dplyr::filter(.data = df, !is.na(.data$Name.fr))
+  if(!is.null(df)){
+    df = dplyr::filter(.data = df, !is.na(.data$Name.fr))
+  }
 
   # df = tibble::as_tibble(df)
 

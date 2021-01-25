@@ -73,18 +73,21 @@ get_idbank_list = function(
   }
 
   dataset_list = invisible(get_dataset_list()$id)
-  if("SERIES_BDM" %in% dataset_list){
-    dataset_list = dataset_list[-which(dataset_list == "SERIES_BDM")]
-  }
 
-  if(!is.null(dataset)){
-    dataset_selected = which(dataset %in% dataset_list)
+  if(!is.null(dataset_list)){
+    if("SERIES_BDM" %in% dataset_list){
+      dataset_list = dataset_list[-which(dataset_list == "SERIES_BDM")]
+    }
 
-    if(length(dataset_selected) == 0){
-      warning("None dataset provided is among INSEE's datasets \nGet the list with get_dataset_list()")
-      return(NULL)
-    }else{
-      dataset = dataset[dataset_selected]
+    if(!is.null(dataset)){
+      dataset_selected = which(dataset %in% dataset_list)
+
+      if(length(dataset_selected) == 0){
+        warning("None dataset provided is among INSEE's datasets \nGet the list with get_dataset_list()")
+        return(NULL)
+      }else{
+        dataset = dataset[dataset_selected]
+      }
     }
   }
 
@@ -164,10 +167,14 @@ get_idbank_list = function(
           dplyr::filter(.data = idbank_list_internal, .data$nomflow %in% dataset)
         )
 
-        msg1 = "Idbank list download failed"
+        msg1 = "\n\nIdbank list download failed"
         msg2 = "\nPackage's internal data has been used instead"
         msg3 = "\nPlease contact the package maintainer if this error persists"
         warning(sprintf("%s %s %s", msg1, msg2, msg3))
+
+        idbank_list = tibble::as_tibble(idbank_list)
+
+        return(idbank_list)
 
       }else{
 
@@ -180,7 +187,7 @@ get_idbank_list = function(
 
     }
 
-   idbank_list = read_dataset_metadata(dataset = dataset,
+  idbank_list = read_dataset_metadata(dataset = dataset,
                                       dataset_metadata_file_cache = dataset_metadata_file_cache)
 
   idbank_list = tibble::as_tibble(idbank_list)
