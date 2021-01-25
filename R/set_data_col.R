@@ -14,7 +14,7 @@ set_data_col = function(data_final){
 
   col_common = which(colnames_order %in% names(data_final))
 
-  if(length(vect_col_common) > 0){
+  if(length(col_common) > 0){
     colnames_order = colnames_order[col_common]
   }else{
     colnames_order = names(data_final)
