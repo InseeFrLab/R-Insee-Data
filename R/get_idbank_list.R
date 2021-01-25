@@ -73,6 +73,9 @@ get_idbank_list = function(
   }
 
   dataset_list = invisible(get_dataset_list()$id)
+  if("SERIES_BDM" %in% dataset_list){
+    dataset_list = dataset_list[-which(dataset_list == "SERIES_BDM")]
+  }
 
   if(!is.null(dataset)){
     dataset_selected = which(dataset %in% dataset_list)
@@ -98,9 +101,15 @@ get_idbank_list = function(
     if(difftime(insee_today_date, date_last_update, units = "days") > 90){
       update = TRUE
       auto = TRUE
+
+      msg = "\nMetadata is older than 3 months"
+      message(crayon::style(sprintf("%s", msg), "red"))
     }
 
   }else{
+    msg = "\nMetadata date file is missing"
+    message(crayon::style(sprintf("%s", msg), "red"))
+
     update = TRUE
     auto = TRUE
   }
@@ -132,9 +141,10 @@ get_idbank_list = function(
     if(update){
       if(auto){
         msg1bis = "\nEither because it is older than 3 months, or because some files are missing"
-        msg1 = sprintf("Metadata update has been triggered automatically%s", msg1bis)
+        # msg1 = sprintf("Metadata update has been triggered automatically%s", msg1bis)
+        msg1 = "Metadata update has been triggered automatically"
       }else{
-        msg1 = "Metadata update triggered manually"
+        msg1 = "Metadata update has been triggered manually"
       }
 
       msg2 = "\nIt may last several minutes"
