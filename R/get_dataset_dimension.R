@@ -20,7 +20,7 @@ get_dataset_dimension = function(dataset){
     response = try(httr::GET(link), silent = TRUE)
     response_content = try(httr::content(response, encoding = "UTF-8"), silent = TRUE)
 
-    if(class(response_content) != "try-error"){
+    if(!"try-error" %in% class(response_content)){
 
       content_list = xml2::as_list(response_content)
       data = tibble::as_tibble(content_list)
