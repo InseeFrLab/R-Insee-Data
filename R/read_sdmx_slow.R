@@ -3,7 +3,6 @@
 read_sdmx_slow = function(link, step = "1/1"){
 
   insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
-  insee_value_as_numeric = if(Sys.getenv("INSEE_value_as_numeric") == "TRUE"){TRUE}else{FALSE}
 
   response = try(httr::GET(link), silent = TRUE)
 
@@ -171,10 +170,7 @@ read_sdmx_slow = function(link, step = "1/1"){
 
       data_final = dplyr::bind_rows(list_df)
 
-      if(insee_value_as_numeric & "OBS_VALUE" %in% names(data_final)){
-        data_final = dplyr::mutate(.data = data_final,
-                                   OBS_VALUE = as.numeric(as.character(.data$OBS_VALUE)))
-      }
+      data_final = set_data_col(data_final)
 
       # if("DATE" %in% names(data_final)){
       #   col_names_ordered = c("DATE", names(data_final)[which(names(data_final) != "DATE")])

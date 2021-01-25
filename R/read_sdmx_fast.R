@@ -13,14 +13,16 @@ read_sdmx_fast = function(link, step = "1/1"){
 
   if(class(data) != "try-error"){
     if(nrow(data) > 0){
-      data$OBS_VALUE = as.numeric(data$OBS_VALUE)
+      # data$OBS_VALUE = as.numeric(data$OBS_VALUE)
 
       data = dplyr::group_by(.data = data, .data$IDBANK)
 
       data = dplyr::mutate(.data = data,
                            DATE = get_date(.data$TIME_PERIOD, .data$FREQ))
 
-      data_final = tibble::as_tibble(data)
+      data_final = set_data_col(data)
+
+      data_final = tibble::as_tibble(data_final)
     }else{
       warning("Wrong query")
       data_final = NULL
