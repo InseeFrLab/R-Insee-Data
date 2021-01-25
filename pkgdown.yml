@@ -9,7 +9,7 @@ articles:
   v5_pop-vignettes: v5_pop-vignettes.html
   v6_pop_map-vignettes: v6_pop_map-vignettes.html
   v7_death_birth-vignettes: v7_death_birth-vignettes.html
-last_built: 2021-01-21T20:10Z
+last_built: 2021-01-25T09:15Z
 urls:
   reference: https://InseeFr.github.io/R-Insee-Data//reference
   article: https://InseeFr.github.io/R-Insee-Data//articles
