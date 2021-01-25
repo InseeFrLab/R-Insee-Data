@@ -63,12 +63,16 @@ get_insee = function(link, step = "1/1"){
     }
 
     if(use_read_sdmx_fast){
-      data_final = read_sdmx_fast(link, step)
+      data_final = try(read_sdmx_fast(link, step), silent = TRUE)
     }
 
     # read_sdmx_slow is used as a backup solution in case read_sdmx_fast is not working
     if(use_read_sdmx_fast == TRUE){
-      if(is.null(data_final)){
+      if(!"try-error" %in% class(data_final)){
+        if(is.null(data_final)){
+          use_read_sdmx_fast = FALSE
+        }
+      }else{
         use_read_sdmx_fast = FALSE
       }
     }
@@ -78,6 +82,27 @@ get_insee = function(link, step = "1/1"){
     }
 
     if(!is.null(data_final)){
+
+      colnames_order = c("DATE", "TIME_PERIOD", "OBS_VALUE", "OBS_STATUS", "OBS_QUAL", "OBS_TYPE",
+                         "IDBANK", "FREQ", "TITLE_FR", "TITLE_EN", "LAST_UPDATE", "UNIT_MEASURE",
+                         "UNIT_MULT", "REF_AREA", "DECIMALS")
+
+      vect_col_common = which(colnames_order %in% names(data_final))
+
+      if(length(vect_col_common) > 0){
+        colnames_order = colnames_order[vect_col_common]
+      }else{
+        colnames_order = names(data_final)
+      }
+
+      other_columns_id = which(!names(data_final) %in% colnames_order)
+      if(length(other_columns_id) > 0){
+        colnames_order = c(colnames_order, sort(names(data)[other_columns_id]))
+      }
+
+      data_final = dplyr::select(.data = data_final, tidyselect::all_of(colnames_order))
+
+      colnames(data_final) = gsub("\\.|-", "_", colnames(data_final))
 
       saveRDS(data_final, file = file_cache)
 

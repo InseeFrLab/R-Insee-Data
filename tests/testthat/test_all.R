@@ -135,6 +135,12 @@ test_that("output tests",{
   expect_is(read_sdmx_slow(link), "NULL")
   expect_is(read_sdmx_fast(""), "NULL")
 
+  # columns same and fixed order
+  link = "https://bdm.insee.fr/series/sdmx/data/CLIMAT-AFFAIRES"
+  df_slow = read_sdmx_slow(link)
+  df_fast = read_sdmx_fast(link)
+  expect_equal(all(names(df_slow) == names(df_fast)), TRUE)
+
   expect_warning(clean_insee_folder(), regexp = NA)
   expect_equal('data.frame' %in% class(get_dimension_values('CL_NATURE', 'NATURE', name = TRUE)), TRUE)
 
