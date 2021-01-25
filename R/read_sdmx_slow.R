@@ -170,7 +170,9 @@ read_sdmx_slow = function(link, step = "1/1"){
 
       data_final = dplyr::bind_rows(list_df)
 
-      data_final = set_data_col(data_final)
+      if(!dataflow_dwn){
+        data_final = set_data_col(data_final)
+      }
 
       # if("DATE" %in% names(data_final)){
       #   col_names_ordered = c("DATE", names(data_final)[which(names(data_final) != "DATE")])
