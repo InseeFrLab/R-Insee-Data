@@ -26,7 +26,7 @@ search_insee = function(pattern = '.*'){
   if(is.null(pattern)){pattern = '.*'}
   if(pattern == ''){pattern = '.*'}
 
-  dataset_list = get_dataset_list()
+  dataset_list = invisible(get_dataset_list())
 
   # create new french name column withtout accent
   dataset_list = dplyr::mutate(.data = dataset_list,
@@ -79,6 +79,18 @@ search_insee = function(pattern = '.*'){
 
   search_results = dplyr::select(.data = search_results,
                                  .data$nomflow, .data$id, .data$title_fr, .data$title_en)
+
+  file_warning_search_data = file.path(tempdir(), paste0(openssl::md5("search_data"), ".rds"))
+
+  if(!file.exists(file_warning_search_data)){
+    msg1 = "\nInternal package data has been used, it may not be the most up-to-date data"
+    msg2 = "This message is displayed once per R session"
+    msg = sprintf("%s\n%s\n", msg1, msg2)
+
+    message(crayon::style(msg, "red"))
+    save(msg, file = file_warning_search_data)
+  }
+
   return(search_results)
 }
 
