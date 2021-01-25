@@ -38,6 +38,11 @@ read_dataset_metadata = function(dataset, dataset_metadata_file_cache){
         return(idbank_list)
 
       }else{
+
+        missing_dataset_metadata = paste0(dataset[!file.exists(sub_dataset_metadata_file)], collapse = " ")
+        msg = "\nMetadata is missing for the following datasets : "
+        message(crayon::style(sprintf("%s %s", msg, missing_dataset_metadata), "red"))
+
         return(TRUE)
       }
     }
