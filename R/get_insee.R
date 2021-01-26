@@ -48,7 +48,7 @@ get_insee = function(link, step = "1/1"){
       saveRDS(data_final, file = file_cache)
 
       if(insee_download_verbose){
-        msg = sprintf("Data cached : %s\n", file_cache)
+        msg = sprintf("\nData cached : %s\n", file_cache)
 
         message(crayon::style(msg, "green"))
       }
