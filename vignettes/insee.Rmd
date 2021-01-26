@@ -145,6 +145,19 @@ idbank_list_selected =
 
 ```
 
+Another way to find a series key is to perform a keyword-based search with the function <code>search_insee</code>. Beware that this function uses package internal data which might not be the most up-to-date. See the following examples :
+
+```{r message=FALSE, warning=FALSE,eval=FALSE}
+# search multiple patterns
+dataset_survey_gdp = search_insee("Survey|gdp")
+
+# data about paris
+data_paris = search_insee('paris')
+
+# all data
+data_all = search_insee()
+```
+
 ## Download data
 
 ### Download using a list of idbanks
