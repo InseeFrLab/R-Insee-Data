@@ -110,7 +110,14 @@ get_idbank_list = function(
     }
 
   }else{
-    msg = "\nMetadata date file is missing"
+    list_file_insee_local_dir = list.files(insee_local_dir)
+
+    if(length(list_file_insee_local_dir) > 1){
+      msg = "\nMetadata date file is missing"
+    }else{
+      msg = "\nMetadata files are missing"
+    }
+
     message(crayon::style(sprintf("%s", msg), "red"))
 
     update = TRUE
