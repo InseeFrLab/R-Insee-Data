@@ -15,6 +15,7 @@ test_that("class tests",{
   expect_equal(any(class(get_idbank_list("CLIMAT-AFFAIRES")) == 'data.frame'), TRUE)
   Sys.setenv(INSEE_idbank_dataset_path = INSEE_idbank_dataset_path)
 
+  expect_equal(any(class(get_idbank_list("CLIMAT-AFFAIRES")) == 'data.frame'), TRUE)
   expect_equal(any(class(get_idbank_list(update = TRUE)) == 'data.frame'), TRUE)
   expect_equal(any(class(get_idbank_list()) == 'data.frame'), TRUE)
 
