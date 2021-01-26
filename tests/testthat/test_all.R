@@ -137,7 +137,7 @@ test_that("output tests",{
   Sys.setenv("INSEE_download_verbose" = "FALSE")
   link = "https://bdm.insee.fr/series/sdmx/data/IPC-2015"
 
-  expect_is(get_insee(link), "NULL")
+  expect_is(get_insee_dataset("IPC-2015"), "NULL")
   expect_is(read_sdmx_slow(link), "NULL")
   expect_is(read_sdmx_fast(""), "NULL")
 

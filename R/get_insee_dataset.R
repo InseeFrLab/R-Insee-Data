@@ -91,7 +91,7 @@ get_insee_dataset <- function(dataset,
 
           if(length(list_query) > 0){
 
-            loc_slash = str_locate_all(list_query, "\\/")
+            loc_slash = stringr::str_locate_all(list_query, "\\/")
 
             loc_slash_vec = unlist(lapply(1:length(loc_slash),
                                           function(i){
