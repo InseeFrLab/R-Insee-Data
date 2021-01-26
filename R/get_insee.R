@@ -8,8 +8,6 @@
 #' Sys.setenv(INSEE_download_verbose = "FALSE")
 #' The use of cached data can be disabled with : Sys.setenv(INSEE_no_cache_use = "TRUE")
 #' All queries are printed in the console with this command: Sys.setenv(INSEE_print_query = "TRUE").
-#' The RapidXML C++ library is used optionally thanks to the readsdmx package if it is installed.
-#' The previous parser can still be used with this command : Sys.setenv(INSEE_read_sdmx_slow = "TRUE")
 #' @param link SDMX query link
 #' @param step argument used only for internal package purposes to tweak download display
 #' @return a tibble containing the data
@@ -31,7 +29,6 @@ get_insee = function(link, step = "1/1"){
   insee_value_as_numeric = if(Sys.getenv("INSEE_value_as_numeric") == "TRUE"){TRUE}else{FALSE}
   insee_print_query = if(Sys.getenv("INSEE_print_query") == "TRUE"){TRUE}else{FALSE}
   insee_no_cache_use = if(Sys.getenv("INSEE_no_cache_use") == "TRUE"){TRUE}else{FALSE}
-  insee_read_sdmx_slow = if(Sys.getenv("INSEE_read_sdmx_slow") == "TRUE"){TRUE}else{FALSE}
 
   if(insee_download_verbose){
     if(insee_print_query == TRUE) {
@@ -44,53 +41,14 @@ get_insee = function(link, step = "1/1"){
 
   if((!file.exists(file_cache)) | insee_no_cache_use){
 
-    use_read_sdmx_fast = TRUE
-
-    if(insee_read_sdmx_slow){
-      use_read_sdmx_fast = FALSE
-    }
-
-    if(stringr::str_detect(link, "includeHistory")){
-      use_read_sdmx_fast = FALSE
-    }
-
-    if(link == Sys.getenv("INSEE_sdmx_link_dataflow")){
-      use_read_sdmx_fast = FALSE
-    }
-
-    if(!requireNamespace("readsdmx", quietly = TRUE)){
-      use_read_sdmx_fast = FALSE
-    }
-
-    if(use_read_sdmx_fast){
-      data_final = try(read_sdmx_fast(link, step), silent = TRUE)
-    }
-
-    # read_sdmx_slow is used as a backup solution in case read_sdmx_fast is not working
-    if(use_read_sdmx_fast == TRUE){
-      if(!"try-error" %in% class(data_final)){
-        if(is.null(data_final)){
-          use_read_sdmx_fast = FALSE
-        }
-      }else{
-        use_read_sdmx_fast = FALSE
-      }
-    }
-
-    if(use_read_sdmx_fast == FALSE){
-      data_final = read_sdmx_slow(link, step)
-    }
+    data_final = read_sdmx_slow(link, step)
 
     if(!is.null(data_final)){
 
       saveRDS(data_final, file = file_cache)
 
       if(insee_download_verbose){
-        if(use_read_sdmx_fast){
-          msg = sprintf("Data cached : %s\n", file_cache)
-        }else{
-          msg = sprintf("\nData cached : %s\n", file_cache)
-        }
+        msg = sprintf("Data cached : %s\n", file_cache)
 
         message(crayon::style(msg, "green"))
       }

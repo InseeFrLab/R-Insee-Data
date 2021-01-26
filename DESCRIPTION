@@ -28,7 +28,6 @@ Imports:
   openssl,
   rappdirs
 Suggests:
-    readsdmx,
     tidyverse,
     prettydoc,
     htmltools,
