@@ -117,7 +117,6 @@ test_that("output tests",{
                    updatedAfter = "2017-07-11T08:45:00")), TRUE)
 
   Sys.setenv("INSEE_download_verbose" = "TRUE")
-  Sys.setenv("INSEE_read_sdmx_slow"= "TRUE")
   Sys.setenv("INSEE_no_cache_use" = "TRUE")
 
   expect_equal(ncol(get_insee_idbank("001769682") %>% add_insee_metadata())
@@ -139,13 +138,6 @@ test_that("output tests",{
 
   expect_is(get_insee_dataset("IPC-2015"), "NULL")
   expect_is(read_sdmx_slow(link), "NULL")
-  expect_is(read_sdmx_fast(""), "NULL")
-
-  # columns name and fixed order
-  link = "https://bdm.insee.fr/series/sdmx/data/CLIMAT-AFFAIRES"
-  df_slow = read_sdmx_slow(link)
-  df_fast = read_sdmx_fast(link)
-  expect_equal(all(names(df_slow) == names(df_fast)), TRUE)
 
   expect_warning(clean_insee_folder(), regexp = NA)
   expect_equal(read_dataset_metadata("CLIMAT-AFFAIRES"), TRUE)

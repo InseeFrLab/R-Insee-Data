@@ -21,6 +21,5 @@
   Sys.setenv(INSEE_download_option_idbank_list = "wb")
   Sys.setenv(INSEE_no_cache_use = "FALSE")
   Sys.setenv(INSEE_print_query = "FALSE")
-  Sys.setenv(INSEE_read_sdmx_slow = "FALSE")
   Sys.setenv(INSEE_today_date = as.character(Sys.Date()))
 }

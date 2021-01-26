@@ -8,7 +8,7 @@
 * option to choose the separator with the `split_title` function
 * vignette : deaths and births example added
 * backup idbank list stored inside the package
-* readsdmx optional, removed as a dependency
+* readsdmx removed as a dependency
 * package now officially supported by INSEE, source code and issue reports are moved to INSEE's official GitHub page
 
 # insee 0.9.0
