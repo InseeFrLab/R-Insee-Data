@@ -139,10 +139,11 @@ test_that("output tests",{
   Sys.setenv("INSEE_download_verbose" = "FALSE")
   link = "https://bdm.insee.fr/series/sdmx/data/IPC-2015"
 
+  expect_is(get_insee(link), "NULL")
   expect_is(read_sdmx_slow(link), "NULL")
   expect_is(read_sdmx_fast(""), "NULL")
 
-  # columns same and fixed order
+  # columns name and fixed order
   link = "https://bdm.insee.fr/series/sdmx/data/CLIMAT-AFFAIRES"
   df_slow = read_sdmx_slow(link)
   df_fast = read_sdmx_fast(link)

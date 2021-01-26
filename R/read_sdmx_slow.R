@@ -180,8 +180,10 @@ read_sdmx_slow = function(link, step = "1/1"){
       # }
 
     }else{
-      warning("The query might be either too big or wrongly done, try to modify it, use filter argument if necessary")
-      warning(data[[1]][[1]][["Text"]][[1]])
+      # warning("The query might be either too big or wrongly done, try to modify it, use filter argument if necessary")
+      # warning(data[[1]][[1]][["Text"]][[1]])
+      warning("Wrong query")
+
       data_final = NULL
     }
   }else{

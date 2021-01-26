@@ -81,6 +81,55 @@ get_insee = function(link, step = "1/1"){
       data_final = read_sdmx_slow(link, step)
     }
 
+    if(is.null(data_final)){
+      if(!stringr::str_detect(link, "SERIES_BDM")){
+
+        response <- httr::GET(link)
+
+        response_content = try(httr::content(response, encoding = "UTF-8"), silent = TRUE)
+
+        if(!"try-error" %in% class(response_content)){
+
+          content_list = xml2::as_list(response_content)
+          content_query = content_list$Error$ErrorMessage
+
+          if(!is.null(content_query)){
+            lgt = length(content_query)
+
+            list_query = unlist(lapply(1:lgt,
+                                       function(i){content_query[[i]][1]}))
+
+            list_query = list_query[stringr::str_detect(list_query, "bdm.insee.fr")]
+
+            if(length(list_query) > 0){
+
+              loc_slash = str_locate_all(list_query, "\\/")
+
+              loc_slash_vec = unlist(lapply(1:length(loc_slash),
+                                            function(i){
+                                              max(loc_slash[[i]])
+                                            }))
+
+              query_filter = unlist(lapply(1:length(list_query),
+                                           function(i){
+                                             substr(list_query[i], loc_slash_vec[i]+1, nchar(list_query[i]))
+                                           }))
+
+              query_filter = paste0(query_filter, collapse = "  ")
+
+              msg = sprintf("\nThe query is too big, please use the following filters : \n%s\n", query_filter)
+              message(crayon::style(msg, "red"))
+
+            }
+
+          }
+        }
+      }
+
+
+    }
+
+
     if(!is.null(data_final)){
 
       saveRDS(data_final, file = file_cache)
