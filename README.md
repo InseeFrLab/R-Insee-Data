@@ -137,6 +137,7 @@ library(rgdal)
 library(geosphere)
 library(broom)
 library(viridis)
+library(mapproj)
 
 dataset_list = get_dataset_list()
 
