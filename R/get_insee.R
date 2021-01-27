@@ -44,13 +44,29 @@ get_insee = function(link, step = "1/1"){
 
   if((!file.exists(file_cache)) | insee_no_cache_use){
 
+    use_read_sdmx_fast_first = insee_read_sdmx_fast
+    use_backup_parser = TRUE
+
+    if(stringr::str_detect(link, "includeHistory")){
+      use_backup_parser = FALSE
+      insee_read_sdmx_fast = FALSE
+    }
+
+    if(link == Sys.getenv("INSEE_sdmx_link_dataflow")){
+      use_backup_parser = FALSE
+      insee_read_sdmx_fast = FALSE
+    }
+
     # by default the internal parser is used, if it fails the readsdmx parser is used
-    if(!insee_read_sdmx_fast){
+    if(!use_read_sdmx_fast_first){
       data_final = read_sdmx_slow(link, step)
 
-      if(is.null(data_final)){
-        data_final = read_sdmx_fast(link, step)
+      if(use_backup_parser){
+        if(is.null(data_final)){
+          data_final = read_sdmx_fast(link, step)
+        }
       }
+
     }else{
       data_final = read_sdmx_fast(link, step)
 
