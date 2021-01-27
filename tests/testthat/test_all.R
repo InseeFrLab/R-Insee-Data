@@ -31,14 +31,18 @@ test_that("class tests",{
 
   expect_equal(any(class(get_dataset_list()) == 'data.frame'), TRUE)
 
+  expect_equal(any(class(get_last_release()) == 'data.frame'), TRUE)
+  expect_equal(any(class(get_last_release()) == 'data.frame'), TRUE)
+
   Sys.setenv(INSEE_print_query = "TRUE")
   insee_link = "http://www.bdm.insee.fr/series/sdmx/data/SERIES_BDM"
   insee_query = file.path(insee_link, paste0(idbank_test1,"?", "firstNObservations=1"))
 
-  expect_equal(any(class(get_last_release()) == 'data.frame'), TRUE)
-  expect_equal(any(class(get_last_release()) == 'data.frame'), TRUE)
-
+  # test readsdmx parser
+  Sys.setenv(INSEE_read_sdmx_fast = "TRUE")
   expect_equal(any(class(get_insee(insee_query)) == 'data.frame'), TRUE)
+  Sys.setenv(INSEE_read_sdmx_fast = "FALSE")
+
   expect_is(get_insee(), "NULL")
   expect_is(get_insee(""), "NULL")
 
@@ -139,6 +143,7 @@ test_that("output tests",{
 
   expect_is(get_insee_dataset("IPC-2015"), "NULL")
   expect_is(read_sdmx_slow(link), "NULL")
+  expect_is(read_sdmx_fast(link), "NULL")
 
   expect_warning(clean_insee_folder(), regexp = NA)
   expect_equal(read_dataset_metadata("CLIMAT-AFFAIRES"), TRUE)

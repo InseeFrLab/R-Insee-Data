@@ -26,7 +26,8 @@ Imports:
   purrr,
   crayon,
   openssl,
-  rappdirs
+  rappdirs,
+  readsdmx
 Suggests:
     tidyverse,
     prettydoc,
