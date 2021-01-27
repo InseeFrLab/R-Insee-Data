@@ -70,9 +70,12 @@ get_insee = function(link, step = "1/1"){
     }else{
       data_final = read_sdmx_fast(link, step)
 
-      if(is.null(data_final)){
-        data_final = read_sdmx_slow(link, step)
+      if(use_backup_parser){
+        if(is.null(data_final)){
+          data_final = read_sdmx_slow(link, step)
+        }
       }
+
     }
 
     if(!is.null(data_final)){
