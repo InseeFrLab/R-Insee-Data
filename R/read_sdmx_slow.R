@@ -6,19 +6,8 @@ read_sdmx_slow = function(link, step = "1/1"){
 
   response = try(httr::GET(link), silent = TRUE)
 
-  # if(insee_download_verbose){
-
-    # msg = sprintf("%s - Data download :", step)
-    # message(crayon::style(msg, "black"))
-
-    # response = try(httr::GET(link, httr::progress()), silent = TRUE)
-
-  # }else{
-    # response = try(httr::GET(link), silent = TRUE)
-  # }
-
   if("try-error" %in% class(response)){
-    warning("Wrong query")
+    # warning("Wrong query")
     return(NULL)
   }
 
@@ -174,21 +163,16 @@ read_sdmx_slow = function(link, step = "1/1"){
         data_final = set_data_col(data_final)
       }
 
-      # if("DATE" %in% names(data_final)){
-      #   col_names_ordered = c("DATE", names(data_final)[which(names(data_final) != "DATE")])
-      #   data_final = dplyr::select(.data = data_final, tidyselect::all_of(col_names_ordered))
-      # }
-
     }else{
       # warning("The query might be either too big or wrongly done, try to modify it, use filter argument if necessary")
       # warning(data[[1]][[1]][["Text"]][[1]])
-      warning("Wrong query")
+      # warning("Wrong query")
 
       data_final = NULL
     }
   }else{
-    print(response)
-    stop("Wrong query")
+    # print(response)
+    # stop("Wrong query")
   }
   return(data_final)
 }
