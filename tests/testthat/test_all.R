@@ -108,7 +108,8 @@ test_that("output tests",{
   expect_is(get_insee_idbank(idbank_test1201, firstNObservations = 1), "NULL")
   expect_message(get_insee_idbank(idbank_test1201, firstNObservations = 1))
 
-  expect_equal(nrow(get_insee_idbank("001769682")) < nrow(get_insee_idbank("001769682", includeHistory = TRUE)), TRUE)
+  expect_equal(nrow(get_insee_idbank("001769682")) <
+                 nrow(get_insee_idbank("001769682", includeHistory = TRUE)), TRUE)
 
   expect_equal(nrow(get_insee_dataset("IPC-2015", filter = "M......ENSEMBLE...CVS.2015")) <
                  nrow(get_insee_dataset(
