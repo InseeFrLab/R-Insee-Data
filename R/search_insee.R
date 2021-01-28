@@ -26,7 +26,7 @@ search_insee = function(pattern = '.*'){
   if(is.null(pattern)){pattern = '.*'}
   if(pattern == ''){pattern = '.*'}
 
-  dataset_list = invisible(get_dataset_list())
+  dataset_list = suppressMessages(get_dataset_list())
 
   # create new french name column withtout accent
   dataset_list = dplyr::mutate(.data = dataset_list,

@@ -14,7 +14,7 @@ get_column_title = function(dataset = NULL){
   if(!is.null(dataset)){
     dataset_dimension = get_dataset_dimension(dataset = dataset)
   }else{
-    list_dataset = as.character(get_dataset_list()$id)
+    list_dataset = as.character(suppressMessages(get_dataset_list()$id))
 
     df_dataset_dimension = dplyr::bind_rows(
       lapply(1:length(list_dataset),

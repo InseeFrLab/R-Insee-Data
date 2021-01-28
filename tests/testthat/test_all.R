@@ -66,6 +66,8 @@ test_that("class tests",{
   expect_is(get_date("2010-05", "M"), "Date")
 
   expect_is(search_insee("gdp|Paris"), "data.frame")
+  expect_is(search_insee(""), "data.frame")
+  expect_is(search_insee(NULL), "data.frame")
 
   Sys.setenv("INSEE_download_option_idbank_list" = "a")
   expect_is(download_idbank_list(label = TRUE), "data.frame")
