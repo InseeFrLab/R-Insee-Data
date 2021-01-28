@@ -49,6 +49,8 @@ read_dataset_metadata = function(dataset, dataset_metadata_file_cache){
   }else{
 
     idbank_list = readRDS(dataset_metadata_file_cache)
+    message(crayon::style("Cached data has been used", "green"))
+
     return(idbank_list)
 
   }

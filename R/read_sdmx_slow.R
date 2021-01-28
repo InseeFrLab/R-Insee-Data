@@ -155,6 +155,13 @@ read_sdmx_slow = function(link, step = "1/1"){
             }
           }
         }
+
+        if(insee_download_verbose){
+          if(n_series_tot > 1){
+            message(crayon::style("", "black"))
+          }
+        }
+
       }
 
       data_final = dplyr::bind_rows(list_df)

@@ -72,7 +72,7 @@ get_idbank_list = function(
     dataset_metadata_file_cache = metadata_file_cache
   }
 
-  dataset_list = invisible(get_dataset_list()$id)
+  dataset_list = suppressMessages(get_dataset_list()$id)
 
   if(!is.null(dataset_list)){
     if("SERIES_BDM" %in% dataset_list){
@@ -154,7 +154,7 @@ get_idbank_list = function(
         # msg1 = sprintf("Metadata update has been triggered automatically%s", msg1bis)
         msg1 = "Metadata update has been triggered automatically"
       }else{
-        msg1 = "Metadata update has been triggered manually"
+        msg1 = "\nMetadata update has been triggered manually"
       }
 
       msg2 = "\nIt may last several minutes"
@@ -194,8 +194,10 @@ get_idbank_list = function(
 
     }
 
-  idbank_list = read_dataset_metadata(dataset = dataset,
-                                      dataset_metadata_file_cache = dataset_metadata_file_cache)
+  idbank_list = suppressMessages(
+    read_dataset_metadata(dataset = dataset,
+                          dataset_metadata_file_cache = dataset_metadata_file_cache)
+  )
 
   idbank_list = tibble::as_tibble(idbank_list)
 
