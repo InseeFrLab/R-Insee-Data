@@ -48,6 +48,7 @@ test_that("class tests",{
 
   expect_is(get_insee_idbank(idbank_test1), "data.frame")
   expect_is(get_insee_idbank(), "NULL")
+  expect_is(get_insee_idbank(character(0)), "NULL")
 
   expect_is(get_insee_dataset(), "NULL")
   expect_is(get_insee_dataset("CNA-2014-CPEB",

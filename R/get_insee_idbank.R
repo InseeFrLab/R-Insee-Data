@@ -85,6 +85,12 @@ get_insee_idbank <- function(...,
   list_idbank = unique(list_idbank)
   n_idbank = length(list_idbank)
 
+  if(n_idbank == 0){
+    msg = "Error : idbank missing"
+    message(crayon::style(msg, "red"))
+    return(NULL)
+  }
+
   if(n_idbank > insee_get_idbank_limit & limit){
     msg1 = sprintf("By default, this function has a %s-idbank limit.", insee_get_idbank_limit)
     msg2 = "Please set limit argument to FALSE to ignore the limit."
