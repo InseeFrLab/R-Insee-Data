@@ -26,8 +26,7 @@ Imports:
   crayon,
   openssl,
   rappdirs,
-  readsdmx,
-  rmarkdown
+  readsdmx
 Suggests:
     tidyverse,
     prettydoc,
