@@ -45,7 +45,7 @@ library(prettydoc)
 
 ```{r message = FALSE, warning=FALSE, eval = FALSE}
 # please download the Github version
-# devtools::install_github("hadrilec/insee")
+# devtools::install_github("InseeFr/R-Insee-Data")
 library(tidyverse)
 library(lubridate)
 library(insee)
