@@ -1,3 +1,10 @@
+# insee 1.1.0
+
+* cached data no longer stored in the folder coming from tempdir function
+* numeric data only stored for 2 hours
+* dim columns whose usage was previously deprecated are removed from idbank list dataframe 
+* DESCRIPTION : LazyData is FALSE
+
 # insee 1.0.0
 
 * if dataset names are provided, get clean metadata with `get_idbank_list` (code breaks likely). The metadata is then stored locally on the computer. The update is automatically done every 3 months, and can be manually triggered
