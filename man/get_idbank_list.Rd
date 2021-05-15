@@ -21,7 +21,7 @@ a tibble the idbank dataset
 Download a full INSEE's series key list
 }
 \details{
-Download a mapping dataset betwen INSEE series keys (idbank) and SDMX series names.
+Download a mapping dataset between INSEE series keys (idbank) and SDMX series names.
 Under the hood the get_idbank_list uses download.file function from utils, the user can change the mode argument with the following
 command : Sys.getenv(INSEE_download_option_idbank_list = "wb")
 If INSEE makes an update, the user can also change the zip file downloaded, the data file contained in the zip and data the separator  :
