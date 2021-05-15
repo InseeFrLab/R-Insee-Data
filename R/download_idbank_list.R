@@ -5,8 +5,10 @@ download_idbank_list = function(dataset = NULL, label = FALSE){
 
   if(!"try-error" %in% class(dir_creation_fail)){
     insee_local_dir = rappdirs::user_data_dir("insee")
+    insee_data_dir = file.path(rappdirs::user_data_dir("insee"), "data")
   }else{
     insee_local_dir = tempdir()
+    insee_data_dir = tempdir()
   }
 
   # insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
@@ -20,9 +22,8 @@ download_idbank_list = function(dataset = NULL, label = FALSE){
   if(is.na(idbank_nchar)){idbank_nchar = 9}
 
   temp_file = tempfile()
-  temp_dir = tempdir()
 
- idbank_list_file_cache = file.path(temp_dir,
+  idbank_list_file_cache = file.path(insee_data_dir,
                                  paste0(openssl::md5(file_to_dwn), ".rds"))
 
  if(!file.exists(idbank_list_file_cache)){
@@ -30,9 +31,9 @@ download_idbank_list = function(dataset = NULL, label = FALSE){
    dwn = utils::download.file(file_to_dwn, temp_file,
                               mode = insee_download_option_idbank_list, quiet = TRUE)
 
-   uzp = utils::unzip(temp_file, exdir = temp_dir)
+   uzp = utils::unzip(temp_file, exdir = insee_data_dir)
 
-   mapping_file = file.path(temp_dir, list.files(temp_dir, pattern = mapping_file_pattern)[1])
+   mapping_file = file.path(insee_data_dir, list.files(insee_data_dir, pattern = mapping_file_pattern)[1])
    # load data
    mapping = utils::read.delim(mapping_file, sep = mapping_file_sep,
                                stringsAsFactors = F)

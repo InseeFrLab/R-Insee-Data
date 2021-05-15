@@ -7,7 +7,7 @@ library(lubridate)
 test_that("class tests",{
   skip_on_cran()
 
-  expect_warning(create_insee_folder(), regexp = NA)
+  expect_warning(insee:::create_insee_folder(), regexp = NA)
   expect_warning(insee:::.onLoad(), regexp = NA)
 
   Sys.setenv(INSEE_idbank_dataset_path = "https://www.insee.fr/en/statistiques/fichier/fake_file.zip")
@@ -88,8 +88,8 @@ test_that("class tests",{
 test_that("output tests",{
   skip_on_cran()
 
-  expect_equal(if_null_na(NULL), NA)
-  expect_equal(if_null_na(1), 1)
+  expect_equal(insee:::if_null_na(NULL), NA)
+  expect_equal(insee:::if_null_na(1), 1)
 
   idbank_test1 = get_idbank_list() %>% slice(1) %>% pull(idbank)
   idbank_test401 = get_idbank_list() %>% slice(1:401) %>% pull(idbank)
