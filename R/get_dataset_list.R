@@ -15,6 +15,13 @@ get_dataset_list = function(){
     df = dplyr::filter(.data = df, !is.na(.data$Name.fr))
   }
 
+  # delete SERIES_BDM from dataset list
+  dataset_list = df$id
+
+  if("SERIES_BDM" %in% dataset_list){
+    df = df[-which(df$id == "SERIES_BDM"),]
+  }
+
   # df = tibble::as_tibble(df)
 
   return(df)
