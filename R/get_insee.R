@@ -88,13 +88,16 @@ get_insee = function(link, step = "1/1"){
 
     if(!is.null(data_final)){
 
-      saveRDS(data_final, file = file_cache)
+      s = try(saveRDS(data_final, file = file_cache), silent = TRUE)
 
-      if(insee_download_verbose){
-        msg = sprintf("Data cached : %s\n", file_cache)
+      if(class(s) != "try-error"){
+        if(insee_download_verbose){
+          msg = sprintf("Data cached : %s\n", file_cache)
 
-        message(crayon::style(msg, "green"))
+          message(crayon::style(msg, "green"))
+        }
       }
+
     }else{
       msg = "An error occurred"
       message(crayon::style(msg, "red"))

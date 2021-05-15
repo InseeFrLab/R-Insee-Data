@@ -22,8 +22,8 @@ test_that("class tests",{
   expect_equal(any(class(get_idbank_list()) == 'data.frame'), TRUE)
   Sys.setenv("INSEE_today_date" = as.character(lubridate::today()))
 
-  idbank_test1 = get_idbank_list() %>% slice(1) %>% pull(idbank)
-  idbank_test2 = get_idbank_list() %>% slice(2) %>% pull(idbank)
+  idbank_test1 = "001694056"
+  idbank_test2 = "001694057"
 
   expect_equal(any(class(get_idbank_list("CNA-2014-CPEB")) == 'data.frame'), TRUE)
   expect_equal(any(class(get_idbank_list("BALANCE-PAIEMENTS", "CNA-2014-CPEB",
