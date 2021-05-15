@@ -174,20 +174,17 @@ The function ignores accents and cases.</p>
 <span class='co'># example 1 : search one pattern, the accents do not matter</span>
 <span class='fu'><a href='https://rdrr.io/r/base/writeLines.html'>writeLines</a></span><span class='op'>(</span><span class='st'>"the word 'enqu\U00EAte' (meaning survey in French) will match with 'enquete'"</span><span class='op'>)</span>
 </div><div class='output co'>#&gt; the word 'enquête' (meaning survey in French) will match with 'enquete'</div><div class='input'><span class='va'>dataset_enquete</span> <span class='op'>=</span> <span class='fu'>search_insee</span><span class='op'>(</span><span class='st'>"enquete"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'><span style='color: #BB0000;'></span>
-#&gt; <span class='message'>Internal package data has been used, it may not be the most up-to-date data</span>
-#&gt; <span class='message'>This message is displayed once per R session</span>
-#&gt; <span class='message'></span><span></span></div><div class='input'>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: cannot open compressed file '/Users/runner/Library/Application Support/insee/data/6bce20f8021f2b83467819f1e4f74d9f.rds', probable reason 'No such file or directory'</span></div><div class='output co'>#&gt; <span class='error'>Error in gzfile(file, mode): cannot open the connection</span></div><div class='input'>
 <span class='co'># example 2 : search multiple patterns</span>
 <span class='va'>dataset_survey_gdp</span> <span class='op'>=</span> <span class='fu'>search_insee</span><span class='op'>(</span><span class='st'>"Survey|gdp"</span><span class='op'>)</span>
-
+</div><div class='output co'>#&gt; <span class='warning'>Warning: cannot open compressed file '/Users/runner/Library/Application Support/insee/data/6bce20f8021f2b83467819f1e4f74d9f.rds', probable reason 'No such file or directory'</span></div><div class='output co'>#&gt; <span class='error'>Error in gzfile(file, mode): cannot open the connection</span></div><div class='input'>
 <span class='co'># example 3 : data about paris</span>
 <span class='va'>data_paris</span> <span class='op'>=</span> <span class='fu'>search_insee</span><span class='op'>(</span><span class='st'>'paris'</span><span class='op'>)</span>
-
+</div><div class='output co'>#&gt; <span class='warning'>Warning: cannot open compressed file '/Users/runner/Library/Application Support/insee/data/6bce20f8021f2b83467819f1e4f74d9f.rds', probable reason 'No such file or directory'</span></div><div class='output co'>#&gt; <span class='error'>Error in gzfile(file, mode): cannot open the connection</span></div><div class='input'>
 <span class='co'># example 4 : all data</span>
 <span class='va'>data_all</span> <span class='op'>=</span> <span class='fu'>search_insee</span><span class='op'>(</span><span class='op'>)</span>
-<span class='co'># }</span>
-</div></span></pre>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: cannot open compressed file '/Users/runner/Library/Application Support/insee/data/6bce20f8021f2b83467819f1e4f74d9f.rds', probable reason 'No such file or directory'</span></div><div class='output co'>#&gt; <span class='error'>Error in gzfile(file, mode): cannot open the connection</span></div><div class='input'><span class='co'># }</span>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
