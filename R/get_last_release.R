@@ -11,13 +11,15 @@ get_last_release = function(){
 
   insee_last_release_link = Sys.getenv("INSEE_last_release_link")
 
-  dir_creation_fail = try(create_insee_folder(), silent = TRUE)
+  # dir_creation_fail = try(create_insee_folder(), silent = TRUE)
+  #
+  # if(!"try-error" %in% class(dir_creation_fail)){
+  #   insee_data_dir = file.path(rappdirs::user_data_dir("insee"), "data")
+  # }else{
+  #   insee_data_dir = tempdir()
+  # }
 
-  if(!"try-error" %in% class(dir_creation_fail)){
-    insee_data_dir = file.path(rappdirs::user_data_dir("insee"), "data")
-  }else{
-    insee_data_dir = tempdir()
-  }
+  insee_data_dir = tempdir()
 
   file_cache = file.path(insee_data_dir, paste0(openssl::md5(insee_last_release_link), ".rds"))
 
