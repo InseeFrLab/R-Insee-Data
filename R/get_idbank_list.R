@@ -95,18 +95,27 @@ get_idbank_list = function(
   # Check when was the last metadata update, update triggered if the metadata is older than 6 months
   #
 
-  auto = FALSE
+  # auto = FALSE
 
   if(file.exists(metadata_file_cache_date)){
 
     date_last_update = readRDS(metadata_file_cache_date)
 
     if(difftime(insee_today_date, date_last_update, units = "days") > 90){
-      update = TRUE
-      auto = TRUE
 
       msg = "\nMetadata is older than 3 months"
       message(crayon::style(sprintf("%s", msg), "red"))
+
+      user_answer <- as.character(readline(prompt="Do you want to update all metadata ? [y/n]"))
+
+      if (substr(user_answer, 1, 1) != "n"){
+        update = TRUE
+        # auto = TRUE
+      }else{
+        update = FALSE
+        # auto = FALSE
+      }
+
     }
 
   }else{
@@ -120,8 +129,15 @@ get_idbank_list = function(
 
     message(crayon::style(sprintf("%s", msg), "red"))
 
-    update = TRUE
-    auto = TRUE
+    user_answer <- as.character(readline(prompt="Do you want to update all metadata ? [y/n]"))
+
+    if (substr(user_answer, 1, 1) != "n"){
+      update = TRUE
+      # auto = TRUE
+    }else{
+      update = FALSE
+      # auto = FALSE
+    }
   }
 
   #
@@ -135,7 +151,7 @@ get_idbank_list = function(
                                         dataset_metadata_file_cache = dataset_metadata_file_cache)
     if(all(class(idbank_list) != "data.frame")){
       if(idbank_list == TRUE){
-        auto = TRUE
+        # auto = TRUE
         update = TRUE
       }
     }else{
@@ -145,17 +161,18 @@ get_idbank_list = function(
 
     if(!file.exists(metadata_file_cache)){
       update = TRUE
-      auto = TRUE
+      # auto = TRUE
     }
 
     if(update){
-      if(auto){
-        msg1bis = "\nEither because it is older than 3 months, or because some files are missing"
-        # msg1 = sprintf("Metadata update has been triggered automatically%s", msg1bis)
-        msg1 = "Metadata update has been triggered automatically"
-      }else{
-        msg1 = "\nMetadata update has been triggered manually"
-      }
+      # if(auto){
+      #   msg1bis = "\nEither because it is older than 3 months, or because some files are missing"
+      #   # msg1 = sprintf("Metadata update has been triggered automatically%s", msg1bis)
+      #   msg1 = "Metadata update has been triggered automatically"
+      # }else{
+      #   msg1 = "\nMetadata update has been triggered manually"
+      # }
+      msg1 = "\nMetadata update has been triggered"
 
       msg2 = "\nIt may last several minutes"
       message(crayon::style(sprintf("%s %s", msg1, msg2), "red"))
