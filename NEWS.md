@@ -1,7 +1,6 @@
 # insee 1.1.0
 
-* cached data no longer stored in the folder coming from tempdir function
-* numeric data only stored for 2 hours
+* metadata is updated if a file is missing or if it is outdated, but this step now requires the user's approval
 * dim columns whose usage was previously deprecated are removed from idbank list dataframe 
 * DESCRIPTION : LazyData is FALSE
 
