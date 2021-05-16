@@ -119,25 +119,28 @@ get_idbank_list = function(
     }
 
   }else{
-    list_file_insee_local_dir = list.files(insee_local_dir)
+    # list_file_insee_local_dir = list.files(insee_local_dir)
 
-    if(length(list_file_insee_local_dir) > 1){
-      msg = "\nMetadata date file is missing"
-    }else{
-      msg = "\nMetadata files are missing"
-    }
+    # if(length(list_file_insee_local_dir) > 1){
+    #   msg = "\nMetadata date file is missing"
+    # }else{
+    #   msg = "\nMetadata files are missing"
+    # }
+    msg = "\nMetadata files are missing"
 
     message(crayon::style(sprintf("%s", msg), "red"))
 
-    user_answer <- as.character(readline(prompt="Do you want to update all metadata ? [y/n]"))
+    update = TRUE
 
-    if (substr(user_answer, 1, 1) != "n"){
-      update = TRUE
-      # auto = TRUE
-    }else{
-      update = FALSE
-      # auto = FALSE
-    }
+    # user_answer <- as.character(readline(prompt="Do you want to update all metadata ? [y/n]"))
+    #
+    # if (substr(user_answer, 1, 1) != "n"){
+    #   update = TRUE
+    #   # auto = TRUE
+    # }else{
+    #   update = FALSE
+    #   # auto = FALSE
+    # }
   }
 
   #
