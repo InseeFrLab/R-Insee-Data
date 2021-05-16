@@ -158,5 +158,7 @@ test_that("output tests",{
   expect_equal(read_dataset_metadata("CLIMAT-AFFAIRES"), TRUE)
   expect_equal('data.frame' %in% class(get_dimension_values('CL_NATURE', 'NATURE', name = TRUE)), TRUE)
 
+  # delete all remaining files
+  clean_insee_folder()
 })
 
