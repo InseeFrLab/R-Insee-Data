@@ -4,8 +4,8 @@ download_idbank_list = function(dataset = NULL, label = FALSE){
   dir_creation_fail = try(create_insee_folder(), silent = TRUE)
 
   if(!"try-error" %in% class(dir_creation_fail)){
-    insee_local_dir = rappdirs::user_data_dir("insee")
-    insee_data_dir = file.path(rappdirs::user_data_dir("insee"), "data")
+    insee_local_dir = file.path(rappdirs::user_data_dir(), "R", "insee", "insee")
+    insee_data_dir = tempdir()
   }else{
     insee_local_dir = tempdir()
     insee_data_dir = tempdir()

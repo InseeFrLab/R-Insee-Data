@@ -40,14 +40,6 @@ get_insee = function(link, step = "1/1"){
     }
   }
 
-  # dir_creation_fail = try(create_insee_folder(), silent = TRUE)
-  #
-  # if(!"try-error" %in% class(dir_creation_fail)){
-  #   insee_data_dir = file.path(rappdirs::user_data_dir("insee"), "data")
-  # }else{
-  #   insee_data_dir = tempdir()
-  # }
-
   insee_data_dir = tempdir()
 
   file_cache = file.path(insee_data_dir, paste0(openssl::md5(link), ".rds"))
