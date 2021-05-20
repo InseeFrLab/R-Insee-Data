@@ -4,12 +4,12 @@ clean_insee_folder = function(){
   dir_creation_fail = try(create_insee_folder(), silent = TRUE)
 
   if(!"try-error" %in% class(dir_creation_fail)){
-    insee_local_dir = rappdirs::user_data_dir("insee")
+    insee_local_dir = file.path(rappdirs::user_data_dir(), "R", "insee", "insee")
   }else{
     insee_local_dir = tempdir()
   }
 
-  if(insee_local_dir == rappdirs::user_data_dir("insee")){
+  if(insee_local_dir == file.path(rappdirs::user_data_dir(), "R", "insee", "insee")){
 
     list_file_insee = file.path(insee_local_dir,
                                 list.files(insee_local_dir))
