@@ -50,18 +50,6 @@ get_idbank_list = function(
 
   metadata_file_cache_date = file.path(insee_local_dir, paste0(openssl::md5("insee_metadata_file_date"), ".rds"))
 
-  # file_warning_deprecated = file.path(tempdir(), paste0(openssl::md5("dimdeprecated"), ".rds"))
-  #
-  # if(!file.exists(file_warning_deprecated)){
-  #   msg1 = "\n!!! The use of dim columns is DEPRECATED"
-  #   msg2 = "!!! First, please use datasets' name as input of this function"
-  #   msg3 = "!!! Then, please use new columns' name instead as FREQ and INDICATEUR etc"
-  #   msg4 = "This message is displayed once per R session"
-  #   msg = sprintf("%s\n%s\n%s\n%s\n", msg1, msg2, msg3, msg4)
-  #   message(crayon::style(msg, "red"))
-  #   save(msg, file = file_warning_deprecated)
-  # }
-
   if(!is.null(dataset)){
     dataset_hash = paste0(dataset, collapse = "_")
 
@@ -119,28 +107,13 @@ get_idbank_list = function(
     }
 
   }else{
-    # list_file_insee_local_dir = list.files(insee_local_dir)
 
-    # if(length(list_file_insee_local_dir) > 1){
-    #   msg = "\nMetadata date file is missing"
-    # }else{
-    #   msg = "\nMetadata files are missing"
-    # }
     msg = "\nMetadata files are missing"
 
     message(crayon::style(sprintf("%s", msg), "red"))
 
     update = TRUE
 
-    # user_answer <- as.character(readline(prompt="Do you want to update all metadata ? [y/n]"))
-    #
-    # if (substr(user_answer, 1, 1) != "n"){
-    #   update = TRUE
-    #   # auto = TRUE
-    # }else{
-    #   update = FALSE
-    #   # auto = FALSE
-    # }
   }
 
   #
@@ -168,13 +141,7 @@ get_idbank_list = function(
     }
 
     if(update){
-      # if(auto){
-      #   msg1bis = "\nEither because it is older than 3 months, or because some files are missing"
-      #   # msg1 = sprintf("Metadata update has been triggered automatically%s", msg1bis)
-      #   msg1 = "Metadata update has been triggered automatically"
-      # }else{
-      #   msg1 = "\nMetadata update has been triggered manually"
-      # }
+
       msg1 = "\nMetadata update has been triggered"
 
       msg2 = "\nIt may last several minutes"
