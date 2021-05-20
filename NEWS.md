@@ -1,7 +1,7 @@
 # insee 1.1.0
 
 * metadata is updated if a file is missing or if it is outdated, but this step now requires the user's approval
-* dim columns whose usage was previously deprecated are removed from idbank list dataframe 
+* dim columns whose usage was previously deprecated are removed from idbank list dataframe (code breaks likely) 
 * DESCRIPTION : LazyData is FALSE
 
 # insee 1.0.0
