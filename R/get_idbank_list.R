@@ -205,8 +205,9 @@ get_idbank_list = function(
 
       }else{
 
+        today_date = as.character(lubridate::today())
         saveRDS(idbank_list, file = metadata_file_cache)
-        saveRDS(insee_today_date, file = metadata_file_cache_date)
+        saveRDS(today_date, file = metadata_file_cache_date)
 
         msg = sprintf("\nData cached : %s", metadata_file_cache)
         message(crayon::style(msg, "green"))
