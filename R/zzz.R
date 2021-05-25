@@ -23,4 +23,8 @@
   Sys.setenv(INSEE_print_query = "FALSE")
   Sys.setenv(INSEE_today_date = as.character(Sys.Date()))
   Sys.setenv(INSEE_read_sdmx_fast = "FALSE")
+
+  # if different from the default value, it makes an error in create_insee_folder function
+  # and all metadata files are stored in tempdir
+  Sys.setenv(INSEE_metadata_folder = "")
 }

@@ -7,6 +7,8 @@ library(lubridate)
 test_that("class tests",{
   skip_on_cran()
 
+  Sys.setenv(INSEE_metadata_folder = "tempdir")
+
   expect_warning(insee:::create_insee_folder(), regexp = NA)
   expect_warning(insee:::.onLoad(), regexp = NA)
 
@@ -154,11 +156,11 @@ test_that("output tests",{
   df_fast = read_sdmx_fast(link)
   expect_equal(all(names(df_slow) == names(df_fast)), TRUE)
 
-  expect_warning(clean_insee_folder(), regexp = NA)
+  # expect_warning(clean_insee_folder(), regexp = NA)
   expect_equal(read_dataset_metadata("CLIMAT-AFFAIRES"), TRUE)
   expect_equal('data.frame' %in% class(get_dimension_values('CL_NATURE', 'NATURE', name = TRUE)), TRUE)
 
   # delete all remaining files
-  clean_insee_folder()
+  # clean_insee_folder()
 })
 
