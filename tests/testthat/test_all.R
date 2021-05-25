@@ -7,10 +7,10 @@ library(lubridate)
 test_that("class tests",{
   skip_on_cran()
 
-  Sys.setenv(INSEE_metadata_folder = "tempdir")
-
   expect_warning(insee:::create_insee_folder(), regexp = NA)
   expect_warning(insee:::.onLoad(), regexp = NA)
+
+  Sys.setenv(INSEE_metadata_folder = "tempdir")
 
   Sys.setenv(INSEE_idbank_dataset_path = "https://www.insee.fr/en/statistiques/fichier/fake_file.zip")
   expect_equal(any(class(get_idbank_list("CLIMAT-AFFAIRES")) == 'data.frame'), TRUE)
