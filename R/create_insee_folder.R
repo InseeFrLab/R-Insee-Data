@@ -17,4 +17,9 @@ create_insee_folder = function(){
     saveRDS(test, file = test_file)
   }
 
+  if (Sys.getenv("INSEE_metadata_folder") != ""){
+    # Make error on purpose
+    a = 1 + "1"
+  }
+
 }
