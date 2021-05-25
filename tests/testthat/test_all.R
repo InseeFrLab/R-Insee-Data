@@ -7,8 +7,8 @@ library(lubridate)
 test_that("class tests",{
   skip_on_cran()
 
-  expect_warning(insee:::create_insee_folder(), regexp = NA)
   expect_warning(insee:::.onLoad(), regexp = NA)
+  expect_warning(insee:::create_insee_folder(), regexp = NA)
 
   Sys.setenv(INSEE_metadata_folder = "tempdir")
 
