@@ -157,7 +157,7 @@ test_that("output tests",{
   expect_equal(all(names(df_slow) == names(df_fast)), TRUE)
 
   # expect_warning(clean_insee_folder(), regexp = NA)
-  expect_equal(read_dataset_metadata("CLIMAT-AFFAIRES"), TRUE)
+  # expect_equal(read_dataset_metadata("CLIMAT-AFFAIRES"), TRUE)
   expect_equal('data.frame' %in% class(get_dimension_values('CL_NATURE', 'NATURE', name = TRUE)), TRUE)
 
   # delete all remaining files
