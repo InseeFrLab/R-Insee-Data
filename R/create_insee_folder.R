@@ -15,6 +15,9 @@ create_insee_folder = function(){
   if(!file.exists(test_file)){
     test = 1
     saveRDS(test, file = test_file)
+    if (file.exists(test_file)){
+      file.remove(test_file)
+    }
   }
 
   if (Sys.getenv("INSEE_metadata_folder") != ""){
