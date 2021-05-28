@@ -38,6 +38,9 @@ download_idbank_list = function(dataset = NULL, label = FALSE){
    mapping = utils::read.delim(mapping_file, sep = mapping_file_sep,
                                stringsAsFactors = F)
 
+   mapping = mapping[,c(1:3)]
+   names(mapping) = c("nomflow", "idbank", "cleFlow")
+
    saveRDS(mapping, file = idbank_list_file_cache)
  }else{
    mapping = readRDS(idbank_list_file_cache)

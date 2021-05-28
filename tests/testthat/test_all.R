@@ -14,7 +14,7 @@ test_that("class tests",{
 
   Sys.setenv(INSEE_idbank_dataset_path = "https://www.insee.fr/en/statistiques/fichier/fake_file.zip")
   expect_equal(any(class(get_idbank_list("CLIMAT-AFFAIRES")) == 'data.frame'), TRUE)
-  Sys.setenv(INSEE_idbank_dataset_path = "https://www.insee.fr/en/statistiques/fichier/2868055/2020_correspondance_idbank_dimension.zip")
+  Sys.setenv(INSEE_idbank_dataset_path = "https://www.insee.fr/en/statistiques/fichier/2868055/2021_correspondance_idbank_dimension.zip")
 
   expect_equal(any(class(get_idbank_list("CLIMAT-AFFAIRES")) == 'data.frame'), TRUE)
   expect_equal(any(class(get_idbank_list(update = TRUE)) == 'data.frame'), TRUE)
