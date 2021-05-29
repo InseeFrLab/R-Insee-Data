@@ -6,6 +6,7 @@
 ^\.travis\.yml$
 ^docs$
 ^pkg_tools.R$
+^build_idbank_list.R$
 ^cran-comments.md$
 ^README.Rmd$
 ^CRAN-RELEASE$
