@@ -131,6 +131,19 @@ get_idbank_list = function(
         update = TRUE
       }
     }else{
+      col_to_keep = names(idbank_list)[!names(idbank_list) %in% c(paste0("dim", 1:50))]
+      idbank_list = idbank_list[,col_to_keep]
+      idbank_list = tibble::as_tibble(idbank_list)
+
+      # drop series if dataset is not available in the list
+      idbank_list = dplyr::filter(.data = idbank_list, .data$nomflow %in% dataset_list)
+
+      # drop series if not in internal list
+      idbank_internal = search_insee()
+      idbank_list = dplyr::filter(.data = idbank_list, .data$idbank %in% idbank_internal$id)
+
+      # sort by alphebetical order
+      idbank_list = dplyr::arrange(.data = idbank_list, .data$nomflow)
       return(idbank_list)
     }
   }
@@ -193,6 +206,16 @@ get_idbank_list = function(
   idbank_list = idbank_list[,col_to_keep]
 
   idbank_list = tibble::as_tibble(idbank_list)
+
+  # drop series if dataset is not available in the list
+  idbank_list = dplyr::filter(.data = idbank_list, .data$nomflow %in% dataset_list)
+
+  # drop series if not in internal list
+  idbank_internal = search_insee()
+  idbank_list = dplyr::filter(.data = idbank_list, .data$idbank %in% idbank_internal$id)
+
+  # sort by alphebetical order
+  idbank_list = dplyr::arrange(.data = idbank_list, .data$nomflow)
 
   return(idbank_list)
 
