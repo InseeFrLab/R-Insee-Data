@@ -26,69 +26,89 @@ search_insee = function(pattern = '.*'){
   if(is.null(pattern)){pattern = '.*'}
   if(pattern == ''){pattern = '.*'}
 
-  dataset_list = suppressMessages(get_dataset_list())
+  insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}
 
-  # create new french name column withtout accent
-  dataset_list = dplyr::mutate(.data = dataset_list,
-                               nomflow = .data$id,
-                               Name.fr_accent = iconv(.data$Name.fr,
-                                                      from = "UTF-8", to = 'ASCII//TRANSLIT')
-                               )
+  file_cache = file.path(tempdir(), paste0(openssl::md5(paste0("search", pattern)), ".rds"))
 
-  # filter the dataset list no matter the cases
-  dataset_selected = dplyr::filter_at(
-    .tbl = dataset_list,
-    .vars = dplyr::vars(.data$Name.en, .data$Name.fr, .data$Name.fr_accent),
-    .vars_predicate = dplyr::any_vars(stringr::str_detect(.data$.,
-                                                          stringr::regex(pattern, ignore_case = TRUE))))
+  if(!file.exists(file_cache)){
+    dataset_list = suppressMessages(get_dataset_list())
 
-  dataset_selected = dplyr::select(.data = dataset_selected, -.data$Name.fr_accent)
+    # create new french name column withtout accent
+    dataset_list = dplyr::mutate(.data = dataset_list,
+                                 nomflow = .data$id,
+                                 Name.fr_accent = iconv(.data$Name.fr,
+                                                        from = "UTF-8", to = 'ASCII//TRANSLIT')
+    )
+
+    # filter the dataset list no matter the cases
+    dataset_selected = dplyr::filter_at(
+      .tbl = dataset_list,
+      .vars = dplyr::vars(.data$Name.en, .data$Name.fr, .data$Name.fr_accent),
+      .vars_predicate = dplyr::any_vars(stringr::str_detect(.data$.,
+                                                            stringr::regex(pattern, ignore_case = TRUE))))
+
+    dataset_selected = dplyr::select(.data = dataset_selected, -.data$Name.fr_accent)
 
 
-  idbank_list_search = dplyr::select(.data = idbank_list_internal,
-                                     .data$nomflow, .data$idbank, .data$title_fr, .data$title_en)
+    idbank_list_search = dplyr::select(.data = idbank_list_internal,
+                                       .data$nomflow, .data$idbank, .data$title_fr, .data$title_en)
 
-  idbank_list_search = dplyr::mutate(.data = idbank_list_search,
-                                     stop_var = dplyr::case_when(stringr::str_detect(title_en,
-                                                                                     stringr::regex('stopped series', ignore_case = TRUE)) ~ 1,
-                                                                 TRUE ~ 0))
+    idbank_list_search = dplyr::mutate(.data = idbank_list_search,
+                                       stop_var = dplyr::case_when(stringr::str_detect(title_en,
+                                                                                       stringr::regex('stopped series', ignore_case = TRUE)) ~ 1,
+                                                                   TRUE ~ 0))
 
-  idbank_list_search = dplyr::arrange(.data = idbank_list_search, .data$stop_var)
+    idbank_list_search = dplyr::arrange(.data = idbank_list_search, .data$stop_var)
 
-  idbank_list_search = dplyr::mutate(.data = idbank_list_search,
-                                     title_fr_accent = iconv(.data$title_fr,
-                                                             from = "UTF-8", to = 'ASCII//TRANSLIT'))
+    idbank_list_search = dplyr::mutate(.data = idbank_list_search,
+                                       title_fr_accent = iconv(.data$title_fr,
+                                                               from = "UTF-8", to = 'ASCII//TRANSLIT'))
 
-  idbank_list_search = dplyr::filter_at(
-    .tbl = idbank_list_search,
-    .vars = dplyr::vars(.data$title_en, .data$title_fr, .data$title_fr_accent),
-    .vars_predicate = dplyr::any_vars(stringr::str_detect(.data$.,
-                                                          stringr::regex(pattern, ignore_case = TRUE))))
+    idbank_list_search = dplyr::filter_at(
+      .tbl = idbank_list_search,
+      .vars = dplyr::vars(.data$title_en, .data$title_fr, .data$title_fr_accent),
+      .vars_predicate = dplyr::any_vars(stringr::str_detect(.data$.,
+                                                            stringr::regex(pattern, ignore_case = TRUE))))
 
-  idbank_list_search = dplyr::select(.data = idbank_list_search,
-                                     -.data$title_fr_accent, -.data$stop_var)
+    idbank_list_search = dplyr::select(.data = idbank_list_search,
+                                       -.data$title_fr_accent, -.data$stop_var)
 
-  idbank_list_search = dplyr::rename(.data = idbank_list_search,
-                                   id = .data$idbank)
+    idbank_list_search = dplyr::rename(.data = idbank_list_search,
+                                       id = .data$idbank)
 
-  dataset_selected = dplyr::rename(.data = dataset_selected,
-                                   title_fr = .data$Name.fr,
-                                   title_en = .data$Name.en)
+    dataset_selected = dplyr::rename(.data = dataset_selected,
+                                     title_fr = .data$Name.fr,
+                                     title_en = .data$Name.en)
 
-  search_results = dplyr::bind_rows(dataset_selected, idbank_list_search)
+    search_results = dplyr::bind_rows(dataset_selected, idbank_list_search)
 
-  search_results = dplyr::select(.data = search_results,
-                                 .data$nomflow, .data$id, .data$title_fr, .data$title_en)
+    search_results = dplyr::select(.data = search_results,
+                                   .data$nomflow, .data$id, .data$title_fr, .data$title_en)
 
-  file_warning_search_data = file.path(tempdir(), paste0(openssl::md5("search_data"), ".rds"))
+    file_warning_search_data = file.path(tempdir(), paste0(openssl::md5("search_data"), ".rds"))
 
-  if(!file.exists(file_warning_search_data)){
-    msg1 = "\nInternal package data has been used, it may not be the most up-to-date data"
-    msg2 = "This message is displayed once per R session"
-    msg = sprintf("%s\n%s\n", msg1, msg2)
+    if(!file.exists(file_warning_search_data)){
+      msg1 = "\nInternal package data has been used, it may not be the most up-to-date data"
+      msg2 = "This message is displayed once per R session"
+      msg = sprintf("%s\n%s\n", msg1, msg2)
 
-    message(crayon::style(msg, "red"))
-    save(msg, file = file_warning_search_data)
+      message(crayon::style(msg, "red"))
+      save(msg, file = file_warning_search_data)
+    }
+
+
+    saveRDS(search_results, file = file_cache)
+    if(insee_download_verbose){
+      msg = sprintf("Data cached : %s\n", file_cache)
+      message(crayon::style(msg, "green"))
+    }
+
+  }else{
+    if(insee_download_verbose){
+      msg = "Cached data has been used"
+      message(crayon::style(msg, "green"))
+    }
+    search_results = readRDS(file_cache)
   }
 
   return(search_results)
