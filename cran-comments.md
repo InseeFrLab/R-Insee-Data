@@ -1,7 +1,10 @@
 ## Purpose
 
 * many new features (see NEWS)
-* CRAN warning addressed : vignette no longer downloads from internet
+* all concerns from CRAN team should have been tackled:
+	- files are not deleted without user's approval
+	- files created for package's checks are only temporary
+* resubmission after CRAN removal on 29th may 2021
 
 ## Test environments
 
