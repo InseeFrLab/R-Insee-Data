@@ -139,7 +139,7 @@ get_idbank_list = function(
       idbank_list = dplyr::filter(.data = idbank_list, .data$nomflow %in% dataset_list)
 
       # drop series if not in internal list
-      idbank_internal = search_insee()
+      idbank_internal = suppressMessages(search_insee())
       idbank_list = dplyr::filter(.data = idbank_list, .data$idbank %in% idbank_internal$id)
 
       # sort by alphebetical order
@@ -211,7 +211,7 @@ get_idbank_list = function(
   idbank_list = dplyr::filter(.data = idbank_list, .data$nomflow %in% dataset_list)
 
   # drop series if not in internal list
-  idbank_internal = search_insee()
+  idbank_internal = suppressMessages(search_insee())
   idbank_list = dplyr::filter(.data = idbank_list, .data$idbank %in% idbank_internal$id)
 
   # sort by alphebetical order
