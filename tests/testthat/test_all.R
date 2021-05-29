@@ -110,9 +110,12 @@ test_that("output tests",{
   expect_equal(nrow(split_title(get_insee_idbank(idbank_test1, firstNObservations = 1), lang = "fr")), 1)
   expect_equal(nrow(split_title(get_insee_idbank(idbank_test1, firstNObservations = 1), lang = "en")), 1)
   expect_equal(nrow(get_insee_idbank(idbank_test401, firstNObservations = 1)), length(idbank_test401))
+
+  # expect_equal(any(class(get_insee_idbank(idbank_test401, firstNObservations = 1)) == 'data.frame'), TRUE)
   expect_message(nrow(get_insee_idbank(idbank_test401, firstNObservations = 1)))
 
   expect_equal(nrow(get_insee_idbank(idbank_test1201, firstNObservations = 1, limit = FALSE)), length(idbank_test1201))
+  # expect_equal(any(class(get_insee_idbank(idbank_test1201, firstNObservations = 1, limit = FALSE)) == 'data.frame'), TRUE)
   expect_is(get_insee_idbank(idbank_test1201, firstNObservations = 1), "NULL")
   expect_message(get_insee_idbank(idbank_test1201, firstNObservations = 1))
 
