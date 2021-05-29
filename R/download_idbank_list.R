@@ -17,9 +17,6 @@ download_idbank_list = function(dataset = NULL, label = FALSE){
   mapping_file_pattern = Sys.getenv("INSEE_idbank_dataset_file")
 
   mapping_file_sep = Sys.getenv("INSEE_idbank_sep")
-  idbank_nchar = as.numeric(Sys.getenv("INSEE_idbank_nchar"))
-
-  if(is.na(idbank_nchar)){idbank_nchar = 9}
 
   temp_file = tempfile()
 
