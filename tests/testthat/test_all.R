@@ -124,6 +124,9 @@ test_that("output tests",{
   expect_is(get_insee_idbank(idbank_test1201, firstNObservations = 1), "NULL")
   expect_message(get_insee_idbank(idbank_test1201, firstNObservations = 1))
 
+  df = read_sdmx_slow("https://bdm.insee.fr/series/sdmx/data/IPC-2015/M.IPC.SO.SO.4000.INDICE.ENSEMBLE.FE.SO.BRUT.2015")
+  expect_is(df, "NULL")
+
   expect_equal(nrow(get_insee_idbank("001769682")) <
                  nrow(get_insee_idbank("001769682", includeHistory = TRUE)), TRUE)
 
