@@ -178,6 +178,7 @@ read_sdmx_slow = function(link, step = "1/1"){
       data_final = NULL
     }
   }else{
+    data_final = NULL
     # print(response)
     # stop("Wrong query")
   }
