@@ -4,7 +4,6 @@ insee R package
  <br> 
  
  [![CRAN status](https://www.r-pkg.org/badges/version/insee)](https://cran.r-project.org/package=insee) 
- [![CRAN checks](https://cranchecks.info/badges/worst/insee)](https://cran.r-project.org/web/checks/check_results_insee.html) 
  [![Codecov test coverage](https://codecov.io/gh/InseeFr/R-Insee-Data/branch/master/graph/badge.svg)](https://codecov.io/gh/InseeFr/R-Insee-Data?branch=master) 
  [![lifecycle](https://img.shields.io/badge/lifecycle-stable-green.svg)](https://lifecycle.r-lib.org/articles/stages.html) 
  [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee) 
