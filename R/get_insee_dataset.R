@@ -17,10 +17,10 @@
 #' idbank_ipc = get_idbank_list("IPC-2015")
 #'
 #' #example 1
-#' data = get_insee_dataset("IPC-2015", filter = "M+A.........CVS.", startPeriod = "2015-03")
+#' data = get_insee_dataset("IPC-2015", filter = "M+A.........CVS..", startPeriod = "2015-03")
 #'
 #' #example 2
-#' data = get_insee_dataset("IPC-2015", filter = "M......ENSEMBLE...CVS.2015",
+#' data = get_insee_dataset("IPC-2015", filter = "A..SO...VARIATIONS_A....BRUT..SO",
 #'  includeHistory = TRUE, updatedAfter = "2017-07-11T08:45:00")
 #' }
 #'
