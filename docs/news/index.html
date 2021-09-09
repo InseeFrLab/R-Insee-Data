@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">insee</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -122,7 +122,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/InseeFr/R-Insee-Data/">
+  <a href="https://github.com/pyr-opendatafr/R-Insee-Data/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -141,24 +141,44 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1 data-toc-skip>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/InseeFr/R-Insee-Data/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+      <small>Source: <a href='https://github.com/pyr-opendatafr/R-Insee-Data/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
-    <div id="insee-1-0-0" class="section level1">
-<h1 class="page-header" data-toc-text="1.0.0">
-<a href="#insee-1-0-0" class="anchor"></a>insee 1.0.0<small> Unreleased </small>
+    <div id="insee-110" class="section level1">
+<h1 class="page-header" data-toc-text="1.1.0">
+<a href="#insee-110" class="anchor"></a>insee 1.1.0<small> 2021-06-04 </small>
 </h1>
 <ul>
-<li>if dataset names are provided, get clean metadata with <code>get_idbank_list</code> (code breaks likely)</li>
-<li>add metadata to raw data with the function <code>add_insee_metadata</code>
-</li>
-<li>backup idbank list stored inside the package</li>
-<li>readsdmx optional, removed as a dependency</li>
+<li>metadata are updated if a file is outdated, but this step now requires the user’s approval</li>
+<li>dim columns whose usage was previously deprecated are removed from idbank list dataframe (code breaks likely)</li>
+<li>new idbanks from 2021 list are included in the internal package data</li>
+<li>all files created in the checks are stored in a temporary directory</li>
+<li>DESCRIPTION : LazyData is FALSE</li>
 </ul>
 </div>
-    <div id="insee-0-9-0" class="section level1">
+    <div id="insee-100" class="section level1">
+<h1 class="page-header" data-toc-text="1.0.0">
+<a href="#insee-100" class="anchor"></a>insee 1.0.0<small> 2021-01-28 </small>
+</h1>
+<ul>
+<li>if dataset names are provided, get clean metadata with <code>get_idbank_list</code> (code breaks likely). The metadata is then stored locally on the computer. The update is automatically done every 3 months, and can be manually triggered</li>
+<li>use of dim columns in the idbank list is then deprecated</li>
+<li>add metadata to raw data with the function <code>add_insee_metadata</code>
+</li>
+<li>get columns’ name with the function <code>get_column_title</code>
+</li>
+<li>
+<code>search_insee</code> function is now using the idbank and the dataset lists</li>
+<li>option to choose the separator with the <code>split_title</code> function</li>
+<li>vignette : deaths and births example added</li>
+<li>backup idbank list stored inside the package</li>
+<li>readsdmx dependency is used optionally but not by default</li>
+<li>package now officially supported by INSEE, source code and issue reports are moved to INSEE’s official GitHub page</li>
+</ul>
+</div>
+    <div id="insee-090" class="section level1">
 <h1 class="page-header" data-toc-text="0.9.0">
-<a href="#insee-0-9-0" class="anchor"></a>insee 0.9.0<small> 2020-09-04 </small>
+<a href="#insee-090" class="anchor"></a>insee 0.9.0<small> 2020-09-04 </small>
 </h1>
 <ul>
 <li>all data is cached, and then all queries are run once per R session</li>
@@ -177,18 +197,18 @@
 <li>rsdmx and tidyr dependencies dropped, readsdmx added</li>
 </ul>
 </div>
-    <div id="insee-0-8-0" class="section level1">
+    <div id="insee-080" class="section level1">
 <h1 class="page-header" data-toc-text="0.8.0">
-<a href="#insee-0-8-0" class="anchor"></a>insee 0.8.0<small> 2020-08-02 </small>
+<a href="#insee-080" class="anchor"></a>insee 0.8.0<small> 2020-08-02 </small>
 </h1>
 <ul>
 <li>Bug fix in <code>get_insee_title</code> function</li>
 <li>more hands-on examples</li>
 </ul>
 </div>
-    <div id="insee-0-7-0" class="section level1">
+    <div id="insee-070" class="section level1">
 <h1 class="page-header" data-toc-text="0.7.0">
-<a href="#insee-0-7-0" class="anchor"></a>insee 0.7.0<small> 2020-07-29 </small>
+<a href="#insee-070" class="anchor"></a>insee 0.7.0<small> 2020-07-29 </small>
 </h1>
 <ul>
 <li>first version on CRAN</li>
@@ -211,7 +231,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

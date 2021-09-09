@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">insee</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.1.1</span>
       </span>
     </div>
 
@@ -123,7 +123,7 @@
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://github.com/InseeFr/R-Insee-Data/">
+  <a href="https://github.com/pyr-opendatafr/R-Insee-Data/">
     <span class="fab fa fab fa-github fa-lg"></span>
      
   </a>
@@ -142,7 +142,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Download a full INSEE's series key list</h1>
-    <small class="dont-index">Source: <a href='https://github.com/InseeFr/R-Insee-Data/blob/master/R/get_idbank_list.R'><code>R/get_idbank_list.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/pyr-opendatafr/R-Insee-Data/blob/master/R/get_idbank_list.R'><code>R/get_idbank_list.R</code></a></small>
     <div class="hidden name"><code>get_idbank_list.Rd</code></div>
     </div>
 
@@ -150,7 +150,7 @@
     <p>Download a full INSEE's series key list</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get_idbank_list</span><span class='op'>(</span><span class='va'>...</span>, dataset <span class='op'>=</span> <span class='cn'>NULL</span>, update <span class='op'>=</span> <span class='cn'>FALSE</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>get_idbank_list</span>(<span class='no'>...</span>, <span class='kw'>dataset</span> <span class='kw'>=</span> <span class='kw'>NULL</span>, <span class='kw'>update</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -175,7 +175,7 @@ all the data is returned, and column names refer directly to data dimensions</p>
     <p>a tibble the idbank dataset</p>
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>Download a mapping dataset betwen INSEE series keys (idbank) and SDMX series names.
+    <p>Download a mapping dataset between INSEE series keys (idbank) and SDMX series names.
 Under the hood the get_idbank_list uses download.file function from utils, the user can change the mode argument with the following
 command : Sys.getenv(INSEE_download_option_idbank_list = "wb")
 If INSEE makes an update, the user can also change the zip file downloaded, the data file contained in the zip and data the separator  :
@@ -184,8 +184,7 @@ Sys.setenv(INSEE_idbank_sep = ",")
 Sys.setenv(INSEE_idbank_dataset_file = "new_data_file_name")</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>idbank_list</span> <span class='op'>=</span> <span class='fu'>get_idbank_list</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>Cached data has been used</span><span></span></div></span></pre>
+    <pre class="examples"><div class='input'><span class='no'>idbank_list</span> <span class='kw'>=</span> <span class='fu'>get_idbank_list</span>()</div><div class='output co'>#&gt; <span class='message'><span style='color: #00BB00;'>Cached data has been used</span><span></span></div></span></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -201,7 +200,7 @@ Sys.setenv(INSEE_idbank_dataset_file = "new_data_file_name")</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

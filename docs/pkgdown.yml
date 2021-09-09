@@ -1,5 +1,5 @@
-pandoc: 1.19.2.1
-pkgdown: 1.6.1
+pandoc: '2.13'
+pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   insee: insee.html
@@ -9,8 +9,8 @@ articles:
   v5_pop-vignettes: v5_pop-vignettes.html
   v6_pop_map-vignettes: v6_pop_map-vignettes.html
   v7_death_birth-vignettes: v7_death_birth-vignettes.html
-last_built: 2020-12-08T16:59Z
+last_built: 2021-09-09T13:39Z
 urls:
-  reference: https://InseeFr.github.io/R-Insee-Data//reference
-  article: https://InseeFr.github.io/R-Insee-Data//articles
+  reference: https://pyr-opendatafr.github.io/R-Insee-Data//reference
+  article: https://pyr-opendatafr.github.io/R-Insee-Data//articles
 
