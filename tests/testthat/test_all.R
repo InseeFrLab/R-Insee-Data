@@ -58,7 +58,7 @@ test_that("class tests",{
                               lastNObservations = 1), "data.frame")
   expect_is(get_insee_dataset("IPC-2015", filter = "M+A.........CVS..", startPeriod = "2015-03"), "data.frame")
 
-  expect_is(get_insee_dataset("IPC-2015", filter = "A..SO...VARIATIONS_A....BRUT..SO",
+  expect_is(get_insee_dataset("IPC-2015", filter = "A..SO...VARIATIONS_A....BRUT...",
                               includeHistory = TRUE, updatedAfter = "2017-07-11T08:45:00"), "data.frame")
 
   expect_error(get_insee_dataset(1))
