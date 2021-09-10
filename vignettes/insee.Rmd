@@ -235,13 +235,14 @@ data =
 
 # Examples 
 
-* [GDP growth rate](https://inseefr.github.io/R-Insee-Data/articles/v2_gdp-vignettes.html)
-* [Inflation](https://inseefr.github.io/R-Insee-Data/articles/v3_inflation-vignettes.html)
-* [Unemployment rate](https://inseefr.github.io/R-Insee-Data/articles/v4_unem-vignettes.html)
-* [Population by age](https://inseefr.github.io/R-Insee-Data/articles/v5_pop-vignettes.html)
-* [Population map](https://inseefr.github.io/R-Insee-Data/articles/v6_pop_map-vignettes.html)
-* [Deaths and Births](https://inseefr.github.io/R-Insee-Data/articles/v7_death_birth-vignettes.html)
+* [GDP growth rate](https://pyr-opendatafr.github.io/R-Insee-Data/articles/v2_gdp-vignettes.html)
+* [Inflation](https://pyr-opendatafr.github.io/R-Insee-Data/articles/v3_inflation-vignettes.html)
+* [Unemployment rate](https://pyr-opendatafr.github.io/R-Insee-Data/articles/v4_unem-vignettes.html)
+* [Population by age](https://pyr-opendatafr.github.io/R-Insee-Data/articles/v5_pop-vignettes.html)
+* [Population map](https://pyr-opendatafr.github.io/R-Insee-Data/articles/v6_pop_map-vignettes.html)
+* [Deaths and Births](https://pyr-opendatafr.github.io/R-Insee-Data/articles/v7_death_birth-vignettes.html)
 
 # Support
-Feel free to contact me with any question about this package using this [e-mail address](mailto:hadrien.leclerc@insee.fr?subject=[r-package][insee]).
+
+Feel free to open an issue with any question about this package using <https://github.com/pyr-opendatafr/R-Insee-Data> Github repository
 
