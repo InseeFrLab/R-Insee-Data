@@ -12,9 +12,11 @@ test_that("class tests",{
 
   Sys.setenv(INSEE_metadata_folder = "tempdir")
 
+  insee_idbank_dataset_path = Sys.getenv("INSEE_idbank_dataset_path")
+
   Sys.setenv(INSEE_idbank_dataset_path = "https://www.insee.fr/en/statistiques/fichier/fake_file.zip")
   expect_equal(any(class(get_idbank_list("CLIMAT-AFFAIRES")) == 'data.frame'), TRUE)
-  Sys.setenv(INSEE_idbank_dataset_path = "https://www.insee.fr/en/statistiques/fichier/2868055/202108_correspondance_idbank_dimension.zip")
+  Sys.setenv(INSEE_idbank_dataset_path = insee_idbank_dataset_path)
 
 
   expect_equal(any(class(get_idbank_list("CLIMAT-AFFAIRES")) == 'data.frame'), TRUE)
