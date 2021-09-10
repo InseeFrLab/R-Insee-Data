@@ -9,7 +9,7 @@ insee R package
  [![Downloads](https://cranlogs.r-pkg.org/badges/grand-total/insee)](https://cran.r-project.org/package=insee) 
  [![Downloads](https://cranlogs.r-pkg.org/badges/insee)](https://cran.r-project.org/package=insee) 
  [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/) 
- [![R build status](https://github.com/hadrilec/insee/workflows/R-CMD-check/badge.svg)](https://github.com/InseeFr/R-Insee-Data/actions) 
+ [![R build status](https://github.com/pyr-opendatafr/R-Insee-Data/workflows/R-CMD-check/badge.svg)](https://github.com/pyr-opendatafr/R-Insee-Data/actions) 
 
 <br> 
 
@@ -21,7 +21,7 @@ Using embedded SDMX queries, get the data of more than 150 000 INSEE series.
 
 Have a look at the detailed SDMX web service page with the following [link](https://www.insee.fr/en/information/2868055).
 
-This package is a contribution to reproducible research and public data transparency.
+This package is a contribution to reproducible research and public data transparency. It benefits from the developments made by INSEE's teams working on APIs.
 
 ## Installation & Loading
 
@@ -40,13 +40,13 @@ library(insee)
 
 ## Examples & Tutorial
 
--   [Tutorial](https://inseefr.github.io/R-Insee-Data/articles/insee.html)
--   [GDP](https://inseefr.github.io/R-Insee-Data/articles/v2_gdp-vignettes.html)
--   [Inflation](https://inseefr.github.io/R-Insee-Data/articles/v3_inflation-vignettes.html)
--   [Unemployment rate](https://inseefr.github.io/R-Insee-Data/articles/v4_unem-vignettes.html)
--   [Population by age](https://inseefr.github.io/R-Insee-Data/articles/v5_pop-vignettes.html)
--   [Population map](https://inseefr.github.io/R-Insee-Data/articles/v6_pop_map-vignettes.html)
--   [Deaths and Births](https://inseefr.github.io/R-Insee-Data/articles/v7_death_birth-vignettes.html)
+-   [Tutorial](https://pyr-opendatafr.github.io/R-Insee-Data/articles/insee.html)
+-   [GDP](https://pyr-opendatafr.github.io/R-Insee-Data/articles/v2_gdp-vignettes.html)
+-   [Inflation](https://pyr-opendatafr.github.io/R-Insee-Data/articles/v3_inflation-vignettes.html)
+-   [Unemployment rate](https://pyr-opendatafr.github.io/R-Insee-Data/articles/v4_unem-vignettes.html)
+-   [Population by age](https://pyr-opendatafr.github.io/R-Insee-Data/articles/v5_pop-vignettes.html)
+-   [Population map](https://pyr-opendatafr.github.io/R-Insee-Data/articles/v6_pop_map-vignettes.html)
+-   [Deaths and Births](https://pyr-opendatafr.github.io/R-Insee-Data/articles/v7_death_birth-vignettes.html)
 
 ## French GDP growth rate
 
@@ -239,4 +239,4 @@ Sys.setenv(https_proxy = "my_proxy_server")
 
 ## Support
 
-Feel free to contact me with any question about this package using this [e-mail address](mailto:hadrien.leclerc@insee.fr?subject=%5Br-package%5D%5Binsee%5D).
+Feel free to open an issue with any question about this package using <https://github.com/pyr-opendatafr/R-Insee-Data> Github repository
