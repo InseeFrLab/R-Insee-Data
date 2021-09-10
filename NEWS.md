@@ -1,3 +1,9 @@
+# insee 1.1.1
+
+* package maintainer's email address changes
+* idbanks list file update
+
+
 # insee 1.1.0
 
 * metadata are updated if a file is outdated, but this step now requires the user's approval
