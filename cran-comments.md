@@ -1,10 +1,7 @@
 ## Purpose
 
-* many new features (see NEWS)
-* all concerns from CRAN team should have been tackled:
-	- files are not deleted without user's approval
-	- files created for package's checks are only temporary
-* resubmission after CRAN removal on 29th may 2021
+* maintainer's address change
+* new features (see NEWS)
 
 ## Test environments
 

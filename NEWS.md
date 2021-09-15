@@ -1,8 +1,7 @@
 # insee 1.1.1
 
-* package maintainer's email address changes
+* package maintainer's email address change
 * idbanks list file update
-
 
 # insee 1.1.0
 

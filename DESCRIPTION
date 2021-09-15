@@ -3,7 +3,7 @@ Type: Package
 Title: Tools to Easily Download Data from INSEE BDM Database
 Version: 1.1.1
 Authors@R: 
-  c(person("Hadrien", "Leclerc", email = "leclerc.hadrien@gmail.fr", role = c("aut", "cre")),
+  c(person("Hadrien", "Leclerc", email = "leclerc.hadrien@gmail.com", role = c("aut", "cre")),
     person("INSEE", role = "cph"))
 Description: Using embedded sdmx queries, get the data of more than 150 000 insee series from bdm database. Have a look at the detailed sdmx web service page with the following link : <https://www.insee.fr/en/information/2868055>.
 URL: https://pyr-opendatafr.github.io/R-Insee-Data/
