@@ -1,14 +1,13 @@
 #' @noRd
 download_idbank_list = function(dataset = NULL, label = FALSE){
 
+  insee_data_dir = tempdir()
   dir_creation_fail = try(create_insee_folder(), silent = TRUE)
 
-  if(!"try-error" %in% class(dir_creation_fail)){
-    insee_local_dir = file.path(rappdirs::user_data_dir(), "R", "insee", "insee")
-    insee_data_dir = tempdir()
-  }else{
+  insee_local_dir = file.path(rappdirs::user_data_dir(), "R", "insee", "insee")
+
+  if(("try-error" %in% class(dir_creation_fail))|(!file.exists(insee_local_dir))){
     insee_local_dir = tempdir()
-    insee_data_dir = tempdir()
   }
 
   # insee_download_verbose = if(Sys.getenv("INSEE_download_verbose") == "TRUE"){TRUE}else{FALSE}

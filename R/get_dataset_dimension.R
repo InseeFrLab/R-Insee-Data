@@ -6,9 +6,9 @@ get_dataset_dimension = function(dataset){
 
   dir_creation_fail = try(create_insee_folder(), silent = TRUE)
 
-  if(!"try-error" %in% class(dir_creation_fail)){
-    insee_local_dir = file.path(rappdirs::user_data_dir(), "R", "insee", "insee")
-  }else{
+  insee_local_dir = file.path(rappdirs::user_data_dir(), "R", "insee", "insee")
+
+  if(("try-error" %in% class(dir_creation_fail))|(!file.exists(insee_local_dir))){
     insee_local_dir = tempdir()
   }
 
