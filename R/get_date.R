@@ -26,14 +26,20 @@ get_date = function(date, freq){
   }
   if(freq %in% c("S", "T")){
     # quarterly
-    date = stringr::str_replace_all(date, "^[0-9]{4}-Q[1-4]$", as.character(lubridate::yq(date)))
+    # date = stringr::str_replace_all(date, "^[0-9]{4}-Q[1-4]$",
+    #                                 as.character(lubridate::yq(date)))
+    date = stringr::str_replace_all(date, c("-Q1" = "-01-01",
+                                            "-Q2" = "-04-01",
+                                            "-Q3" = "-07-01",
+                                            "-Q4" = "-10-01"))
   }
   if(freq == "A"){
     # annualy
     date = stringr::str_replace_all(date, "^[0-9]{4}$", as.character(paste0(date, "-01-01")))
   }
   if(freq %in% c("M", "B", "T", "A", "S")){
-    date = lubridate::ymd(date)
+    # date = lubridate::ymd(date)
+    date = as.Date(date)
   }
   return(date)
 }

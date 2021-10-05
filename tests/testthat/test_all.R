@@ -2,7 +2,7 @@ testthat::context("class and output tests")
 library(testthat)
 library(insee)
 library(tidyverse)
-library(lubridate)
+# library(lubridate)
 
 test_that("class tests",{
   skip_on_cran()
@@ -110,7 +110,12 @@ test_that("output tests",{
   expect_equal(get_date(1, ""), 1)
   expect_equal(get_date("2010-05", "M"), as.Date("2010-05-01"))
   expect_equal(get_date("2010", "A"), as.Date("2010-01-01"))
+
   expect_equal(get_date("2010-Q1", "T"), as.Date("2010-01-01"))
+  expect_equal(get_date("2010-Q2", "T"), as.Date("2010-04-01"))
+  expect_equal(get_date("2010-Q3", "T"), as.Date("2010-07-01"))
+  expect_equal(get_date("2010-Q4", "T"), as.Date("2010-10-01"))
+
   expect_equal(get_date("2010-S1", "S"), as.Date("2010-01-01"))
   expect_equal(get_date("2010-B1", "B"), as.Date("2010-01-01"))
 

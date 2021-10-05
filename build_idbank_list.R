@@ -3,6 +3,8 @@ library(insee)
 library(tidyverse)
 
 # idbank_list = build_idbank_list( c('IPC-2015', 'BALANCE-PAIEMENTS'))
+# idbank_list = build_idbank_list()
+
 
 build_idbank_list = function(dataset_list = NULL){
 
@@ -22,7 +24,7 @@ build_idbank_list = function(dataset_list = NULL){
     return(result)
   }
 
-  # pb = utils::txtProgressBar(min = 1, max = length(dataset_list), initial = 1, style = 3)
+  pb = utils::txtProgressBar(min = 1, max = length(dataset_list), initial = 1, style = 3)
 
 
   idbank_list = dplyr::bind_rows(
@@ -65,7 +67,7 @@ build_idbank_list = function(dataset_list = NULL){
                  mutate(nomflow = dataset) %>%
                  select(nomflow, IDBANK, cleflow)
 
-               # utils::setTxtProgressBar(pb, i)
+               utils::setTxtProgressBar(pb, i)
                return(df_id)
              }
 
