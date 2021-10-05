@@ -2,7 +2,7 @@ testthat::context("class and output tests")
 library(testthat)
 library(insee)
 library(tidyverse)
-# library(lubridate)
+library(lubridate)
 
 test_that("class tests",{
   skip_on_cran()

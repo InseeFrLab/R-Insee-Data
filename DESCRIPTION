@@ -27,6 +27,7 @@ Imports:
   readsdmx
 Suggests:
     tidyverse,
+    lubridate,
     prettydoc,
     htmltools,
     kableExtra,
