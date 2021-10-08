@@ -13,6 +13,8 @@ insee R package
 
 <br> 
 
+This package is not actively maintained at Insee. More recent versions can be found on a [community-maintained fork](https://github.com/pyr-opendatafr/R-Insee-Data).
+
 ## Overview
 
 The insee package contains tools to easily download data and metadata from INSEE main database (BDM).
